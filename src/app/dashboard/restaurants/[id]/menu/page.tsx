@@ -27,6 +27,7 @@ export default async function MenuPage({ params }: MenuPageProps) {
     }
 
     const menu = await getMenuByRestaurantId(params.id)
+    const menuId= menu._id
 
     
 
@@ -39,7 +40,7 @@ export default async function MenuPage({ params }: MenuPageProps) {
           </Link>
         </DashboardHeader>
 
-        <MenuEditor menuId="682211a19a3f309c37dbe94d"  />
+        <MenuEditor menuId= {menuId} />
       </DashboardShell>
     )
   } catch (error) {

@@ -25,7 +25,11 @@ export function MenuCategories({ categories, categoryRefs, currency, activeCateg
             <section
               id={categoryId}
               key={categoryId}
-              ref={(el) => categoryId && (categoryRefs[categoryId] = el)}
+              ref={(el) => {
+                if (categoryId) {
+                  categoryRefs[categoryId] = el
+                }
+              }}
               className={`mb-12 scroll-mt-[100px] lg:scroll-mt-16 relative ${isActive ? "category-active" : ""}`}
               itemScope
               itemType="https://schema.org/MenuSection"
