@@ -1,0 +1,30 @@
+{
+  "overallRating": 4.3,
+  "totalReviews": 1487,
+  "sampleReviews": [
+    {
+      "author": "Ehab O",
+      "rating": 5,
+      "comment": "The food was excellent and it was orzo soup, tarb, grape leaves, molokhiya, pigeon grits, and rice. The location is excellent, as it is located in Heliopolis on Al-Marghany Street. The interior decor is good and needs to be up to the standard of the food. In general, the rating is very good and I will go again.",
+      "date": "2023-11-17"
+    },
+    {
+      "author": "Heba T",
+      "rating": 4,
+      "comment": "We ordered a number of oriental salads and some main dishes. The okra with meat was very nice. The fetta is well done and tasty. The ribds were nice.",
+      "date": "2019-09-04"
+    },
+    {
+      "author": "Anonymous",
+      "rating": 1,
+      "comment": "Yet another restaurant who's food quality has become terrible. And worse! The customer service department is useless. Can you imagine ordering an intact half barbecued chicken, only to be received in 2 pieces thrown away like trash, with a thigh that is the size of 3 fingers!",
+      "date": "2024-03-29"
+    },
+    {
+      "author": "Anonymous",
+      "rating": 2,
+      "comment": "The quality of the food and its packaging was bad. I'm not used to this from el Dahan, as it was my favourite restaurant ever.",
+      "date": "2025-04-19"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+[
+  {
+    "name": {
+      "ar": "الدهان - فرع المهندسين",
+      "en": "El Dahan - Mohandessin Branch"
+    },
+    "location": {
+      "address": {
+        "ar": "١٣ شارع سوريا، المهندسين، الجيزة، مصر",
+        "en": "13 Syria Street, Mohandessin, Giza, Egypt"
+      },
+      "latitude": 30.055909,
+      "longitude": 31.202797
+    },
+    "phone": "02 33027000",
+    "workingHours": "10 AM - 1 AM",
+    "isMainBranch": true
+  },
+  {
+    "name": {
+      "ar": "الدهان - فرع مصر الجديدة",
+      "en": "El Dahan - Heliopolis Branch"
+    },
+    "location": {
+      "address": {
+        "ar": "١١ شارع الحجاز، مصر الجديدة، القاهرة، مصر",
+        "en": "11 El Hegaz Street, Heliopolis, Cairo, Egypt"
+      },
+      "latitude": 30.098727,
+      "longitude": 31.326716
+    },
+    "phone": "02 24540200",
+    "workingHours": "9 AM - 12 AM",
+    "isMainBranch": false
+  },
+  {
+    "name": {
+      "ar": "الدهان - فرع التجمع الخامس",
+      "en": "El Dahan - New Cairo (Tagamoa) Branch"
+    },
+    "location": {
+      "address": {
+        "ar": "شارع التسعين الشمالي، التجمع الخامس، القاهرة الجديدة، القاهرة، مصر",
+        "en": "North 90th Street, Fifth Settlement, New Cairo, Cairo, Egypt"
+      },
+      "latitude": 30.027533,
+      "longitude": 31.491365
+    },
+    "phone": "02 26174000",
+    "workingHours": "9 AM - 1 AM",
+    "isMainBranch": false
+  },
+  {
+    "name": {
+      "ar": "الدهان - فرع مدينة نصر",
+      "en": "El Dahan - Nasr City Branch"
+    },
+    "location": {
+      "address": {
+        "ar": "٢ شارع حسن المأمون، الحي العاشر، مدينة نصر، القاهرة، مصر",
+        "en": "2 Hassan El Maamoun Street, 10th District, Nasr City, Cairo, Egypt"
+      },
+      "latitude": 30.047084,
+      "longitude": 31.364704
+    },
+    "phone": "02 24711300",
+    "workingHours": "10 AM - 12 AM",
+    "isMainBranch": false
+  },
+  {
+    "name": {
+      "ar": "الدهان - فرع الإسكندرية",
+      "en": "El Dahan - Alexandria Branch"
+    },
+    "location": {
+      "address": {
+        "ar": "١٥ شارع فؤاد، محطة الرمل، الإسكندرية، مصر",
+        "en": "15 Fouad Street, Raml Station, Alexandria, Egypt"
+      },
+      "latitude": 31.200927,
+      "longitude": 29.909282
+    },
+    "phone": "03 4873500",
+    "workingHours": "11 AM - 12 AM",
+    "isMainBranch": false
+  }
+]

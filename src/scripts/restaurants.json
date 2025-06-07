@@ -1,0 +1,486 @@
+[
+  {
+    "name": "El Dahan",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/el-dahan",
+    "image": "https://www.menuegypt.com/restaurants_logos/El-Dahan_logo.JPG",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Home made",
+      "Juice",
+      "Nut shop"
+    ]
+  },
+  {
+    "name": "KFC",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/kfc",
+    "image": "https://www.menuegypt.com/restaurants_logos/kfc_logo.gif",
+    "categories": [
+      "Sandwiches",
+      "Fried chicken"
+    ]
+  },
+  {
+    "name": "Mcdonalds",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/mcdonalds",
+    "image": "https://www.menuegypt.com/restaurants_logos/Mcdonalds_logo.png",
+    "categories": [
+      "Sandwiches",
+      "Fool _ Ta3meya",
+      "Desserts",
+      "Fried chicken"
+    ]
+  },
+  {
+    "name": "Cook Door",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/cook-door",
+    "image": "https://www.menuegypt.com/restaurants_logos/cook-door_logo.png",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Pizza",
+      "Sea Food",
+      "Desserts",
+      "Fried chicken",
+      "Juice"
+    ]
+  },
+  {
+    "name": "B laban",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/b-laban",
+    "image": "https://www.menuegypt.com/restaurants_logos/B-laban_logo.jpg",
+    "categories": [
+      "Desserts",
+      "Bakery and Shops",
+      "Juice"
+    ]
+  },
+  {
+    "name": "Buffalo Burger",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/buffalo-burger",
+    "image": "https://www.menuegypt.com/restaurants_logos/buffalo-burger_logo.jpg",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Desserts",
+      "Bakery and Shops",
+      "Fried chicken",
+      "Juice"
+    ]
+  },
+  {
+    "name": "Pizza Hut",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/pizza-hut",
+    "image": "https://www.menuegypt.com/restaurants_logos/pizza-hut_logo.jpg",
+    "categories": [
+      "Pizza",
+      "Desserts",
+      "Bakery and Shops",
+      "Fried chicken",
+      "Juice"
+    ]
+  },
+  {
+    "name": "Hardees",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/hardees",
+    "image": "https://www.menuegypt.com/restaurants_logos/hardees_logo.png",
+    "categories": [
+      "Sandwiches",
+      "Pizza"
+    ]
+  },
+  {
+    "name": "Gad",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/gad",
+    "image": "https://www.menuegypt.com/restaurants_logos/gad_logo.PNG",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Pizza",
+      "Sea Food",
+      "Fool _ Ta3meya",
+      "Desserts",
+      "Non Egyptian food",
+      "Bakery and Shops",
+      "Home made",
+      "Fried chicken",
+      "Crepe",
+      "Juice",
+      "Nut shop"
+    ]
+  },
+  {
+    "name": "Primos Pizza",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/primos-pizza",
+    "image": "https://www.menuegypt.com/restaurants_logos/Primos-Pizza_logo.jpg",
+    "categories": [
+      "Pizza",
+      "Sea Food",
+      "Desserts",
+      "Non Egyptian food",
+      "Bakery and Shops",
+      "Fried chicken",
+      "Juice"
+    ]
+  },
+  {
+    "name": "TIKKA",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/tikka",
+    "image": "https://www.menuegypt.com/restaurants_logos/TIKKA_logo.png",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Desserts",
+      "Fried chicken",
+      "Juice"
+    ]
+  },
+  {
+    "name": "Karam El Sham",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/karam-el-sham",
+    "image": "https://www.menuegypt.com/restaurants_logos/Karam-El-Sham_logo.png",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Pizza",
+      "Non Egyptian food",
+      "Fried chicken",
+      "Crepe",
+      "Nut shop"
+    ]
+  },
+  {
+    "name": "Pizza King",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/pizza-king",
+    "image": "https://www.menuegypt.com/restaurants_logos/pizza-king_logo.jpg",
+    "categories": [
+      "Sandwiches",
+      "Pizza",
+      "Sea Food",
+      "Desserts",
+      "Non Egyptian food",
+      "Bakery and Shops",
+      "Fried chicken",
+      "Juice"
+    ]
+  },
+  {
+    "name": "Papa Johns",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/papa-johns",
+    "image": "https://www.menuegypt.com/restaurants_logos/papa-johns_logo.jpg",
+    "categories": [
+      "Pizza"
+    ]
+  },
+  {
+    "name": "Bazooka",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/bazooka",
+    "image": "https://www.menuegypt.com/restaurants_logos/Bazooka_logo.jpg",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Desserts",
+      "Fried chicken"
+    ]
+  },
+  {
+    "name": "Ebn El Sham",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/ebn-el-sham",
+    "image": "https://www.menuegypt.com/restaurants_logos/Ebn-El-Sham_logo.jpeg",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Pizza",
+      "Non Egyptian food",
+      "Bakery and Shops",
+      "Fried chicken",
+      "Juice"
+    ]
+  },
+  {
+    "name": "Wahmy Burger Egypt",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/wahmy-burger-egypt",
+    "image": "https://www.menuegypt.com/restaurants_logos/wahmy-burger-egypt_logo.jpg",
+    "categories": [
+      "Sandwiches"
+    ]
+  },
+  {
+    "name": "Dominos Pizza",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/dominos-pizza",
+    "image": "https://www.menuegypt.com/restaurants_logos/dominos-pizza_logo.PNG",
+    "categories": [
+      "Pizza"
+    ]
+  },
+  {
+    "name": "Koshary El Tahrir",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/koshary-eltahrir",
+    "image": "https://www.menuegypt.com/restaurants_logos/Koshary-Eltahrir_logo.jpg",
+    "categories": [
+      "Koshari",
+      "Desserts"
+    ]
+  },
+  {
+    "name": "Momen",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/momen",
+    "image": "https://www.menuegypt.com/restaurants_logos/momen_logo.png",
+    "categories": [
+      "Sandwiches",
+      "Fried chicken"
+    ]
+  },
+  {
+    "name": "Majesty",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/majesty",
+    "image": "https://www.menuegypt.com/restaurants_logos/Majesty_logo.JPG",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Pizza",
+      "Sea Food",
+      "Desserts",
+      "Bakery and Shops",
+      "Fried chicken",
+      "Crepe"
+    ]
+  },
+  {
+    "name": "7amza",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/7amza",
+    "image": "https://www.menuegypt.com/restaurants_logos/7amza_logo.jpg",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Pizza",
+      "Sea Food",
+      "Desserts",
+      "Non Egyptian food",
+      "Bakery and Shops",
+      "Home made",
+      "Fried chicken",
+      "Crepe"
+    ]
+  },
+  {
+    "name": "Prego",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/prego",
+    "image": "https://www.menuegypt.com/restaurants_logos/Prego_logo.jpg",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Non Egyptian food",
+      "Fried chicken"
+    ]
+  },
+  {
+    "name": "Tata Sons",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/tata-sons",
+    "image": "https://www.menuegypt.com/restaurants_logos/Tata-Sons_logo.JPG",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Sea Food",
+      "Desserts",
+      "cafe",
+      "Home made",
+      "Juice",
+      "Nut shop"
+    ]
+  },
+  {
+    "name": "Spectra",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/spectra",
+    "image": "https://www.menuegypt.com/restaurants_logos/Spectra_logo.jpg",
+    "categories": [
+      "Sandwiches",
+      "Grilled"
+    ]
+  },
+  {
+    "name": "Abou Mazen",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/abou-mazen",
+    "image": "https://www.menuegypt.com/restaurants_logos/abou-Mazen_logo.JPG",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Fool _ Ta3meya",
+      "Desserts",
+      "Non Egyptian food",
+      "Fried chicken",
+      "Crepe",
+      "Nut shop"
+    ]
+  },
+  {
+    "name": "Chicken Fil-A",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/chicken-fil-a",
+    "image": "https://www.menuegypt.com/restaurants_logos/Chicken-Fil-A_logo.jpg",
+    "categories": [
+      "Sandwiches",
+      "Pizza",
+      "Desserts",
+      "Non Egyptian food",
+      "Fried chicken",
+      "Juice"
+    ]
+  },
+  {
+    "name": "City Crepe",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/city-crepe",
+    "image": "https://www.menuegypt.com/restaurants_logos/City-Crepe_logo.PNG",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Pizza",
+      "Sea Food",
+      "Desserts",
+      "Fried chicken",
+      "Crepe",
+      "Nut shop"
+    ]
+  },
+  {
+    "name": "Rosto Oriental",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/rosto-oriental",
+    "image": "https://www.menuegypt.com/restaurants_logos/Rosto-Oriental_logo.jpg",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Sea Food",
+      "Desserts",
+      "Non Egyptian food",
+      "Bakery and Shops",
+      "Fried chicken",
+      "Juice",
+      "Nut shop"
+    ]
+  },
+  {
+    "name": "Heart Attack Fried Chicken",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/heart-attack-fried-chicken",
+    "image": "https://www.menuegypt.com/restaurants_logos/Heart-attack-fried-chicken_logo.JPG",
+    "categories": [
+      "Sandwiches",
+      "Sea Food",
+      "Fried chicken"
+    ]
+  },
+  {
+    "name": "Shawerma El Reem",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/shawerma-el-reem",
+    "image": "https://www.menuegypt.com/restaurants_logos/Shawerma-El-Reem_logo.JPG",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Fool _ Ta3meya",
+      "Desserts",
+      "Non Egyptian food",
+      "Fried chicken",
+      "Nut shop"
+    ]
+  },
+  {
+    "name": "Hawawshi El Refaay",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/refaay",
+    "image": "https://www.menuegypt.com/restaurants_logos/Refaay_logo.jpg",
+    "categories": [
+      "Sandwiches",
+      "Desserts",
+      "Non Egyptian food",
+      "Home made",
+      "Fried chicken"
+    ]
+  },
+  {
+    "name": "Tom and Basal",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/tom-and-basal",
+    "image": "https://www.menuegypt.com/restaurants_logos/Tom-and-Basal_logo.jpg",
+    "categories": [
+      "Sandwiches",
+      "Pizza",
+      "Koshari",
+      "Sea Food",
+      "Desserts",
+      "Bakery and Shops",
+      "Home made"
+    ]
+  },
+  {
+    "name": "Abu Mazen al sory",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/abu-mazen-al-sory",
+    "image": "https://www.menuegypt.com/restaurants_logos/Abu-Mazen-al-sory_logo.png",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Fool _ Ta3meya",
+      "Desserts",
+      "Non Egyptian food",
+      "Home made",
+      "Fried chicken",
+      "Crepe",
+      "Nut shop"
+    ]
+  },
+  {
+    "name": "Burger king",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/burger-king",
+    "image": "https://www.menuegypt.com/restaurants_logos/Burger-king_logo.png",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Fried chicken"
+    ]
+  },
+  {
+    "name": "Cinnabon",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/cinnabon",
+    "image": "https://www.menuegypt.com/restaurants_logos/Cinnabon_logo.png",
+    "categories": [
+      "Desserts",
+      "Juice"
+    ]
+  },
+  {
+    "name": "Welatain",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/welatain",
+    "image": "https://www.menuegypt.com/restaurants_logos/welatain.gif",
+    "categories": [
+      "Sandwiches",
+      "Fried chicken"
+    ]
+  },
+  {
+    "name": "El Malky",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/el-malky",
+    "image": "https://www.menuegypt.com/restaurants_logos/El-malky_logo.jpg",
+    "categories": [
+      "Desserts",
+      "Home made",
+      "Juice"
+    ]
+  },
+  {
+    "name": "Heart Attack",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/heart-attack",
+    "image": "https://www.menuegypt.com/restaurants_logos/Heart-Attack_logo.jpg",
+    "categories": [
+      "Sandwiches",
+      "Fried chicken"
+    ]
+  },
+  {
+    "name": "Pastaweesy",
+    "url": "https://menuegypt.comhttps://www.menuegypt.com/pastaweesy",
+    "image": "https://www.menuegypt.com/restaurants_logos/Pastaweesy_logo.jpg",
+    "categories": [
+      "Sandwiches",
+      "Grilled",
+      "Sea Food",
+      "Desserts",
+      "Non Egyptian food",
+      "Fried chicken"
+    ]
+  }
+]
