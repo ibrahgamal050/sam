@@ -47,7 +47,7 @@ export function CategoryTabs({ categories, activeCategory, scrollToCategory, cla
       >
         <div className="flex space-x-4">
           {categories.map((category) => {
-            const categoryId = category._id.toString()
+            const categoryId = category._id ? category._id.toString() : ""
             const categoryName =
               typeof category.name === "object"
                 ? category.name.ar || Object.values(category.name)[0] // Fallback to 'en' or first available

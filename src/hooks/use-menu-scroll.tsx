@@ -6,16 +6,16 @@ import type { ICategory, CategoryRef } from "@/types/menu"
 
 interface MenuScrollProps {
   categories: ICategory[]
-  headerRef: RefObject<HTMLDivElement>
-  footerRef: RefObject<HTMLDivElement>
-  sidebarRef: RefObject<HTMLDivElement>
+  headerRef: RefObject<HTMLDivElement | null>
+  footerRef: RefObject<HTMLDivElement | null>
+  sidebarRef: RefObject<HTMLDivElement | null>
 }
 
 export function useMenuScroll({ categories, headerRef, footerRef, sidebarRef }: MenuScrollProps) {
   // State for tracking active category
-  const [activeCategory, setActiveCategory] = useState<string | null>(
-    categories.length > 0 && categories[0]._id ? categories[0]._id.toString() : null,
-  )
+  const initialCategory =
+    categories.length > 0 && categories[0]._id ? categories[0]._id.toString() : ""
+  const [activeCategory, setActiveCategory] = useState<string>(initialCategory)
 
   // State for tracking if header is sticky
   const [isHeaderSticky, setIsHeaderSticky] = useState(false)
@@ -36,8 +36,8 @@ export function useMenuScroll({ categories, headerRef, footerRef, sidebarRef }: 
   const prevValuesRef = useRef({
     isHeaderSticky: false,
     sidebarBottom: null as number | null,
-    activeCategory: null as string | null,
-  })
+    activeCategory: initialCategory,
+    })
 
   // Initialize category refs
   useEffect(() => {

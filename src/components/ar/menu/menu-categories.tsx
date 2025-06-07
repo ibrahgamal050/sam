@@ -9,7 +9,7 @@ interface MenuCategoriesProps {
   categories: ICategory[]
   categoryRefs: { [key: string]: CategoryRef }
   currency: string
-  activeCategory: string | null
+  activeCategory: string 
 }
 
 export function MenuCategories({ categories, categoryRefs, currency, activeCategory }: MenuCategoriesProps) {

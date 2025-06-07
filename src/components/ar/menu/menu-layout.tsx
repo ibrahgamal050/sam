@@ -7,13 +7,13 @@ import { DesktopMenu } from "./desktop-menu"
 import { MobileMenu } from "./mobile-menu"
 import { MenuGallery } from "./menu-gallery"
 import { MenuCategories } from "./menu-categories"
-import type { IMenu, ICategory } from "@/types/menu"
+import type { IMenu, ICategory, CategoryRef } from "@/types/menu"
 
 interface MenuLayoutProps {
   menuData: IMenu
   categories: ICategory[]
   activeCategory: string
-  categoryRefs: Record<string, React.RefObject<HTMLDivElement>>
+  categoryRefs: { [key: string]: CategoryRef }
   scrollToCategory: (categoryId: string) => void
   headerRef: React.RefObject<HTMLDivElement>
   footerRef: React.RefObject<HTMLDivElement>

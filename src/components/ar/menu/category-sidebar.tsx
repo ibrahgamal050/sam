@@ -5,7 +5,7 @@ import type { ICategory } from "@/types/menu"
 
 interface CategorySidebarProps {
   categories: (ICategory & { _id: NonNullable<ICategory["_id"]> })[]
-  activeCategory: string | null
+  activeCategory: string 
   scrollToCategory: (categoryId: string) => void
   sidebarBottom: number | null
 }
