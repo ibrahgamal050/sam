@@ -42,6 +42,11 @@ export default async function RestaurantPage({ params }: RestaurantPageProps) {
               Menu
             </Link>
           </Button>
+          <Button size="sm" asChild>
+            <Link href={`/dashboard/restaurants/${restaurant._id}/pages`}>
+              Pages
+            </Link>
+          </Button>
         </div>
       </DashboardHeader>
 
