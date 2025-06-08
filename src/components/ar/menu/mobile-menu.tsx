@@ -6,7 +6,7 @@ import { CategoryTabs } from "./category-tabs"
 import type { ICategory } from "@/types/menu"
 
 interface MobileMenuProps {
-  headerRef: React.RefObject<HTMLDivElement>
+  headerRef: React.RefObject<HTMLDivElement | null>
   categories: ICategory[]
   activeCategory: string
   scrollToCategory: (categoryId: string) => void

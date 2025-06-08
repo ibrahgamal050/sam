@@ -11,7 +11,7 @@ interface DesktopMenuProps {
   categories: ICategory[]
   activeCategory: string
   scrollToCategory: (categoryId: string) => void
-  sidebarBottom: number
+  sidebarBottom: number | null
 }
 
 export const DesktopMenu = forwardRef<HTMLDivElement, DesktopMenuProps>(function DesktopMenu(

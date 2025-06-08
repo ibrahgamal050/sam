@@ -128,7 +128,7 @@ async function MenuContent({ searchParams }: { searchParams: { q?: string } }) {
         <meta itemProp="description" content={restaurantData.description} />
         <meta itemProp="address" content={restaurantData.address} />
         <link rel="canonical" href={`https://${subdomain}.meelza.com/menu`} />
-        <MenuPage menuData={menuData} restaurantData={restaurantData}  />
+        <MenuPage menuData={menuData}  />
       </div>
     )
   } catch (error) {

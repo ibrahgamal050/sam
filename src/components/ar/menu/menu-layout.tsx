@@ -6,6 +6,7 @@ import type { ReactNode } from "react"
 import { DesktopMenu } from "./desktop-menu"
 import { MobileMenu } from "./mobile-menu"
 import { MenuGallery } from "./menu-gallery"
+import { convertToMenuImages } from "@/types/menu-components"
 import { MenuCategories } from "./menu-categories"
 import type { IMenu, ICategory, CategoryRef } from "@/types/menu"
 
@@ -15,10 +16,10 @@ interface MenuLayoutProps {
   activeCategory: string
   categoryRefs: { [key: string]: CategoryRef }
   scrollToCategory: (categoryId: string) => void
-  headerRef: React.RefObject<HTMLDivElement>
-  footerRef: React.RefObject<HTMLDivElement>
-  sidebarRef: React.RefObject<HTMLDivElement>
-  sidebarBottom: number
+  headerRef: React.RefObject<HTMLDivElement | null>
+  footerRef: React.RefObject<HTMLDivElement | null>
+  sidebarRef: React.RefObject<HTMLDivElement | null>
+  sidebarBottom: number | null
   currency: string
   children: ReactNode
 }
@@ -35,11 +36,12 @@ export function MenuLayout({
   currency,
   children,
 }: MenuLayoutProps) {
+  const galleryImages = convertToMenuImages(menuData.menuImages)
   return (
     <div className="flex flex-col lg:flex-row">
       {/* Main Content Area */}
       <div className="w-full lg:mr-64">
-        <MenuGallery images={menuData.menuImages} />
+      <MenuGallery images={galleryImages} />
 
         {/* Mobile Header with Category Tabs */}
         <MobileMenu
@@ -55,7 +57,12 @@ export function MenuLayout({
 
           {/* Category Sections - Only shown when not searching */}
           <div id="menu-categories">
-            <MenuCategories categories={categories} categoryRefs={categoryRefs} currency={currency} />
+          <MenuCategories
+              categories={categories}
+              categoryRefs={categoryRefs}
+              currency={currency}
+              activeCategory={activeCategory}
+            />
           </div>
         </div>
       </div>

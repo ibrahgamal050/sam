@@ -12,7 +12,6 @@ interface MenuPageProps {
 export function MenuPage({ menuData }: MenuPageProps) {
   // Extract categories from menuData
   const categories = menuData?.categories || []
-  const allMenuItems = categories.flatMap((category) => category.menuItems || [])
 
   // Get currency from menuData
   const currency = menuData?.currency?.ar || "ج.م"
