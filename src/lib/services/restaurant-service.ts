@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
-import Restaurant, { type IRestaurant } from "@/models/Restaurant"
+import Restaurant, { type IRestaurant } from "@/models/restaurant"
 import connectToDatabase from "@/lib/db"
-import type { Restaurant as RestaurantType } from "@/lib/types"
+import type { Restaurant as RestaurantType } from "@/types"
 
 // Helper function to convert Mongoose document to plain object
 function convertToPlainObject(doc: IRestaurant): RestaurantType {

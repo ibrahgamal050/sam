@@ -6,7 +6,7 @@ const componentSchema = new Schema<IComponent>({
   type: { type: String, required: true },
   props: { type: Schema.Types.Mixed, required: true },
   position: { type: Number, required: true }
-}, { _id: false });
+});
 
 const seoSchema = new Schema<ISEO>({
   
@@ -39,7 +39,7 @@ const seoSchema = new Schema<ISEO>({
       }]
     }
   },
-}, { _id: false });
+});
 
 const PageSchema = new Schema<IPage>({
   name: { type: String, required: true, trim: true },
@@ -55,7 +55,7 @@ const PageSchema = new Schema<IPage>({
     updated_at: { type: Date, default: Date.now },
     published_at: { type: Date }
   },
-}, { _id: false });
+});
 
 const PagesSchema = new Schema<IPages>({
   restaurantId: { type: Schema.Types.ObjectId, ref: 'Restaurant', required: true },

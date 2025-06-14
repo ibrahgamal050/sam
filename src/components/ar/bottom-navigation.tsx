@@ -14,7 +14,7 @@ export function BottomNavigation() {
     { name: "الرئيسية", href: `/ar/`, icon: Home },
     { name: "المنيو", href: `/ar/menu`, icon: Menu },
     { name: "الفروع", href: `/ar/branches`, icon: MapPin },
-    { name: "المنشورات", href: `/ar/posts`, icon: FileText },
+    { name: "عن المطعم", href: `/ar/about`, icon: FileText },
   ]
 
   return (

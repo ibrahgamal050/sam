@@ -84,7 +84,7 @@ export function PageList({ pages, restaurantId }: PageListProps) {
                     <DropdownMenuContent align="end">
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
                       <DropdownMenuItem asChild>
-                        <Link href={`/dashboard/restaurants/${restaurantId}/pages/${page._id}/edit`}>
+                      <Link href={`/dashboard/restaurants/${restaurantId}/pages/${page._id}`}>
                           <Edit className="mr-2 h-4 w-4" />
                           Edit
                         </Link>

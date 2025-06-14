@@ -3,6 +3,8 @@ import { DashboardShell } from "@/components/dashboard/dashboard-shell"
 import { PageForm } from "@/components/dashboard/pages/page-form"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { ComponentsManager } from "@/components/dashboard/pages/components-manager"
+
 import { getPageById } from "@/lib/services/page-service"
 import { getRestaurantById } from "@/lib/services/restaurant-service"
 import { notFound } from "next/navigation"
@@ -23,6 +25,7 @@ export default async function EditPage({ params }: EditPageProps) {
           <Link href={`/dashboard/restaurants/${params.id}/pages`}>Back</Link>
         </Button>
       </DashboardHeader>
+      
       <PageForm restaurantId={params.id} subdomain={restaurant.subdomain} page={page} />
     </DashboardShell>
   )

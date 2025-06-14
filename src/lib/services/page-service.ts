@@ -1,14 +1,14 @@
 import mongoose from "mongoose"
-import dbConnect from "@/lib/db"
+import connectToDatabase from "@/lib/db"
 import Pages from "@/models/page"
 import type { IPage, ISEO, IComponent } from "@/types/page"
-
+export const ALLOWED_COMPONENT_TYPES = ["text", "image", "gallery"]
 function toPlain<T>(doc: T): any {
   return JSON.parse(JSON.stringify(doc))
 }
 
 export async function getPagesByRestaurantId(restaurantId: string) {
-  await dbConnect()
+  await connectToDatabase()
 
   if (!mongoose.Types.ObjectId.isValid(restaurantId)) {
     return []
@@ -19,7 +19,7 @@ export async function getPagesByRestaurantId(restaurantId: string) {
 }
 
 export async function getPageById(restaurantId: string, pageId: string) {
-  await dbConnect()
+  await connectToDatabase ()
 
   if (!mongoose.Types.ObjectId.isValid(restaurantId)) {
     return null
@@ -27,7 +27,7 @@ export async function getPageById(restaurantId: string, pageId: string) {
 
   const pagesDoc = await Pages.findOne({ restaurantId })
   if (!pagesDoc) return null
-  const page = pagesDoc.pages.id(pageId)
+  const page = pagesDoc.pages.find((p) => p._id.toString() === pageId)
   return page ? toPlain(page) : null
 }
 
@@ -43,7 +43,7 @@ export interface PageInput {
 }
 
 export async function createPage(restaurantId: string, subdomain: string, data: PageInput) {
-  await dbConnect()
+  await connectToDatabase ()
 
   if (!mongoose.Types.ObjectId.isValid(restaurantId)) {
     throw new Error("Invalid restaurant ID")
@@ -103,13 +103,13 @@ export async function updatePage(
   pageId: string,
   data: Partial<PageInput>,
 ) {
-  await dbConnect()
+  await connectToDatabase()
 
   if (!mongoose.Types.ObjectId.isValid(restaurantId)) return null
 
   const pagesDoc = await Pages.findOne({ restaurantId })
   if (!pagesDoc) return null
-  const page = pagesDoc.pages.id(pageId)
+  const page = pagesDoc.pages.find((p) => p._id.toString() === pageId)
   if (!page) return null
 
   if (data.slug && data.slug !== page.slug) {
@@ -154,7 +154,7 @@ export async function updatePage(
 }
 
 export async function deletePage(restaurantId: string, pageId: string) {
-  await dbConnect()
+  await connectToDatabase ()
 
   if (!mongoose.Types.ObjectId.isValid(restaurantId)) return false
 
@@ -165,3 +165,136 @@ export async function deletePage(restaurantId: string, pageId: string) {
 
   return result.modifiedCount > 0
 }
+export async function getPageBySlug(
+  restaurantId: string,
+  slug: string,
+  language: "en" | "ar",
+) {
+  await connectToDatabase()
+
+  if (!mongoose.Types.ObjectId.isValid(restaurantId)) {
+    return null
+  }
+
+  const result = await Pages.findOne(
+    {
+      restaurantId,
+      pages: {
+        $elemMatch: { slug, language },
+      },
+    },
+    {
+      "pages.$": 1,
+    },
+  ).lean()
+
+  return result?.pages?.[0] ? toPlain(result.pages[0]) : null
+}
+
+export async function updatePageBySlug(
+  restaurantId: string,
+  slug: string,
+  language: "en" | "ar",
+  components: IComponent[],
+) {
+  await connectToDatabase()
+
+  if (!mongoose.Types.ObjectId.isValid(restaurantId)) return null
+
+  const pagesDoc = await Pages.findOne({ restaurantId })
+  if (!pagesDoc) return null
+
+  const page = pagesDoc.pages.find(
+    (p) => p.slug === slug && p.language === language,
+  )
+  if (!page) return null
+
+  page.components = components
+  page.metadata.updated_at = new Date()
+
+  await pagesDoc.save()
+  return toPlain(page)
+}
+export async function updatePageComponents(
+    restaurantId: string,
+    pageId: string,
+    operation: "add" | "update" | "delete",
+    data: Partial<IComponent>
+  ) {
+    await connectToDatabase ()
+  
+    if (!mongoose.Types.ObjectId.isValid(restaurantId)) return null
+  
+    const pagesDoc = await Pages.findOne({ restaurantId })
+    if (!pagesDoc) return null
+    const page = pagesDoc.pages.find((p) => p._id.toString() === pageId)
+   
+    if (!page) return null
+  
+    switch (operation) {
+      case "add": {
+        const { type, props, position } = data
+        if (!type || props === undefined || position === undefined) {
+          throw new Error("Missing required fields for component addition")
+        }
+        if (!ALLOWED_COMPONENT_TYPES.includes(type)) {
+          throw new Error(`Invalid component type: ${type}`)
+        }
+  
+        const newComponent: IComponent = {
+          component_id: data.component_id || new mongoose.Types.ObjectId().toString(),
+          type,
+          props,
+          position,
+        }
+  
+        page.components.push(newComponent)
+        break
+      }
+  
+      case "update": {
+        const { component_id } = data
+        if (!component_id) throw new Error("component_id is required for update")
+  
+        const comp = page.components.find(c => c.component_id === component_id)
+        if (!comp) return null
+  
+        if (data.type) {
+          if (!ALLOWED_COMPONENT_TYPES.includes(data.type)) {
+            throw new Error(`Invalid component type: ${data.type}`)
+          }
+          comp.type = data.type
+        }
+  
+        if (data.props) {
+          comp.props = { ...comp.props, ...data.props }
+        }
+  
+        if (data.position !== undefined) {
+          comp.position = data.position
+        }
+  
+        break
+      }
+  
+      case "delete": {
+        const { component_id } = data
+        if (!component_id) throw new Error("component_id is required for deletion")
+  
+        const index = page.components.findIndex(c => c.component_id === component_id)
+        if (index === -1) return null
+  
+        page.components.splice(index, 1)
+        break
+      }
+  
+      default:
+        throw new Error(`Unsupported operation: ${operation}`)
+    }
+  
+    page.metadata.updated_at = new Date()
+    await pagesDoc.save()
+  
+    return toPlain(page.components)
+  }
+  
