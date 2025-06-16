@@ -5,9 +5,11 @@ import dbConnect from "@/lib/db"
 import mongoose from "mongoose"
 import { headers } from "next/headers"
 import Restaurant from "@/models/restaurant"
-import { IRestaurant  } from "@/types/restaurant" // Make sure to import the Restaurant type if you have it.
+import type { Metadata } from 'next';
+import type { IRestaurant } from "@/types/restaurant";
 
 export const revalidate = 3600 // كل ساعة
+
 
 export default async function About() {
   await dbConnect();
@@ -16,12 +18,13 @@ export default async function About() {
   const host = headersList.get('host'); // ✅ هذا الآن يعمل
 
   const subdomain = host?.split('.')[0];
-
-  const restaurant = await Restaurant.findOne({ subdomain }).lean() as IRestaurant | null;
+  if (!subdomain) {
+    return <div className="text-center py-10 text-red-600">لم يتم العثور على اسم النطاق الفرعي</div>;
+  }
+ 
   try {
     // جلب بيانات صفحة "عن"
-    const pageData = await getPageBySlug(  restaurant._id, "about", "ar")
-    console.log(pageData)
+    const pageData = await getPageBySlug(subdomain, "about", "ar")
 
     // لو مفيش بيانات
     if (!pageData) {
@@ -39,15 +42,13 @@ export default async function About() {
   }
 }
 
-/**
- * Get a page by slug and language
- */
-export async function getPageBySlug(restaurantId: string, slug: string, language: "en" | "ar") {
+
+export async function getPageBySlug(subdomain: string, slug: string, language: "en" | "ar") {
   await dbConnect()
 
   const result = await Pages.findOne(
     {
-      restaurantId: new mongoose.Types.ObjectId(restaurantId),
+      subdomain: subdomain,
       pages: {
         $elemMatch: {
           slug,
@@ -63,22 +64,16 @@ export async function getPageBySlug(restaurantId: string, slug: string, language
   return result?.pages?.[0] || null
 }
 
-/**
- * Get all pages for a restaurant
- */
-export async function getAllPages(restaurantId: string) {
-  await dbConnect()
 
-  const result = await Pages.findOne({ restaurantId: new mongoose.Types.ObjectId(restaurantId) }).lean()
 
-  return result?.pages || []
-} 
 export async function generateMetadata(): Promise<Metadata> {
   await dbConnect()
-  const host = headers().get("host") || ""
-  const subdomain = host.split(".")[0]
+  const headersList = await headers(); // ✅ await هنا مهم
+  const host = headersList.get('host'); // ✅ هذا الآن يعمل
 
-  const restaurant = await Restaurant.findOne({ subdomain }).lean()
+  const subdomain = host?.split('.')[0];
+
+  const restaurant = await Restaurant.findOne({ subdomain }).lean<IRestaurant>();
   if (!restaurant) return {}
 
   const page = await Pages.findOne(
@@ -92,22 +87,42 @@ export async function generateMetadata(): Promise<Metadata> {
   ).lean()
 
   const pageData = page?.pages?.[0]
-
+  const allowedTypes = [
+    "website",
+    "article",
+    "book",
+    "profile",
+    "music.song",
+    "music.album",
+    "music.playlist",
+    "music.radio_station",
+    "video.movie",
+    "video.episode",
+    "video.tv_show",
+    "video.other",
+  ] as const;
+  
+  type OpenGraphType = typeof allowedTypes[number];
+  
+  const ogType: OpenGraphType =
+    allowedTypes.includes(pageData?.seo?.og_type as OpenGraphType)
+      ? (pageData?.seo?.og_type as OpenGraphType)
+      : "website";
   return {
-    title: pageData?.seo?.title || `عن ${restaurant.name}`,
+    title: pageData?.seo?.title || `عن ${restaurant.name.ar}`,
     description: pageData?.seo?.description || `اعرف المزيد عن مطعم ${restaurant.name}`,
-    keywords: pageData?.seo?.keywords || ["مطعم", restaurant.name, "عن المطعم"],
+    keywords: pageData?.seo?.keywords || ["مطعم", restaurant.name.ar, "عن المطعم"],
     openGraph: {
-      title: pageData?.seo?.og_title || `عن ${restaurant.name}`,
-      description: pageData?.seo?.og_description || `تفاصيل مطعم ${restaurant.name}`,
-      images: [pageData?.seo?.og_image || restaurant.image],
-      type: pageData?.seo?.og_type || "website",
+      title: pageData?.seo?.og_title || `عن ${restaurant.name.ar}`,
+      description: pageData?.seo?.og_description || `تفاصيل مطعم ${restaurant.name.ar}`,
+      images: [pageData?.seo?.og_image || restaurant.logo],
+      type: ogType,
     },
     twitter: {
       card: pageData?.seo?.twitter_card || "summary_large_image",
-      title: pageData?.seo?.twitter_title || restaurant.name,
+      title: pageData?.seo?.twitter_title || restaurant.name.ar,
       description: pageData?.seo?.twitter_description || `عن مطعم ${restaurant.name}`,
-      images: [pageData?.seo?.twitter_image || restaurant.image],
+      images: [pageData?.seo?.twitter_image || restaurant.logo],
     },
     alternates: {
       canonical: pageData?.seo?.canonical_url || `https://${host}/ar/about`,

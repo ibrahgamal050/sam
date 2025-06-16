@@ -3,18 +3,12 @@ import { Award, Heart, Star, Users, Utensils } from "lucide-react"
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import {IPage} from  "@/types/page"
 
 interface AboutPageProps {
   data:IPage 
 }
-export interface IPage {
-  components: {
-    component_id: string;
-    type: string;
-    props: Record<string, any>; // أو ممكن تعملها أقوى بنوع مخصص لكل type
-    position?: number;
-  }[];
-}
+
 export default function AboutPage({ data }: AboutPageProps) {
   return (
     <div className="   rtl">
@@ -25,7 +19,7 @@ export default function AboutPage({ data }: AboutPageProps) {
   switch (type) {
     case 'header':
       return (
-        <div key={component.component_id} className="relative  w-full h-48">
+        <div  key={component._id.toString()} className="relative  w-full h-48">
          
           <Image
             src={`http://localhost:3000/images${props.heroImage}`}
@@ -47,7 +41,7 @@ export default function AboutPage({ data }: AboutPageProps) {
 
     case 'story':
       return (
-        <div key={component.component_id} className="p-4">
+        <div key={component._id.toString()} className="p-4">
            <section>
             <div className="flex items-center mb-3">
               <Utensils className="h-5 w-5 ml-2 text-orange-600" />
@@ -55,13 +49,11 @@ export default function AboutPage({ data }: AboutPageProps) {
             </div>
           
             <Card className="rounded-2xl shadow">
-            {props.contentParagraphs.map((paragraph, idx) => (
-              <CardContent className="p-4">
-                <p className="text-sm text-gray-700 leading-relaxed">
-                {paragraph} </p>
-                
-              </CardContent>
-               ))}
+            {(props.contentParagraphs as string[]).map((paragraph, idx) => (
+  <CardContent key={idx} className="p-4">
+    <p className="text-sm text-gray-700 leading-relaxed">{paragraph}</p>
+  </CardContent>
+))}
             </Card>
             
           </section>
@@ -72,7 +64,7 @@ export default function AboutPage({ data }: AboutPageProps) {
 
     case 'mission':
       return (
-        <div key={component.component_id} className="p-4">
+        <div key={component._id.toString()} className="p-4">
           <section>
             <div className="flex items-center mb-3">
               <Star className="h-5 w-5 ml-2 text-orange-600" />
@@ -97,7 +89,7 @@ export default function AboutPage({ data }: AboutPageProps) {
 
     case 'values':
       return (
-        <div key={component.component_id} className="p-4">
+        <div key={component._id.toString()} className="p-4">
            <section>
             <div className="flex items-center mb-3">
               <Award className="h-5 w-5 ml-2 text-orange-600" />
@@ -105,19 +97,22 @@ export default function AboutPage({ data }: AboutPageProps) {
             </div>
             <Card className="rounded-2xl shadow">
               <CardContent className="p-4 space-y-3">
-              {props.items.map((item) => (
-                <div   key={item.id} className="flex">
-                  <Badge className="bg-orange-600 h-6 w-6 rounded-full flex items-center justify-center p-0 ml-3">
-                  {item.number}
-                  </Badge>
-                  <div>
-                    <h3 className="font-bold text-sm">{item.title}</h3>
-                    <p className="text-xs text-gray-600 mt-1">
-                    {item.description}
-                       </p>
-                  </div>
-                </div>
-                 ))}
+              {(props.items as {
+  id: string;
+  number: number;
+  title: string;
+  description: string;
+}[]).map((item) => (
+  <div key={item.id} className="flex">
+    <Badge className="bg-orange-600 h-6 w-6 rounded-full flex items-center justify-center p-0 ml-3">
+      {item.number}
+    </Badge>
+    <div>
+      <h3 className="font-bold text-sm">{item.title}</h3>
+      <p className="text-xs text-gray-600 mt-1">{item.description}</p>
+    </div>
+  </div>
+))}
 
                
               </CardContent>
@@ -128,7 +123,7 @@ export default function AboutPage({ data }: AboutPageProps) {
       );
       case 'team':
         return(
-          <div key={component.component_id} className="p-4">
+          <div key={component._id.toString()} className="p-4">
          <section>
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center">

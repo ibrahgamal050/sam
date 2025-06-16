@@ -2,7 +2,6 @@ import mongoose, { Schema, Model, Document } from 'mongoose';
 import {IComponent,ISEO,IPage,IPages } from "@/types"
 
 const componentSchema = new Schema<IComponent>({
-  component_id: { type: String, required: true },
   type: { type: String, required: true },
   props: { type: Schema.Types.Mixed, required: true },
   position: { type: Number, required: true }

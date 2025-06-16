@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { Types } from "mongoose";
 
 
 export interface ISEO {
@@ -34,14 +35,12 @@ export interface ISEO {
 }
 
 export interface IComponent {
-  component_id: string;
+  _id: Types.ObjectId;
   type: string;
-  props: IComponentProps;
+  props: any;
   position: number;
 }
-interface IComponentProps {
-  [key: string]:Record<string, unknown>;  // خصائص مرنة حسب نوع المكون
-}
+
 export interface IPage {
   _id: mongoose.Types.ObjectId;
   name: string;

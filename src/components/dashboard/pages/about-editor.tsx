@@ -1,5 +1,5 @@
 "use client"
-
+import { Types } from "mongoose"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -25,6 +25,7 @@ interface AboutEditorProps {
   page: IPage
   restaurantId: string
 }
+import { SEOEditor } from "./seo-editor"
 
 export function AboutEditor({ page, restaurantId }: AboutEditorProps) {
   const [components, setComponents] = useState<IComponent[]>(page.components)
@@ -66,7 +67,7 @@ export function AboutEditor({ page, restaurantId }: AboutEditorProps) {
   const handleSave = async () => {
     setSaving(true)
     try {
-      await PageService.updatePage(restaurantId, page._id, {
+        await PageService.updatePage(restaurantId, page._id.toString(), {
         components,
         seo,
         headerImage,
@@ -97,7 +98,7 @@ export function AboutEditor({ page, restaurantId }: AboutEditorProps) {
 
   const addComponent = (type: string) => {
     const newComponent: IComponent = {
-      component_id: crypto.randomUUID(),
+        _id: new Types.ObjectId(),
       type,
       props: getDefaultPropsForType(type),
       position: components.length,
@@ -123,7 +124,7 @@ export function AboutEditor({ page, restaurantId }: AboutEditorProps) {
   }
 
   const renderComponentEditor = (comp: IComponent, idx: number) => (
-    <Draggable draggableId={comp.component_id} index={idx} key={comp.component_id}>
+<Draggable draggableId={comp._id.toString()} index={idx} key={comp._id.toString()}>
       {(provided) => (
         <div
           ref={provided.innerRef}
@@ -385,30 +386,13 @@ export function AboutEditor({ page, restaurantId }: AboutEditorProps) {
             </Card>
           </div>
         )}
-        {activeTab === "seo" && (
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>SEO</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <Input
-                  value={seo.title || ""}
-                  onChange={(e) => setSeo({ ...seo, title: e.target.value })}
-                  placeholder="SEO title"
-                />
-                <Textarea
-                  className="min-h-[100px]"
-                  value={seo.description || ""}
-                  onChange={(e) =>
-                    setSeo({ ...seo, description: e.target.value })
-                  }
-                  placeholder="SEO description"
-                />
-              </CardContent>
-            </Card>
-          </div>
-        )}
+       {activeTab === "seo" && (
+  <div className="space-y-6">
+    
+<SEOEditor seo={seo} onChange={setSeo} />
+  </div>
+)}
+
       </div>
     </div>
   )
