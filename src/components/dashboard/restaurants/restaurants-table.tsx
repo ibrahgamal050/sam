@@ -238,49 +238,79 @@ export function RestaurantsTable({ data, isLoading = false }: RestaurantsTablePr
                 ) : (
                   paginatedData.map((restaurant) => (
                     <TableRow key={restaurant._id} className="group">
-                      <TableCell className="font-medium">
-                        <div className="flex items-center gap-3">
-                          <div className="relative h-10 w-10 overflow-hidden rounded-md border bg-muted">
-                            {restaurant.logo ? (
-                              <img
-                              src={`/images${restaurant?.coverImage}` }
-                                alt={restaurant.name.en}
-                                className="h-full w-full object-cover transition-all group-hover:scale-105"
-                              />
-                            ) : (
-                              <div className="flex h-full w-full items-center justify-center">
-                                <Store className="h-5 w-5 text-muted-foreground" />
-                              </div>
-                            )}
-                          </div>
-                          <div>
-                            <div className="font-medium">{restaurant.name.en}</div>
-                            <div className="text-xs text-muted-foreground">{restaurant.name.ar}</div>
-                          </div>
-                        </div>
-                      </TableCell>
+                     <TableCell className="font-medium">
+  <div className="flex items-center gap-3 group">
+    <div className="relative h-10 w-10 overflow-hidden rounded-md border bg-muted">
+      {restaurant.logo ? (
+        <img
+          src={`/images${restaurant?.coverImage}`}
+          alt={restaurant.name.en}
+          className="h-full w-full object-cover transition-all group-hover:scale-105"
+        />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center">
+          <Store className="h-5 w-5 text-muted-foreground" />
+        </div>
+      )}
+    </div>
+
+    <div>
+      <div className="font-medium flex items-center gap-1">
+        {restaurant.name.en}
+
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link href={`/dashboard/restaurants/${restaurant._id}`}>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                >
+                  <ExternalLink className="h-3.5 w-3.5 text-muted-foreground" />
+                  <span className="sr-only">Open Dashboard</span>
+                </Button>
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Open Dashboard</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </div>
+      <div className="text-xs text-muted-foreground">{restaurant.name.ar}</div>
+    </div>
+  </div>
+</TableCell>
+
                       <TableCell>
-                        <div className="flex items-center gap-1">
-                          <span>{restaurant.subdomain}</span>
-                          <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button
-                                  variant="ghost"
-                                  size="icon"
-                                  className="h-6 w-6 opacity-0 group-hover:opacity-100"
-                                >
-                                  <ExternalLink className="h-3.5 w-3.5 text-muted-foreground" />
-                                  <span className="sr-only">Visit site</span>
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Visit restaurant site</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
-                        </div>
-                      </TableCell>
+  <div className="flex items-center gap-1 group">
+    <span>{restaurant.subdomain}</span>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <a
+            href={`https://${restaurant.subdomain}.meelza.site`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-6 w-6 opacity-0 group-hover:opacity-100"
+            >
+              <ExternalLink className="h-3.5 w-3.5 text-muted-foreground" />
+              <span className="sr-only">Visit site</span>
+            </Button>
+          </a>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Visit restaurant site</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  </div>
+</TableCell>
                       <TableCell>
                         <Badge
                           variant={restaurant.isPublished ? "default" : "outline"}

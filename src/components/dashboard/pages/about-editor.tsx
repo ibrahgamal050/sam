@@ -1,5 +1,4 @@
 "use client"
-import { Types } from "mongoose"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -28,8 +27,15 @@ interface AboutEditorProps {
 import { SEOEditor } from "./seo-editor"
 
 export function AboutEditor({ page, restaurantId }: AboutEditorProps) {
-  const [components, setComponents] = useState<IComponent[]>(page.components)
-  const [seo, setSeo] = useState(page.seo)
+    const [components, setComponents] = useState<IComponent[]>(
+        page.components.map((comp: any, idx: number) => ({
+          component_id: comp.component_id || comp._id || crypto.randomUUID(),
+          type: comp.type,
+          props: comp.props,
+          position: comp.position ?? idx,
+        }))
+      )
+      const [seo, setSeo] = useState(page.seo)
   const [headerImage, setHeaderImage] = useState(page.headerImage)
   const [saving, setSaving] = useState(false)
   const [activeTab, setActiveTab] = useState<"components" | "settings" | "seo">(
@@ -98,7 +104,7 @@ export function AboutEditor({ page, restaurantId }: AboutEditorProps) {
 
   const addComponent = (type: string) => {
     const newComponent: IComponent = {
-        _id: new Types.ObjectId(),
+        component_id: crypto.randomUUID(),
       type,
       props: getDefaultPropsForType(type),
       position: components.length,
@@ -124,7 +130,7 @@ export function AboutEditor({ page, restaurantId }: AboutEditorProps) {
   }
 
   const renderComponentEditor = (comp: IComponent, idx: number) => (
-<Draggable draggableId={comp._id.toString()} index={idx} key={comp._id.toString()}>
+     <Draggable draggableId={comp.component_id} index={idx} key={comp.component_id}>
       {(provided) => (
         <div
           ref={provided.innerRef}

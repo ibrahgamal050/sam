@@ -15,11 +15,11 @@ export default function AboutPage({ data }: AboutPageProps) {
       {/* Main Content */}
       {data.components.map((component) => {
   const { type, props } = component;
-
+  const key = (component as any).component_id || (component as any)._id;
   switch (type) {
     case 'header':
       return (
-        <div  key={component._id.toString()} className="relative  w-full h-48">
+        <div  key={key} className="relative  w-full h-48">
          
           <Image
             src={`http://localhost:3000/images${props.heroImage}`}
@@ -41,7 +41,7 @@ export default function AboutPage({ data }: AboutPageProps) {
 
     case 'story':
       return (
-        <div key={component._id.toString()} className="p-4">
+        <div key={key} className="p-4">
            <section>
             <div className="flex items-center mb-3">
               <Utensils className="h-5 w-5 ml-2 text-orange-600" />
@@ -64,7 +64,7 @@ export default function AboutPage({ data }: AboutPageProps) {
 
     case 'mission':
       return (
-        <div key={component._id.toString()} className="p-4">
+        <div key={key} className="p-4">
           <section>
             <div className="flex items-center mb-3">
               <Star className="h-5 w-5 ml-2 text-orange-600" />
@@ -89,7 +89,7 @@ export default function AboutPage({ data }: AboutPageProps) {
 
     case 'values':
       return (
-        <div key={component._id.toString()} className="p-4">
+        <div key={key} className="p-4">
            <section>
             <div className="flex items-center mb-3">
               <Award className="h-5 w-5 ml-2 text-orange-600" />
@@ -123,7 +123,7 @@ export default function AboutPage({ data }: AboutPageProps) {
       );
       case 'team':
         return(
-          <div key={component._id.toString()} className="p-4">
+          <div key={key} className="p-4">
          <section>
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center">

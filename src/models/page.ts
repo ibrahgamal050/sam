@@ -2,6 +2,7 @@ import mongoose, { Schema, Model, Document } from 'mongoose';
 import {IComponent,ISEO,IPage,IPages } from "@/types"
 
 const componentSchema = new Schema<IComponent>({
+  component_id: { type: String, required: true },
   type: { type: String, required: true },
   props: { type: Schema.Types.Mixed, required: true },
   position: { type: Number, required: true }
@@ -10,7 +11,7 @@ const componentSchema = new Schema<IComponent>({
 const seoSchema = new Schema<ISEO>({
   
   title: { type: String, required: true, maxlength: 60 },
-  description: { type: String, required: true, maxlength: 160 },
+  description: { type: String, required: true},
   keywords: [{ type: String, maxlength: 50 }],
   og_title: { type: String, required: true, maxlength: 60 },
   og_description: { type: String, required: true, maxlength: 200 },

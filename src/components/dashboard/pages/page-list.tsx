@@ -65,9 +65,16 @@ export function PageList({ pages, restaurantId }: PageListProps) {
           ) : (
             pages.map((page) => (
               <TableRow key={page._id}>
-                <TableCell className="font-medium">{page.name}</TableCell>
+                
+                <TableCell className="font-medium">
+                <Link href={`/dashboard/restaurants/${restaurantId}/pages/${page.slug}`}>
+                  {page.name}
+                  </Link>
+                  </TableCell>
+                
                 <TableCell>{page.language}</TableCell>
                 <TableCell>{page.slug}</TableCell>
+                
                 <TableCell>
                   <Badge variant="outline">
                     {page.isPublished ? "Published" : "Draft"}
@@ -84,7 +91,7 @@ export function PageList({ pages, restaurantId }: PageListProps) {
                     <DropdownMenuContent align="end">
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
                       <DropdownMenuItem asChild>
-                      <Link href={`/dashboard/restaurants/${restaurantId}/pages/${page._id}`}>
+                      <Link href={`/dashboard/restaurants/${restaurantId}/pages/${page.slug}`}>
                           <Edit className="mr-2 h-4 w-4" />
                           Edit
                         </Link>

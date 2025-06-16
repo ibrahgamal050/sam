@@ -35,7 +35,8 @@ export interface ISEO {
 }
 
 export interface IComponent {
-  _id: Types.ObjectId;
+  component_id: string;
+  
   type: string;
   props: any;
   position: number;

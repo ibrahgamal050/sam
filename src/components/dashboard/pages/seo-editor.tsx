@@ -14,6 +14,9 @@ interface SEOEditorProps {
 
 export function SEOEditor({ seo, onChange }: SEOEditorProps) {
   const handleChange = (field: keyof ISEO, value: string | string[]) => {
+    if (field === "description" && typeof value === "string") {
+      value = value.slice(0, 160)
+    }
     onChange({
       ...seo,
       [field]: value,
