@@ -10,16 +10,16 @@ const componentSchema = new Schema<IComponent>({
 
 const seoSchema = new Schema<ISEO>({
   
-  title: { type: String, required: true, maxlength: 60 },
+  title: { type: String, required: true },
   description: { type: String, required: true},
-  keywords: [{ type: String, maxlength: 50 }],
-  og_title: { type: String, required: true, maxlength: 60 },
-  og_description: { type: String, required: true, maxlength: 200 },
+  keywords: [{ type: String,}],
+  og_title: { type: String, required: true, },
+  og_description: { type: String, required: true, },
   og_image: { type: String, required: true },
   og_type: { type: String, required: true, enum: ['website', 'article', 'product'] },
   twitter_card: { type: String, required: true, enum: ['summary', 'summary_large_image', 'app', 'player'] },
-  twitter_title: { type: String, required: true, maxlength: 60 },
-  twitter_description: { type: String, required: true, maxlength: 200 },
+  twitter_title: { type: String, required: true},
+  twitter_description: { type: String, required: true },
   twitter_image: { type: String, required: true },
   canonical_url: { type: String, required: true },
   structured_data: {
