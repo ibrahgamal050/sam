@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from "react"
 import { Plus, Minus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import type { IMenuItem } from "@/types/menu"
+import { useState, useEffect } from "react"
 
 interface MenuItemCardProps {
   item: IMenuItem
@@ -13,11 +13,18 @@ interface MenuItemCardProps {
 
 export function MenuItemCard({ item, currency }: MenuItemCardProps) {
   const [quantity, setQuantity] = useState(item.quantity || 0)
-
+  
   const itemName = typeof item.name === "object" ? item.name.ar : item.name
   const itemDescription =
     typeof item.description === "object" && item.description !== null ? item.description.ar : item.description || ""
   const itemWeight = item.weight || ""
+  const [subdomain, setSubdomain] = useState("")
+
+useEffect(() => {
+  const host = window.location.hostname
+  const sub = host.split(".")[0]
+  setSubdomain(sub)
+}, [])
 
   const incrementQuantity = () => {
     setQuantity((prev) => prev + 1)
@@ -38,7 +45,7 @@ export function MenuItemCard({ item, currency }: MenuItemCardProps) {
       <div className="relative">
         {item.image ? (
           <img
-            src={`/images/hadramotantar/cover.jpg`}
+            src={`/images/${subdomain}/cover.jpg`}
             alt={`${itemName} `}
             className="h-32 w-full object-cover"
             loading="lazy"

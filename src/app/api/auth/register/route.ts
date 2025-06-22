@@ -20,64 +20,64 @@ const registerSchema = z.object({
 export async function POST(request: NextRequest) {
   return NextResponse.json({ error: "🚫 التسجيل مغلق مؤقتًا. الرجاء المحاولة لاحقًا." }, { status: 403 })
 
-  try {
-    const body = await request.json()
+  // try {
+  //   const body = await request.json()
 
-    // Validate the request body
-    const result = registerSchema.safeParse(body)
-    if (!result.success) {
-      return NextResponse.json({ error: "Invalid input", details: result.error.format() }, { status: 400 })
-    }
+  //   // Validate the request body
+  //   const result = registerSchema.safeParse(body)
+  //   if (!result.success) {
+  //     return NextResponse.json({ error: "Invalid input", details: result.error.format() }, { status: 400 })
+  //   }
 
-    const { name, email, password, restaurantId, role = "staff" } = result.data
+  //   const { name, email, password, restaurantId, role = "staff" } = result.data
 
-    // Validate restaurantId is a valid ObjectId
-    if (!mongoose.Types.ObjectId.isValid(restaurantId)) {
-      return NextResponse.json({ error: "Invalid restaurant ID format" }, { status: 400 })
-    }
+  //   // Validate restaurantId is a valid ObjectId
+  //   if (!mongoose.Types.ObjectId.isValid(restaurantId)) {
+  //     return NextResponse.json({ error: "Invalid restaurant ID format" }, { status: 400 })
+  //   }
 
-    await dbconnect()
+  //   await dbconnect()
 
-    // Check if user with this email already exists
-    const existingUser = await User.findOne({ email })
-    if (existingUser) {
-      return NextResponse.json({ error: "Email already in use" }, { status: 409 })
-    }
+  //   // Check if user with this email already exists
+  //   const existingUser = await User.findOne({ email })
+  //   if (existingUser) {
+  //     return NextResponse.json({ error: "Email already in use" }, { status: 409 })
+  //   }
 
-    // Create the new user
-    const user = new User({
-      name,
-      email,
-      password, // Will be hashed by the pre-save hook
-      restaurantId: new mongoose.Types.ObjectId(restaurantId),
-      role,
-      isActive: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    })
+  //   // Create the new user
+  //   const user = new User({
+  //     name,
+  //     email,
+  //     password, // Will be hashed by the pre-save hook
+  //     restaurantId: new mongoose.Types.ObjectId(restaurantId),
+  //     role,
+  //     isActive: true,
+  //     createdAt: new Date(),
+  //     updatedAt: new Date(),
+  //   })
 
-    await user.save()
+  //   await user.save()
 
-    // Log the action
-    logger.info("User registered", {
-      userId: user._id,
-      email: user.email,
-      restaurantId: user.restaurantId,
-    })
+  //   // Log the action
+  //   logger.info("User registered", {
+  //     userId: user._id,
+  //     email: user.email,
+  //     restaurantId: user.restaurantId,
+  //   })
 
-    // Return success without exposing the password
-    return NextResponse.json(
-      {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        restaurantId: user.restaurantId,
-        role: user.role,
-      },
-      { status: 201 },
-    )
-  } catch (error: any) {
-    logger.error("Error registering user", { error: error.message })
-    return NextResponse.json({ error: "Failed to register user" }, { status: 500 })
-  }
+  //   // Return success without exposing the password
+  //   return NextResponse.json(
+  //     {
+  //       id: user._id,
+  //       name: user.name,
+  //       email: user.email,
+  //       restaurantId: user.restaurantId,
+  //       role: user.role,
+  //     },
+  //     { status: 201 },
+  //   )
+  // } catch (error: any) {
+  //   logger.error("Error registering user", { error: error.message })
+  //   return NextResponse.json({ error: "Failed to register user" }, { status: 500 })
+  // }
 }
