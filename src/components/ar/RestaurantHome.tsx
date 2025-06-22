@@ -12,7 +12,6 @@ interface RestaurantHomeProps {
 
 export function RestaurantHome({ restaurant }: RestaurantHomeProps) {
   // Default to Arabic
-  const language = "ar"
   const direction = "rtl"
 
   // Get localized restaurant data
@@ -20,18 +19,13 @@ export function RestaurantHome({ restaurant }: RestaurantHomeProps) {
   const restaurantDescription = restaurant.description
 
   // Mock data for categories - replace with actual data when available
-  const categories = [
-    { id: 1, name: "وجبات رئيسية", image: "/placeholder.svg?key=vfw8r" },
-    { id: 2, name: "مقبلات", image: "/assorted-appetizers.png" },
-    { id: 3, name: "حلويات", image: "/assorted-desserts.png" },
-    { id: 4, name: "مشروبات", image: "/assorted-drinks.png" },
-  ]
+ 
 
   return (
     <div className="flex flex-col w-full min-h-screen bg-background" dir={direction}>
      
 
-      <main className="flex-1">
+      
         {/* Hero Section */}
         <div className="relative w-full h-[60vh] max-h-[300px]">
           <Image
@@ -146,8 +140,7 @@ export function RestaurantHome({ restaurant }: RestaurantHomeProps) {
       </div>
     </section>
         </div>
-      </main>
-
+      
      
     </div>
   )

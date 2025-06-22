@@ -33,7 +33,7 @@ export default async function HomeContent() {
     const subdomain = host?.split(".")[0]
   
     await dbConnect()
-    const restaurant = await Restaurant.findOne({ subdomain }).lean() as IRestaurant | null;
+    const restaurant = await Restaurant.findOne({ subdomain }).lean() as IRestaurant | null
   
     if (!restaurant) {
       return {
@@ -42,14 +42,21 @@ export default async function HomeContent() {
       }
     }
   
+    const imageUrl = `https://${host}/images${restaurant.coverImage}`
+  
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "Restaurant",
       name: restaurant.name?.ar,
-      image: `https://${host}/images${restaurant.coverImage}`,
+      image: imageUrl,
       url: `https://${host}`,
       telephone: restaurant.phones,
-     
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: restaurant.location?.address || "مصر",
+        addressRegion: "مصر",
+      },
+      servesCuisine: restaurant.cuisines || ["مطبخ شرقي"],
     }
   
     return {
@@ -60,10 +67,16 @@ export default async function HomeContent() {
         description: restaurant.description,
         images: [
           {
-            url: `https://${host}/images${restaurant.coverImage}`,
+            url: imageUrl,
             alt: restaurant.name?.ar || "صورة المطعم",
           },
         ],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: restaurant.name?.ar,
+        description: restaurant.description,
+        images: [imageUrl],
       },
       other: {
         "ld+json": JSON.stringify(structuredData),
