@@ -18,6 +18,8 @@ const registerSchema = z.object({
  * POST handler to register a new user
  */
 export async function POST(request: NextRequest) {
+  return NextResponse.json({ error: "🚫 التسجيل مغلق مؤقتًا. الرجاء المحاولة لاحقًا." }, { status: 403 })
+
   try {
     const body = await request.json()
 

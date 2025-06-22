@@ -23,13 +23,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+interface DashboardSidebarProps{
 
-export function DashboardSidebar() {
+  restaurantId: string
+}
+
+export function DashboardSidebar({ restaurantId }:DashboardSidebarProps) {
   const pathname = usePathname()
 
   return (
-    <Sidebar>
-      <SidebarHeader>
+    <Sidebar className="mt-16">
+      <SidebarHeader >
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
@@ -38,7 +42,7 @@ export function DashboardSidebar() {
                   <Store className="size-4" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">Restaurant Admin</span>
+                  <span className="font-semibold">Meelza</span>
                   <span className="text-xs text-muted-foreground">v1.0.0</span>
                 </div>
               </Link>
@@ -74,7 +78,7 @@ export function DashboardSidebar() {
           </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <Link href="/dashboard/menus">
+              <Link href={`/dashboard/restaurants/${restaurantId}/menu`}>
                 <Menu className="h-4 w-4" />
                 <span>Menus</span>
               </Link>
