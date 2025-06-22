@@ -35,7 +35,7 @@ export function MenuGallery({ images }: MenuGalleryProps) {
       <div className="relative w-full aspect-square md:aspect-[16/9] mx-auto max-w-3xl">
         <div className="relative h-full w-full">
           <Image
-            src={`${process.env.NEXT_PUBLIC_API_URL}${images[currentImageIndex].url}`}
+            src={`${images[currentImageIndex].url}`}
             alt={images[currentImageIndex].altText}
             fill
             className="object-contain"
