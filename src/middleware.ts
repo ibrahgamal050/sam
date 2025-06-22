@@ -114,30 +114,34 @@ export async function middleware(request: NextRequest) {
 
   // Handle subdomains
   try {
-    const subdomains = await getSubdomains(request)
-
+    const subdomains = await getSubdomains(request);
+    console.log("✅ List of subdomains from cache/API:", Array.from(subdomains));
+    
+    console.log("📌 currentHost:", currentHost);
+    console.log("📌 pathname:", pathname);
+  
     if (subdomains.has(currentHost)) {
-      // For subdomain with any path, rewrite to the dynamic [slug] page
-      // with the subdomain as context
+      console.log("✅ Subdomain exists:", currentHost);
+  
       if (pathname !== "/") {
         const slug = pathname.startsWith("/") ? pathname : `/${pathname}`;
+        console.log("➡️ Rewriting to:", `/sites${slug}`);
         return NextResponse.rewrite(new URL(`/sites${slug}`, request.url));
-      }  else {
-        // إذا كان المسار هو الجذر "/"، يتم استخدام الساب دومين كـ slug
-        
+      } else {
+        console.log("➡️ Rewriting to:", `/sites`);
         return NextResponse.rewrite(new URL(`/sites`, request.url));
       }
+  
     } else {
-      // Subdomain not found, rewrite to error page
-      return NextResponse.rewrite(new URL("/404", request.url))
+      console.warn("❌ Subdomain not found:", currentHost);
+      return NextResponse.rewrite(new URL("/404", request.url));
     }
+  
   } catch (error) {
-    console.error("Error checking subdomains:", error)
-    // In case of an error, also rewrite to error page
-    return NextResponse.rewrite(new URL("/404", request.url))
+    console.error("❌ Error checking subdomains:", error);
+    return NextResponse.rewrite(new URL("/404", request.url));
   }
 }
-
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico|public/|images).*)"],
 }
