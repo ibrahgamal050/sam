@@ -16,6 +16,7 @@ export function BranchesPage({restaurant}:BranchesPageProps) {
   // If no branches, show a message
   if (!restaurant ) {
     return (
+      
       <div className="p-6 max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-[#6C5CE7] to-[#8A7FF5] bg-clip-text text-transparent">
@@ -32,12 +33,28 @@ export function BranchesPage({restaurant}:BranchesPageProps) {
   }
 
   return (
+    <>
+     <div   className="relative  w-full h-48">
+         
+         <Image
+           src={`/images${restaurant?.coverImage}`}
+           alt="صورة المطعم"
+           fill
+           className="object-cover"
+           priority
+         />
+         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+           <div className="p-4 text-white">
+             <h2 className="text-2xl font-bold">فروعنا</h2>
+             <p className="text-sm opacity-90"></p>
+           </div>
+         </div>
+       
+        
+       </div>
+    
     <div className="p-6 max-w-7xl mx-auto">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-[#6C5CE7] to-[#8A7FF5] bg-clip-text text-transparent">
-          فروعنا
-        </h1>
-      </div>
+     
 
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {branches.map((branch) => (
@@ -127,6 +144,7 @@ export function BranchesPage({restaurant}:BranchesPageProps) {
         ))}
       </div>
     </div>
+    </>
   )
 }
 
