@@ -7,14 +7,14 @@ let lastFetchTime = 0
 const CACHE_DURATION = 5 * 60 * 1000 // 5 minutes
 
 // Fetch subdomains from an API route
-const fetchSubdomains = async (): Promise<Set<string>> => {
+const fetchSubdomains = async (request: NextRequest): Promise<Set<string>> => {
+  const host = request.headers.get("host")
+  const protocol = host?.includes("localhost") ? "http" : "https"
+  const url = `${protocol}://${host}/api/subdomains`
+
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/subdomains`, {
-      headers: { "Cache-Control": "no-cache" },
-    })
-    if (!response.ok) {
-      throw new Error("Failed to fetch subdomains")
-    }
+    const response = await fetch(url, { headers: { "Cache-Control": "no-cache" } })
+    if (!response.ok) throw new Error("Failed to fetch subdomains")
     const subdomains = await response.json()
     return new Set(subdomains)
   } catch (error) {
@@ -23,22 +23,24 @@ const fetchSubdomains = async (): Promise<Set<string>> => {
   }
 }
 
+
 // Get subdomains with caching
-const getSubdomains = async (): Promise<Set<string>> => {
+const getSubdomains = async (request: NextRequest): Promise<Set<string>> => {
   const now = Date.now()
   if (subdomainsCache.size === 0 || now - lastFetchTime > CACHE_DURATION) {
     try {
-      subdomainsCache = await fetchSubdomains()
+      subdomainsCache = await fetchSubdomains(request)
       lastFetchTime = now
     } catch (error) {
       console.error("Error updating subdomain cache:", error)
       if (subdomainsCache.size === 0) {
-        throw error // Rethrow if we have no cached data
+        throw error
       }
     }
   }
   return subdomainsCache
 }
+
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl
@@ -78,8 +80,8 @@ export async function middleware(request: NextRequest) {
     const pathSegments = pathname.split("/").filter(Boolean)
     if (pathSegments.length > 0) {
       try {
-        const subdomains = await getSubdomains()
-        const potentialSubdomain = pathSegments[0]
+        const subdomains = await fetchSubdomains(request)
+                const potentialSubdomain = pathSegments[0]
 
         if (subdomains.has(potentialSubdomain)) {
           // Redirect to the subdomain with the rest of the path
@@ -112,7 +114,8 @@ export async function middleware(request: NextRequest) {
 
   // Handle subdomains
   try {
-    const subdomains = await getSubdomains()
+    const subdomains = await getSubdomains(request)
+
     if (subdomains.has(currentHost)) {
       // For subdomain with any path, rewrite to the dynamic [slug] page
       // with the subdomain as context
