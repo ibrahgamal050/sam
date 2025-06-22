@@ -14,18 +14,18 @@ export default function RestaurantLayout({
   children: React.ReactNode
 }) {
   return (
-   
-        <>
-            <div className="block lg:hidden"> {/* شاشات صغيرة */}
-              <MobileLayout>
-                {children}
-              </MobileLayout>
-            </div>
-            <div className="hidden lg:block"> {/* شاشات كبيرة */}
-                {children}
-            </div>
-            <Footer />
-            </>
-     
+    <RestaurantProvider>
+      {/* دي تغلف كل حاجة */}
+      <div className="min-h-screen flex flex-col" dir="rtl" >
+        <div className="block lg:hidden">
+          <MobileLayout>{children}</MobileLayout>
+        </div>
+        <div className="hidden lg:block">
+          {/* نمرر children بنفس الطريقة لكن بدون إعادة تكرار */}
+          {children}
+        </div>
+        <Footer />
+      </div>
+    </RestaurantProvider>
   )
 }
