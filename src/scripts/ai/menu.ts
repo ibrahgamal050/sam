@@ -152,63 +152,63 @@ async function convertTextToMenuJSON(rawText: string, name: string): Promise<ICa
           continue;
         }
     
-        let allCategories: ICategory[] = [];
+       // let allCategories: ICategory[] = [];
     
-        for (const [i, image] of imageLinks.entries()) {
-          console.log(`🖼️ معالجة الصورة ${i + 1}/${imageLinks.length}...`);
-          try {
-            const extractedText = await extractTextFromImage(image);
-            console.log(`📄 النص المستخرج:\n${extractedText}`);
+        // for (const [i, image] of imageLinks.entries()) {
+        //   console.log(`🖼️ معالجة الصورة ${i + 1}/${imageLinks.length}...`);
+        //   try {
+        //     const extractedText = await extractTextFromImage(image);
+        //     console.log(`📄 النص المستخرج:\n${extractedText}`);
     
-            const aiCategories = await convertTextToMenuJSON(extractedText, rest.name);
-            if (Array.isArray(aiCategories)) {
-              for (const newCat of aiCategories) {
-                const existingCat = allCategories.find(cat => 
-                  cat.name.en === newCat.name.en || cat.name.ar === newCat.name.ar
-                );
+        //     const aiCategories = await convertTextToMenuJSON(extractedText, rest.name);
+        //     if (Array.isArray(aiCategories)) {
+        //       for (const newCat of aiCategories) {
+        //         const existingCat = allCategories.find(cat => 
+        //           cat.name.en === newCat.name.en || cat.name.ar === newCat.name.ar
+        //         );
               
-                if (existingCat) {
-                  for (const newItem of newCat.menuItems) {
-                    const alreadyExists = existingCat.menuItems.some(
-                      item => item.name.en === newItem.name.en || item.name.ar === newItem.name.ar
-                    );
-                    if (!alreadyExists) {
-                      // تأكد من أن السعر مفقود يتم تعيينه إلى null أو 0
-                      if (newItem.sizes) {
-                        newItem.sizes.forEach(size => {
-                          // إذا كانت قيمة السعر غير موجودة أو null، يتم تعيينها إلى 0
-                          if (size.price === undefined || size.price === null) {
-                            size.price = 0;  // أو يمكنك تعيينه إلى null إذا كنت تفضل ذلك
-                          }
-                        });
-                      }
-                      existingCat.menuItems.push(newItem);
-                    }
-                  }
-                } else {
-                  allCategories.push(newCat);
-                }
-              }
+        //         if (existingCat) {
+        //           for (const newItem of newCat.menuItems) {
+        //             const alreadyExists = existingCat.menuItems.some(
+        //               item => item.name.en === newItem.name.en || item.name.ar === newItem.name.ar
+        //             );
+        //             if (!alreadyExists) {
+        //               // تأكد من أن السعر مفقود يتم تعيينه إلى null أو 0
+        //               if (newItem.sizes) {
+        //                 newItem.sizes.forEach(size => {
+        //                   // إذا كانت قيمة السعر غير موجودة أو null، يتم تعيينها إلى 0
+        //                   if (size.price === undefined || size.price === null) {
+        //                     size.price = 0;  // أو يمكنك تعيينه إلى null إذا كنت تفضل ذلك
+        //                   }
+        //                 });
+        //               }
+        //               existingCat.menuItems.push(newItem);
+        //             }
+        //           }
+        //         } else {
+        //           allCategories.push(newCat);
+        //         }
+        //       }
     
-              console.log(`✅ تم استخراج ${aiCategories.length} قسم من الصورة ${i + 1}`);
-            } else {
-              console.warn(`⚠️ الذكاء الاصطناعي لم يرجع نتيجة مناسبة للصورة ${i + 1}`);
-            }
-          } catch (imgErr) {
-            console.error(`❌ خطأ أثناء معالجة الصورة ${i + 1}:`, imgErr);
-          }
-        }
+        //       console.log(`✅ تم استخراج ${aiCategories.length} قسم من الصورة ${i + 1}`);
+        //     } else {
+        //       console.warn(`⚠️ الذكاء الاصطناعي لم يرجع نتيجة مناسبة للصورة ${i + 1}`);
+        //     }
+        //   } catch (imgErr) {
+        //     console.error(`❌ خطأ أثناء معالجة الصورة ${i + 1}:`, imgErr);
+        //   }
+        // }
     
-        if (allCategories.length === 0) {
-          console.warn(`🚫 لم يتم استخراج أي أقسام للمطعم ${rest.name}`);
-          continue;
-        }
+        // if (allCategories.length === 0) {
+        //   console.warn(`🚫 لم يتم استخراج أي أقسام للمطعم ${rest.name}`);
+        //   continue;
+        // }
     
         const menu = new MenuItem({
           restaurantId: rest._id,
           name: rest.subdomain,
           currency: { ar: "جنيه", en: "EGP" },
-          categories: allCategories,
+          categories:[],
           menuImages: [],
         });
         await menu.save();

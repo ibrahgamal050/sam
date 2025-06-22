@@ -1,37 +1,20 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Clock, MapPin, Phone, Navigation } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import IRestaurant from '@/types'
-interface BranchLocation {
-  address: {
-    ar: string
-    en: string
-  }
-  latitude?: number
-  longitude?: number
+import {IRestaurant} from '@/types'
+
+
+
+
+interface BranchesPageProps {
+  restaurant: IRestaurant
 }
 
-interface Branch {
-  _id: string
-  name: {
-    ar: string
-    en: string
-  }
-  location: BranchLocation
-  phone: string
-  workingHours: string
-  isMainBranch?: boolean
-  image?: string
-}
-
-
-
-export function BranchesPage({restaurant}: IRestaurant) {
+export function BranchesPage({restaurant}:BranchesPageProps) {
   const branches = restaurant.branches 
   // If no branches, show a message
-  if (!restaurant || restaurant.length === 0) {
+  if (!restaurant ) {
     return (
       <div className="p-6 max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
@@ -59,7 +42,7 @@ export function BranchesPage({restaurant}: IRestaurant) {
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {branches.map((branch) => (
           <Card
-            key={branch._id}
+          key={branch._id.toString()}
             className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-[#6C5CE7]/10 border-gray-200 group"
           >
             
@@ -71,18 +54,14 @@ export function BranchesPage({restaurant}: IRestaurant) {
                   height={200}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                {branch.isMainBranch && (
-                  <Badge className="absolute top-3 right-3 bg-[#6C5CE7] hover:bg-[#5A4BD1]">الفرع الرئيسي</Badge>
-                )}
+              
               </div>
             
 
             <CardContent className="p-6 space-y-5">
               <div className="flex justify-between items-start">
                 <h2 className="text-xl font-bold">{branch.name.ar}</h2>
-                {branch.isMainBranch && !branch.image && (
-                  <Badge className="bg-[#6C5CE7] hover:bg-[#5A4BD1]">الفرع الرئيسي</Badge>
-                )}
+               
               </div>
 
               <div className="space-y-4 pt-2">

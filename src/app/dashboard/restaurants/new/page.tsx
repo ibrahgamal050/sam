@@ -1,6 +1,6 @@
 import { DashboardHeader } from "@/components/dashboard/dashboard-header"
 import { DashboardShell } from "@/components/dashboard/dashboard-shell"
-import { RestaurantForm } from "@/components/restaurants/restaurant-form"
+import { RestaurantForm } from "@/components/dashboard/restaurants/restaurant-form"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"

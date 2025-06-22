@@ -29,6 +29,9 @@ export interface IMenuItem {
   price?: number
   image?: string
   sizes?: ISize[]
+  weight?: string
+  quantity?: number
+  isNew?: boolean 
 }
 
 export interface ICategory {

@@ -1,6 +1,7 @@
 import { Types } from "mongoose";
 
 export interface IBranch {
+  _id: Types.ObjectId
     name: {
       ar: string;
       en: string;
@@ -65,7 +66,7 @@ export interface IBranch {
       twitter?: string;
     };
   
-    branches?: IBranch[];
+    branches: IBranch[];
     hours?: RestaurantHours[];
     isPublished?: boolean;
     phones: string[];

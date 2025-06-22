@@ -1,8 +1,8 @@
 import { BranchesPage } from "@/components/ar/branches-page"
 import dbConnect from "@/lib/db"
-import mongoose from "mongoose"
 import Restaurant from "@/models/restaurant"
 import { headers } from 'next/headers';
+import { IRestaurant } from "@/types";
 
 export default async function Branches({ params }: { params: { slug: string } }) {
   await dbConnect();
@@ -14,7 +14,7 @@ export default async function Branches({ params }: { params: { slug: string } })
 
   const restaurant = await Restaurant.findOne({ subdomain }).lean() as IRestaurant | null;
 
-  if (!restaurant || restaurant.length === 0) {
+  if (!restaurant ) {
     // Handle case where restaurant is not found
     return <div>Restaurant not found</div>
   }
