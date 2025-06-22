@@ -16,7 +16,7 @@ export function MobileMenu({ headerRef, categories, activeCategory, scrollToCate
   return (
     <div
       ref={headerRef}
-      className="lg:hidden fixed top-16 left-0 right-0 z-30 bg-white border-b border-gray-200 shadow-sm"
+      className="lg:hidden fixed top-0 left-0 right-0 z-30 bg-white border-b border-gray-200 shadow-sm"
     >
       <CategoryTabs categories={categories} activeCategory={activeCategory} scrollToCategory={scrollToCategory} />
     </div>
