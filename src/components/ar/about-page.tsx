@@ -22,7 +22,7 @@ export default function AboutPage({ data }: AboutPageProps) {
         <div  key={key} className="relative  w-full h-48">
          
           <Image
-            src={`http://localhost:3000/images${props.heroImage}`}
+            src={`/images${props.heroImage}`}
             alt="صورة المطعم"
             fill
             className="object-cover"
