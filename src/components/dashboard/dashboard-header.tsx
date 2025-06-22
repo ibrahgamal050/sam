@@ -1,18 +1,21 @@
-import type React from "react"
-interface DashboardHeaderProps {
-  heading: string
-  description?: string
-  children?: React.ReactNode
+'use client'
+
+import { signOut } from "next-auth/react"
+
+interface Props {
+  nameOrEmail: string
 }
 
-export function DashboardHeader({ heading, description, children }: DashboardHeaderProps) {
+export default function DashboardHeader({ nameOrEmail }: Props) {
   return (
-    <div className="flex items-center justify-between px-2 py-4">
-      <div className="grid gap-1">
-        <h1 className="text-2xl font-bold tracking-tight">{heading}</h1>
-        {description && <p className="text-muted-foreground">{description}</p>}
-      </div>
-      {children}
-    </div>
+    <header className="mb-6 flex items-center justify-between">
+      <h1 className="text-xl font-semibold">مرحبا {nameOrEmail}</h1>
+      <button
+        onClick={() => signOut()}
+        className="text-sm bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+      >
+        تسجيل الخروج
+      </button>
+    </header>
   )
 }

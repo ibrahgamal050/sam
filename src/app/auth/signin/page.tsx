@@ -25,7 +25,7 @@ type FormData = z.infer<typeof formSchema>
 export default function SignIn() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard"
+  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard/restaurants"
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
