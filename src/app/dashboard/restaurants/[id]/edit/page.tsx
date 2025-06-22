@@ -1,4 +1,4 @@
-import { DashboardHeader } from "@/components/dashboard/dashboard-header"
+import { DashboardHeader } from "@/components/dashboard/restaurants/dashboard-header"
 import { DashboardShell } from "@/components/dashboard/dashboard-shell"
 import { RestaurantForm } from "@/components/dashboard/restaurants/restaurant-form"
 import { Button } from "@/components/ui/button"

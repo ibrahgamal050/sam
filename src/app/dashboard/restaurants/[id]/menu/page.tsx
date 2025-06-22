@@ -1,4 +1,4 @@
-import { DashboardHeader } from "@/components/dashboard/dashboard-header"
+import { DashboardHeader } from "@/components/dashboard/restaurants/dashboard-header"
 import { DashboardShell } from "@/components/dashboard/dashboard-shell"
 import { MenuCategoriesList } from "@/components/dashboard/menu/menu-categories-list"
 import { MenuCreateCategoryButton } from "@/components/dashboard/menu/menu-create-category-button"

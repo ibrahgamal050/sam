@@ -1,4 +1,4 @@
-import { DashboardHeader } from "@/components/dashboard/dashboard-header"
+import { DashboardHeader } from "@/components/dashboard/restaurants/dashboard-header"
 import { DashboardShell } from "@/components/dashboard/dashboard-shell"
 import { ComponentsManager } from "@/components/dashboard/pages/components-manager"
 import { getPageById } from "@/lib/services/page-service"
