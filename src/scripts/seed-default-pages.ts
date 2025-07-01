@@ -8,8 +8,6 @@ import Restaurant from "@/models/restaurant"
 dotenv.config()
 
 
-mongoose.connect('mongodb+srv://ibrahimfoodApp55:Ola442004@cluster0.m9kbm.mongodb.net/restaurantsDB?retryWrites=true&w=majority&appName=Cluster0').then(() => console.log("✅ تم الاتصال بقاعدة البيانات"))
-  .catch(err => console.error("❌ خطأ في الاتصال:", err));
 
 
 

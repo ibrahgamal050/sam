@@ -16,9 +16,32 @@ import { Badge } from "@/components/ui/badge"
 
 interface BranchesTableProps {
   branches: IBranch[]
+  onEdit?: (branch: IBranch) => void
+  onDelete?: (branch: IBranch) => void
 }
 
-export function BranchesTable({ branches }: BranchesTableProps) {
+export function BranchesTable({ branches, onEdit, onDelete }: BranchesTableProps) {
+  const days = [
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+  ] as const
+
+  const getSummary = (branch: IBranch) => {
+    if (branch.isOpen24Hours) return "24 Hours"
+    const first = branch.workingHours.monday
+    const same = days.every(
+      (d) =>
+        branch.workingHours[d].open === first.open &&
+        branch.workingHours[d].close === first.close,
+    )
+    return same ? `${first.open} - ${first.close}` : "Varies"
+  }
+
   return (
     <div className="rounded-md border">
       <Table>
@@ -41,12 +64,12 @@ export function BranchesTable({ branches }: BranchesTableProps) {
             </TableRow>
           ) : (
             branches.map((branch) => (
-              <TableRow key={branch._id}>
+              <TableRow key={branch.id}>
                 <TableCell className="font-medium">
                   <div>
-                    <div>{branch.name.en}</div>
-                    <div className="text-xs text-muted-foreground">{branch.name.ar}</div>
-                    {branch.isMainBranch && (
+                    <div>{branch.nameEn}</div>
+                    <div className="text-xs text-muted-foreground">{branch.nameAr}</div>
+                  {branch.isMainBranch && (
                       <Badge variant="outline" className="mt-1">
                         Main Branch
                       </Badge>
@@ -57,8 +80,8 @@ export function BranchesTable({ branches }: BranchesTableProps) {
                   <div className="flex items-start gap-2">
                     <MapPin className="mt-0.5 h-4 w-4 text-muted-foreground" />
                     <div>
-                      <div className="text-xs">{branch.location.address.en}</div>
-                      <div className="text-xs text-muted-foreground">{branch.location.address.ar}</div>
+                      <div className="text-xs">{branch.addressEn}</div>
+                      <div className="text-xs text-muted-foreground">{branch.addressAr}</div>
                     </div>
                   </div>
                 </TableCell>
@@ -68,7 +91,7 @@ export function BranchesTable({ branches }: BranchesTableProps) {
                     <span>{branch.phone}</span>
                   </div>
                 </TableCell>
-                <TableCell>{branch.workingHours}</TableCell>
+                <TableCell>{getSummary(branch)}</TableCell>
                 <TableCell>
                   <Badge variant="outline">Active</Badge>
                 </TableCell>
@@ -82,12 +105,15 @@ export function BranchesTable({ branches }: BranchesTableProps) {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuItem>
+                      <DropdownMenuItem onSelect={() => onEdit?.(branch)}>
                         <Edit className="mr-2 h-4 w-4" />
                         Edit
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem className="text-destructive focus:text-destructive">
+                      <DropdownMenuItem
+                        onSelect={() => onDelete?.(branch)}
+                        className="text-destructive focus:text-destructive"
+                      >
                         <Trash className="mr-2 h-4 w-4" />
                         Delete
                       </DropdownMenuItem>
