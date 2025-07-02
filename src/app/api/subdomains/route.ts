@@ -1,20 +1,16 @@
+// app/api/subdomains/route.ts (أو pages/api/subdomains.ts لو بتستخدم pages router)
 import { NextResponse } from "next/server"
-import dbConnect from "@/lib/db"
+import { dbConnect } from "@/lib/db"
 import Restaurant from "@/models/restaurant"
 
 export async function GET() {
   try {
     await dbConnect()
-
-    // Fetch all restaurant slugs from the database
     const restaurants = await Restaurant.find({}, { subdomain: 1 })
-
-    // Extract slugs into an array
-    const subdomains = restaurants.map((restaurant: any) => restaurant.subdomain)
-
+    const subdomains = restaurants.map((r) => r.subdomain)
     return NextResponse.json(subdomains)
-  } catch (error) {
-    console.error("Error fetching subdomains:", error)
-    return NextResponse.json({ error: "Failed to fetch subdomains" }, { status: 500 })
+  } catch (err) {
+    console.error("Failed to fetch subdomains:", err)
+    return NextResponse.json([], { status: 500 })
   }
 }
