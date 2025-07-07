@@ -41,17 +41,13 @@ export function RestaurantHome({ restaurant }: RestaurantHomeProps) {
               <h1 className="text-white text-3xl md:text-4xl font-bold mb-2">{restaurantName}</h1>
               
               <div className="flex gap-4 mt-4">
-                <Button className="gap-2">
-                  <Utensils className="w-4 h-4" />
-                  تصفح القائمة
-                </Button>
-                <Button
-                  variant="outline"
-                  className="gap-2 bg-black/30 text-white border-white/20 hover:bg-black/50 hover:text-white"
-                >
-                  <Phone className="w-4 h-4" />
-                  احجز الآن
-                </Button>
+              <Link href="/ar/menu">
+  <Button className="gap-2">
+    <Utensils className="w-4 h-4" />
+    تصفح القائمة
+  </Button>
+</Link>
+               
               </div>
             </div>
           </div>
@@ -71,7 +67,7 @@ export function RestaurantHome({ restaurant }: RestaurantHomeProps) {
                   {restaurantDescription ||
                     "نحن نقدم تجربة طعام فريدة من نوعها مع أطباق تقليدية وعصرية. نستخدم مكونات طازجة ومحلية لضمان أعلى جودة لوجباتنا. تعال واستمتع بأجواء مريحة وخدمة ممتازة."}
                 </p>
-                <Link href={`/${restaurant.subdomain}/about`}>
+                <Link href={`/ar/about`}>
                   <Button variant="outline" className="gap-2">
                     اقرأ المزيد
                     <ChevronRight className="w-4 h-4" />
@@ -114,11 +110,9 @@ export function RestaurantHome({ restaurant }: RestaurantHomeProps) {
       <div className="absolute bottom-10 left-10 w-20 h-1 bg-[#6C5CE7] opacity-40"></div>
 
       <div className="relative z-10">
-        <div className="inline-block px-4 py-1 rounded-full bg-[#1A1346] border border-[#6C5CE7]/30 text-[#8A7FF5] text-sm font-medium mb-6">
-          حجز طاولة
-        </div>
+        
 
-        <h2 className="text-3xl font-bold mb-4 text-white">احجز طاولتك الآن</h2>
+        <h2 className="text-3xl font-bold mb-4 text-white">اطلب الآن</h2>
         <p className="mb-8 max-w-xl mx-auto text-[#B8B2E5]">
           استمتع بتجربة طعام لا تُنسى. احجز طاولتك الآن لتجنب الانتظار.
         </p>

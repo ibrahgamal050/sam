@@ -43,7 +43,7 @@ useEffect(() => {
       itemType="https://schema.org/MenuItem"
     >
       <div className="relative">
-        {item.image ? (
+        {item? (
           <img
             src={`/images/${subdomain}/cover.jpg`}
             alt={`${itemName} `}

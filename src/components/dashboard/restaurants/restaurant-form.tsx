@@ -5,7 +5,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Switch } from "@/components/ui/switch"
-import type { Restaurant } from "@/lib/types"
+import type { IRestaurant } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
@@ -40,7 +40,7 @@ const formSchema = z.object({
 })
 
 interface RestaurantFormProps {
-  restaurant?: Restaurant
+  restaurant?: IRestaurant
 }
 
 export function RestaurantForm({ restaurant }: RestaurantFormProps) {
