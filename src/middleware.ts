@@ -68,7 +68,7 @@ export async function middleware(request: NextRequest) {
   const hostname = request.headers.get("host") || "localhost:3000"
   const currentHost =
     process.env.NODE_ENV === "production" && process.env.VERCEL === "1"
-      ? hostname.replace(`.mmenus.com`, "")
+      ? hostname.replace(`.meelza.com`, "")
       : hostname.replace(`.localhost:3000`, "")
 
   // Redirect www to non-www
