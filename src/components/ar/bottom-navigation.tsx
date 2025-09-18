@@ -1,28 +1,30 @@
 "use client"
 
-import { Home, Menu, Info, MapPin, FileText, Phone } from 'lucide-react'
+import { Home, Menu, MapPin, ShoppingCart } from 'lucide-react'
 import Link from "next/link"
-import { usePathname, useParams } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { useCart } from "@/contexts/cart-context"
 
 export function BottomNavigation() {
   const pathname = usePathname()
-  const params = useParams()
-  const slug = params?.slug as string
+  const { items } = useCart()
+
+  const cartCount = items.reduce((sum, item) => sum + item.quantity, 0)
 
   const navItems = [
     { name: "الرئيسية", href: `/ar/`, icon: Home },
     { name: "المنيو", href: `/ar/menu`, icon: Menu },
     { name: "الفروع", href: `/ar/branches`, icon: MapPin },
-    { name: "عن المطعم", href: `/ar/about`, icon: FileText },
+    { name: "السلة", href: `/ar/cart`, icon: ShoppingCart, badge: cartCount },
   ]
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-gray-200/50 shadow-lg">
       <div className="flex justify-around items-center h-16 max-w-md mx-auto px-2">
-        {navItems.map((item, index) => {
-const isActive = pathname === item.href
-const Icon = item.icon
+        {navItems.map((item) => {
+          const isActive = pathname === item.href
+          const Icon = item.icon
 
           return (
             <Link
@@ -45,15 +47,21 @@ const Icon = item.icon
               <div className={cn(
                 "relative transition-all duration-300 ease-out",
                 isActive ? "transform -translate-y-0.5 scale-110" : "group-hover:scale-105"
-              )}>
-                <Icon 
+              )}
+              >
+                <Icon
                   className={cn(
                     "h-5 w-5 transition-colors duration-300",
-                    isActive 
-                      ? "text-[#6C5CE7] drop-shadow-sm" 
+                    isActive
+                      ? "text-[#6C5CE7] drop-shadow-sm"
                       : "text-gray-500 group-hover:text-[#6C5CE7]"
-                  )} 
+                  )}
                 />
+                {item.badge && item.badge > 0 && (
+                  <span className="absolute -top-2 -right-2 min-w-[18px] h-[18px] rounded-full bg-[#6C5CE7] text-white text-[11px] leading-none flex items-center justify-center px-1">
+                    {item.badge}
+                  </span>
+                )}
               </div>
               
               {/* Label with improved typography */}

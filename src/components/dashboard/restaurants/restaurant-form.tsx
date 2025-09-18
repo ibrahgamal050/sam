@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useState } from "react"
+import {ImageUploadField} from "./ImageUploadField"
 
 const formSchema = z.object({
   nameEn: z.string().min(2, {
@@ -189,43 +190,8 @@ export function RestaurantForm({ restaurant }: RestaurantFormProps) {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2">
-                <FormField
-                  control={form.control}
-                  name="logo"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Logo</FormLabel>
-                      <FormControl>
-                        <div className="flex flex-col items-center justify-center rounded-md border border-dashed p-4">
-                          <div className="flex h-40 w-40 items-center justify-center rounded-md bg-muted">
-                            {field.value ? (
-                              <img
-                                src={field.value || "/placeholder.svg"}
-                                alt="Restaurant logo"
-                                className="h-full w-full rounded-md object-cover"
-                              />
-                            ) : (
-                              <span className="text-sm text-muted-foreground">No logo uploaded</span>
-                            )}
-                          </div>
-                          <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            className="mt-4"
-                            onClick={() => {
-                              // In a real app, this would open a file picker
-                              console.log("Upload logo clicked")
-                            }}
-                          >
-                            Upload Logo
-                          </Button>
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <ImageUploadField control={form.control} name="logo" label="Logo" subdomain={restaurant?.subdomain} />
+
                 <FormField
                   control={form.control}
                   name="coverImage"

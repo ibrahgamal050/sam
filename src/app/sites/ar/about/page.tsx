@@ -21,6 +21,8 @@ export default async function About() {
   if (!subdomain) {
     return <div className="text-center py-10 text-red-600">لم يتم العثور على اسم النطاق الفرعي</div>;
   }
+  const restaurant = await Restaurant.findOne({ subdomain }).lean<IRestaurant>();
+  if (!restaurant) return {}
  
   try {
     // جلب بيانات صفحة "عن"
@@ -35,7 +37,7 @@ export default async function About() {
     const aboutPageData = pageData as AboutPageType
 
     // عرض صفحة "عن"
-    return <AboutPage data={aboutPageData} />
+    return <AboutPage logo={restaurant.logo} data={aboutPageData} />
   } catch (error) {
     console.error("Error fetching about page:", error)
     return <div className="text-center py-10 text-red-600">حدث خطأ أثناء تحميل الصفحة</div>

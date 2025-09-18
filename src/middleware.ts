@@ -8,9 +8,29 @@ const CACHE_DURATION = 5 * 60 * 1000 // 5 minutes
 
 // Fetch subdomains from an API route
 const fetchSubdomains = async (request: NextRequest): Promise<Set<string>> => {
-  const host = request.headers.get("host")
-  const protocol = host?.includes("localhost") ? "http" : "https"
-  const url = `${protocol}://${host}/api/subdomains`
+  const explicitBase = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "")
+  const rootDomain = process.env.NEXT_PUBLIC_ROOT_DOMAIN
+  const hostHeader = request.headers.get("host")
+
+  let origin = explicitBase
+
+  if (!origin) {
+    const protocol = request.nextUrl.protocol || (hostHeader?.includes("localhost") ? "http:" : "https:")
+    const requestHost = request.nextUrl.host || hostHeader || rootDomain
+
+    if (!requestHost) {
+      throw new Error("Unable to resolve host for subdomain lookup")
+    }
+
+    const shouldUseRootDomain =
+      !!rootDomain && requestHost.endsWith(rootDomain) && requestHost !== rootDomain
+
+    const targetHost = shouldUseRootDomain ? rootDomain : requestHost
+
+    origin = `${protocol}//${targetHost}`
+  }
+
+  const url = new URL("/api/subdomains", origin).toString()
 
   try {
     const response = await fetch(url, { headers: { "Cache-Control": "no-cache" } })
@@ -18,7 +38,7 @@ const fetchSubdomains = async (request: NextRequest): Promise<Set<string>> => {
     const subdomains = await response.json()
     return new Set(subdomains)
   } catch (error) {
-    console.error("Error fetching subdomains:", error)
+    console.error(`Error fetching subdomains from ${url}:`, error)
     throw error
   }
 }
@@ -80,8 +100,8 @@ export async function middleware(request: NextRequest) {
     const pathSegments = pathname.split("/").filter(Boolean)
     if (pathSegments.length > 0) {
       try {
-        const subdomains = await fetchSubdomains(request)
-                const potentialSubdomain = pathSegments[0]
+        const subdomains = await getSubdomains(request)
+        const potentialSubdomain = pathSegments[0]
 
         if (subdomains.has(potentialSubdomain)) {
           // Redirect to the subdomain with the rest of the path
@@ -114,28 +134,25 @@ export async function middleware(request: NextRequest) {
 
   // Handle subdomains
   try {
-    const subdomains = await getSubdomains(request);
-    
-   
+    const subdomains = await getSubdomains(request)
+
     if (subdomains.has(currentHost)) {
-  
       if (pathname !== "/") {
-        const slug = pathname.startsWith("/") ? pathname : `/${pathname}`;
-        return NextResponse.rewrite(new URL(`/sites${slug}`, request.url));
-      } else {
-        return NextResponse.rewrite(new URL(`/sites`, request.url));
+        const slug = pathname.startsWith("/") ? pathname : `/${pathname}`
+        return NextResponse.rewrite(new URL(`/sites${slug}`, request.url))
       }
-  
-    } else {
-      console.warn("❌ Subdomain not found:", currentHost);
-      return NextResponse.rewrite(new URL("/404", request.url));
+
+      return NextResponse.rewrite(new URL(`/sites`, request.url))
     }
-  
+
+    console.warn("❌ Subdomain not found:", currentHost)
+    return NextResponse.rewrite(new URL("/404", request.url))
   } catch (error) {
-    console.error("❌ Error checking subdomains:", error);
-    return NextResponse.rewrite(new URL("/404", request.url));
+    console.error("❌ Error checking subdomains:", error)
+    return NextResponse.rewrite(new URL("/404", request.url))
   }
 }
+
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico|public/|images).*)"],
 }

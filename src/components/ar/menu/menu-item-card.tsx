@@ -4,7 +4,8 @@ import { Plus, Minus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import type { IMenuItem } from "@/types/menu"
-import { useState, useEffect } from "react"
+import { useEffect, useMemo, useState } from "react"
+import { useCart } from "@/contexts/cart-context"
 
 interface MenuItemCardProps {
   item: IMenuItem
@@ -12,8 +13,14 @@ interface MenuItemCardProps {
 }
 
 export function MenuItemCard({ item, currency }: MenuItemCardProps) {
-  const [quantity, setQuantity] = useState(item.quantity || 0)
-  
+  const { items: cartItems, addItem, decreaseItem } = useCart()
+  // Derive current quantity from the cart by item id
+  const itemId = useMemo(() => (item._id ? item._id.toString() : `${item.name?.ar || item.name?.en || ""}-${item.price ?? 0}`), [item])
+  const quantity = useMemo(() => {
+    const found = cartItems.find((ci) => ci.id === itemId)
+    return found ? found.quantity : 0
+  }, [cartItems, itemId])
+
   const itemName = typeof item.name === "object" ? item.name.ar : item.name
   const itemDescription =
     typeof item.description === "object" && item.description !== null ? item.description.ar : item.description || ""
@@ -27,23 +34,28 @@ useEffect(() => {
 }, [])
 
   const incrementQuantity = () => {
-    setQuantity((prev) => prev + 1)
+    // Add to shared cart context
+    addItem({
+      id: itemId,
+      name: itemName || "",
+      price: item.price ?? 0,
+    })
   }
 
   const decrementQuantity = () => {
     if (quantity > 0) {
-      setQuantity((prev) => prev - 1)
+      decreaseItem(itemId)
     }
   }
 
   return (
     <article
-      className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+      className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
       itemScope
       itemType="https://schema.org/MenuItem"
     >
       <div className="relative">
-        {item? (
+        {item ? (
           <img
             src={`/images/${subdomain}/cover.jpg`}
             alt={`${itemName} `}
@@ -59,57 +71,50 @@ useEffect(() => {
           </div>
         )}
 
-        {/* New Badge */}
         {item.isNew && (
           <div className="absolute top-2 right-2">
-            <Badge className="bg-gray-900 hover:bg-gray-800 text-white border-0 text-xs font-bold px-2">جديد</Badge>
+            <Badge className="bg-violet-600 hover:bg-violet-700 text-white border-0 text-xs font-bold px-2">جديد</Badge>
           </div>
         )}
       </div>
 
-      <div className="p-3">
-        <div className="mb-1 flex justify-between items-start">
-          <h3 className="font-medium text-gray-800 text-sm line-clamp-1" itemProp="name">
-            {itemName}
-          </h3>
-          <div
-            className="text-xl font-bold text-gray-900"
-            itemProp="offers"
-            itemScope
-            itemType="https://schema.org/Offer"
-          >
-            <span itemProp="price">{item.price}</span> <span itemProp="priceCurrency">{currency}</span>
-          </div>
-        </div>
-
+      <div className="p-3 space-y-2">
+        <h3 className="font-bold text-gray-900 text-base line-clamp-1" itemProp="name">
+          {itemName}
+        </h3>
         {itemDescription && (
-          <p className="text-gray-500 text-xs line-clamp-2 mb-1" itemProp="description">
+          <p className="text-gray-600 text-sm leading-snug line-clamp-2" itemProp="description">
             {itemDescription}
           </p>
         )}
 
-        {itemWeight && (
-          <div className="flex justify-between items-center">
-            <p className="text-gray-400 text-xs mb-2">{itemWeight}</p>
-            <p className="text-gray-400 text-xs mb-2">تكفي 3-4 أفراد</p>
+        <div className="flex items-center justify-between pt-1">
+          <div
+            className="text-[#6C5CE7] font-extrabold text-lg"
+            itemProp="offers"
+            itemScope
+            itemType="https://schema.org/Offer"
+          >
+            <span itemProp="price">{item.price}</span>
+            <span className="mr-1 text-sm" itemProp="priceCurrency">{currency || "ج.م"}</span>
           </div>
-        )}
 
-        <div className="flex items-center justify-end mt-2">
-          {quantity > 0 ? (
-            <QuantityControls quantity={quantity} onIncrement={incrementQuantity} onDecrement={decrementQuantity} />
-          ) : (
-            <Button
-              variant="outline"
-              size="sm"
-              className="rounded-full border-gray-200 text-gray-700 hover:bg-gray-100"
-              onClick={incrementQuantity}
-              aria-label={`إضافة ${itemName}`}
-            >
-              <Plus className="h-4 w-4 ml-1" aria-hidden="true" />
-              إضافة
-            </Button>
-          )}
+          <div className="flex items-center">
+            {quantity > 0 ? (
+              <QuantityControls quantity={quantity} onIncrement={incrementQuantity} onDecrement={decrementQuantity} />
+            ) : (
+              <button
+                onClick={incrementQuantity}
+                aria-label={`إضافة ${itemName}`}
+                className="inline-flex items-center gap-1.5 rounded-full bg-[#6C5CE7] text-white px-3 py-1.5 text-sm shadow-sm hover:bg-[#5A4BD1] active:scale-95 transition"
+              >
+                <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white/20">
+                  <Plus className="h-3.5 w-3.5" aria-hidden="true" />
+                </span>
+                إضافة
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </article>

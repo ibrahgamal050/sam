@@ -20,8 +20,13 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ['meelza.site', 'localhost'],
+    domains: ['meelza.site', 'localhost','images.meelza.com'],
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.meelza.com',
+        pathname: '/images/**',
+      },
       {
         protocol: 'http',
         hostname: 'localhost',

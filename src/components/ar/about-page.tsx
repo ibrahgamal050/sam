@@ -4,12 +4,14 @@ import { Award, Heart, Star, Users, Utensils } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import {IPage} from  "@/types/page"
+import restaurant from "@/models/restaurant"
 
 interface AboutPageProps {
   data:IPage 
+  logo:string
 }
 
-export default function AboutPage({ data }: AboutPageProps) {
+export default function AboutPage({ data ,logo}: AboutPageProps) {
   return (
     <div className="   rtl">
       {/* Main Content */}
@@ -22,7 +24,7 @@ export default function AboutPage({ data }: AboutPageProps) {
         <div  key={key} className="relative  w-full h-48">
          
           <Image
-            src={`/images${props.heroImage}`}
+            src={`https://images.meelza.com/images/${logo}`}
             alt="صورة المطعم"
             fill
             className="object-cover"

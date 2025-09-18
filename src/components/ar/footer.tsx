@@ -154,23 +154,7 @@ export function Footer() {
         <div dir="rtl" className="mt-12 mb-8 pt-8 border-t border-[#2A2162]">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-[#B8B2E5]">© {new Date().getFullYear()} ميلزا مصر</p>
-            <div className="flex space-x-6 space-x-reverse">
-              <Link href="#" className="text-[#B8B2E5] hover:text-white transition-colors">
-                عنا
-              </Link>
-              <Link href="#" className="text-[#B8B2E5] hover:text-white transition-colors">
-                الاحكام والشروط
-              </Link>
-              <Link href="#" className="text-[#B8B2E5] hover:text-white transition-colors">
-                الخصوصية
-              </Link>
-              <Link href="#" className="text-[#B8B2E5] hover:text-white transition-colors">
-                وظائف
-              </Link>
-              <Link href="#" className="text-[#B8B2E5] hover:text-white transition-colors">
-                انضم لنا
-              </Link>
-            </div>
+           
           </div>
         </div>
       </div>

@@ -3,6 +3,9 @@
 import { useRef, useEffect } from "react"
 import { cn } from "@/lib/utils"
 import type { ICategory } from "@/types/menu" // Adjusted import path
+import Link from "next/link"
+import { ShoppingCart } from "lucide-react"
+import { useCart } from "@/contexts/cart-context"
 
 interface CategoryTabsProps {
   categories: ICategory[]
@@ -14,6 +17,8 @@ interface CategoryTabsProps {
 export function CategoryTabs({ categories, activeCategory, scrollToCategory, className }: CategoryTabsProps) {
   const tabsRef = useRef<HTMLDivElement>(null)
   const activeTabRef = useRef<HTMLButtonElement>(null)
+  const { items } = useCart()
+  const count = items.reduce((s, i) => s + i.quantity, 0)
 
   useEffect(() => {
     if (activeTabRef.current && tabsRef.current) {
@@ -72,6 +77,22 @@ export function CategoryTabs({ categories, activeCategory, scrollToCategory, cla
               </button>
             )
           })}
+          {/* Cart entry at the end */}
+          <Link
+            href="/ar/cart"
+            className="ml-2 inline-flex items-center gap-1.5 whitespace-nowrap text-sm font-semibold py-2 px-3 rounded-full bg-[#6C5CE7] text-white shadow-sm hover:bg-[#5A4BD1]"
+            aria-label="الذهاب إلى السلة"
+          >
+            <div className="relative">
+              <ShoppingCart className="h-4 w-4" />
+              {count > 0 && (
+                <span className="absolute -top-2 -right-2 text-[10px] bg-white text-[#6C5CE7] rounded-full px-1.5 py-0.5 font-bold">
+                  {count}
+                </span>
+              )}
+            </div>
+            السلة
+          </Link>
         </div>
       </div>
     </nav>
