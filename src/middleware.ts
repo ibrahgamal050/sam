@@ -117,19 +117,13 @@ export async function middleware(request: NextRequest) {
       }
     }
 
-    // For root domain with any path, rewrite to the dynamic [slug] page
-    if (pathname !== "/") {
-      // Extract the first segment as the slug
-      const slug = pathname.split("/")[1]
-      return NextResponse.rewrite(new URL(`/${slug}`, request.url))
-    }
-
-    // Root path still shows 404 as per original logic
     if (pathname === "/") {
-      return NextResponse.rewrite(new URL("/404", request.url))
+      return NextResponse.next()
     }
 
-    return NextResponse.next()
+    // For other root domain paths, rewrite to the slug to keep existing dynamic routing
+    const slug = pathname.split("/")[1]
+    return NextResponse.rewrite(new URL(`/${slug}`, request.url))
   }
 
   // Handle subdomains
