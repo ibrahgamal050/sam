@@ -25,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="ar" className={inter.variable} suppressHydrationWarning>
       <body className="min-h-screen bg-background font-sans antialiased" suppressHydrationWarning>
+        <Analytics/>
         {children}
 
         {/* Google Tag Manager */}
