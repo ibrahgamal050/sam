@@ -21,7 +21,7 @@ const resolveImageSrc = (path: string | undefined | null, fallback = "/placehold
   }
 
   const normalized = path.startsWith("/") ? path : `/${path}`
-  return `/images${normalized}`
+  return `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/${normalized}`
 }
 
 const buildRestaurantUrl = (subdomain: string) => {
@@ -186,7 +186,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
                       )}
 
                       <Link
-                        href={`http://${restaurantUrl}.localhost:3000`}
+                        href={`${restaurantUrl}`}
                         className="inline-flex items-center gap-2 text-[#6C5CE7] transition hover:text-[#5A4BD1]"
                         {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                       >

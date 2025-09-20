@@ -37,8 +37,7 @@ export default function RootLayout({
     <html lang="ar" className={inter.variable} suppressHydrationWarning>
       <body className="min-h-screen bg-background font-sans antialiased" suppressHydrationWarning>
         <Analytics />
-        <MainNav />
-        <div className="pt-[80px] md:pt-[90px]">
+        <div className="">
           {children}
         </div>
 
