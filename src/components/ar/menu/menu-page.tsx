@@ -31,7 +31,7 @@ export function MenuPage({ menuData }: MenuPageProps) {
 
   return (
     <div
-      className="min-h-screen bg-gray-50 text-gray-800 pb-16"
+      className="min-h-screen bg-[#f8fafc] text-gray-900 pb-16"
       itemScope
       itemType="https://schema.org/Restaurant"
       dir="rtl"
@@ -43,15 +43,13 @@ export function MenuPage({ menuData }: MenuPageProps) {
         categoryRefs={categoryRefs}
         scrollToCategory={scrollToCategory}
         headerRef={headerRef}
-        footerRef={footerRef}
         sidebarRef={sidebarRef}
         sidebarBottom={sidebarBottom}
         currency={currency}
       >
       </MenuLayout>
 
-      {/* Footer reference for positioning */}
-      <div ref={footerRef} className="h-1" aria-hidden="true"></div>
+      
     </div>
   )
 }

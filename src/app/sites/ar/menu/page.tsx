@@ -119,7 +119,7 @@ async function MenuContent({ searchParams }: { searchParams: { q?: string } }) {
     // Return the menu page with data
     return (
       <div
-        className="min-h-screen bg-gray-50 text-gray-800 pb-16"
+        className="min-h-screen bg-[#f8fafc] text-gray-900 pb-16"
         itemScope
         itemType="https://schema.org/Restaurant"
         dir="rtl"

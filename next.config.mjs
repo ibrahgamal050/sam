@@ -13,6 +13,10 @@ try {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  allowedDevOrigins: [
+    "http://karamelsham.localhost",
+    "http://karamelsham.localhost:3000",
+  ],
   eslint: {
     ignoreDuringBuilds: true,
   },

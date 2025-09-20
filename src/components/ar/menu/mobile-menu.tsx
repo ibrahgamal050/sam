@@ -16,9 +16,19 @@ export function MobileMenu({ headerRef, categories, activeCategory, scrollToCate
   return (
     <div
       ref={headerRef}
-      className="lg:hidden fixed top-0 left-0 right-0 z-30 bg-white border-b border-gray-200 shadow-sm"
+      data-mobile-menu="true"
+      data-offset="12"
+      className="lg:hidden sticky top-[80px] z-40 border-b border-gray-200 bg-white/95 backdrop-blur shadow-[0_15px_35px_-30px_rgba(15,23,42,0.4)]"
     >
-      <CategoryTabs categories={categories} activeCategory={activeCategory} scrollToCategory={scrollToCategory} />
+      <div className="px-4 py-3">
+        <div className="mb-3 flex items-center justify-between">
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-gray-400">Menu</p>
+            <h2 className="mt-1 text-base font-semibold text-gray-900">اختر القسم</h2>
+          </div>
+        </div>
+        <CategoryTabs categories={categories} activeCategory={activeCategory} scrollToCategory={scrollToCategory} />
+      </div>
     </div>
   )
 }

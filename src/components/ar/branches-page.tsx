@@ -1,195 +1,209 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Clock, MapPin, Phone, Navigation } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import {IRestaurant} from '@/types'
-
-
-
+import { Clock, MapPin, Navigation, Phone, Building2 } from "lucide-react"
+import type { IRestaurant } from "@/types"
 
 interface BranchesPageProps {
   restaurant: IRestaurant
 }
 
-export function BranchesPage({restaurant}:BranchesPageProps) {
-  const branches = restaurant.branches 
-  // If no branches, show a message
-  if (!restaurant ) {
+const resolveImageSrc = (path?: string | null, fallback = "/placeholder.jpg") => {
+  if (!path) return fallback
+  if (path.startsWith("http")) return path
+  if (path.startsWith("/images/")) return path
+  const normalized = path.startsWith("/") ? path : `/${path}`
+  return `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/${normalized}`
+}
+
+export function BranchesPage({ restaurant }: BranchesPageProps) {
+  const branches = restaurant.branches || []
+  const coverImage = resolveImageSrc(restaurant.logo)
+  const logoImage = resolveImageSrc(restaurant.logo, "/placeholder-logo.png")
+
+  if (branches.length === 0) {
     return (
-      
-      <div className="p-6 max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-[#6C5CE7] to-[#8A7FF5] bg-clip-text text-transparent">
-            فروعنا
-          </h1>
-        </div>
-        <div className="text-center py-16 bg-gray-50 rounded-xl border border-gray-100">
-          <MapPin className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-          <p className="text-lg text-muted-foreground">لا توجد فروع متاحة حالياً</p>
-          <p className="text-sm text-muted-foreground mt-2">يرجى التحقق مرة أخرى لاحقاً</p>
+      <div className="min-h-screen bg-white text-gray-900" dir="rtl">
+        <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-4 py-16 text-center sm:px-6">
+          <div className="relative overflow-hidden rounded-[32px] border border-gray-200 bg-gradient-to-br from-[#f7f9fc] to-white p-12 shadow-[0_25px_60px_-35px_rgba(15,23,42,0.35)]">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(247,195,37,0.18),_transparent_60%)]" />
+            <div className="relative space-y-4">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#fef3c7] text-[#f59e0b]">
+                <Building2 className="h-8 w-8" />
+              </div>
+              <h1 className="text-3xl font-bold text-gray-900">لم يتم إضافة فروع بعد</h1>
+              <p className="mx-auto max-w-2xl text-sm leading-7 text-gray-600">
+                سيتم استعراض فروع المطعم بمجرد إضافتها. تابعنا قريباً لاكتشاف مواقعنا الجديدة وخدمات التوصيل المتاحة في منطقتك.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     )
   }
 
   return (
-    <>
-     <div   className="relative  w-full h-48">
-         
-         <Image
-           src={`/images${restaurant?.coverImage}`}
-           alt="صورة المطعم"
-           fill
-           className="object-cover"
-           priority
-         />
-         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
-           <div className="p-4 text-white">
-             <h2 className="text-2xl font-bold">فروعنا</h2>
-             <p className="text-sm opacity-90"></p>
-           </div>
-         </div>
-       
-        
-       </div>
-    
-    <div className="p-6 max-w-7xl mx-auto">
-     
+    <div className="min-h-screen bg-white text-gray-900" dir="rtl">
+      <div className="mx-auto w-full max-w-6xl px-4 pb-16 pt-10 sm:px-6 lg:pt-12">
+        {/* Hero */}
+        <section className="relative overflow-hidden rounded-[32px] border border-gray-200 bg-gradient-to-br from-[#f7f9fc] via-white to-white shadow-[0_25px_60px_-35px_rgba(15,23,42,0.4)]">
+          <div className="absolute inset-0">
+            <Image src={coverImage} alt={restaurant.name.ar} fill className="object-cover opacity-35" priority />
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-[#eef2f7]/70" />
+          </div>
 
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {branches.map((branch) => (
-          <Card
-          key={branch._id.toString()}
-            className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-[#6C5CE7]/10 border-gray-200 group"
-          >
-            
-              <div className="relative w-full h-48 overflow-hidden">
-                <Image
-                  src={`/images${restaurant?.coverImage}` }
-                  alt={`صورة فرع ${branch.name.ar}`}
-                  width={400}
-                  height={200}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              
+          <div className="relative grid gap-8 p-8 lg:grid-cols-[minmax(0,1fr)_300px] lg:p-12">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-3 rounded-full bg-black/5 px-4 py-2 text-xs font-semibold text-gray-600">
+                <span className="flex h-2 w-2 rounded-full bg-[#f7c325]" />
+                {branches.length} فرع متاح
               </div>
-            
-
-            <CardContent className="p-6 space-y-5">
-              <div className="flex justify-between items-start">
-                <h2 className="text-xl font-bold">{branch.name.ar}</h2>
-               
-              </div>
-
-              <div className="space-y-4 pt-2">
-                <div className="flex items-start gap-3">
-                  <div className="bg-[#F4F2FF] p-2 rounded-md">
-                    <MapPin className="h-5 w-5 text-[#6C5CE7]" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm text-gray-700">{branch.location.address.ar}</p>
-                    {branch.location.latitude && branch.location.longitude && (
-                      <Link
-                        href={`https://www.google.com/maps/search/?api=1&query=${branch.location.latitude},${branch.location.longitude}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs text-[#6C5CE7] hover:text-[#5A4BD1] mt-1 inline-flex items-center gap-1"
-                      >
-                        <Navigation className="h-3 w-3" />
-                        الاتجاهات على الخريطة
-                      </Link>
-                    )}
-                  </div>
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="relative h-16 w-16 overflow-hidden rounded-2xl border border-white shadow-lg">
+                  <Image src={logoImage} alt={restaurant.name.ar} fill className="object-cover" />
                 </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="bg-[#F4F2FF] p-2 rounded-md">
-                    <Phone className="h-5 w-5 text-[#6C5CE7]" />
-                  </div>
-                  <div className="flex-1">
-                    <Link dir="ltr" href={`tel:${branch.phone}`} className="text-sm text-gray-700 hover:text-[#6C5CE7]">
-                      {branch.phone}
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="bg-[#F4F2FF] p-2 rounded-md">
-                    <Clock className="h-5 w-5 text-[#6C5CE7]" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-gray-900">ساعات العمل:</p>
-                    <p className="text-sm text-gray-700">{branch.workingHours}</p>
-                  </div>
+                <div>
+                  <h1 className="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl">فروع {restaurant.name.ar}</h1>
+                  <p className="mt-2 text-sm text-gray-600">
+                    اختر أقرب فرع إليك للتواصل المباشر ومعرفة خدمات التوصيل المتاحة.
+                  </p>
                 </div>
               </div>
+            </div>
 
-              {/* {branch.location.latitude && branch.location.longitude && (
-                <div className="mt-5 pt-5 border-t border-gray-100">
-                  <div className="relative w-full h-32 rounded-md overflow-hidden">
-                    <iframe
-                      title={`خريطة لفرع ${branch.name.ar}`}
-                      width="100%"
-                      height="100%"
-                      frameBorder="0"
-                      src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "YOUR_API_KEY"}&q=${branch.location.latitude},${branch.location.longitude}&language=ar&zoom=15`}
-                      allowFullScreen
-                      className="border-0"
-                    ></iframe>
+            <div className="rounded-3xl border border-gray-200 bg-white/80 p-6 shadow-[0_20px_45px_-35px_rgba(15,23,42,0.5)] backdrop-blur">
+              <h2 className="text-base font-semibold text-gray-800">أبرز الخدمات</h2>
+              <ul className="mt-5 space-y-4 text-sm text-gray-600">
+                <li className="flex items-start gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f7f9fc] text-gray-700">
+                    <Clock className="h-5 w-5" />
                   </div>
-                </div>
-              )} */}
-            </CardContent>
-          </Card>
-        ))}
+                  <div>
+                    <p className="font-semibold text-gray-800">ساعات عمل مرنة</p>
+                    <p className="text-xs text-gray-500">جميع الفروع تعمل يومياً لتغطية احتياجاتك طوال اليوم.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f7f9fc] text-gray-700">
+                    <Navigation className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-800">مواقع استراتيجية</p>
+                    <p className="text-xs text-gray-500">اختر فرعك المفضل مع سهولة الوصول وخدمات التوصيل المتاحة.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f7f9fc] text-gray-700">
+                    <Phone className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-800">دعم سريع</p>
+                    <p className="text-xs text-gray-500">فريقنا جاهز للرد على استفساراتك وحجز الطلبات الخاصة.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Branch cards */}
+        <section className="mt-12 space-y-6">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="space-y-2">
+              <h2 className="text-2xl font-semibold text-gray-900">استكشف فروعنا</h2>
+              <p className="text-sm text-gray-600">اختر الفرع الأقرب إليك لمعرفة تفاصيل الاتصال وخدمات التوصيل.</p>
+            </div>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {branches.map((branch) => {
+              const branchName = branch.name?.ar || branch.name?.en || "الفرع"
+              const branchKey = branch._id ? branch._id.toString() : `${branchName}-${branch.phone ?? ""}`
+              const branchImage = resolveImageSrc(restaurant.logo)
+              const branchAddress = branch.location?.address?.ar || branch.location?.address?.en || "العنوان غير متوفر";
+              const hasLocation = Boolean(branch.location?.latitude && branch.location?.longitude)
+
+              return (
+                <article
+                  key={branchKey}
+                  className="group flex h-full flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-[0_20px_45px_-35px_rgba(15,23,42,0.3)] transition duration-300 hover:-translate-y-1 hover:border-gray-300"
+                >
+                  <div className="relative h-40 w-full overflow-hidden">
+                    <Image src={branchImage} alt={`فرع ${branchName}`} fill className="object-cover transition duration-500 group-hover:scale-105" />
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-4 text-white">
+                      <h3 className="text-lg font-semibold">{branchName}</h3>
+                      {branch.isMainBranch && <p className="text-xs font-medium text-white/80">الفرع الرئيسي</p>}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-1 flex-col gap-5 px-6 py-6">
+                    <div className="space-y-4 text-sm text-gray-600">
+                      <div className="flex gap-3">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f7f9fc] text-gray-700">
+                          <MapPin className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-700">{branchAddress}</p>
+                          {hasLocation && (
+                            <Link
+                              href={`https://www.google.com/maps/search/?api=1&query=${branch.location.latitude},${branch.location.longitude}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="mt-2 inline-flex items-center gap-2 text-xs font-semibold text-[#f7c325] hover:text-[#eab308]"
+                            >
+                              <Navigation className="h-3.5 w-3.5" />
+                              الاتجاهات على الخريطة
+                            </Link>
+                          )}
+                        </div>
+                      </div>
+
+                      {branch.phone && (
+                        <div className="flex gap-3">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f7f9fc] text-gray-700">
+                            <Phone className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <Link dir="ltr" href={`tel:${branch.phone}`} className="text-sm font-semibold text-gray-800 hover:text-[#f7c325]">
+                              {branch.phone}
+                            </Link>
+                            <p className="text-xs text-gray-500">للحجوزات والاستفسارات</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {branch.workingHours && (
+                        <div className="flex gap-3">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f7f9fc] text-gray-700">
+                            <Clock className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold text-gray-800">ساعات العمل</p>
+                            <p className="text-sm text-gray-600">{branch.workingHours}</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              )
+            })}
+          </div>
+        </section>
       </div>
     </div>
-    </>
   )
 }
 
-// Updated skeleton to match the new layout
 export function BranchesPageSkeleton() {
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <div className="h-10 w-48 bg-gray-200 rounded-md mb-8 animate-pulse"></div>
-
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="border border-gray-200 rounded-lg overflow-hidden animate-pulse">
-            <div className="h-48 w-full bg-gray-200"></div>
-            <div className="p-6 space-y-4">
-              <div className="h-6 w-3/4 bg-gray-200 rounded"></div>
-
-              <div className="space-y-4 pt-2">
-                <div className="flex items-start gap-3">
-                  <div className="h-9 w-9 bg-gray-200 rounded-md"></div>
-                  <div className="flex-1">
-                    <div className="h-4 w-full bg-gray-200 rounded"></div>
-                    <div className="h-3 w-1/3 bg-gray-200 rounded mt-2"></div>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="h-9 w-9 bg-gray-200 rounded-md"></div>
-                  <div className="h-4 w-1/2 bg-gray-200 rounded"></div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="h-9 w-9 bg-gray-200 rounded-md"></div>
-                  <div className="flex-1">
-                    <div className="h-4 w-1/3 bg-gray-200 rounded"></div>
-                    <div className="h-4 w-2/3 bg-gray-200 rounded mt-2"></div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-5 pt-5 border-t border-gray-100">
-                <div className="h-32 w-full bg-gray-200 rounded-md"></div>
-              </div>
-            </div>
-          </div>
-        ))}
+    <div className="min-h-screen bg-white" dir="rtl">
+      <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
+        <div className="h-[280px] animate-pulse rounded-[32px] bg-gray-100" />
+        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {[...Array(3)].map((_, idx) => (
+            <div key={idx} className="h-[320px] animate-pulse rounded-3xl bg-gray-100" />
+          ))}
+        </div>
       </div>
     </div>
   )

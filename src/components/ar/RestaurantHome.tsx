@@ -1,7 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Clock, MapPin, Phone, Star, ChevronRight, Utensils } from "lucide-react"
+import { Clock, MapPin, Phone, Star, Utensils, ChevronRight, ArrowLeftRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import type { IRestaurant } from "@/types"
@@ -11,131 +9,210 @@ interface RestaurantHomeProps {
 }
 
 export function RestaurantHome({ restaurant }: RestaurantHomeProps) {
-  // Default to Arabic
   const direction = "rtl"
+  const restaurantName = restaurant.name.ar
+  const restaurantDescription =
+    typeof restaurant.description === "object" ? restaurant.description.ar : restaurant.description
 
-  // Get localized restaurant data
-  const restaurantName = restaurant.name.ar 
-  const restaurantDescription = restaurant.description
+  const resolveImageSrc = (path?: string | null, fallback = "/placeholder.jpg") => {
+    if (!path) return fallback
+    if (path.startsWith("http")) return path
+    if (path.startsWith("/images/")) return path
+    const normalized = path.startsWith("/") ? path : `/${path}`
+    return `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/${normalized}`
+  }
 
-  // Mock data for categories - replace with actual data when available
- 
+  const coverImage = resolveImageSrc(restaurant.logo)
+  const logoImage = resolveImageSrc(restaurant.logo, "/placeholder-logo.png")
+  const primaryPhone = restaurant.phones?.[0]
+  const primaryBranch = restaurant.branches?.find((branch) => branch.isMainBranch) || restaurant.branches?.[0]
 
   return (
-    <div className="flex flex-col w-full min-h-screen bg-background" dir={direction}>
-     
-
-      
-        {/* Hero Section */}
-        <div className="relative w-full h-[60vh] max-h-[300px]">
-          <Image
-            src={`/images${restaurant?.coverImage}` }
-            alt={restaurantName}
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6 md:p-8">
-            <div className="max-w-4xl mx-auto w-full">
-              <Badge className="mb-3 bg-primary/90 hover:bg-primary">مفتوح الآن</Badge>
-              <h1 className="text-white text-3xl md:text-4xl font-bold mb-2">{restaurantName}</h1>
-              
-              <div className="flex gap-4 mt-4">
-              <Link href="/ar/menu">
-  <Button className="gap-2">
-    <Utensils className="w-4 h-4" />
-    تصفح القائمة
-  </Button>
-</Link>
-               
-              </div>
-            </div>
+    <div className="min-h-screen bg-white text-gray-900" dir={direction}>
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 pb-16 pt-10 sm:px-6 lg:pt-12">
+        {/* Hero */}
+        <section className="relative overflow-hidden rounded-[32px] border border-gray-200 bg-gradient-to-br from-[#f7f9fc] via-white to-white shadow-[0_25px_60px_-35px_rgba(15,23,42,0.4)]">
+          <div className="absolute inset-0">
+            <Image
+              src={coverImage}
+              alt={restaurantName}
+              fill
+              className="object-cover opacity-40"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-white via-white/90 to-[#eef2f7]/70" />
           </div>
-        </div>
 
-        <div className="max-w-4xl mx-auto px-4 py-8">
-          
+          <div className="relative grid gap-8 p-8 md:grid-cols-[minmax(0,1fr)_280px] md:items-center lg:p-12">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-3 rounded-full bg-black/5 px-4 py-2 text-xs font-semibold text-gray-600">
+                <span className="flex h-2 w-2 rounded-full bg-emerald-500" />
+                مفتوح الآن
+              </div>
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="relative h-16 w-16 overflow-hidden rounded-2xl border border-white shadow-lg">
+                  <Image src={logoImage} alt={restaurantName} fill className="object-cover" />
+                </div>
+                <div>
+                  <h1 className="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl">{restaurantName}</h1>
+                  {primaryBranch?.location?.address?.ar && (
+                    <p className="mt-1 flex items-center gap-2 text-sm text-gray-600">
+                      <MapPin className="h-4 w-4 text-gray-400" />
+                      {primaryBranch.location.address.ar}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <p className="max-w-2xl text-sm leading-7 text-gray-600">
+                {restaurantDescription ||
+                  "استمتع بأطباق تم إعدادها بعناية باستخدام أفضل المكونات الطازجة، مع أجواء مريحة وخدمة ترحيبية طوال الوقت."}
+              </p>
 
-     
-
-          {/* About Section */}
-          <section className=" bg-purple-50  rounded-lg p-6 mb-10">
-            <div className="flex flex-col md:flex-row gap-6">
-              <div className="md:w-1/2">
-                <h2 className="text-2xl font-bold mb-3">عن {restaurantName}</h2>
-                <p className="text-muted-foreground mb-4">
-                  {restaurantDescription ||
-                    "نحن نقدم تجربة طعام فريدة من نوعها مع أطباق تقليدية وعصرية. نستخدم مكونات طازجة ومحلية لضمان أعلى جودة لوجباتنا. تعال واستمتع بأجواء مريحة وخدمة ممتازة."}
-                </p>
-                <Link href={`/ar/about`}>
-                  <Button variant="outline" className="gap-2">
-                    اقرأ المزيد
-                    <ChevronRight className="w-4 h-4" />
+              <div className="flex flex-wrap items-center gap-4">
+                <Link href="/ar/menu">
+                  <Button className="rounded-2xl bg-[#f7c325] px-6 py-5 text-base font-semibold text-black shadow-lg transition hover:bg-[#ffd342]">
+                    <span className="inline-flex items-center gap-2">
+                      <Utensils className="h-5 w-5" /> تصفح القائمة
+                    </span>
                   </Button>
                 </Link>
-              </div>
-              <div className="md:w-1/2 relative h-48 md:h-auto rounded-lg overflow-hidden">
-                <Image
-                   src={`/images${restaurant?.coverImage}` }
-                  alt={`${restaurantName} interior`}
-                  fill
-                  className="object-cover rounded-lg"
-                />
+                <Link href="/ar/about" className="text-sm font-semibold text-gray-700 hover:text-gray-900">
+                  من نحن؟
+                </Link>
+                <Link href="/ar/branches" className="text-sm font-semibold text-gray-700 hover:text-gray-900">
+                  فروعنا
+                </Link>
               </div>
             </div>
-          </section>
 
-          {/* CTA Section */}
-          <section
-      className="rounded-lg p-5 text-center overflow-hidden relative"
-      style={{
-        background: `linear-gradient(155deg, #0F0B30 0%, #1F1259 100%)`,
-      }}
-      dir={direction}
-    >
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-full h-full">
-        <div
-          className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-20"
-          style={{ background: "#6C5CE7", filter: "blur(80px)" }}
-        ></div>
-        <div
-          className="absolute bottom-0 left-0 w-48 h-48 rounded-full opacity-10"
-          style={{ background: "#8A7FF5", filter: "blur(60px)" }}
-        ></div>
-      </div>
-
-      {/* Geometric accent lines */}
-      <div className="absolute top-10 right-10 w-20 h-1 bg-[#6C5CE7] opacity-40"></div>
-      <div className="absolute bottom-10 left-10 w-20 h-1 bg-[#6C5CE7] opacity-40"></div>
-
-      <div className="relative z-10">
-        
-
-        <h2 className="text-3xl font-bold mb-4 text-white">اطلب الآن</h2>
-        <p className="mb-8 max-w-xl mx-auto text-[#B8B2E5]">
-          استمتع بتجربة طعام لا تُنسى. احجز طاولتك الآن لتجنب الانتظار.
-        </p>
-
-        <div className="flex flex-wrap gap-4 justify-center">
-          <div className="flex items-center gap-4">
-            <a href={`tel:${restaurant.phones?.[0]}`}>
-              <Button
-                size="lg"
-                className="gap-2 bg-[#6C5CE7] hover:bg-[#5A4BD1] text-white border-0 shadow-lg px-6 py-6"
-              >
-                <Phone className="w-4 h-4" />
-                اتصل بنا
-              </Button>
-            </a>
-            <span className="text-lg text-white/80 font-medium">{restaurant.phones?.[0]}</span>
+            <div className="rounded-3xl border border-gray-200 bg-white/80 p-6 shadow-[0_20px_45px_-35px_rgba(15,23,42,0.5)] backdrop-blur">
+              <h2 className="text-base font-semibold text-gray-800">معلومات سريعة</h2>
+              <ul className="mt-5 space-y-4 text-sm text-gray-600">
+                <li className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f7f9fc] text-gray-700">
+                    <Star className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-800">تقييم الزوار</p>
+                    <p className="text-xs text-gray-500">4.6 / 5 (أكثر من 200 تقييم)</p>
+                  </div>
+                </li>
+                <li className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f7f9fc] text-gray-700">
+                    <Clock className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-800">ساعات العمل</p>
+                    <p className="text-xs text-gray-500">يومياً 10 صباحاً – 12 منتصف الليل</p>
+                  </div>
+                </li>
+                {primaryPhone && (
+                  <li className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f7f9fc] text-gray-700">
+                      <Phone className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-800">اتصل بنا مباشرة</p>
+                      <a dir="ltr" href={`tel:${primaryPhone}`} className="text-xs text-gray-500 hover:text-gray-700">
+                        {primaryPhone}
+                      </a>
+                    </div>
+                  </li>
+                )}
+              </ul>
+            </div>
           </div>
-        </div>
+        </section>
+
+        {/* Highlights */}
+        <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="rounded-3xl border border-gray-200 bg-[#f7f9fc] p-6 shadow-[0_15px_35px_-25px_rgba(15,23,42,0.35)]">
+            <h3 className="text-lg font-semibold text-gray-900">لماذا تختارنا؟</h3>
+            <p className="mt-3 text-sm leading-6 text-gray-600">
+              نحرص على تقديم وصفات محلية بلمسة عصرية، مع اهتمام بأدق التفاصيل لضمان تجربة فاخرة منذ وصولك وحتى آخر لقمة.
+            </p>
+            <ul className="mt-4 space-y-3 text-sm text-gray-700">
+              <li className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-[#f7c325]" /> مكونات طازجة يومياً</li>
+              <li className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-[#f7c325]" /> قائمة متنوعة تناسب جميع الأذواق</li>
+              <li className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-[#f7c325]" /> خدمة توصيل سريعة وآمنة</li>
+            </ul>
+          </div>
+
+          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-[0_15px_35px_-25px_rgba(15,23,42,0.2)]">
+            <h3 className="text-lg font-semibold text-gray-900">روابط سريعة</h3>
+            <div className="mt-5 grid gap-3 text-sm font-semibold text-gray-700">
+              <Link href="/ar/menu" className="flex items-center justify-between rounded-2xl border border-gray-100 px-4 py-3 transition hover:border-gray-200 hover:bg-[#f7f9fc]">
+                <span>عرض المنيو</span>
+                <ChevronRight className="h-4 w-4" />
+              </Link>
+              <Link href="/ar/branches" className="flex items-center justify-between rounded-2xl border border-gray-100 px-4 py-3 transition hover:border-gray-200 hover:bg-[#f7f9fc]">
+                <span>الفروع وخدمات التوصيل</span>
+                <ChevronRight className="h-4 w-4" />
+              </Link>
+              <Link href="/ar/about" className="flex items-center justify-between rounded-2xl border border-gray-100 px-4 py-3 transition hover:border-gray-200 hover:bg-[#f7f9fc]">
+                <span>تعرف على قصتنا</span>
+                <ChevronRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+
+          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-[0_15px_35px_-25px_rgba(15,23,42,0.2)]">
+            <h3 className="text-lg font-semibold text-gray-900">خدمات إضافية</h3>
+            <p className="mt-3 text-sm text-gray-600">
+              نوفر خدمات تقديم الطعام للحفلات والمناسبات الخاصة مع قوائم مصممة حسب احتياجاتك.
+            </p>
+            <div className="mt-5 flex flex-col gap-3 text-sm text-gray-700">
+              <div className="flex items-center gap-3 rounded-2xl border border-gray-100 px-4 py-3">
+                <ArrowLeftRight className="h-4 w-4" /> خدمة استلام الطلب من المطعم
+              </div>
+              <div className="flex items-center gap-3 rounded-2xl border border-gray-100 px-4 py-3">
+                <MapPin className="h-4 w-4" /> تغطية كاملة للمنطقة المحيطة
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* About */}
+        <section className="grid gap-8 rounded-[32px] border border-gray-200 bg-white p-8 shadow-[0_20px_55px_-40px_rgba(15,23,42,0.5)] md:grid-cols-[minmax(0,1fr)_320px] md:items-center">
+          <div className="space-y-4">
+            <h2 className="text-2xl font-semibold text-gray-900">عن {restaurantName}</h2>
+            <p className="text-sm leading-7 text-gray-600">
+              {restaurantDescription ||
+                "منذ بدايتنا حرصنا على تقديم وصفات عريقة بلمسات عصرية. فريقنا يعمل بشغف لتقديم أفضل تجربة لضيوفنا، سواء اخترت تناول الطعام داخل المطعم أو عبر التوصيل."}
+            </p>
+            <Link href="/ar/about">
+              <Button variant="outline" className="rounded-2xl border-gray-200 px-5 py-2 text-sm font-semibold">
+                اكتشف المزيد عن المطعم
+              </Button>
+            </Link>
+          </div>
+          <div className="relative h-52 overflow-hidden rounded-3xl border border-gray-200 bg-[#f7f9fc]">
+            <Image src={coverImage} alt={`${restaurantName} interior`} fill className="object-cover" />
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="relative overflow-hidden rounded-[32px] border border-gray-200 bg-gradient-to-r from-[#fdf4cf] via-[#fdeab5] to-[#f7c325] p-8 shadow-[0_25px_60px_-35px_rgba(245,158,11,0.65)]">
+          <div className="relative flex flex-col gap-6 text-center md:text-right">
+            <h2 className="text-3xl font-bold text-[#1f1a09]">جاهز لتجربة نكهاتنا؟</h2>
+            <p className="mx-auto max-w-2xl text-sm leading-7 text-[#3a3016] md:ml-auto md:mr-0">
+              اطلب عبر المنيو الإلكتروني أو تواصل مع فريقنا مباشرة لتنظيم مناسبتك القادمة.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4 md:justify-end">
+              {primaryPhone && (
+                <a href={`tel:${primaryPhone}`} className="inline-flex items-center gap-2 rounded-2xl bg-black px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-gray-900">
+                  <Phone className="h-4 w-4" /> اتصال مباشر
+                </a>
+              )}
+              <Link href="/ar/menu">
+                <Button variant="ghost" className="rounded-2xl border border-black/20 bg-white/50 px-6 py-3 text-sm font-semibold text-black shadow">
+                  تصفح الأطباق
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
-        </div>
-      
-     
     </div>
   )
 }
@@ -143,95 +220,23 @@ export function RestaurantHome({ restaurant }: RestaurantHomeProps) {
 // Loading skeleton for the home page
 export function HomePageSkeleton() {
   return (
-    <div className="flex flex-col w-full min-h-screen" dir="rtl">
-      {/* Header Skeleton */}
-      <header className="sticky top-0 z-10 bg-background border-b">
-        <div className="max-w-4xl mx-auto p-4 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full bg-gray-200 animate-pulse"></div>
-            <div className="h-6 w-32 bg-gray-200 rounded-md animate-pulse"></div>
-          </div>
-          <div className="flex gap-3">
-            <div className="h-9 w-20 bg-gray-200 rounded-md animate-pulse"></div>
-            <div className="h-9 w-20 bg-gray-200 rounded-md animate-pulse"></div>
-            <div className="h-9 w-20 bg-gray-200 rounded-md animate-pulse"></div>
-          </div>
+    <div className="min-h-screen bg-white" dir="rtl">
+      <div className="mx-auto w-full max-w-6xl px-4 py-10">
+        <div className="h-[320px] animate-pulse rounded-[32px] bg-gray-100" />
+
+        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {[...Array(3)].map((_, idx) => (
+            <div key={idx} className="h-52 w-full animate-pulse rounded-3xl bg-gray-100" />
+          ))}
         </div>
-      </header>
 
-      <main className="flex-1">
-        {/* Hero Skeleton */}
-        <div className="relative w-full h-[60vh] max-h-[500px] bg-gray-200 animate-pulse"></div>
-
-        <div className="max-w-4xl mx-auto px-4 py-8">
-          {/* Quick Info Skeleton */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="border rounded-lg p-4 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gray-200 animate-pulse"></div>
-                <div className="flex-1">
-                  <div className="h-5 w-24 bg-gray-200 rounded-md animate-pulse mb-2"></div>
-                  <div className="h-4 w-32 bg-gray-200 rounded-md animate-pulse"></div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Categories Skeleton */}
-          <section className="mb-10">
-            <div className="flex justify-between items-center mb-4">
-              <div className="h-8 w-40 bg-gray-200 rounded-md animate-pulse"></div>
-              <div className="h-6 w-24 bg-gray-200 rounded-md animate-pulse"></div>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="border rounded-lg overflow-hidden">
-                  <div className="h-32 w-full bg-gray-200 animate-pulse"></div>
-                  <div className="p-3 flex justify-center">
-                    <div className="h-5 w-20 bg-gray-200 rounded-md animate-pulse"></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* About Skeleton */}
-          <section className="rounded-lg p-6 mb-10 border">
-            <div className="flex flex-col md:flex-row gap-6">
-              <div className="md:w-1/2">
-                <div className="h-8 w-40 bg-gray-200 rounded-md animate-pulse mb-3"></div>
-                <div className="h-4 w-full bg-gray-200 rounded-md animate-pulse mb-2"></div>
-                <div className="h-4 w-full bg-gray-200 rounded-md animate-pulse mb-2"></div>
-                <div className="h-4 w-3/4 bg-gray-200 rounded-md animate-pulse mb-4"></div>
-                <div className="h-10 w-28 bg-gray-200 rounded-md animate-pulse"></div>
-              </div>
-              <div className="md:w-1/2 h-48 md:h-auto bg-gray-200 rounded-lg animate-pulse"></div>
-            </div>
-          </section>
-
-          {/* CTA Skeleton */}
-          <section className="rounded-lg p-6 border">
-            <div className="flex flex-col items-center">
-              <div className="h-8 w-48 bg-gray-200 rounded-md animate-pulse mb-3"></div>
-              <div className="h-4 w-full max-w-xl bg-gray-200 rounded-md animate-pulse mb-4"></div>
-              <div className="flex gap-3">
-                <div className="h-12 w-32 bg-gray-200 rounded-md animate-pulse"></div>
-                <div className="h-12 w-32 bg-gray-200 rounded-md animate-pulse"></div>
-              </div>
-            </div>
-          </section>
+        <div className="mt-10 grid gap-6 md:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="h-64 animate-pulse rounded-3xl bg-gray-100" />
+          <div className="h-64 animate-pulse rounded-3xl bg-gray-100" />
         </div>
-      </main>
 
-      {/* Footer Skeleton */}
-      <footer className="py-6 border-t">
-        <div className="max-w-4xl mx-auto px-4 flex justify-center">
-          <div className="h-4 w-48 bg-gray-200 rounded-md animate-pulse"></div>
-        </div>
-      </footer>
+        <div className="mt-10 h-56 animate-pulse rounded-[32px] bg-gray-100" />
+      </div>
     </div>
   )
 }
-
-

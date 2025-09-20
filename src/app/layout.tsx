@@ -1,14 +1,25 @@
+import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import Script from "next/script"
 import "@/app/globals.css"
 import { Analytics } from "@vercel/analytics/next"
+import { MainNav } from "@/components/ar/header/main-nav"
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 })
 
-export const metadata = {
+const metadataBaseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.NEXT_PUBLIC_ROOT_DOMAIN
+    ? `https://${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
+    : undefined) ??
+  process.env.NEXT_PUBLIC_API_URL ??
+  "http://localhost:3000"
+
+export const metadata: Metadata = {
+  metadataBase: new URL(metadataBaseUrl),
   title: "Meelza",
   description: "منصة إدارة المطاعم",
   other: {
@@ -25,8 +36,11 @@ export default function RootLayout({
   return (
     <html lang="ar" className={inter.variable} suppressHydrationWarning>
       <body className="min-h-screen bg-background font-sans antialiased" suppressHydrationWarning>
-        <Analytics/>
-        {children}
+        <Analytics />
+        <MainNav />
+        <div className="pt-[80px] md:pt-[90px]">
+          {children}
+        </div>
 
         {/* Google Tag Manager */}
         <Script

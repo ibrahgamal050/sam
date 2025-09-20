@@ -33,7 +33,7 @@ export default async function RestaurantLayout({ children }: { children: React.R
             <MobileLayout restaurant={restaurant}>{children}</MobileLayout>
           </div>
           <div className="hidden lg:block">
-            <DesktopSiteLayout restaurant={restaurant}>{children}</DesktopSiteLayout>
+            {children}
           </div>
           <Footer />
         </div>

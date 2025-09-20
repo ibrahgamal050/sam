@@ -1,91 +1,81 @@
 "use client"
 
-import { Home, Menu, MapPin, ShoppingCart } from 'lucide-react'
+import { Home, Menu, MapPin, ShoppingCart } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
+
 import { useCart } from "@/contexts/cart-context"
+import { cn } from "@/lib/utils"
+
+const NAV_ITEMS = [
+  { name: "الرئيسية", href: "/ar", icon: Home },
+  { name: "المنيو", href: "/ar/menu", icon: Menu },
+  { name: "الفروع", href: "/ar/branches", icon: MapPin },
+  { name: "السلة", href: "/ar/cart", icon: ShoppingCart, withBadge: true },
+] as const
+
+const normalizePath = (path: string) => {
+  if (!path) return "/"
+  const normalized = path.replace(/\/+$/, "")
+  return normalized === "" ? "/" : normalized
+}
 
 export function BottomNavigation() {
-  const pathname = usePathname()
+  const pathname = normalizePath(usePathname())
   const { items } = useCart()
-
-  const cartCount = items.reduce((sum, item) => sum + item.quantity, 0)
-
-  const navItems = [
-    { name: "الرئيسية", href: `/ar/`, icon: Home },
-    { name: "المنيو", href: `/ar/menu`, icon: Menu },
-    { name: "الفروع", href: `/ar/branches`, icon: MapPin },
-    { name: "السلة", href: `/ar/cart`, icon: ShoppingCart, badge: cartCount },
-  ]
+  const cartCount = items.reduce((total, item) => total + item.quantity, 0)
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-gray-200/50 shadow-lg">
-      <div className="flex justify-around items-center h-16 max-w-md mx-auto px-2">
-        {navItems.map((item) => {
-          const isActive = pathname === item.href
-          const Icon = item.icon
+    <nav className="fixed inset-x-0 bottom-0 z-50 block lg:hidden" aria-label="التنقل السفلي">
+      <div className="mx-auto flex max-w-md flex-col gap-2 px-4 pb-4">
+        <div className="relative overflow-hidden rounded-[26px] border border-gray-200 bg-white shadow-[0_25px_45px_-30px_rgba(15,23,42,0.4)]">
+          <div className="grid grid-cols-4">
+            {NAV_ITEMS.map((item) => {
+              const Icon = item.icon
+              const isActive = pathname === normalizePath(item.href)
 
-          return (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={cn(
-                "relative flex flex-col items-center justify-center w-full h-full",
-                "transition-all duration-300 ease-out",
-                "rounded-xl mx-1 group",
-                "hover:bg-gray-50/80 active:scale-95",
-                isActive && "bg-gradient-to-br from-[#6C5CE7]/10 to-[#6C5CE7]/5"
-              )}
-            >
-              {/* Active indicator */}
-              {isActive && (
-                <div className="absolute -top-0.5 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-[#6C5CE7] to-[#A29BFE] rounded-full" />
-              )}
-              
-              {/* Icon with animation */}
-              <div className={cn(
-                "relative transition-all duration-300 ease-out",
-                isActive ? "transform -translate-y-0.5 scale-110" : "group-hover:scale-105"
-              )}
-              >
-                <Icon
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
                   className={cn(
-                    "h-5 w-5 transition-colors duration-300",
+                    "relative flex h-16 flex-col items-center justify-center gap-1 rounded-[26px] px-2 text-xs font-medium transition-all",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6c5ce7]/60",
                     isActive
-                      ? "text-[#6C5CE7] drop-shadow-sm"
-                      : "text-gray-500 group-hover:text-[#6C5CE7]"
+                      ? "text-[#6c5ce7]"
+                      : "text-gray-500 hover:text-[#6c5ce7]"
                   )}
-                />
-                {item.badge && item.badge > 0 && (
-                  <span className="absolute -top-2 -right-2 min-w-[18px] h-[18px] rounded-full bg-[#6C5CE7] text-white text-[11px] leading-none flex items-center justify-center px-1">
-                    {item.badge}
-                  </span>
-                )}
-              </div>
-              
-              {/* Label with improved typography */}
-              <span className={cn(
-                "text-xs mt-1.5 font-medium transition-all duration-300",
-                "leading-tight text-center",
-                isActive 
-                  ? "text-[#6C5CE7] font-semibold" 
-                  : "text-gray-600 group-hover:text-[#6C5CE7]"
-              )}>
-                {item.name}
-              </span>
+                >
+                  {isActive && (
+                    <span className="absolute inset-x-4 top-2 h-[3px] rounded-full bg-gradient-to-r from-[#6c5ce7] via-[#8a7ff5] to-[#6c5ce7]" />
+                  )}
 
-              {/* Ripple effect on tap */}
-              <div className="absolute inset-0 rounded-xl overflow-hidden">
-                <div className="absolute inset-0 bg-[#6C5CE7]/0 group-active:bg-[#6C5CE7]/10 transition-colors duration-150" />
-              </div>
-            </Link>
-          )
-        })}
+                  <span
+                    className={cn(
+                      "flex h-9 w-9 items-center justify-center rounded-2xl transition-all",
+                      isActive
+                        ? "bg-[#6c5ce7]/10 text-[#6c5ce7]"
+                        : "bg-gray-100/60 text-gray-500"
+                    )}
+                  >
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+
+                  <span className={cn("leading-none", isActive && "font-semibold")}>{item.name}</span>
+
+                  {item.withBadge && cartCount > 0 && (
+                    <span className="absolute right-5 top-[10px] grid min-h-[18px] min-w-[18px] place-items-center rounded-full bg-[#f7c325] px-1 text-[11px] font-semibold text-black shadow">
+                      {cartCount}
+                    </span>
+                  )}
+                </Link>
+              )
+            })}
+          </div>
+        </div>
+
+        <div className="h-safe-area-inset-bottom" />
       </div>
-      
-      {/* Bottom safe area for mobile devices */}
-      <div className="h-safe-area-inset-bottom bg-white/95" />
-    </div>
+    </nav>
   )
 }

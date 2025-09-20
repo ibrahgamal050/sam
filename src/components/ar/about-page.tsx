@@ -3,208 +3,167 @@ import { Award, Heart, Star, Users, Utensils } from "lucide-react"
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import {IPage} from  "@/types/page"
-import restaurant from "@/models/restaurant"
+import type { IPage } from "@/types/page"
 
 interface AboutPageProps {
-  data:IPage 
-  logo:string
+  data: IPage
+  logo: string
 }
 
-export default function AboutPage({ data ,logo}: AboutPageProps) {
+const resolveImageSrc = (path?: string | null, fallback = "/placeholder.jpg") => {
+  if (!path) return fallback
+  if (path.startsWith("http")) return path
+  if (path.startsWith("/images/")) return path
+  const normalized = path.startsWith("/") ? path : `/${path}`
+  return `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/${normalized}`
+}
+
+export default function AboutPage({ data, logo }: AboutPageProps) {
+  const components = data?.components ?? []
+
   return (
-    <div className="   rtl">
-      {/* Main Content */}
-      {data.components.map((component) => {
-  const { type, props } = component;
-  const key = (component as any).component_id || (component as any)._id;
-  switch (type) {
-    case 'header':
-      return (
-        <div  key={key} className="relative  w-full h-48">
-         
-          <Image
-            src={`https://images.meelza.com/images/${logo}`}
-            alt="صورة المطعم"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
-            <div className="p-4 text-white">
-              <h2 className="text-2xl font-bold">{props.title}</h2>
-              <p className="text-sm opacity-90">{props.subtitle}</p>
-            </div>
-          </div>
-        
-         
-        </div>
-      );
+    <div className="min-h-screen bg-white text-gray-900" dir="rtl">
+      <div className="mx-auto w-full max-w-5xl px-4 pb-16 pt-10 sm:px-6 lg:pt-12">
+        {components.map((component) => {
+          const { type, props = {} } = component as any
+          const key = component.component_id || component._id || type
 
-    case 'story':
-      return (
-        <div key={key} className="p-4">
-           <section>
-            <div className="flex items-center mb-3">
-              <Utensils className="h-5 w-5 ml-2 text-orange-600" />
-              <h2 className="text-lg font-bold">{props.title}</h2>
-            </div>
-          
-            <Card className="rounded-2xl shadow">
-            {(props.contentParagraphs as string[]).map((paragraph, idx) => (
-  <CardContent key={idx} className="p-4">
-    <p className="text-sm text-gray-700 leading-relaxed">{paragraph}</p>
-  </CardContent>
-))}
-            </Card>
-            
-          </section>
-
- 
-        </div>
-      );
-
-    case 'mission':
-      return (
-        <div key={key} className="p-4">
-          <section>
-            <div className="flex items-center mb-3">
-              <Star className="h-5 w-5 ml-2 text-orange-600" />
-              <h2 className="text-lg font-bold">{props.title}</h2>
-            </div>
-            <Card className="rounded-2xl shadow">
-              <CardContent className="p-4">
-                <div className="flex items-center">
-                  <div className="bg-orange-100 p-3 rounded-full">
-                    <Heart className="h-6 w-6 text-orange-600" />
+          switch (type) {
+            case "header": {
+              const heroImage = resolveImageSrc(props.backgroundImage || logo)
+              return (
+                <section
+                  key={key}
+                  className="relative mb-10 overflow-hidden rounded-[32px] border border-gray-200 bg-gradient-to-br from-[#f7f9fc] via-white to-white shadow-[0_25px_60px_-35px_rgba(15,23,42,0.35)]"
+                >
+                  <div className="absolute inset-0">
+                    <Image src={heroImage} alt={props.title || "عن المطعم"} fill className="object-cover opacity-40" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-[#eef2f7]/70" />
                   </div>
-                  <p className="mr-4 text-sm text-gray-700 leading-relaxed">
-                  {props.content}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </section>
-        
-        </div>
-      );
+                  <div className="relative flex flex-col gap-4 px-8 py-12 text-gray-900 sm:px-12">
+                    <span className="inline-flex w-fit items-center gap-2 rounded-full bg-black/5 px-4 py-2 text-xs font-semibold text-gray-600">
+                      <Utensils className="h-4 w-4" /> قصتنا
+                    </span>
+                    <h1 className="text-3xl font-bold leading-tight sm:text-4xl">{props.title}</h1>
+                    {props.subtitle && <p className="max-w-2xl text-sm leading-7 text-gray-600">{props.subtitle}</p>}
+                  </div>
+                </section>
+              )
+            }
 
-    case 'values':
-      return (
-        <div key={key} className="p-4">
-           <section>
-            <div className="flex items-center mb-3">
-              <Award className="h-5 w-5 ml-2 text-orange-600" />
-              <h2 className="text-lg font-bold">{props.title}</h2>
-            </div>
-            <Card className="rounded-2xl shadow">
-              <CardContent className="p-4 space-y-3">
-              {(props.items as {
-  id: string;
-  number: number;
-  title: string;
-  description: string;
-}[]).map((item) => (
-  <div key={item.id} className="flex">
-    <Badge className="bg-orange-600 h-6 w-6 rounded-full flex items-center justify-center p-0 ml-3">
-      {item.number}
-    </Badge>
-    <div>
-      <h3 className="font-bold text-sm">{item.title}</h3>
-      <p className="text-xs text-gray-600 mt-1">{item.description}</p>
-    </div>
-  </div>
-))}
+            case "story": {
+              const paragraphs = (props.contentParagraphs as string[]) || []
+              return (
+                <section key={key} className="mb-10 space-y-5 rounded-[32px] border border-gray-200 bg-white p-8 shadow-[0_20px_55px_-40px_rgba(15,23,42,0.45)]">
+                  <div className="flex items-center gap-3">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-[#f7f9fc] text-[#f59e0b]">
+                      <Utensils className="h-4 w-4" />
+                    </span>
+                    <h2 className="text-xl font-semibold text-gray-900">{props.title || "قصتنا"}</h2>
+                  </div>
+                  <div className="space-y-4 text-sm leading-7 text-gray-600">
+                    {paragraphs.map((paragraph, idx) => (
+                      <p key={idx}>{paragraph}</p>
+                    ))}
+                  </div>
+                </section>
+              )
+            }
 
-               
-              </CardContent>
-            </Card>
-          </section>
-       
-        </div>
-      );
-      case 'team':
-        return(
-          <div key={key} className="p-4">
-         <section>
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center">
-                <Users className="h-5 w-5 ml-2 text-orange-600" />
-                <h2 className="text-lg font-bold">فريقنا</h2>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-              <Card className="overflow-hidden rounded-2xl shadow">
-                <div className="relative w-full h-32">
-                  <Image
-                    src="/placeholder.svg?height=200&width=200&text=أحمد"
-                    alt="الشيف أحمد"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <CardContent className="p-3">
-                  <h3 className="font-bold text-sm">أحمد محمد</h3>
-                  <p className="text-xs text-gray-600">الشيف التنفيذي</p>
-                </CardContent>
-              </Card>
+            case "mission":
+              return (
+                <section key={key} className="mb-10 rounded-[32px] border border-gray-200 bg-gradient-to-r from-[#fdf4cf] via-[#fdeab5] to-[#f7c325] p-8 shadow-[0_25px_60px_-35px_rgba(245,158,11,0.6)]">
+                  <div className="flex flex-col gap-5 text-[#1f1a09]">
+                    <div className="flex items-center gap-3">
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-black/10 text-black/70">
+                        <Star className="h-4 w-4" />
+                      </span>
+                      <h2 className="text-xl font-semibold">{props.title || "رؤيتنا"}</h2>
+                    </div>
+                    <div className="rounded-2xl bg-white/70 p-5 text-sm leading-7 text-[#3a3016]">
+                      <div className="flex gap-4">
+                        <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#fef3c7] text-[#f59e0b]">
+                          <Heart className="h-5 w-5" />
+                        </span>
+                        <p>{props.content}</p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              )
 
-              <Card className="overflow-hidden rounded-2xl shadow">
-                <div className="relative w-full h-32">
-                  <Image
-                    src="/placeholder.svg?height=200&width=200&text=سارة"
-                    alt="سارة"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <CardContent className="p-3">
-                  <h3 className="font-bold text-sm">سارة أحمد</h3>
-                  <p className="text-xs text-gray-600">مديرة المطعم</p>
-                </CardContent>
-              </Card>
+            case "values": {
+              const items = (props.items as { id: string; number: number; title: string; description: string }[]) || []
+              return (
+                <section key={key} className="mb-10 rounded-[32px] border border-gray-200 bg-white p-8 shadow-[0_20px_55px_-40px_rgba(15,23,42,0.45)]">
+                  <div className="mb-6 flex items-center gap-3">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-[#f7f9fc] text-[#f59e0b]">
+                      <Award className="h-4 w-4" />
+                    </span>
+                    <h2 className="text-xl font-semibold text-gray-900">{props.title || "قيمنا"}</h2>
+                  </div>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {items.map((item) => (
+                      <Card key={item.id} className="border border-gray-100 bg-[#f7f9fc] shadow-sm">
+                        <CardContent className="flex items-start gap-3 p-4">
+                          <Badge className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f7c325] text-black">
+                            {item.number}
+                          </Badge>
+                          <div>
+                            <h3 className="text-sm font-semibold text-gray-900">{item.title}</h3>
+                            <p className="mt-1 text-xs text-gray-600">{item.description}</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </section>
+              )
+            }
 
-              <Card className="overflow-hidden rounded-2xl shadow">
-                <div className="relative w-full h-32">
-                  <Image
-                    src="/placeholder.svg?height=200&width=200&text=محمد"
-                    alt="محمد"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <CardContent className="p-3">
-                  <h3 className="font-bold text-sm">محمد علي</h3>
-                  <p className="text-xs text-gray-600">شيف المعجنات</p>
-                </CardContent>
-              </Card>
+            case "team": {
+              const members = (props.members as { id: string; name: string; role: string; image?: string }[]) || []
+              const fallbackMembers = [
+                { id: "1", name: "أحمد محمد", role: "الشيف التنفيذي" },
+                { id: "2", name: "سارة أحمد", role: "مديرة المطعم" },
+                { id: "3", name: "محمد علي", role: "شيف المعجنات" },
+                { id: "4", name: "ليلى خالد", role: "مديرة خدمة العملاء" },
+              ]
+              const teamToRender = members.length > 0 ? members : fallbackMembers
 
-              <Card className="overflow-hidden rounded-2xl shadow">
-                <div className="relative w-full h-32">
-                  <Image
-                    src="/placeholder.svg?height=200&width=200&text=ليلى"
-                    alt="ليلى"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <CardContent className="p-3">
-                  <h3 className="font-bold text-sm">ليلى خالد</h3>
-                  <p className="text-xs text-gray-600">مديرة خدمة العملاء</p>
-                </CardContent>
-              </Card>
-            </div>
-          </section>
-      
-       </div>
+              return (
+                <section key={key} className="mb-10 rounded-[32px] border border-gray-200 bg-white p-8 shadow-[0_20px_55px_-40px_rgba(15,23,42,0.45)]">
+                  <div className="mb-6 flex items-center gap-3">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-[#f7f9fc] text-[#f59e0b]">
+                      <Users className="h-4 w-4" />
+                    </span>
+                    <h2 className="text-xl font-semibold text-gray-900">فريقنا</h2>
+                  </div>
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    {teamToRender.map((member) => {
+                      const photo = resolveImageSrc(member.image, "/placeholder-user.jpg")
+                      return (
+                        <Card key={member.id} className="overflow-hidden border border-gray-100 bg-[#f7f9fc] shadow-sm">
+                          <div className="relative h-36 w-full">
+                            <Image src={photo} alt={member.name} fill className="object-cover" />
+                          </div>
+                          <CardContent className="p-4">
+                            <h3 className="text-sm font-semibold text-gray-900">{member.name}</h3>
+                            <p className="mt-1 text-xs text-gray-600">{member.role}</p>
+                          </CardContent>
+                        </Card>
+                      )
+                    })}
+                  </div>
+                </section>
+              )
+            }
 
-        )
-
-    default:
-      return null;
-  }
-})}
-
+            default:
+              return null
+          }
+        })}
+      </div>
     </div>
   )
 }

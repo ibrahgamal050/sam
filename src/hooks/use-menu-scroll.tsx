@@ -4,6 +4,9 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import type { RefObject } from "react"
 import type { ICategory, CategoryRef } from "@/types/menu"
 
+const getCategoryId = (category: ICategory, index: number) =>
+  category._id ? category._id.toString() : `category-${index}`
+
 interface MenuScrollProps {
   categories: ICategory[]
   headerRef: RefObject<HTMLDivElement | null>
@@ -13,8 +16,7 @@ interface MenuScrollProps {
 
 export function useMenuScroll({ categories, headerRef, footerRef, sidebarRef }: MenuScrollProps) {
   // State for tracking active category
-  const initialCategory =
-    categories.length > 0 && categories[0]._id ? categories[0]._id.toString() : ""
+  const initialCategory = categories.length > 0 ? getCategoryId(categories[0], 0) : ""
   const [activeCategory, setActiveCategory] = useState<string>(initialCategory)
 
   // State for tracking if header is sticky
@@ -41,12 +43,11 @@ export function useMenuScroll({ categories, headerRef, footerRef, sidebarRef }: 
 
   // Initialize category refs
   useEffect(() => {
-    categoryRefs.current = categories.reduce((acc, category) => {
-      if (category._id) {
-        return { ...acc, [category._id.toString()]: null }
-      }
+    categoryRefs.current = categories.reduce((acc, category, index) => {
+      const key = getCategoryId(category, index)
+      acc[key] = acc[key] ?? null
       return acc
-    }, {})
+    }, {} as { [key: string]: CategoryRef })
   }, [categories])
 
   // Calculate header height whenever it changes
@@ -87,8 +88,21 @@ export function useMenuScroll({ categories, headerRef, footerRef, sidebarRef }: 
         let offset = 16 // Base padding
 
         // Add header height if it's sticky
-        if (headerRef.current && window.getComputedStyle(headerRef.current).position === "fixed") {
-          offset += headerRef.current.offsetHeight
+        if (headerRef.current) {
+          const style = window.getComputedStyle(headerRef.current)
+          if (style.position === "fixed" || style.position === "sticky") {
+            const headerHeight = headerRef.current.offsetHeight
+            const headerTop = headerRef.current.getBoundingClientRect().top
+            offset += headerHeight
+            if (style.position === "sticky" && headerTop > 0) {
+              offset -= headerTop
+            }
+          }
+
+          const customOffset = Number(headerRef.current.getAttribute("data-offset"))
+          if (!Number.isNaN(customOffset)) {
+            offset += customOffset
+          }
         }
 
         // Check for any other fixed elements that might affect scrolling
