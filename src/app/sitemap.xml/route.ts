@@ -10,26 +10,6 @@ type RestaurantRecord = {
 const SUBDOMAIN_HOST = process.env.NEXT_PUBLIC_SITES_DOMAIN ?? "meelza.com"
 const ROOT_DOMAIN = process.env.NEXT_PUBLIC_ROOT_DOMAIN ?? "meelza.com"
 const LOCALE_SEGMENT = "ar"
-const CHANGE_FREQUENCY = "daily"
-const PRIORITY = "0.8"
-
-const STATIC_PATHS = ["", "menu", "branches", "about"]
-
-const escapeXml = (value: string) =>
-  value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
-    .replace(/'/g, "&apos;")
-
-const buildUrl = (base: string, path: string) =>
-  path ? `${base}/${path}` : base
-
-const buildRestaurantBaseUrl = (subdomain: string) =>
-  `https://${subdomain}.${SUBDOMAIN_HOST}/${LOCALE_SEGMENT}`
-
-const buildRootBaseUrl = () => `https://${ROOT_DOMAIN}/${LOCALE_SEGMENT}`
 
 export const dynamic = "force-dynamic"
 
@@ -39,44 +19,37 @@ export async function GET() {
   const restaurants = await Restaurant.find({}, { subdomain: 1, updatedAt: 1 })
     .lean<RestaurantRecord[]>()
     .catch(() => [])
-  const publishedRestaurants = restaurants.filter((restaurant) =>
-    typeof restaurant?.subdomain === "string" && restaurant.subdomain.trim().length > 0
+
+  const publishedRestaurants = restaurants.filter(
+    (r) => typeof r?.subdomain === "string" && r.subdomain.trim().length > 0
   )
 
-  const locationEntries = publishedRestaurants.length
-    ? publishedRestaurants.flatMap((restaurant) => {
-        const updatedAt = new Date(restaurant.updatedAt ?? new Date())
-        const baseUrl = buildRestaurantBaseUrl(restaurant.subdomain)
-
-        return STATIC_PATHS.map((path) => ({
-          loc: buildUrl(baseUrl, path),
-          lastmod: updatedAt.toISOString(),
-        }))
-      })
-    : STATIC_PATHS.map((path) => ({
-        loc: buildUrl(buildRootBaseUrl(), path),
-        lastmod: new Date().toISOString(),
-      }))
-
-  const urlSet = locationEntries
-    .map(
-      ({ loc, lastmod }) => `  <url>
-    <loc>${escapeXml(loc)}</loc>
-    <lastmod>${lastmod}</lastmod>
-    <changefreq>${CHANGE_FREQUENCY}</changefreq>
-    <priority>${PRIORITY}</priority>
-  </url>`
-    )
-    .join("\n")
+  // سايت ماب الصفحات الرئيسية
+  const sitemaps = [
+    {
+      loc: `https://meelza.com/sitemap-root.xml`,
+      lastmod: new Date().toISOString(),
+    },
+    // سايت ماب كل مطعم
+    ...publishedRestaurants.map((r) => ({
+      loc: `https://${r.subdomain}.${SUBDOMAIN_HOST}/sitemap.xml`,
+      lastmod: new Date(r.updatedAt ?? new Date()).toISOString(),
+    })),
+  ]
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urlSet}
-</urlset>`
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemaps
+  .map(
+    (s) => `  <sitemap>
+    <loc>${s.loc}</loc>
+    <lastmod>${s.lastmod}</lastmod>
+  </sitemap>`
+  )
+  .join("\n")}
+</sitemapindex>`
 
   return new NextResponse(xml, {
-    headers: {
-      "Content-Type": "application/xml",
-    },
+    headers: { "Content-Type": "application/xml" },
   })
 }
