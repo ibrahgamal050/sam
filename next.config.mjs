@@ -16,6 +16,8 @@ const nextConfig = {
   allowedDevOrigins: [
     "http://karamelsham.localhost",
     "http://karamelsham.localhost:3000",
+    "http://kosharyelrahmany.localhost",
+    "http://kosharyelrahmany.localhost:3000",
   ],
   eslint: {
     ignoreDuringBuilds: true,

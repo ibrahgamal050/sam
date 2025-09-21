@@ -77,12 +77,13 @@ export async function middleware(request: NextRequest) {
   }
 
   // Allow access to API routes, robots.txt, and sitemap for all domains
-  if (
-    pathname.startsWith("/api") ||
-    pathname.startsWith("/_next") ||
-    pathname.includes(".xml") ||
-    pathname.includes(".txt")
-  ) {
+  if (pathname.startsWith("/api") || pathname.startsWith("/_next") || pathname.includes(".txt")) {
+    return NextResponse.next()
+  }
+
+  const isXmlRequest = pathname.endsWith(".xml")
+  const isRootHost = hostname === "localhost:3000" || hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN
+  if (isXmlRequest && isRootHost) {
     return NextResponse.next()
   }
 
