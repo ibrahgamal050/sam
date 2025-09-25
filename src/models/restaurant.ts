@@ -25,7 +25,7 @@ const BranchSchema = new Schema(
 
 const DomainAliasSchema = new Schema(
   {
-    host: { type: String, required: true, trim: true },
+    host: { type: String, required: true, trim: true, lowercase: true },
     redirectTo: { type: String, trim: true },
     active: { type: Boolean, default: true },
     createdAt: { type: Date, default: Date.now },
@@ -39,8 +39,8 @@ const RestaurantSchema: Schema = new Schema(
       ar: { type: String, required: true },
       en: { type: String, required: true },
     },
-    subdomain: { type: String, required: true, unique: true },
-    canonicalHost: { type: String, trim: true, unique: true, sparse: true },
+    subdomain: { type: String, required: true, unique: true, trim: true, lowercase: true },
+    canonicalHost: { type: String, trim: true, lowercase: true, unique: true, sparse: true },
     domainAliases: { type: [DomainAliasSchema], default: [] },
     logo: { type: String, required: true },
     coverImage: { type: String, required: true },

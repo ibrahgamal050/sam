@@ -62,7 +62,7 @@ export interface IRestaurant {
   }
   subdomain: string
   // الهوست الأساسي: "abdo.com" أو "abdo.meelza.site"
-  canonicalHost: string
+  canonicalHost?: string | null
   // الدومينات القديمة أو الثانوية
   domainAliases: DomainAlias[]
   logo: string

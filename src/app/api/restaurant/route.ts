@@ -1,44 +1,19 @@
 import { NextResponse } from "next/server"
-import dbConnect from "@/lib/db"
-import Restaurant from "@/models/restaurant"
+import { normalizeHost } from "@/lib/host-utils"
+import { getRestaurantByHost } from "@/lib/services/restaurant-service"
 
 export async function GET(request: Request) {
   try {
-    await dbConnect()
-    
-    // Get hostname and extract subdomain
-    const hostname = request.headers.get("host") || ""
-    let subdomain
-    
-    if (process.env.NODE_ENV === "development") {
-      // For localhost:3000 or similar
-      subdomain = hostname.includes("localhost") 
-        ? hostname.split(".")[0] 
-        : hostname.split(".")[0]
-    } else {
-      // For production: tenant.yourdomain.com
-      const parts = hostname.split(".")
-      subdomain = parts.length >= 3 ? parts[0] : null
-    }
-    
-    console.log("Extracted subdomain:", subdomain)  // Debug log
+    const hostname = normalizeHost(request.headers.get("host"))
 
-    // If no subdomain was found, return an error
-    if (!subdomain) {
-      return NextResponse.json(
-        { error: "No subdomain provided" }, 
-        { status: 400 }
-      )
+    if (!hostname) {
+      return NextResponse.json({ error: "Host header is required" }, { status: 400 })
     }
-    
-    // Find restaurant by subdomain
-    const restaurant = await Restaurant.findOne({ subdomain })
+
+    const restaurant = await getRestaurantByHost(hostname)
 
     if (!restaurant) {
-      return NextResponse.json(
-        { error: `Restaurant not found for subdomain: ${subdomain}` }, 
-        { status: 404 }
-      )
+      return NextResponse.json({ error: `Restaurant not found for host: ${hostname}` }, { status: 404 })
     }
 
     return NextResponse.json(restaurant)

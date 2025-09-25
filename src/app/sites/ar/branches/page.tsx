@@ -1,19 +1,11 @@
-import { BranchesPage } from "@/components/ar/branches-page"
-import dbConnect from "@/lib/db"
-import Restaurant from "@/models/restaurant"
-import { headers } from 'next/headers';
-import { IRestaurant } from "@/types";
-
 import type { Metadata } from "next"
+import { BranchesPage } from "@/components/ar/branches-page"
+import { resolveRestaurantFromHeaders } from "@/lib/domain/restaurant-context"
+import { getRootDomain, resolveRestaurantHost } from "@/lib/host-utils"
+import type { IRestaurant } from "@/types/restaurant"
 
 export async function generateMetadata(): Promise<Metadata> {
-  await dbConnect()
-
-  const headersList = headers()
-  const host = (await headersList).get("host")
-  const subdomain = host?.split(".")[0]
-
-  const restaurant = await Restaurant.findOne({ subdomain }).lean() as IRestaurant | null
+  const { restaurant, hostHeader } = await resolveRestaurantFromHeaders()
 
   if (!restaurant) {
     return {
@@ -21,6 +13,11 @@ export async function generateMetadata(): Promise<Metadata> {
       description: "تعرف على فروعنا ومواقعنا المختلفة",
     }
   }
+
+  const resolvedHost = resolveRestaurantHost(restaurant, hostHeader, getRootDomain())
+  const protocol = resolveProtocol(hostHeader)
+  const coverImage = `/images${restaurant.coverImage || "/default-og.jpg"}`
+  const coverImageUrl = `${protocol}://${resolvedHost}${coverImage}`
 
   return {
     title: `فروع ${restaurant.name.ar}`,
@@ -30,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: `تعرف على فروع ${restaurant.name.ar} ومواقعنا المختلفة لتجربة طعام رائعة.`,
       images: [
         {
-          url: `/images${restaurant.coverImage || "/default-og.jpg"}`,
+          url: coverImageUrl,
           alt: `${restaurant.name.ar} - صورة الغلاف`,
         },
       ],
@@ -39,27 +36,23 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: `فروع ${restaurant.name.ar}`,
       description: `تعرف على فروع ${restaurant.name.ar} ومواقعنا المختلفة.`,
-      images: [`/images${restaurant.coverImage || "/default-og.jpg"}`],
+      images: [coverImageUrl],
     },
   }
 }
-export default async function Branches({ params }: { params: { slug: string } }) {
-  await dbConnect();
 
-  const headersList = await headers(); // ✅ await هنا مهم
-  const host = headersList.get('host'); // ✅ هذا الآن يعمل
+export default async function Branches() {
+  const { restaurant } = await resolveRestaurantFromHeaders()
+  const typedRestaurant = restaurant as IRestaurant | null
 
-  const subdomain = host?.split('.')[0];
-
-  const restaurant = await Restaurant.findOne({ subdomain }).lean() as IRestaurant | null;
-
-  if (!restaurant ) {
-    // Handle case where restaurant is not found
-    return <div>Restaurant not found</div>
+  if (!typedRestaurant) {
+    return <div className="p-4">المطعم غير موجود</div>
   }
 
-  // Get all branches
-  
+  return <BranchesPage restaurant={typedRestaurant} />
+}
 
-  return <BranchesPage restaurant={restaurant} />
+const resolveProtocol = (hostHeader: string): "http" | "https" => {
+  const normalized = hostHeader.toLowerCase()
+  return normalized.includes("localhost") || normalized.includes("127.0.0.1") ? "http" : "https"
 }

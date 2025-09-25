@@ -1,10 +1,11 @@
 import mongoose from "mongoose"
-import Restaurant, { type IRestaurant } from "@/models/restaurant"
+import Restaurant from "@/models/restaurant"
 import connectToDatabase from "@/lib/db"
-import type { Restaurant as RestaurantType } from "@/types"
+import type { IRestaurant as RestaurantType } from "@/types/restaurant"
+import { extractPlatformSubdomain, getRootDomain, normalizeHost } from "@/lib/host-utils"
 
 // Helper function to convert Mongoose document to plain object
-function convertToPlainObject(doc: IRestaurant): RestaurantType {
+function convertToPlainObject(doc: unknown): RestaurantType {
   return JSON.parse(JSON.stringify(doc))
 }
 
@@ -35,13 +36,69 @@ export async function getRestaurantById(id: string): Promise<RestaurantType | nu
   }
 }
 
+const ALIAS_ACTIVE_CONDITION = {
+  $or: [{ active: { $exists: false } }, { active: { $ne: false } }],
+}
+
 export async function getRestaurantBySubdomain(subdomain: string): Promise<RestaurantType | null> {
   try {
     await connectToDatabase()
-    const restaurant = await Restaurant.findOne({ subdomain })
+    const normalized = subdomain?.trim().toLowerCase()
+    if (!normalized) {
+      return null
+    }
+
+    const restaurant = await Restaurant.findOne({ subdomain: normalized })
     return restaurant ? convertToPlainObject(restaurant) : null
   } catch (error) {
     console.error(`Error fetching restaurant with subdomain ${subdomain}:`, error)
+    throw new Error("Failed to fetch restaurant")
+  }
+}
+
+export async function getRestaurantByHost(host: string): Promise<RestaurantType | null> {
+  const normalizedHost = normalizeHost(host)
+  if (!normalizedHost) {
+    return null
+  }
+
+  const rootDomain = getRootDomain()
+  if (
+    normalizedHost === "localhost" ||
+    normalizedHost === "127.0.0.1" ||
+    (rootDomain && normalizedHost === rootDomain)
+  ) {
+    return null
+  }
+
+  try {
+    await connectToDatabase()
+
+    const subdomain = extractPlatformSubdomain(normalizedHost, rootDomain)
+    if (subdomain) {
+      const restaurantBySubdomain = await Restaurant.findOne({ subdomain })
+      if (restaurantBySubdomain) {
+        return convertToPlainObject(restaurantBySubdomain)
+      }
+    }
+
+    const restaurantByCanonical = await Restaurant.findOne({ canonicalHost: normalizedHost })
+    if (restaurantByCanonical) {
+      return convertToPlainObject(restaurantByCanonical)
+    }
+
+    const restaurantByAlias = await Restaurant.findOne({
+      domainAliases: {
+        $elemMatch: {
+          host: normalizedHost,
+          ...ALIAS_ACTIVE_CONDITION,
+        },
+      },
+    })
+
+    return restaurantByAlias ? convertToPlainObject(restaurantByAlias) : null
+  } catch (error) {
+    console.error(`Error fetching restaurant with host ${host}:`, error)
     throw new Error("Failed to fetch restaurant")
   }
 }

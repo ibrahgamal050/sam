@@ -1,56 +1,43 @@
+import type { Metadata } from "next"
+import mongoose from "mongoose"
 import AboutPage from "@/components/ar/about-page"
 import type { IPage as AboutPageType } from "@/types/page"
 import Pages from "@/models/page"
 import dbConnect from "@/lib/db"
-import mongoose from "mongoose"
-import { headers } from "next/headers"
-import Restaurant from "@/models/restaurant"
-import type { Metadata } from 'next';
-import type { IRestaurant } from "@/types/restaurant";
+import { resolveRestaurantFromHeaders } from "@/lib/domain/restaurant-context"
+import { getRootDomain, resolveRestaurantHost } from "@/lib/host-utils"
+import type { IRestaurant } from "@/types/restaurant"
 
-export const revalidate = 3600 // كل ساعة
-
+export const revalidate = 3600
 
 export default async function About() {
-  await dbConnect();
+  const { restaurant } = await resolveRestaurantFromHeaders()
+  const typedRestaurant = restaurant as IRestaurant | null
 
-  const headersList = await headers(); // ✅ await هنا مهم
-  const host = headersList.get('host'); // ✅ هذا الآن يعمل
-
-  const subdomain = host?.split('.')[0];
-  if (!subdomain) {
-    return <div className="text-center py-10 text-red-600">لم يتم العثور على اسم النطاق الفرعي</div>;
+  if (!typedRestaurant) {
+    return <div className="text-center py-10 text-red-600">لم يتم العثور على المطعم</div>
   }
-  const restaurant = await Restaurant.findOne({ subdomain }).lean<IRestaurant>();
-  if (!restaurant) return {}
- 
-  try {
-    // جلب بيانات صفحة "عن"
-    const pageData = await getPageBySlug(subdomain, "about", "ar")
 
-    // لو مفيش بيانات
+  try {
+    const pageData = await getPageBySlug(typedRestaurant.subdomain, "about", "ar")
+
     if (!pageData) {
       return <div className="text-center py-10 text-red-600">لم يتم العثور على صفحة عن المطعم</div>
     }
 
-    // تأكيد نوع البيانات (type assertion)
-    const aboutPageData = pageData as AboutPageType
-
-    // عرض صفحة "عن"
-    return <AboutPage logo={restaurant.logo} data={aboutPageData} />
+    return <AboutPage logo={typedRestaurant.logo} data={pageData as AboutPageType} />
   } catch (error) {
     console.error("Error fetching about page:", error)
     return <div className="text-center py-10 text-red-600">حدث خطأ أثناء تحميل الصفحة</div>
   }
 }
 
-
 export async function getPageBySlug(subdomain: string, slug: string, language: "en" | "ar") {
   await dbConnect()
 
   const result = await Pages.findOne(
     {
-      subdomain: subdomain,
+      subdomain,
       pages: {
         $elemMatch: {
           slug,
@@ -59,24 +46,21 @@ export async function getPageBySlug(subdomain: string, slug: string, language: "
       },
     },
     {
-      "pages.$": 1, // Project only the matched element from the pages array
+      "pages.$": 1,
     },
   ).lean()
 
   return result?.pages?.[0] || null
 }
 
-
-
 export async function generateMetadata(): Promise<Metadata> {
+  const { restaurant, hostHeader } = await resolveRestaurantFromHeaders()
+
+  if (!restaurant) {
+    return {}
+  }
+
   await dbConnect()
-  const headersList = await headers(); // ✅ await هنا مهم
-  const host = headersList.get('host'); // ✅ هذا الآن يعمل
-
-  const subdomain = host?.split('.')[0];
-
-  const restaurant = await Restaurant.findOne({ subdomain }).lean<IRestaurant>();
-  if (!restaurant) return {}
 
   const page = await Pages.findOne(
     {
@@ -102,14 +86,19 @@ export async function generateMetadata(): Promise<Metadata> {
     "video.episode",
     "video.tv_show",
     "video.other",
-  ] as const;
-  
-  type OpenGraphType = typeof allowedTypes[number];
-  
+  ] as const
+
+  type OpenGraphType = (typeof allowedTypes)[number]
+
   const ogType: OpenGraphType =
     allowedTypes.includes(pageData?.seo?.og_type as OpenGraphType)
       ? (pageData?.seo?.og_type as OpenGraphType)
-      : "website";
+      : "website"
+
+  const resolvedHost = resolveRestaurantHost(restaurant, hostHeader, getRootDomain())
+  const protocol = resolveProtocol(hostHeader)
+  const canonicalUrl = pageData?.seo?.canonical_url || `${protocol}://${resolvedHost}/ar/about`
+
   return {
     title: pageData?.seo?.title || `عن ${restaurant.name.ar}`,
     description: pageData?.seo?.description || `اعرف المزيد عن مطعم ${restaurant.name}`,
@@ -127,7 +116,12 @@ export async function generateMetadata(): Promise<Metadata> {
       images: [pageData?.seo?.twitter_image || restaurant.logo],
     },
     alternates: {
-      canonical: pageData?.seo?.canonical_url || `https://${host}/ar/about`,
+      canonical: canonicalUrl,
     },
   }
+}
+
+const resolveProtocol = (hostHeader: string): "http" | "https" => {
+  const normalized = hostHeader.toLowerCase()
+  return normalized.includes("localhost") || normalized.includes("127.0.0.1") ? "http" : "https"
 }

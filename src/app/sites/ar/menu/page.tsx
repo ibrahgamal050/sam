@@ -1,13 +1,13 @@
 import { Suspense } from "react"
-import { headers } from "next/headers"
 import { notFound } from "next/navigation"
-import { getRestaurantBySubdomain } from "@/lib/services/restaurant-service"
 import { getMenuByRestaurantId } from "@/lib/services/menu-service"
 import { MenuPage } from "@/components/ar/menu/menu-page"
 import { MenuPageSkeleton } from "@/components/ar/menu/menu-page-skeleton"
 import { ErrorBoundary } from "@/components/ar/error-boundary"
 import { ErrorDisplay } from "@/components/ar/menu/error-display"
 import type { Metadata } from "next"
+import { resolveRestaurantFromHeaders } from "@/lib/domain/restaurant-context"
+import { getRootDomain, resolveRestaurantHost } from "@/lib/host-utils"
 
 // Enable dynamic rendering for fresh data
 export const dynamic = "force-dynamic"
@@ -17,8 +17,7 @@ export const dynamic = "force-dynamic"
 // Generate metadata for SEO
 export async function generateMetadata(): Promise<Metadata> {
   try {
-    const subdomain =  await  extractSubdomainFromHeaders()
-    const restaurant = await getRestaurantBySubdomain(subdomain)
+    const { restaurant, hostHeader } = await resolveRestaurantFromHeaders()
 
     if (!restaurant) {
       return {
@@ -27,6 +26,10 @@ export async function generateMetadata(): Promise<Metadata> {
       }
     }
 
+    const canonicalHost = resolveRestaurantHost(restaurant, hostHeader, getRootDomain())
+    const protocol = resolveProtocol(hostHeader)
+    const canonicalUrl = `${protocol}://${canonicalHost}/menu`
+
     const restaurantName = restaurant.name?.ar || restaurant.name
     const description =
       restaurant.description?.ar ||
@@ -34,7 +37,8 @@ export async function generateMetadata(): Promise<Metadata> {
       `استعرض قائمة الطعام الخاصة بـ ${restaurantName}. اكتشف مجموعة متنوعة من الأطباق الشهية.`
 
     // Get menu categories for keywords
-    const menu = await getMenuByRestaurantId(restaurant._id)
+    const restaurantId = restaurant._id?.toString?.() ?? ""
+    const menu = await getMenuByRestaurantId(restaurantId)
     const categoryNames =
     menu?.categories?.map((c: { name: string | { ar: string } }) =>
     typeof c.name === "object" ? c.name.ar : c.name
@@ -67,7 +71,7 @@ export async function generateMetadata(): Promise<Metadata> {
         images: [`/api/og?restaurant=${encodeURIComponent(restaurantName)}`],
       },
       alternates: {
-        canonical: `https://${subdomain}.meelza.com/menu`,
+        canonical: canonicalUrl,
       },
       robots: {
         index: true,
@@ -95,17 +99,24 @@ export default async function MenuHandler({ searchParams }: { searchParams: { q?
 
 async function MenuContent({ searchParams }: { searchParams: { q?: string } }) {
   try {
-    const subdomain =  await extractSubdomainFromHeaders()
-    const restaurant = await getRestaurantBySubdomain(subdomain)
+    const { restaurant, hostHeader } = await resolveRestaurantFromHeaders()
 
     if (!restaurant) {
-      console.error(`Restaurant not found for subdomain: ${subdomain}`)
+      console.error("Restaurant not found for current host")
       return notFound()
     }
 
     // Find menu for the restaurant
-    const restaurantId = restaurant._id
+    const restaurantId = restaurant._id?.toString?.() ?? ""
+    if (!restaurantId) {
+      console.error("Restaurant document is missing _id")
+      return notFound()
+    }
+
     const menuData = await getMenuByRestaurantId(restaurantId)
+
+    const canonicalHost = resolveRestaurantHost(restaurant, hostHeader, getRootDomain())
+    const protocol = resolveProtocol(hostHeader)
 
     // Prepare restaurant data for the client component
     const restaurantData = {
@@ -113,7 +124,7 @@ async function MenuContent({ searchParams }: { searchParams: { q?: string } }) {
       description: restaurant.description?.ar || restaurant.description || "",
       address: restaurant.address?.ar || restaurant.address || "",
       logo: restaurant.logo || "",
-      subdomain: subdomain,
+      subdomain: restaurant.subdomain,
     }
 
     // Return the menu page with data
@@ -127,7 +138,7 @@ async function MenuContent({ searchParams }: { searchParams: { q?: string } }) {
         <meta itemProp="name" content={restaurantData.name} />
         <meta itemProp="description" content={restaurantData.description} />
         <meta itemProp="address" content={restaurantData.address} />
-        <link rel="canonical" href={`https://${subdomain}.meelza.com/menu`} />
+        <link rel="canonical" href={`${protocol}://${canonicalHost}/menu`} />
         <MenuPage menuData={menuData}  />
       </div>
     )
@@ -137,31 +148,7 @@ async function MenuContent({ searchParams }: { searchParams: { q?: string } }) {
   }
 }
 
-// Helper function to extract subdomain from headers
-async function extractSubdomainFromHeaders(): Promise<string> {
-  const headersList = await headers()
-  const host = headersList.get("host") || ""
-  return extractSubdomain(host)
-}
-
-// Extract subdomain logic
-function extractSubdomain(host: string): string {
-  // Remove port if present
-  const cleanHost = host.split(":")[0]
-  const hostParts = cleanHost.split(".")
-
-  // Handle localhost case (e.g., karamelsham.localhost)
-  if (cleanHost.endsWith("localhost")) {
-    if (hostParts.length === 2) {
-      return hostParts[0] // karamelsham.localhost => karamelsham
-    }
-    return "main"
-  }
-
-  // Handle real domain case (e.g., karamelsham.example.com)
-  if (hostParts.length > 2) {
-    return hostParts[0] // karamelsham
-  }
-
-  return "main"
+const resolveProtocol = (hostHeader: string): "http" | "https" => {
+  const normalized = hostHeader.toLowerCase()
+  return normalized.includes("localhost") || normalized.includes("127.0.0.1") ? "http" : "https"
 }
