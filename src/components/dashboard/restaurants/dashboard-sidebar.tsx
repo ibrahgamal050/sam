@@ -1,6 +1,6 @@
 "use client"
 
-import { Building2, ChevronDown, Home, LogOut, Menu, Settings, Store, User } from "lucide-react"
+import { Building2, ChevronDown, FileText, Home, LogOut, Menu, Settings, Store, User } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -81,6 +81,14 @@ export function DashboardSidebar({ restaurantId }:DashboardSidebarProps) {
               <Link href={`/dashboard/restaurants/${restaurantId}/menu`}>
                 <Menu className="h-4 w-4" />
                 <span>Menus</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild isActive={pathname.includes(`/dashboard/restaurants/${restaurantId}/posts`)}>
+              <Link href={`/dashboard/restaurants/${restaurantId}/posts`}>
+                <FileText className="h-4 w-4" />
+                <span>Posts</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

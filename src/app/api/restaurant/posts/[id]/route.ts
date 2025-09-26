@@ -1,26 +1,35 @@
+import mongoose from "mongoose"
 import { NextResponse } from "next/server"
+
 import dbConnect from "@/lib/db"
-import Restaurant from "@//models/restaurant"
+import { normalizeHost } from "@/lib/host-utils"
+import { getRestaurantByHost } from "@/lib/services/restaurant-service"
 import Post from "@/models/post"
 
-export async function GET(request: Request, { params }: { params: { slug: string; id: string } }) {
+export async function GET(request: Request, { params }: { params: { id: string } }) {
   try {
-    await dbConnect()
+    const hostname = normalizeHost(request.headers.get("host"))
 
-    const { slug, id } = params
+    if (!hostname) {
+      return NextResponse.json({ error: "Host header is required" }, { status: 400 })
+    }
 
-    // Find restaurant by slug
-    const restaurant = await Restaurant.findOne({ slug })
+    if (!mongoose.Types.ObjectId.isValid(params.id)) {
+      return NextResponse.json({ error: "Invalid post id" }, { status: 400 })
+    }
 
-    if (!restaurant) {
+    const restaurant = await getRestaurantByHost(hostname)
+
+    if (!restaurant?._id) {
       return NextResponse.json({ error: "Restaurant not found" }, { status: 404 })
     }
 
-    // Query post by id and restaurant
+    await dbConnect()
+
     const post = await Post.findOne({
-      _id: id,
+      _id: new mongoose.Types.ObjectId(params.id),
       restaurantId: restaurant._id,
-    })
+    }).lean()
 
     if (!post) {
       return NextResponse.json({ error: "Post not found" }, { status: 404 })

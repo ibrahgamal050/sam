@@ -1,13 +1,14 @@
 "use client"
 
+import { useEffect, useMemo, useState } from "react"
+
 import { Button } from "@/components/ui/button"
+import { Skeleton } from "@/components/ui/skeleton"
+import { useRestaurant } from "@/contexts/restaurant-context"
+import { ar as arLocale } from "date-fns/locale"
 import { Calendar, ChevronLeft, Share2 } from "lucide-react"
 import Image from "next/image"
-import { useRouter } from "next/navigation"
-import { useRestaurant } from "@/contexts/restaurant-context"
-import { useParams } from "next/navigation"
-import { useState, useEffect } from "react"
-import { Skeleton } from "@/components/ui/skeleton"
+import { usePathname, useRouter } from "next/navigation"
 import { format } from "date-fns"
 
 interface Post {
@@ -20,11 +21,35 @@ interface Post {
 
 export function SinglePostPage({ id }: { id: string }) {
   const router = useRouter()
+  const pathname = usePathname()
   const { restaurant } = useRestaurant()
   const [post, setPost] = useState<Post | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const params = useParams()
-  const slug = params?.slug as string
+
+  const postsBasePath = useMemo(() => {
+    const segments = pathname?.split("/").filter(Boolean) ?? []
+
+    if (segments[0] === "sites") {
+      const localeSegment = segments[1]
+      if (!localeSegment || localeSegment === "posts") {
+        return "/posts"
+      }
+
+      return `/${localeSegment}/posts`
+    }
+
+    if (segments[0] === "posts") {
+      return "/posts"
+    }
+
+    if (segments.length >= 2) {
+      return `/${segments[0]}/posts`
+    }
+
+    return "/posts"
+  }, [pathname])
+
+  const isArabic = postsBasePath.startsWith("/ar")
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -32,7 +57,7 @@ export function SinglePostPage({ id }: { id: string }) {
 
       try {
         setIsLoading(true)
-        const response = await fetch(`/api/restaurants/${slug}/posts/${id}`)
+        const response = await fetch(`/api/restaurant/posts/${id}`)
 
         if (response.ok) {
           const data = await response.json()
@@ -51,7 +76,7 @@ export function SinglePostPage({ id }: { id: string }) {
     if (restaurant) {
       fetchPost()
     }
-  }, [restaurant, slug, id])
+  }, [restaurant, id])
 
   const handleShare = async () => {
     if (navigator.share) {
@@ -67,7 +92,7 @@ export function SinglePostPage({ id }: { id: string }) {
     } else {
       // Fallback for browsers that don't support the Web Share API
       navigator.clipboard.writeText(window.location.href)
-      alert("Link copied to clipboard!")
+      alert(isArabic ? "تم نسخ الرابط" : "Link copied to clipboard!")
     }
   }
 
@@ -78,9 +103,9 @@ export function SinglePostPage({ id }: { id: string }) {
   if (!post) {
     return (
       <div className="p-4 text-center">
-        <p>Post not found</p>
-        <Button variant="link" onClick={() => router.push(`/${slug}/posts`)}>
-          Back to Posts
+        <p>{isArabic ? "لم يتم العثور على المقال" : "Post not found"}</p>
+        <Button variant="link" onClick={() => router.push(postsBasePath)}>
+          {isArabic ? "العودة إلى المقالات" : "Back to Posts"}
         </Button>
       </div>
     )
@@ -88,15 +113,22 @@ export function SinglePostPage({ id }: { id: string }) {
 
   return (
     <div className="p-4 space-y-4">
-      <Button variant="ghost" size="sm" className="mb-2" onClick={() => router.push(`/${slug}/posts`)}>
-        <ChevronLeft className="h-4 w-4 mr-1" /> Back to Posts
+      <Button variant="ghost" size="sm" className="mb-2" onClick={() => router.push(postsBasePath)}>
+        <ChevronLeft className="h-4 w-4 mr-1" />
+        {isArabic ? "العودة إلى المقالات" : "Back to Posts"}
       </Button>
 
       <h1 className="text-2xl font-bold">{post.title}</h1>
 
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <Calendar className="h-4 w-4" />
-        <span>{format(new Date(post.createdAt), "MMMM d, yyyy")}</span>
+        <span>
+          {format(
+            new Date(post.createdAt),
+            isArabic ? "d MMMM yyyy" : "MMMM d, yyyy",
+            isArabic ? { locale: arLocale } : undefined,
+          )}
+        </span>
       </div>
 
       <div className="relative w-full h-48 rounded-lg overflow-hidden">
@@ -107,7 +139,8 @@ export function SinglePostPage({ id }: { id: string }) {
 
       <div className="pt-4 border-t flex justify-between items-center">
         <Button variant="outline" size="sm" className="flex items-center gap-1" onClick={handleShare}>
-          <Share2 className="h-4 w-4" /> Share
+          <Share2 className="h-4 w-4" />
+          {isArabic ? "مشاركة" : "Share"}
         </Button>
       </div>
     </div>

@@ -1,23 +1,27 @@
 import { NextResponse } from "next/server"
+
 import dbConnect from "@/lib/db"
-import Restaurant from "@/models/restaurant"
+import { normalizeHost } from "@/lib/host-utils"
+import { getRestaurantByHost } from "@/lib/services/restaurant-service"
 import Post from "@/models/post"
 
-export async function GET(request: Request, { params }: { params: { slug: string } }) {
+export async function GET(request: Request) {
   try {
-    await dbConnect()
+    const hostname = normalizeHost(request.headers.get("host"))
 
-    const { slug } = params
+    if (!hostname) {
+      return NextResponse.json({ error: "Host header is required" }, { status: 400 })
+    }
 
-    // Find restaurant by slug
-    const restaurant = await Restaurant.findOne({ slug })
+    const restaurant = await getRestaurantByHost(hostname)
 
-    if (!restaurant) {
+    if (!restaurant?._id) {
       return NextResponse.json({ error: "Restaurant not found" }, { status: 404 })
     }
 
-    // Query posts for this restaurant
-    const posts = await Post.find({ restaurantId: restaurant._id }).sort({ createdAt: -1 })
+    await dbConnect()
+
+    const posts = await Post.find({ restaurantId: restaurant._id }).sort({ createdAt: -1 }).lean()
 
     return NextResponse.json(posts)
   } catch (error) {

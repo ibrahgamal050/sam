@@ -21,6 +21,7 @@ const DEFAULT_ITEMS: NavItem[] = [
   { name: "الرئيسية", href: "/ar" },
   { name: "المنيو", href: "/ar/menu" },
   { name: "الفروع", href: "/ar/branches" },
+  { name: "المقالات", href: "/ar/posts" },
   { name: "عن المطعم", href: "/ar/about" },
   { name: "تواصل", href: "/ar/contact" },
 ]

@@ -1,13 +1,14 @@
 "use client"
 
+import { useEffect, useMemo, useState } from "react"
+
 import { Card, CardContent } from "@/components/ui/card"
+import { Skeleton } from "@/components/ui/skeleton"
+import { useRestaurant } from "@/contexts/restaurant-context"
 import { Calendar } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useRestaurant } from "@/contexts/restaurant-context"
-import { useParams } from "next/navigation"
-import { useState, useEffect } from "react"
-import { Skeleton } from "@/components/ui/skeleton"
+import { usePathname } from "next/navigation"
 import { formatDistanceToNow } from "date-fns"
 
 interface Post {
@@ -22,8 +23,18 @@ export function PostsPage() {
   const { restaurant } = useRestaurant()
   const [posts, setPosts] = useState<Post[]>([])
   const [isLoading, setIsLoading] = useState(true)
-  const params = useParams()
-  const slug = params?.slug as string
+  const pathname = usePathname()
+
+  const basePath = useMemo(() => {
+    const segments = pathname?.split("/").filter(Boolean) ?? []
+    if (segments[0] === "sites") {
+      const localeSegment = segments[1] ?? ""
+      return localeSegment ? `/${localeSegment}` : ""
+    }
+
+    const localeSegment = segments[0] ?? ""
+    return localeSegment ? `/${localeSegment}` : ""
+  }, [pathname])
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -31,7 +42,7 @@ export function PostsPage() {
 
       try {
         setIsLoading(true)
-        const response = await fetch(`/api/restaurants/${slug}/posts`)
+        const response = await fetch(`/api/restaurant/posts`)
 
         if (response.ok) {
           const data = await response.json()
@@ -47,7 +58,7 @@ export function PostsPage() {
     if (restaurant) {
       fetchPosts()
     }
-  }, [restaurant, slug])
+  }, [restaurant])
 
   if (isLoading) {
     return <PostsPageSkeleton />
@@ -60,7 +71,7 @@ export function PostsPage() {
       {posts.length > 0 ? (
         <div className="space-y-4">
           {posts.map((post) => (
-            <Link href={`/${slug}/posts/${post._id}`} key={post._id}>
+            <Link href={`${basePath}/posts/${post._id}`} key={post._id}>
               <Card className="overflow-hidden">
                 <CardContent className="p-0">
                   <div className="relative w-full h-40">

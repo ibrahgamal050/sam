@@ -1,14 +1,16 @@
 "use client"
 
+import { useEffect, useMemo, useState } from "react"
+
 import { Card, CardContent } from "@/components/ui/card"
-import { Calendar } from 'lucide-react'
+import { Skeleton } from "@/components/ui/skeleton"
+import { useRestaurant } from "@/contexts/restaurant-context"
+import { Calendar } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useRestaurant } from "@/contexts/restaurant-context"
-import { useParams } from "next/navigation"
-import { useState, useEffect } from "react"
-import { Skeleton } from "@/components/ui/skeleton"
+import { usePathname } from "next/navigation"
 import { formatDistanceToNow } from "date-fns"
+import { ar as arLocale } from "date-fns/locale"
 
 interface Post {
   _id: string
@@ -22,8 +24,18 @@ export function PostsPage() {
   const { restaurant } = useRestaurant()
   const [posts, setPosts] = useState<Post[]>([])
   const [isLoading, setIsLoading] = useState(true)
-  const params = useParams()
-  const slug = params?.slug as string
+  const pathname = usePathname()
+
+  const basePath = useMemo(() => {
+    const segments = pathname?.split("/").filter(Boolean) ?? []
+    if (segments[0] === "sites") {
+      const localeSegment = segments[1] ?? "ar"
+      return `/${localeSegment}`
+    }
+
+    const localeSegment = segments[0] ?? "ar"
+    return `/${localeSegment}`
+  }, [pathname])
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -31,7 +43,7 @@ export function PostsPage() {
 
       try {
         setIsLoading(true)
-        const response = await fetch(`/api/restaurants/${slug}/posts`)
+        const response = await fetch(`/api/restaurant/posts`)
 
         if (response.ok) {
           const data = await response.json()
@@ -47,7 +59,7 @@ export function PostsPage() {
     if (restaurant) {
       fetchPosts()
     }
-  }, [restaurant, slug])
+  }, [restaurant])
 
   if (isLoading) {
     return <PostsPageSkeleton />
@@ -60,7 +72,7 @@ export function PostsPage() {
       {posts.length > 0 ? (
         <div className="space-y-4">
           {posts.map((post) => (
-            <Link href={`/${slug}/posts/${post._id}`} key={post._id}>
+            <Link href={`${basePath}/posts/${post._id}`} key={post._id}>
               <Card className="overflow-hidden">
                 <CardContent className="p-0">
                   <div className="relative w-full h-40">
@@ -69,7 +81,9 @@ export function PostsPage() {
                   <div className="p-4">
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                       <Calendar className="h-4 w-4" />
-                      <span>{formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}</span>
+                      <span>
+                        {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true, locale: arLocale })}
+                      </span>
                     </div>
                     <h2 className="font-semibold text-lg mb-1">{post.title}</h2>
                     <p className="text-sm text-muted-foreground">
