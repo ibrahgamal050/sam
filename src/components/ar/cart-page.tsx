@@ -1,14 +1,14 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { ShoppingCart, ShoppingBag, Minus, Plus, Trash2 } from "lucide-react"
 
 import { useCart } from "@/contexts/cart-context"
 
 export function CartPageClient() {
   const { items, addItem, decreaseItem, clearCart } = useCart()
-  const [orderMessage, setOrderMessage] = useState<string | null>(null)
+  const router = useRouter()
 
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const taxes = Math.round(subtotal * 0.14)
@@ -17,9 +17,7 @@ export function CartPageClient() {
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0)
 
   const handleProceed = () => {
-    setOrderMessage(
-      "عذرًا، المطعم غير متاح لاستقبال الطلبات أونلاين حاليًا. لكن تقدر تطلب مباشرة من المطعم من خلال الخط الساخن. ☎️🍴",
-    )
+    router.push("/ar/checkout")
   }
 
   return (
@@ -127,10 +125,6 @@ export function CartPageClient() {
                   <span>{total.toFixed(0)} ج.م</span>
                 </div>
               </div>
-
-              {orderMessage && (
-                <p className="mt-4 rounded-2xl bg-red-50 px-4 py-3 text-xs text-red-600">{orderMessage}</p>
-              )}
 
               <button
                 type="button"

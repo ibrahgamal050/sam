@@ -1,6 +1,6 @@
 "use client"
 
-import { FileText, Home, Menu, MapPin, ShoppingCart } from "lucide-react"
+import { FileText, Home, Menu, MapPin, Navigation, ShoppingCart } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -11,7 +11,6 @@ const NAV_ITEMS = [
   { name: "الرئيسية", href: "/ar", icon: Home },
   { name: "المنيو", href: "/ar/menu", icon: Menu },
   { name: "الفروع", href: "/ar/branches", icon: MapPin },
-  { name: "المقالات", href: "/ar/posts", icon: FileText },
   { name: "السلة", href: "/ar/cart", icon: ShoppingCart, withBadge: true },
 ] as const
 
@@ -30,7 +29,7 @@ export function BottomNavigation() {
     <nav className="fixed inset-x-0 bottom-0 z-50 block lg:hidden" aria-label="التنقل السفلي">
       <div className="mx-auto flex max-w-md flex-col gap-2 px-4 pb-4">
         <div className="relative overflow-hidden rounded-[26px] border border-gray-200 bg-white shadow-[0_25px_45px_-30px_rgba(15,23,42,0.4)]">
-          <div className="grid grid-cols-5">
+          <div className="grid grid-cols-4">
             {NAV_ITEMS.map((item) => {
               const Icon = item.icon
               const isActive = pathname === normalizePath(item.href)

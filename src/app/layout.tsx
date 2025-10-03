@@ -3,7 +3,7 @@ import { Inter } from "next/font/google"
 import Script from "next/script"
 import "@/app/globals.css"
 import { Analytics } from "@vercel/analytics/next"
-import { MainNav } from "@/components/ar/header/main-nav"
+import { AppProviders } from "@/app/providers"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -36,10 +36,10 @@ export default function RootLayout({
   return (
     <html lang="ar" className={inter.variable} suppressHydrationWarning>
       <body className="min-h-screen bg-background font-sans antialiased" suppressHydrationWarning>
-        <Analytics />
-        <div className="">
-          {children}
-        </div>
+        <AppProviders>
+          <Analytics />
+          <div className="">{children}</div>
+        </AppProviders>
 
         {/* Google Tag Manager */}
         <Script

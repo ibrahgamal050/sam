@@ -1,83 +1,121 @@
 import { type NextRequest, NextResponse } from "next/server"
-import  dbconnect from "@/lib/db"
-import { User } from "@/models/User"
+import dbconnect from "@/lib/db"
+import { User, type GlobalRole } from "@/models/User"
 import { logger } from "@/lib/logger"
 import mongoose from "mongoose"
 import { z } from "zod"
 
 // Validation schema for registration
-const registerSchema = z.object({
+const baseSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
   password: z.string().min(6, { message: "Password must be at least 6 characters" }),
-  restaurantId: z.string().min(1, { message: "Restaurant ID is required" }),
-  role: z.enum(["admin", "manager", "staff"]).optional(),
+  type: z.enum(["customer", "manager"]).default("customer"),
 })
+
+const managerSchema = baseSchema.extend({
+  type: z.literal("manager"),
+  restaurantId: z.string().min(1, { message: "Restaurant ID is required" }),
+  role: z.enum(["admin", "manager", "staff"]).default("manager"),
+})
+
+const customerSchema = baseSchema.extend({
+  type: z.literal("customer"),
+})
+
+const registerSchema = z.union([managerSchema, customerSchema])
 
 /**
  * POST handler to register a new user
  */
 export async function POST(request: NextRequest) {
-  return NextResponse.json({ error: "🚫 التسجيل مغلق مؤقتًا. الرجاء المحاولة لاحقًا." }, { status: 403 })
+  try {
+    const body = await request.json()
 
-  // try {
-  //   const body = await request.json()
+    // Validate the request body
+    const result = registerSchema.safeParse(body)
+    if (!result.success) {
+      return NextResponse.json({ error: "Invalid input", details: result.error.format() }, { status: 400 })
+    }
 
-  //   // Validate the request body
-  //   const result = registerSchema.safeParse(body)
-  //   if (!result.success) {
-  //     return NextResponse.json({ error: "Invalid input", details: result.error.format() }, { status: 400 })
-  //   }
+    const { name, email, password, type } = result.data
 
-  //   const { name, email, password, restaurantId, role = "staff" } = result.data
+    await dbconnect()
 
-  //   // Validate restaurantId is a valid ObjectId
-  //   if (!mongoose.Types.ObjectId.isValid(restaurantId)) {
-  //     return NextResponse.json({ error: "Invalid restaurant ID format" }, { status: 400 })
-  //   }
+    const existingUser = await User.findOne({ email })
+    if (existingUser) {
+      return NextResponse.json({ error: "Email already in use" }, { status: 409 })
+    }
 
-  //   await dbconnect()
+    if (type === "customer") {
+      const user = new User({
+        name,
+        email,
+        passwordHash: password,
+        roles: ["customer" as GlobalRole],
+      })
 
-  //   // Check if user with this email already exists
-  //   const existingUser = await User.findOne({ email })
-  //   if (existingUser) {
-  //     return NextResponse.json({ error: "Email already in use" }, { status: 409 })
-  //   }
+      await user.save()
 
-  //   // Create the new user
-  //   const user = new User({
-  //     name,
-  //     email,
-  //     password, // Will be hashed by the pre-save hook
-  //     restaurantId: new mongoose.Types.ObjectId(restaurantId),
-  //     role,
-  //     isActive: true,
-  //     createdAt: new Date(),
-  //     updatedAt: new Date(),
-  //   })
+      logger.info("Customer registered", { userId: user._id, email: user.email })
 
-  //   await user.save()
+      return NextResponse.json(
+        {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          roles: user.roles,
+        },
+        { status: 201 },
+      )
+    }
 
-  //   // Log the action
-  //   logger.info("User registered", {
-  //     userId: user._id,
-  //     email: user.email,
-  //     restaurantId: user.restaurantId,
-  //   })
+    const { restaurantId, role } = result.data
 
-  //   // Return success without exposing the password
-  //   return NextResponse.json(
-  //     {
-  //       id: user._id,
-  //       name: user.name,
-  //       email: user.email,
-  //       restaurantId: user.restaurantId,
-  //       role: user.role,
-  //     },
-  //     { status: 201 },
-  //   )
-  // } catch (error: any) {
-  //   logger.error("Error registering user", { error: error.message })
-  //   return NextResponse.json({ error: "Failed to register user" }, { status: 500 })
-  // }
+    if (!mongoose.Types.ObjectId.isValid(restaurantId)) {
+      return NextResponse.json({ error: "Invalid restaurant ID format" }, { status: 400 })
+    }
+
+    const roles: GlobalRole[] = ["customer"]
+    if (role === "admin") {
+      roles.push("restaurant_manager", "admin")
+    } else if (role === "manager") {
+      roles.push("restaurant_manager")
+    }
+
+    const user = new User({
+      name,
+      email,
+      passwordHash: password,
+      roles,
+    })
+
+    user.addOrUpdateRestaurantLink({
+      restaurantId: new mongoose.Types.ObjectId(restaurantId),
+      role,
+    })
+
+    await user.save()
+
+    logger.info("Manager registered", {
+      userId: user._id,
+      email: user.email,
+      restaurantId,
+      role,
+    })
+
+    return NextResponse.json(
+      {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        roles: user.roles,
+        restaurants: user.restaurants,
+      },
+      { status: 201 },
+    )
+  } catch (error: any) {
+    logger.error("Error registering user", { error: error.message })
+    return NextResponse.json({ error: "Failed to register user" }, { status: 500 })
+  }
 }

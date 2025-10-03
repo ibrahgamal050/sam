@@ -21,7 +21,10 @@ export const authOptions: NextAuthOptions = {
           await dbConnect()
 
           // Find the user by email
-          const user = await User.findOne({ email: credentials.email, isActive: true })
+          const user = await User.findOne({
+            email: credentials.email,
+            $or: [{ isActive: { $exists: false } }, { isActive: true }],
+          })
 
           // If no user found or password doesn't match
           if (!user || !(await user.comparePassword(credentials.password))) {
@@ -29,12 +32,15 @@ export const authOptions: NextAuthOptions = {
           }
 
           // Return the user object
+          const primaryRestaurant = user.restaurants?.[0]?.restaurantId?.toString?.()
+          const primaryRole = user.roles?.[0] ?? "customer"
+
           return {
             id: user._id.toString(),
             name: user.name,
             email: user.email,
-            restaurantId: user.restaurantId.toString(),
-            role: user.role,
+            restaurantId: primaryRestaurant,
+            role: primaryRole,
           }
         } catch (error) {
           console.error("Auth error:", error)
@@ -51,16 +57,16 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id
-        token.restaurantId = (user as any).restaurantId
-        token.role = (user as any).role
+        token.restaurantId = (user as any).restaurantId ?? null
+        token.role = (user as any).role ?? "customer"
       }
       return token
     },
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string
-        session.user.restaurantId = token.restaurantId as string
-        session.user.role = token.role as string
+        session.user.restaurantId = (token.restaurantId as string | null) ?? undefined
+        session.user.role = (token.role as string) ?? "customer"
       }
       return session
     },
@@ -81,8 +87,8 @@ declare module "next-auth" {
       name?: string | null
       email?: string | null
       image?: string | null
-      restaurantId: string
-      role: string
+      restaurantId?: string
+      role?: string
     }
   }
 }
@@ -90,7 +96,7 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   interface JWT {
     id: string
-    restaurantId: string
-    role: string
+    restaurantId?: string | null
+    role?: string
   }
 }

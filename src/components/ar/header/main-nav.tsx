@@ -5,6 +5,8 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 
+import CustomerAddressPage from "@/components/ar/address/address"
+import { MobileProfileMenu } from "@/components/ar/header/mobile-profile-menu"
 import { cn } from "@/lib/utils"
 
 interface NavItem {
@@ -37,15 +39,11 @@ export function MainNav({ logo, items = DEFAULT_ITEMS }: MainNavProps) {
       dir="rtl"
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-       <button
-            type="button"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 transition hover:border-[#6c5ce7]/40 hover:text-[#6c5ce7]"
-            aria-label="الملف الشخصي"
-          >
-            <User className="h-4 w-4" />
-          </button>
+       
 
-        <nav className="hidden items-center gap-6 text-sm font-medium text-gray-600 md:flex">
+        <div className="hidden items-center gap-4 md:flex">
+          <CustomerAddressPage />
+          <nav className="flex items-center gap-6 text-sm font-medium text-gray-600">
           {items.map((item) => {
             const isActive = pathname === item.href
             return (
@@ -64,7 +62,8 @@ export function MainNav({ logo, items = DEFAULT_ITEMS }: MainNavProps) {
               </Link>
             )
           })}
-        </nav>
+          </nav>
+        </div>
 
         <button
           type="button"
@@ -74,8 +73,9 @@ export function MainNav({ logo, items = DEFAULT_ITEMS }: MainNavProps) {
           <User className="h-5 w-5" />
         </button>
 
-        <div className="flex items-center gap-2 md:hidden">
-         
+        <div className="flex flex-1 items-center gap-3 md:hidden">
+          <CustomerAddressPage />
+          <MobileProfileMenu />
           <button
             type="button"
             onClick={() => setOpen((prev) => !prev)}

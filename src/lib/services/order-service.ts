@@ -59,3 +59,22 @@ export async function updateOrderStatus(id: string, status: IOrder['status']) {
   const updated = await Order.findByIdAndUpdate(id, { status }, { new: true }).lean()
   return updated as unknown as IOrder | null
 }
+
+export async function getOrdersForCustomer(userId: string, restaurantId?: string): Promise<IOrder[]> {
+  await dbConnect()
+
+  if (!mongoose.isValidObjectId(userId)) {
+    return []
+  }
+
+  const filter: Record<string, any> = {
+    userId: new mongoose.Types.ObjectId(userId),
+  }
+
+  if (restaurantId && mongoose.isValidObjectId(restaurantId)) {
+    filter.restaurantId = new mongoose.Types.ObjectId(restaurantId)
+  }
+
+  const orders = await Order.find(filter).sort({ createdAt: -1 }).lean()
+  return orders as unknown as IOrder[]
+}

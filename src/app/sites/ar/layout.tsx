@@ -1,7 +1,6 @@
 import type React from "react"
 import { Inter, Amiri } from "next/font/google"
 import "@/app/globals.css"
-import { RestaurantProvider } from "@/contexts/restaurant-context"
 import { MobileLayout } from "@/components/ar/mobile-layout"
 import { Footer } from "@/components/ar/footer"
 import { CartProvider } from "@/contexts/cart-context"
@@ -17,18 +16,16 @@ export default async function RestaurantLayout({ children }: { children: React.R
   }
 
   return (
-    <RestaurantProvider>
-      <CartProvider>
-        <div className="min-h-screen flex flex-col" dir="rtl">
-          <div className="block lg:hidden">
-            <MobileLayout restaurant={typedRestaurant}>{children}</MobileLayout>
-          </div>
-          <div className="hidden lg:block">
-            {children}
-          </div>
-          <Footer />
+    <CartProvider>
+      <div className="min-h-screen flex flex-col" dir="rtl">
+        <div className="block lg:hidden">
+          <MobileLayout restaurant={typedRestaurant}>{children}</MobileLayout>
         </div>
-      </CartProvider>
-    </RestaurantProvider>
+        <div className="hidden lg:block">
+          {children}
+        </div>
+        <Footer />
+      </div>
+    </CartProvider>
   )
 }
