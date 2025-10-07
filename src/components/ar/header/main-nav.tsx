@@ -35,36 +35,39 @@ export function MainNav({ logo, items = DEFAULT_ITEMS }: MainNavProps) {
   return (
     <header
       data-fixed="true"
-      className="sticky top-0 z-50 border-b border-gray-200/80 bg-white/95 shadow-[0_10px_30px_-25px_rgba(15,23,42,0.45)] backdrop-blur"
+      className="sticky top-0 z-50 border-b border-gray-200/80 bg-white/95 shadow-[0_10px_30px_-25px_rgba(15,23,42,0.45)] backdrop-blur relative"
       dir="rtl"
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-       
+        {/* الشعار (اختياري) */}
+        {logo && <div className="flex items-center">{logo}</div>}
 
+        {/* القائمة في الديسكتوب */}
         <div className="hidden items-center gap-4 md:flex">
           <CustomerAddressPage />
           <nav className="flex items-center gap-6 text-sm font-medium text-gray-600">
-          {items.map((item) => {
-            const isActive = pathname === item.href
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "rounded-full px-3 py-2 transition",
-                  isActive
-                    ? "bg-[#6c5ce7]/10 text-[#6c5ce7] font-semibold"
-                    : "hover:bg-[#f7f9fc] hover:text-[#6c5ce7]"
-                )}
-                aria-current={isActive ? "page" : undefined}
-              >
-                {item.name}
-              </Link>
-            )
-          })}
+            {items.map((item) => {
+              const isActive = pathname === item.href
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "rounded-full px-3 py-2 transition",
+                    isActive
+                      ? "bg-[#6c5ce7]/10 text-[#6c5ce7] font-semibold"
+                      : "hover:bg-[#f7f9fc] hover:text-[#6c5ce7]"
+                  )}
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  {item.name}
+                </Link>
+              )
+            })}
           </nav>
         </div>
 
+        {/* زر الملف الشخصي (ديسكتوب) */}
         <button
           type="button"
           className="hidden h-10 w-10 items-center justify-center rounded-2xl border border-gray-200 bg-white text-gray-600 transition hover:border-[#6c5ce7]/40 hover:text-[#6c5ce7] md:inline-flex"
@@ -73,6 +76,7 @@ export function MainNav({ logo, items = DEFAULT_ITEMS }: MainNavProps) {
           <User className="h-5 w-5" />
         </button>
 
+        {/* أدوات الجوال */}
         <div className="flex flex-1 items-center gap-3 md:hidden">
           <CustomerAddressPage />
           <MobileProfileMenu />
@@ -89,11 +93,24 @@ export function MainNav({ logo, items = DEFAULT_ITEMS }: MainNavProps) {
         </div>
       </div>
 
+      {/* خلفية تغطي الصفحة لما المنيو مفتوحة */}
+      {open && (
+        <button
+          aria-hidden
+          onClick={() => setOpen(false)}
+          className="fixed inset-0 bg-black/30 md:hidden"
+          style={{ WebkitTapHighlightColor: "transparent" }}
+        />
+      )}
+
+      {/* منيو الجوال */}
       <div
         id="mobile-menu"
         className={cn(
-          "border-t border-gray-200 bg-white transition-[max-height,opacity] duration-300 md:hidden",
-          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          "absolute top-full inset-x-0 border-t border-gray-200 bg-white transition-[max-height,opacity] duration-300 md:hidden",
+          open
+            ? "max-h-96 opacity-100 pointer-events-auto"
+            : "max-h-0 opacity-0 overflow-hidden pointer-events-none"
         )}
         aria-hidden={!open}
       >
