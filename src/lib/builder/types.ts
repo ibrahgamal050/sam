@@ -451,6 +451,8 @@ export interface ButtonsElement extends ElementBase {
       variant?: ButtonVariant
       iconLeft?: string
       iconRight?: string
+      style?: Record<string, string>
+      hoverStyle?: Record<string, string>
     }>
   }
 }

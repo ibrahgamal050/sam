@@ -19,31 +19,43 @@
      [1m✓[22m parallelServerBuildTraces
 
  [32m[1m✓[22m[39m Starting...
- [32m[1m✓[22m[39m Ready in 4.4s
- [32m[1m✓[22m[39m Compiled /middleware in 439ms (159 modules)
+ [32m[1m✓[22m[39m Ready in 5.9s
+ [32m[1m✓[22m[39m Compiled /middleware in 370ms (159 modules)
  [37m[1m○[22m[39m Compiling /api/subdomains ...
- [32m[1m✓[22m[39m Compiled /api/subdomains in 825ms (346 modules)
- GET /api/subdomains [32m200[39m in 3300ms
- [37m[1m○[22m[39m Compiling /[lng] ...
- [32m[1m✓[22m[39m Compiled /[lng] in 1720ms (1063 modules)
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 725ms (346 modules)
+ GET /api/subdomains [32m200[39m in 3203ms
  [37m[1m○[22m[39m Compiling /[lng]/[...slug] ...
- [32m[1m✓[22m[39m Compiled /[lng]/[...slug] in 2.9s (1079 modules)
- GET /ar [32m200[39m in 1267ms
+ [32m[1m✓[22m[39m Compiled /[lng]/[...slug] in 2.4s (1062 modules)
+ GET /ar/about [32m200[39m in 7042ms
+ GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 1894ms
  [37m[1m○[22m[39m Compiling /api/restaurant ...
  [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
 Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
 
 Import trace for requested module:
 ./src/app/api/restaurant/route.ts
- GET /api/auth/session [32m200[39m in 1536ms
- GET /api/auth/session [32m200[39m in 1540ms
- GET /api/auth/session [32m200[39m in 1549ms
- GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 1873ms
+ GET /api/auth/session [32m200[39m in 3386ms
+ GET /api/auth/session [32m200[39m in 3386ms
+ GET /api/auth/session [32m200[39m in 3401ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 3703ms
  [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
 Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
 
 Import trace for requested module:
 ./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ POST /api/zones/check-delivery [32m200[39m in 1440ms
+ POST /api/zones/check-delivery [32m200[39m in 1446ms
+ POST /api/zones/check-delivery [32m200[39m in 1450ms
+ POST /api/zones/check-delivery [32m200[39m in 118ms
+ POST /api/zones/check-delivery [32m200[39m in 144ms
+ POST /api/zones/check-delivery [32m200[39m in 147ms
+ POST /api/zones/check-delivery [32m200[39m in 469ms
+ POST /api/zones/check-delivery [32m200[39m in 2347ms
  [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
     at useCart (src/contexts/cart-context.tsx:377:19)
     at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
@@ -54,56 +66,88 @@ Import trace for requested module:
  [90m 378 |[39m   [36mreturn[39m ctx
  [90m 379 |[39m }
  [90m 380 |[39m[0m {
-  digest: [32m'1245788135'[39m
+  digest: [32m'1746987863'[39m
 }
- [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
-Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
-
-Import trace for requested module:
-./src/app/api/restaurant/route.ts
- POST /api/zones/check-delivery [32m200[39m in 1311ms
- POST /api/zones/check-delivery [32m200[39m in 1313ms
- POST /api/zones/check-delivery [32m200[39m in 1315ms
- POST /api/zones/check-delivery [32m200[39m in 1317ms
- POST /api/zones/check-delivery [32m200[39m in 1325ms
- POST /api/zones/check-delivery [32m200[39m in 130ms
- POST /api/zones/check-delivery [32m200[39m in 131ms
- POST /api/zones/check-delivery [32m200[39m in 132ms
- GET /favicon.ico [31m500[39m in 3016ms
- GET /ar/about [32m200[39m in 1369ms
- GET /api/auth/session [32m200[39m in 94ms
- GET /api/auth/session [32m200[39m in 1079ms
- GET /api/auth/session [32m200[39m in 1096ms
- GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 1280ms
- POST /api/zones/check-delivery [32m200[39m in 176ms
- POST /api/zones/check-delivery [32m200[39m in 182ms
- POST /api/zones/check-delivery [32m200[39m in 187ms
- POST /api/zones/check-delivery [32m200[39m in 121ms
- POST /api/zones/check-delivery [32m200[39m in 134ms
- POST /api/zones/check-delivery [32m200[39m in 137ms
- [31m[1m⨯[22m[39m [Error: Objects are not valid as a React child (found: object with keys {en, ar}). If you meant to render a collection of children, use an array instead.] {
-  digest: [32m'4210933539'[39m
+ GET /ar [32m200[39m in 7002ms
+ GET /ar [32m200[39m in 1459ms
+ GET /ar [32m200[39m in 1776ms
+ GET /favicon.ico [31m500[39m in 7961ms
+ GET /api/auth/session [32m200[39m in 82ms
+ GET /api/auth/session [32m200[39m in 140ms
+ POST /api/zones/check-delivery [32m200[39m in 219ms
+ POST /api/zones/check-delivery [32m200[39m in 224ms
+ POST /api/zones/check-delivery [32m200[39m in 228ms
+ POST /api/zones/check-delivery [32m200[39m in 231ms
+ POST /api/zones/check-delivery [32m200[39m in 147ms
+ POST /api/zones/check-delivery [32m200[39m in 141ms
+ GET /api/auth/session [32m200[39m in 50ms
+ GET /api/auth/session [32m200[39m in 112ms
+ POST /api/zones/check-delivery [32m200[39m in 354ms
+ POST /api/zones/check-delivery [32m200[39m in 359ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'1746987863'[39m
 }
- POST /api/zones/check-delivery [32m200[39m in 1238ms
- POST /api/zones/check-delivery [32m200[39m in 1238ms
- GET /favicon.ico [31m500[39m in 2207ms
- [31m[1m⨯[22m[39m [Error: Objects are not valid as a React child (found: object with keys {en, ar}). If you meant to render a collection of children, use an array instead.] {
-  digest: [32m'2291626040'[39m
+ GET /favicon.ico [31m500[39m in 1357ms
+ GET /ar [32m200[39m in 864ms
+ GET /api/auth/session [32m200[39m in 41ms
+ GET /api/auth/session [32m200[39m in 72ms
+ GET /api/auth/session [32m200[39m in 73ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 188ms
+ POST /api/zones/check-delivery [32m200[39m in 109ms
+ POST /api/zones/check-delivery [32m200[39m in 118ms
+ POST /api/zones/check-delivery [32m200[39m in 112ms
+ POST /api/zones/check-delivery [32m200[39m in 126ms
+ POST /api/zones/check-delivery [32m200[39m in 125ms
+ POST /api/zones/check-delivery [32m200[39m in 114ms
+ POST /api/zones/check-delivery [32m200[39m in 124ms
+ POST /api/zones/check-delivery [32m200[39m in 126ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'1746987863'[39m
 }
- [31m[1m⨯[22m[39m [Error: Objects are not valid as a React child (found: object with keys {en, ar}). If you meant to render a collection of children, use an array instead.] {
-  digest: [32m'2291626040'[39m
+ GET /favicon.ico [31m500[39m in 1099ms
+ GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 811ms
+ GET /ar [32m200[39m in 1886ms
+ GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 1142ms
+ GET /api/auth/session [32m200[39m in 42ms
+ GET /api/auth/session [32m200[39m in 84ms
+ GET /api/auth/session [32m200[39m in 89ms
+ POST /api/zones/check-delivery [32m200[39m in 135ms
+ POST /api/zones/check-delivery [32m200[39m in 136ms
+ POST /api/zones/check-delivery [32m200[39m in 138ms
+ POST /api/zones/check-delivery [32m200[39m in 139ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 357ms
+ POST /api/zones/check-delivery [32m200[39m in 95ms
+ POST /api/zones/check-delivery [32m200[39m in 99ms
+ POST /api/zones/check-delivery [32m200[39m in 100ms
+ POST /api/zones/check-delivery [32m200[39m in 102ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'1746987863'[39m
 }
- GET / [31m500[39m in 1277ms
-[TypeError: controller[kState].transformAlgorithm is not a function]
- [31m[1m⨯[22m[39m [Error: Objects are not valid as a React child (found: object with keys {en, ar}). If you meant to render a collection of children, use an array instead.] {
-  digest: [32m'2291626040'[39m
-}
- [31m[1m⨯[22m[39m [Error: Objects are not valid as a React child (found: object with keys {en, ar}). If you meant to render a collection of children, use an array instead.] {
-  digest: [32m'2291626040'[39m
-}
- GET / [31m500[39m in 1584ms
- GET /placeholder.svg?height=200&width=300 [33m404[39m in 669ms
- [31m[1m⨯[22m[39m [Error: Objects are not valid as a React child (found: object with keys {en, ar}). If you meant to render a collection of children, use an array instead.] {
-  digest: [32m'4210933539'[39m
-}
- GET /favicon.ico [31m500[39m in 1895ms
+ GET /favicon.ico [31m500[39m in 1384ms

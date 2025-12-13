@@ -153,7 +153,9 @@ export const renderButtonElement = (
   const variant = element.variant ?? "primary"
   const variantClass = buttonVariantClasses[variant]
   const variantStyle = resolveButtonVariantStyle(variant, elementContext.theme?.palette)
-  const style: CSSProperties = { ...(themeVars ?? {}), ...layoutResult.style, ...variantStyle }
+  const customStyle = (element as any).style as CSSProperties | undefined
+  const hoverStyle = (element as any).hoverStyle as CSSProperties | undefined
+  const style: CSSProperties = { ...(themeVars ?? {}), ...layoutResult.style, ...variantStyle, ...(customStyle ?? {}) }
   const isIconOnly = variant === "icon" || variant === "fab"
   const isLoading = element.state === "loading" || element.variant === "loading"
   const isDisabled = element.state === "disabled" || element.variant === "disabled"
@@ -170,6 +172,16 @@ export const renderButtonElement = (
       {layoutResult.css ? (
         <style data-element-style={element.id} dangerouslySetInnerHTML={{ __html: layoutResult.css }} />
       ) : null}
+      {hoverStyle ? (
+        <style
+          data-element-hover-style={element.id}
+          dangerouslySetInnerHTML={{
+            __html: `[data-element-id="${element.id}"]:hover{${Object.entries(hoverStyle)
+              .map(([k, v]) => `${k.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)}:${v}`)
+              .join(";")}}`,
+          }}
+        />
+      ) : null}
       <a
         href={resolvedHref}
         className={cn(
@@ -180,6 +192,7 @@ export const renderButtonElement = (
           variant === "link" ? "min-w-0 px-0 py-0" : "py-3",
           isLoading || isDisabled ? "pointer-events-none opacity-70" : null,
           variantClass,
+          hoverStyle ? "has-[data-custom-hover]:[] group" : null,
           elementLayoutClasses(element.layout)
         )}
         style={style}

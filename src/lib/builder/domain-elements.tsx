@@ -208,6 +208,8 @@ export const renderButtonsElement = (element: ButtonsElement, options: BuilderRe
     variant: item.variant ?? "primary",
     iconLeft: item.iconLeft,
     iconRight: item.iconRight,
+    style: item.style,
+    hoverStyle: item.hoverStyle,
   }))
   const group: CtaGroupElement = {
     ...element,
