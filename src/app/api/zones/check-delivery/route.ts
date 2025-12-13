@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 
 import dbConnect from "@/lib/db"
-import DeliveryZoneLegacy from "@/models/DeliveryZoneLegacy"
+import DeliveryZoneLegacy from "@/models/delivery-zone-legacy"
 import { Types } from "mongoose"
 import { normalizeHost } from "@/lib/host-utils"
 import { getRestaurantByHost } from "@/lib/services/restaurant-service"

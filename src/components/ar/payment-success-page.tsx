@@ -15,7 +15,7 @@ export function PaymentSuccessClient() {
     async function markPaid() {
       try {
         if (orderId && orderId !== '—') {
-          await fetch(`/api/orders/${orderId}/status`, { method: 'PATCH' })
+          await fetch(`/api/v0/orders/${orderId}/status`, { method: 'PATCH' })
           clearCart()
         }
       } catch (e) {

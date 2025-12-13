@@ -43,6 +43,8 @@ type DomainCacheData = {
 let domainCache: DomainCacheData | null = null
 let lastFetchTime = 0
 const CACHE_DURATION = 5 * 60 * 1000 // 5 minutes
+const SUPPORTED_LOCALES = new Set(["ar", "en"])
+const DEFAULT_LOCALE = process.env.NEXT_PUBLIC_DEFAULT_LOCALE?.trim().toLowerCase() || "ar"
 
 const splitHostAndPort = (hostHeader: string) => {
   const [hostPart, portPart] = hostHeader.split(":")
@@ -185,6 +187,26 @@ const withProtocol = (target: string, fallbackProtocol: string) => {
   return `${fallbackProtocol}//${target}`
 }
 
+const normalizePath = (value: string): string => {
+  if (!value || value === "/") return "/"
+  return value.startsWith("/") ? value : `/${value}`
+}
+
+const ensureLocalePath = (value: string): string => {
+  const normalized = normalizePath(value)
+  if (normalized === "/") {
+    return `/${DEFAULT_LOCALE}`
+  }
+
+  const segments = normalized.split("/").filter(Boolean)
+  const firstSegment = segments[0]?.toLowerCase()
+  if (firstSegment && SUPPORTED_LOCALES.has(firstSegment)) {
+    return normalized
+  }
+
+  return `/${DEFAULT_LOCALE}${normalized}`
+}
+
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl
   const { pathname, search } = url
@@ -260,12 +282,9 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(redirectUrl, 301)
     }
 
-    if (pathname !== "/") {
-      const slug = pathname.startsWith("/") ? pathname : `/${pathname}`
-      return NextResponse.rewrite(new URL(`/sites${slug}`, request.url))
-    }
-
-    return NextResponse.rewrite(new URL(`/sites`, request.url))
+    const rewriteUrl = request.nextUrl.clone()
+    rewriteUrl.pathname = ensureLocalePath(pathname)
+    return NextResponse.rewrite(rewriteUrl)
   }
 
   console.warn("❌ Domain not recognized:", hostWithoutPort)

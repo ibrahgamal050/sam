@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -22,6 +22,7 @@ import { useRestaurant } from "@/contexts/restaurant-context"
 import { ZonesAPI } from "@/lib/api/zones"
 import type { DeliveryZone } from "@/types/delivery-zones"
 import { cn } from "@/lib/utils"
+import { extractPreferredBranchIdsFromZones, findNearestBranch, normalizeBranchId, toBranchSummary } from "@/lib/branch-utils"
 
 import { Bookmark, CheckCircle2, MapPin, Navigation, Pencil, Plus, X } from "lucide-react"
 type DeliveryState = {
@@ -40,6 +41,7 @@ const BranchItem = ({
   city,
   isMain,
   phone,
+  active,
   onClick,
 }: {
   id: string
@@ -48,6 +50,7 @@ const BranchItem = ({
   city?: string
   isMain?: boolean
   phone?: string
+  active?: boolean
   onClick?: () => void
 }) => (
   <div
@@ -61,6 +64,7 @@ const BranchItem = ({
         <div className="flex items-center gap-2">
           <p className="font-medium text-gray-900">{name}</p>
           {isMain && <Badge className="bg-[#6c5ce7] text-white">الفرع الرئيسي</Badge>}
+          {active && <CheckCircle2 className="h-4 w-4 text-[#6c5ce7]" />}
         </div>
         <p className="text-sm text-gray-700">{address}</p>
         {(city || phone) && (
@@ -75,73 +79,121 @@ const BranchItem = ({
 
 
 export default function AddressSheet({ className }: Props) {
-  const [open, setOpen] = useState(false)
-  const [tab, setTab] = useState<"delivery" | "pickup">("delivery")
-  const [searchQuery, setSearchQuery] = useState("")
-  const [isCheckingDelivery, setIsCheckingDelivery] = useState(false)
-  const [deliveryInfo, setDeliveryInfo] = useState<DeliveryState>(null)
-
   const { toast } = useToast()
   const { restaurant } = useRestaurant()
-  const restaurantId = restaurant?._id ?? ""
-
   const {
     addresses,
     selectedAddress,
     selectAddress,
     addAddress,
     isLoading: addressesLoading,
+    fulfillmentType,
+    setFulfillmentType,
+    pickupBranch,
+    setPickupBranch,
+    deliveryBranch,
+    setDeliveryBranch,
   } = useDeliveryAddress()
 
+  const restaurantId = restaurant?._id ?? ""
+  const branches = useMemo(() => restaurant?.branches ?? [], [restaurant])
+
+  const [open, setOpen] = useState(false)
+  const [tab, setTab] = useState<"delivery" | "pickup">(fulfillmentType)
+  const [searchQuery, setSearchQuery] = useState("")
+  const [isCheckingDelivery, setIsCheckingDelivery] = useState(false)
+  const [deliveryInfo, setDeliveryInfo] = useState<DeliveryState>(null)
+
+  useEffect(() => {
+    setTab(fulfillmentType)
+  }, [fulfillmentType])
+
+  const syncFulfillmentType = useCallback(
+    (value: "delivery" | "pickup") => {
+      setTab(value)
+      setFulfillmentType(value)
+    },
+    [setFulfillmentType],
+  )
+
   const title = useMemo(() => {
+    if (tab === "pickup") {
+      if (pickupBranch) return pickupBranch.name
+      return "حدد فرع الاستلام"
+    }
     if (!selectedAddress) return "حدد عنوان التوصيل"
     return selectedAddress.name
-  }, [selectedAddress])
+  }, [pickupBranch, selectedAddress, tab])
 
   const subtitle = useMemo(() => {
+    if (tab === "pickup") {
+      if (pickupBranch) {
+        const details = [pickupBranch.address, pickupBranch.city].filter(Boolean).join("، ")
+        return details || "سيتم تجهيز الطلب من الفرع المحدد"
+      }
+      return "اضغط للاختيار"
+    }
     if (!selectedAddress) return "اضغط للاختيار"
     return `${selectedAddress.address}${selectedAddress.city ? `، ${selectedAddress.city}` : ""}`
-  }, [selectedAddress])
-  const handlePickupSelect = (branchId: string) => {
-  const b: any = branches.find((x: any) => x._id === branchId)
-  if (!b) return
-  toast({
-    title: "تم اختيار فرع للاستلام",
-    description: `${b?.name?.ar || b?.name?.en || "فرع"} — ${b?.location?.address?.ar || b?.location?.address?.en || ""}`,
-  })
-  setOpen(false)
-  // لو عندك سياق خاص لاختيار فرع الاستلام، نادِه هنا (مثلاً: setPickupBranch(b))
-}
+  }, [pickupBranch, selectedAddress, tab])
 
+  const determineDeliveryBranch = useCallback(
+    (lat: number, lng: number, zones: DeliveryZone[] = []) => {
+      if (!branches.length || !Number.isFinite(lat) || !Number.isFinite(lng)) {
+        return null
+      }
 
-  // فلترة سريعة زي ما في الصورة (بحث أعلى القائمة)
+      const preferredIds = extractPreferredBranchIdsFromZones(zones as any)
+      const branchFromPreferred =
+        preferredIds.size > 0
+          ? findNearestBranch(branches, lat, lng, { preferredBranchIds: preferredIds })
+          : null
+
+      return branchFromPreferred ?? findNearestBranch(branches, lat, lng) ?? null
+    },
+    [branches],
+  )
+
   const filteredAddresses = useMemo(() => {
     const q = searchQuery.trim().toLowerCase()
     if (!q) return addresses
-    return addresses.filter((a) =>
-      `${a.name} ${a.address} ${a.city}`.toLowerCase().includes(q),
-    )
+    return addresses.filter((a) => `${a.name} ${a.address} ${a.city}`.toLowerCase().includes(q))
   }, [addresses, searchQuery])
-// فوق جنب باقي useMemo
-const branches = useMemo(() => restaurant?.branches ?? [], [restaurant])
 
-const filteredBranches = useMemo(() => {
-  const q = searchQuery.trim().toLowerCase()
-  if (!q) return branches
-  return branches.filter((b: any) => {
-    const name = (b?.name?.ar || b?.name?.en || "").toLowerCase()
-    const addr = (b?.location?.address?.ar || b?.location?.address?.en || "").toLowerCase()
-    const city = (b?.location?.city || "").toLowerCase()
-    return `${name} ${addr} ${city}`.includes(q)
-  })
-}, [branches, searchQuery])
+  const filteredBranches = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase()
+    if (!q) return branches
+    return branches.filter((b: any) => {
+      const name = (b?.name?.ar || b?.name?.en || "").toLowerCase()
+      const addr = (b?.location?.address?.ar || b?.location?.address?.en || "").toLowerCase()
+      const city = (b?.location?.city || "").toLowerCase()
+      return `${name} ${addr} ${city}`.includes(q)
+    })
+  }, [branches, searchQuery])
+
+  const handlePickupSelect = useCallback(
+    (branchId: string) => {
+      const branch = branches.find((x: any) => normalizeBranchId(x?._id) === branchId)
+      if (!branch) return
+      const summary = toBranchSummary(branch)
+      setPickupBranch(summary)
+      syncFulfillmentType("pickup")
+      toast({
+        title: "تم اختيار فرع للاستلام",
+        description: `${summary.name}${summary.address ? ` — ${summary.address}` : ""}`,
+      })
+      setOpen(false)
+    },
+    [branches, setPickupBranch, syncFulfillmentType, toast],
+  )
 
   // التحقق من التوصيل (نفس منطقك لكن مختصر وآمن)
   const checkDeliveryAvailability = useCallback(
     async (lat: number, lng: number) => {
       if (!restaurantId) {
         setDeliveryInfo(null)
-        return false
+        setDeliveryBranch(null)
+        return null
       }
       try {
         setIsCheckingDelivery(true)
@@ -151,21 +203,34 @@ const filteredBranches = useMemo(() => {
           fee: result.lowestDeliveryFee,
           zones: result.zones,
         })
-        return result.isDeliveryAvailable
+        if (result.isDeliveryAvailable) {
+          const assigned = determineDeliveryBranch(lat, lng, result.zones ?? [])
+          setDeliveryBranch(assigned)
+        } else {
+          setDeliveryBranch(null)
+        }
+        return result
       } catch (e) {
         setDeliveryInfo({ isAvailable: false, fee: null, zones: [] })
+        setDeliveryBranch(null)
         toast({
           variant: "destructive",
           title: "تعذر تحديد نطاق التوصيل",
           description: "حدث خطأ أثناء التحقق من توفر التوصيل لهذا العنوان.",
         })
-        return false
+        return null
       } finally {
         setIsCheckingDelivery(false)
       }
     },
-    [restaurantId, toast],
+    [determineDeliveryBranch, restaurantId, setDeliveryBranch, toast],
   )
+
+  useEffect(() => {
+    if (fulfillmentType === "delivery" && selectedAddress) {
+      void checkDeliveryAvailability(selectedAddress.lat, selectedAddress.lng)
+    }
+  }, [checkDeliveryAvailability, fulfillmentType, selectedAddress?.id, selectedAddress?.lat, selectedAddress?.lng])
 
   // اختيار عنوان من القائمة
   const handleSelect = async (addressId: string) => {
@@ -173,8 +238,8 @@ const filteredBranches = useMemo(() => {
     if (!a) return
     // في تبويب الاستلام الذاتي، مش محتاجين تحقق التوصيل
     if (tab === "delivery") {
-      const ok = await checkDeliveryAvailability(a.lat, a.lng)
-      if (!ok) {
+      const result = await checkDeliveryAvailability(a.lat, a.lng)
+      if (!result || !result.isDeliveryAvailable) {
         toast({
           variant: "destructive",
           title: "خارج نطاق التوصيل",
@@ -182,7 +247,15 @@ const filteredBranches = useMemo(() => {
         })
         return
       }
+      const branch = determineDeliveryBranch(a.lat, a.lng, result.zones ?? [])
+      if (branch) {
+        setDeliveryBranch(branch)
+      }
+      syncFulfillmentType("delivery")
+    } else {
+      syncFulfillmentType("pickup")
     }
+
     selectAddress(addressId)
     toast({ title: "تم اختيار العنوان", description: `${a.address}، ${a.city}` })
     setOpen(false)
@@ -282,7 +355,7 @@ const filteredBranches = useMemo(() => {
           </div>
 
           {/* شريط تبويب مثل (التوصيل / الاستلام الذاتي) */}
-          <Tabs value={tab} onValueChange={(v) => setTab(v as any)} className="w-full">
+          <Tabs value={tab} onValueChange={(v) => syncFulfillmentType(v as "delivery" | "pickup")} className="w-full">
             <TabsList className="grid w-full grid-cols-2 rounded-full bg-gray-100 p-1">
               <TabsTrigger value="delivery" className="rounded-full data-[state=active]:bg-white">
                 التوصيل
@@ -338,22 +411,40 @@ const filteredBranches = useMemo(() => {
           </div>
         )}
 
-        {filteredBranches.map((b: any) => (
-          <BranchItem
-            key={b._id}
-            id={b._id}
-            name={b?.name?.ar || b?.name?.en || "فرع بدون اسم"}
-            address={b?.location?.address?.ar || b?.location?.address?.en || "بدون عنوان"}
-            city={b?.location?.city}
-            isMain={b?.isMainBranch}
-            phone={b?.phone}
-            onClick={() => handlePickupSelect(b._id)}
-          />
-        ))}
+        {filteredBranches.map((b: any) => {
+          const branchId = normalizeBranchId(b?._id)
+          return (
+            <BranchItem
+              key={branchId}
+              id={branchId}
+              name={b?.name?.ar || b?.name?.en || "فرع بدون اسم"}
+              address={b?.location?.address?.ar || b?.location?.address?.en || "بدون عنوان"}
+              city={b?.location?.city}
+              isMain={b?.isMainBranch}
+              phone={b?.phone}
+              active={pickupBranch?.id === branchId}
+              onClick={() => handlePickupSelect(branchId)}
+            />
+          )
+        })}
+        {tab === "pickup" && pickupBranch && (
+          <div className="px-1 py-4 text-xs text-gray-500">
+            الفرع المختار: <span className="font-semibold text-gray-700">{pickupBranch.name}</span>
+            {pickupBranch.address && <span> — {pickupBranch.address}</span>}
+          </div>
+        )}
       </>
     )}
   </div>
 </ScrollArea>
+
+        {tab === "delivery" && deliveryBranch && (
+          <div className="mb-4 rounded-2xl bg-[#f7f9fc] px-4 py-3 text-xs text-gray-600">
+            سيتم تجهيز طلبات التوصيل من فرع
+            <span className="font-semibold text-gray-900"> {deliveryBranch.name}</span>
+            {deliveryBranch.address ? ` — ${deliveryBranch.address}` : ""}
+          </div>
+        )}
 
         <Separator className="my-4" />
 

@@ -31,7 +31,9 @@ export interface IMenuItem {
   sizes?: ISize[]
   weight?: string
   quantity?: number
-  isNew?: boolean 
+  isNew?: boolean
+  variants?: IMenuItemVariant[]
+  extrasGroups?: IMenuItemExtrasGroup[]
 }
 
 export interface ICategory {
@@ -66,3 +68,34 @@ export interface IMenu {
 
 // Add this type for category refs
 export type CategoryRef = HTMLElement | null
+
+export interface IMenuItemVariant {
+  _id?: Types.ObjectId
+  name: {
+    en?: string
+    ar?: string
+  }
+  price?: number
+  isDefault?: boolean
+}
+
+export interface IMenuItemExtraOption {
+  _id?: Types.ObjectId
+  name: {
+    en?: string
+    ar?: string
+  }
+  price?: number
+  maxQty?: number
+}
+
+export interface IMenuItemExtrasGroup {
+  _id?: Types.ObjectId
+  name: {
+    en?: string
+    ar?: string
+  }
+  isRequired?: boolean
+  maxQty?: number
+  extras: IMenuItemExtraOption[]
+}

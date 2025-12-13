@@ -10,6 +10,8 @@ import { useDeliveryAddress } from "@/contexts/delivery-address-context"
 import { useRestaurant } from "@/contexts/restaurant-context"
 import { ZonesAPI } from "@/lib/api/zones"
 import type { DeliveryZone } from "@/types/delivery-zones"
+import { extractPreferredBranchIdsFromZones, findNearestBranch, toBranchSummary } from "@/lib/branch-utils"
+import type { BranchSummary } from "@/lib/branch-utils"
 
 import CustomerMap from "./map"
 
@@ -30,9 +32,54 @@ export default function CustomerDeliverySelector({ showIntro = true, onClose }: 
   const { restaurant, isLoading: restaurantLoading } = useRestaurant()
   const restaurantId = restaurant?._id ?? ""
   const { toast } = useToast()
-  const { addresses, selectedAddress, addAddress, selectAddress, isLoading: addressesLoading } = useDeliveryAddress()
+  const {
+    addresses,
+    selectedAddress,
+    addAddress,
+    selectAddress,
+    isLoading: addressesLoading,
+    fulfillmentType,
+    setFulfillmentType,
+    deliveryBranch,
+    setDeliveryBranch,
+    pickupBranch,
+    setPickupBranch,
+  } = useDeliveryAddress()
 
-  const [method, setMethod] = useState<DeliveryMethod>("delivery")
+  const branches = useMemo(() => restaurant?.branches ?? [], [restaurant])
+  const branchSummaries = useMemo(
+    () =>
+      branches
+        .map((branch) => toBranchSummary(branch))
+        .filter(
+          (summary) =>
+            typeof summary.latitude === "number" && typeof summary.longitude === "number",
+        ),
+    [branches],
+  )
+
+  const [method, setMethod] = useState<DeliveryMethod>(fulfillmentType)
+
+  useEffect(() => {
+    setMethod(fulfillmentType)
+  }, [fulfillmentType])
+
+  const determineDeliveryBranch = useCallback(
+    (lat: number, lng: number, zones: DeliveryZone[] = []) => {
+      if (!branches.length || !Number.isFinite(lat) || !Number.isFinite(lng)) {
+        return null
+      }
+
+      const preferredIds = extractPreferredBranchIdsFromZones(zones as any)
+      const preferred =
+        preferredIds.size > 0
+          ? findNearestBranch(branches, lat, lng, { preferredBranchIds: preferredIds })
+          : null
+
+      return preferred ?? findNearestBranch(branches, lat, lng) ?? null
+    },
+    [branches],
+  )
   const [deliveryInfo, setDeliveryInfo] = useState<DeliveryState>(null)
   const [isCheckingDelivery, setIsCheckingDelivery] = useState(false)
 
@@ -42,6 +89,9 @@ export default function CustomerDeliverySelector({ showIntro = true, onClose }: 
     async (lat: number, lng: number) => {
       if (!restaurantId || method === "pickup") {
         setDeliveryInfo(null)
+        if (method === "pickup") {
+          setDeliveryBranch(null)
+        }
         return true
       }
 
@@ -53,10 +103,17 @@ export default function CustomerDeliverySelector({ showIntro = true, onClose }: 
           fee: result.lowestDeliveryFee,
           zones: result.zones,
         })
+        if (result.isDeliveryAvailable) {
+          const assigned = determineDeliveryBranch(lat, lng, result.zones ?? [])
+          setDeliveryBranch(assigned)
+        } else {
+          setDeliveryBranch(null)
+        }
         return result.isDeliveryAvailable
       } catch (error) {
         console.error("Error checking delivery:", error)
         setDeliveryInfo({ isAvailable: false, fee: null, zones: [] })
+        setDeliveryBranch(null)
         toast({
           variant: "destructive",
           title: "تعذر تحديد نطاق التوصيل",
@@ -67,14 +124,32 @@ export default function CustomerDeliverySelector({ showIntro = true, onClose }: 
         setIsCheckingDelivery(false)
       }
     },
-    [restaurantId, method, toast],
+    [determineDeliveryBranch, method, restaurantId, setDeliveryBranch, toast],
   )
 
- useEffect(() => {
-  if (!selectedAddress) return
-  void checkDeliveryAvailability(selectedAddress.lat, selectedAddress.lng)
-}, [selectedAddress?.id, method, checkDeliveryAvailability])
+  useEffect(() => {
+    if (!selectedAddress) return
+    void checkDeliveryAvailability(selectedAddress.lat, selectedAddress.lng)
+  }, [selectedAddress?.id, method, checkDeliveryAvailability])
 
+  useEffect(() => {
+    setFulfillmentType(method)
+    if (method === "pickup") {
+      setDeliveryBranch(null)
+    }
+  }, [method, setDeliveryBranch, setFulfillmentType])
+
+  const handleBranchSelect = useCallback(
+    (branch: BranchSummary) => {
+      setPickupBranch(branch)
+      setFulfillmentType("pickup")
+      toast({
+        title: branch.name,
+        description: [branch.address, branch.city].filter(Boolean).join(" — "),
+      })
+    },
+    [setPickupBranch, setFulfillmentType, toast],
+  )
 
   const handleMapLocationSelect = async (lat: number, lng: number, addressLabel?: string) => {
     const fallbackCity =
@@ -124,12 +199,29 @@ export default function CustomerDeliverySelector({ showIntro = true, onClose }: 
   }
 
   const handleConfirm = () => {
+    if (method === "pickup") {
+      if (!pickupBranch) {
+        toast({
+          variant: "destructive",
+          title: "اختر فرعًا أولاً",
+          description: "اضغط على أحد فروع المطعم على الخريطة لتحديده.",
+        })
+        return
+      }
+      toast({
+        title: pickupBranch.name,
+        description: [pickupBranch.address, pickupBranch.city].filter(Boolean).join(" — "),
+      })
+      onClose?.()
+      return
+    }
+
     if (!currentAddress) {
       toast({ variant: "destructive", title: "لم يتم تحديد عنوان" })
       return
     }
 
-    if (method === "delivery" && deliveryInfo && !deliveryInfo.isAvailable) {
+    if (deliveryInfo && !deliveryInfo.isAvailable) {
       toast({
         variant: "destructive",
         title: "خارج نطاق التوصيل",
@@ -138,7 +230,10 @@ export default function CustomerDeliverySelector({ showIntro = true, onClose }: 
       return
     }
 
-    toast({ title: "تم اختيار عنوان التوصيل", description: `${currentAddress.address}، ${currentAddress.city}` })
+    toast({
+      title: "تم اختيار عنوان التوصيل",
+      description: `${currentAddress.address}${currentAddress.city ? `، ${currentAddress.city}` : ""}`,
+    })
     onClose?.()
   }
 
@@ -146,8 +241,20 @@ export default function CustomerDeliverySelector({ showIntro = true, onClose }: 
     if (method === "pickup") {
       return (
         <div className="flex items-center gap-2 text-sm text-gray-600">
-          <CheckCircle2 className="h-4 w-4 text-green-500" />
-          <span>يمكنك استلام الطلب من الفرع الرئيسي.</span>
+          {pickupBranch ? (
+            <>
+              <CheckCircle2 className="h-4 w-4 text-green-500" />
+              <span>
+                سيتم الاستلام من <span className="font-semibold text-gray-800">{pickupBranch.name}</span>
+                {pickupBranch.address ? ` — ${pickupBranch.address}` : ""}
+              </span>
+            </>
+          ) : (
+            <>
+              <MapPin className="h-4 w-4 text-[#6c5ce7]" />
+              <span>اختر فرع الاستلام من الخريطة للتأكيد.</span>
+            </>
+          )}
         </div>
       )
     }
@@ -191,18 +298,30 @@ export default function CustomerDeliverySelector({ showIntro = true, onClose }: 
   return (
     <div className="relative flex min-h-[520px] flex-col overflow-hidden rounded-3xl bg-white" dir="rtl">
       <div className="relative flex-1">
-         <CustomerMap
-                    restaurantId={restaurantId}
-                    onLocationSelect={handleMapLocationSelect}
-                    selectedAddress={selectedAddress ? { lat: selectedAddress.lat, lng: selectedAddress.lng, name: selectedAddress.name } : null}
-                    className="h-[520px] w-full rounded-3xl"
-                  />
+      <CustomerMap
+        restaurantId={restaurantId}
+        onLocationSelect={handleMapLocationSelect}
+        selectedAddress={
+          selectedAddress
+            ? { lat: selectedAddress.lat, lng: selectedAddress.lng, name: selectedAddress.name }
+            : null
+        }
+        branches={branchSummaries}
+        pickupMode={method === "pickup"}
+        selectedBranchId={pickupBranch?.id ?? null}
+        onSelectBranch={handleBranchSelect}
+        className="h-[520px] w-full rounded-3xl"
+      />
 
         <div className="pointer-events-none absolute inset-x-4 top-4 z-30 flex justify-center">
           <div className="pointer-events-auto rounded-full bg-white p-1 shadow-lg">
             <Tabs
               value={method}
-              onValueChange={(value) => setMethod(value as DeliveryMethod)}
+              onValueChange={(value) => {
+                const nextMethod = value as DeliveryMethod
+                setMethod(nextMethod)
+                setFulfillmentType(nextMethod)
+              }}
               className="w-[240px]"
             >
               <TabsList className="grid w-full grid-cols-2 rounded-full bg-gray-100 p-1 text-[13px] font-semibold">
@@ -235,7 +354,16 @@ export default function CustomerDeliverySelector({ showIntro = true, onClose }: 
           <button
             type="button"
             className="pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow-lg"
-            onClick={() => currentAddress && toast({ title: currentAddress.name, description: currentAddress.address })}
+            onClick={() => {
+              if (method === "pickup" && pickupBranch) {
+                toast({
+                  title: pickupBranch.name,
+                  description: [pickupBranch.address, pickupBranch.city].filter(Boolean).join(" — "),
+                })
+              } else if (currentAddress) {
+                toast({ title: currentAddress.name, description: currentAddress.address })
+              }
+            }}
             aria-label="تفاصيل العنوان"
           >
             <MapPin className="h-4 w-4 text-[#6c5ce7]" />
@@ -250,11 +378,30 @@ export default function CustomerDeliverySelector({ showIntro = true, onClose }: 
               <Navigation className="h-5 w-5" />
             </span>
             <div className="flex-1 text-right">
-              <p className="text-sm font-semibold text-gray-900">سنوصّل إلى هذا العنوان</p>
-              {currentAddress ? (
-                <p className="text-xs text-gray-500">{currentAddress.address}{currentAddress.city ? `، ${currentAddress.city}` : ""}</p>
+              <p className="text-sm font-semibold text-gray-900">
+                {method === "pickup" ? "الرجاء اختيار فرع للاستلام" : "سنوصّل إلى هذا العنوان"}
+              </p>
+              {method === "pickup" ? (
+                pickupBranch ? (
+                  <p className="text-xs text-gray-500">
+                    {[pickupBranch.address, pickupBranch.city].filter(Boolean).join("، ") || "سيتم إعلامك بتفاصيل الفرع بعد التأكيد."}
+                  </p>
+                ) : (
+                  <p className="text-xs text-gray-500">حدد فرعًا على الخريطة أولاً.</p>
+                )
+              ) : currentAddress ? (
+                <p className="text-xs text-gray-500">
+                  {currentAddress.address}
+                  {currentAddress.city ? `، ${currentAddress.city}` : ""}
+                </p>
               ) : (
                 <p className="text-xs text-gray-500">حدد موقعك على الخريطة أولاً.</p>
+              )}
+              {method === "delivery" && deliveryBranch && (
+                <p className="text-[11px] text-gray-500">
+                  سيتم تجهيز الطلب عبر <span className="font-semibold text-gray-800">{deliveryBranch.name}</span>
+                  {deliveryBranch.address ? ` — ${deliveryBranch.address}` : ""}
+                </p>
               )}
             </div>
           </div>

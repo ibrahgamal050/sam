@@ -5,15 +5,21 @@ import { useMemo } from "react"
 import { useCart } from "@/contexts/cart-context"
 import { Button } from "@/components/ui/button"
 
+const formatValue = (value: number) => {
+  if (!Number.isFinite(value)) return "0"
+  const normalized = Math.max(0, value)
+  return Number.isInteger(normalized) ? normalized.toFixed(0) : normalized.toFixed(2)
+}
+
 interface DesktopCartProps {
   currency: string
 }
 
 export function DesktopCart({ currency }: DesktopCartProps) {
-  const { items, addItem, decreaseItem, clearCart } = useCart()
+  const { items, increaseItem, decreaseItem, clearCart } = useCart()
 
   const { subtotal, totalQuantity } = useMemo(() => {
-    const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    const subtotal = items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0)
     const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0)
     return {
       subtotal,
@@ -53,12 +59,31 @@ export function DesktopCart({ currency }: DesktopCartProps) {
         ) : (
           <ul className="space-y-5">
             {items.map((item) => (
-              <li key={item.id} className="rounded-2xl border border-gray-200 bg-[#f7f9fc] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]">
+              <li
+                key={item.id}
+                className="rounded-2xl border border-gray-200 bg-[#f7f9fc] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]"
+              >
                 <div className="flex items-start justify-between gap-3">
-                  <div>
+                  <div className="space-y-1">
                     <p className="text-sm font-semibold text-gray-900">{item.name}</p>
-                    <p className="mt-1 text-xs text-gray-500">
-                      {item.price.toFixed(0)} {currency}
+                    {item.variant?.name && <p className="text-xs text-gray-500">النوع: {item.variant.name}</p>}
+                    {item.extras.length > 0 && (
+                      <ul className="space-y-1 text-[11px] text-gray-500">
+                        {item.extras.map((extra) => (
+                          <li key={`${item.id}-${extra.id}`}>
+                            {extra.qty} × {extra.name || "إضافة"}{" "}
+                            {extra.price > 0 ? (
+                              <span className="text-gray-400">
+                                (+{formatValue(extra.price)} {currency})
+                              </span>
+                            ) : null}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {item.note && <p className="text-[11px] text-gray-400">ملاحظة: {item.note}</p>}
+                    <p className="text-xs text-gray-500">
+                      {formatValue(item.unitPrice)} {currency} لكل عنصر
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
@@ -71,7 +96,7 @@ export function DesktopCart({ currency }: DesktopCartProps) {
                     </button>
                     <span className="w-6 text-center text-sm font-semibold text-gray-900">{item.quantity}</span>
                     <button
-                      onClick={() => addItem({ id: item.id, name: item.name, price: item.price })}
+                      onClick={() => increaseItem(item.id)}
                       className="flex h-8 w-8 items-center justify-center rounded-full bg-[#6c5ce7] text-white transition hover:bg-[#5a4bd1]"
                       aria-label="زيادة الكمية"
                     >
@@ -82,7 +107,7 @@ export function DesktopCart({ currency }: DesktopCartProps) {
                 <div className="mt-3 flex items-center justify-between text-xs text-gray-500">
                   <span>الإجمالي الفرعي</span>
                   <span className="font-semibold text-gray-900">
-                    {(item.price * item.quantity).toFixed(0)} {currency}
+                    {formatValue(item.unitPrice * item.quantity)} {currency}
                   </span>
                 </div>
               </li>
@@ -95,7 +120,7 @@ export function DesktopCart({ currency }: DesktopCartProps) {
         <div className="flex items-center justify-between text-sm text-gray-500">
           <span>الإجمالي</span>
           <span className="text-lg font-semibold text-gray-900">
-            {subtotal.toFixed(0)} {currency}
+            {formatValue(subtotal)} {currency}
           </span>
         </div>
         <Button

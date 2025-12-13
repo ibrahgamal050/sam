@@ -45,8 +45,8 @@ export function MenuLayout({
     <>
       {/* Mobile layout */}
       <div className="lg:hidden">
-        <MenuHeader menuName={menuName} categoriesCount={categoriesCount} itemsCount={itemsCount} />
-        <MenuGallery images={galleryImages} />
+        
+        
 
         <MobileMenu
           headerRef={headerRef}
@@ -74,8 +74,7 @@ export function MenuLayout({
           sidebarBottom={sidebarBottom}
         />
         <div className="space-y-6">
-          <MenuHeader menuName={menuName} categoriesCount={categoriesCount} itemsCount={itemsCount} />
-          <MenuGallery images={galleryImages} />
+         
 
           <div className="rounded-[32px] border border-gray-200 bg-white p-6 shadow-[0_25px_60px_-40px_rgba(15,23,42,0.35)]">
             

@@ -1,12 +1,13 @@
 {
-  "name": "my-v0-project",
+  "name": "meelza-sites",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
+ "scripts": {
+    "dev": "next dev -p 3000",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start -p 3000",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.3.9",
@@ -72,15 +73,15 @@
     "lucide-react": "^0.454.0",
     "mongoose": "^8.14.0",
     "negotiator": "^1.0.0",
-    "next": "15.2.4",
+    "next": "15.5.4",
     "next-auth": "^4.24.11",
     "next-themes": "^0.4.6",
     "node-fetch": "^3.3.2",
     "openai": "^4.96.0",
     "puppeteer": "^24.7.2",
-    "react": "^19",
+    "react": "^18.3.1",
     "react-day-picker": "8.10.1",
-    "react-dom": "^19",
+    "react-dom": "^18.3.1",
     "react-dropzone": "^14.3.8",
     "react-hook-form": "^7.54.1",
     "react-hot-toast": "^2.5.2",
@@ -102,6 +103,6 @@
     "@types/react-dom": "^19",
     "postcss": "^8",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   }
 }

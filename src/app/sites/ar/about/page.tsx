@@ -1,127 +1,150 @@
 import type { Metadata } from "next"
-import mongoose from "mongoose"
+import { notFound } from "next/navigation"
+
 import AboutPage from "@/components/ar/about-page"
-import type { IPage as AboutPageType } from "@/types/page"
-import Pages from "@/models/page"
-import dbConnect from "@/lib/db"
 import { resolveRestaurantFromHeaders } from "@/lib/domain/restaurant-context"
 import { getRootDomain, resolveRestaurantHost } from "@/lib/host-utils"
+import { getPageBySlug } from "@/lib/services/page-service"
+import type { IPage } from "@/types/page"
 import type { IRestaurant } from "@/types/restaurant"
 
-export const revalidate = 3600
+const VALID_LOCALES = ["ar", "en"] as const
+type Locale = (typeof VALID_LOCALES)[number]
+const PAGE_SLUG = "about"
 
-export default async function About() {
-  const { restaurant } = await resolveRestaurantFromHeaders()
-  const typedRestaurant = restaurant as IRestaurant | null
-
-  if (!typedRestaurant) {
-    return <div className="text-center py-10 text-red-600">لم يتم العثور على المطعم</div>
-  }
-
-  try {
-    const pageData = await getPageBySlug(typedRestaurant.subdomain, "about", "ar")
-
-    if (!pageData) {
-      return <div className="text-center py-10 text-red-600">لم يتم العثور على صفحة عن المطعم</div>
-    }
-
-    return <AboutPage logo={typedRestaurant.logo} data={pageData as AboutPageType} />
-  } catch (error) {
-    console.error("Error fetching about page:", error)
-    return <div className="text-center py-10 text-red-600">حدث خطأ أثناء تحميل الصفحة</div>
-  }
+type PageParams = {
+  params: Promise<{
+    lng: string
+  }>
 }
 
-export async function getPageBySlug(subdomain: string, slug: string, language: "en" | "ar") {
-  await dbConnect()
-
-  const result = await Pages.findOne(
-    {
-      subdomain,
-      pages: {
-        $elemMatch: {
-          slug,
-          language,
-        },
-      },
-    },
-    {
-      "pages.$": 1,
-    },
-  ).lean()
-
-  return result?.pages?.[0] || null
-}
-
-export async function generateMetadata(): Promise<Metadata> {
-  const { restaurant, hostHeader } = await resolveRestaurantFromHeaders()
-
-  if (!restaurant) {
-    return {}
-  }
-
-  await dbConnect()
-
-  const page = await Pages.findOne(
-    {
-      restaurantId: new mongoose.Types.ObjectId(restaurant._id),
-      pages: { $elemMatch: { slug: "about", language: "ar" } },
-    },
-    {
-      "pages.$": 1,
-    },
-  ).lean()
-
-  const pageData = page?.pages?.[0]
-  const allowedTypes = [
-    "website",
-    "article",
-    "book",
-    "profile",
-    "music.song",
-    "music.album",
-    "music.playlist",
-    "music.radio_station",
-    "video.movie",
-    "video.episode",
-    "video.tv_show",
-    "video.other",
-  ] as const
-
-  type OpenGraphType = (typeof allowedTypes)[number]
-
-  const ogType: OpenGraphType =
-    allowedTypes.includes(pageData?.seo?.og_type as OpenGraphType)
-      ? (pageData?.seo?.og_type as OpenGraphType)
-      : "website"
-
-  const resolvedHost = resolveRestaurantHost(restaurant, hostHeader, getRootDomain())
-  const protocol = resolveProtocol(hostHeader)
-  const canonicalUrl = pageData?.seo?.canonical_url || `${protocol}://${resolvedHost}/ar/about`
-
-  return {
-    title: pageData?.seo?.title || `عن ${restaurant.name.ar}`,
-    description: pageData?.seo?.description || `اعرف المزيد عن مطعم ${restaurant.name}`,
-    keywords: pageData?.seo?.keywords || ["مطعم", restaurant.name.ar, "عن المطعم"],
-    openGraph: {
-      title: pageData?.seo?.og_title || `عن ${restaurant.name.ar}`,
-      description: pageData?.seo?.og_description || `تفاصيل مطعم ${restaurant.name.ar}`,
-      images: [pageData?.seo?.og_image || restaurant.logo],
-      type: ogType,
-    },
-    twitter: {
-      card: pageData?.seo?.twitter_card || "summary_large_image",
-      title: pageData?.seo?.twitter_title || restaurant.name.ar,
-      description: pageData?.seo?.twitter_description || `عن مطعم ${restaurant.name}`,
-      images: [pageData?.seo?.twitter_image || restaurant.logo],
-    },
-    alternates: {
-      canonical: canonicalUrl,
-    },
-  }
+const resolveLocale = (value?: string): Locale | null => {
+  if (!value) return "ar"
+  const normalized = value.toLowerCase()
+  return (VALID_LOCALES as readonly string[]).includes(normalized) ? (normalized as Locale) : null
 }
 
 const resolveProtocol = (hostHeader: string): "http" | "https" => {
   const normalized = hostHeader.toLowerCase()
   return normalized.includes("localhost") || normalized.includes("127.0.0.1") ? "http" : "https"
+}
+
+type LoadedAboutData =
+  | {
+      restaurant: IRestaurant
+      page: IPage | null
+      hostHeader: string
+      locale: Locale
+    }
+  | {
+      restaurant: null
+      page: null
+      hostHeader: string
+      locale: Locale
+    }
+
+async function loadAboutData(locale: Locale): Promise<LoadedAboutData> {
+  const { restaurant, hostHeader } = await resolveRestaurantFromHeaders()
+  if (!restaurant) {
+    return { restaurant: null, page: null, hostHeader, locale }
+  }
+
+  const restaurantId = restaurant._id?.toString?.()
+  if (!restaurantId) {
+    return { restaurant: restaurant as IRestaurant, page: null, hostHeader, locale }
+  }
+
+  const page = await getPageBySlug(restaurantId, PAGE_SLUG, locale)
+  return {
+    restaurant: restaurant as IRestaurant,
+    page: page ?? null,
+    hostHeader,
+    locale,
+  }
+}
+
+export default async function AboutRoute({ params }: PageParams) {
+  const { lng } = await params
+  const locale = resolveLocale(lng)
+  if (!locale) {
+    notFound()
+  }
+
+  const { restaurant, page } = await loadAboutData(locale)
+
+  if (!restaurant || !page) {
+    notFound()
+  }
+
+  return <AboutPage data={page} logo={restaurant.logo || "/placeholder.svg?height=400&width=800"} />
+}
+
+export async function generateMetadata({ params }: PageParams): Promise<Metadata> {
+  const { lng } = await params
+  const locale = resolveLocale(lng)
+  if (!locale) {
+    return {}
+  }
+
+  const { restaurant, page, hostHeader } = await loadAboutData(locale)
+
+  if (!restaurant || !page) {
+    return {
+      title: locale === "ar" ? "الصفحة غير متوفرة" : "Page unavailable",
+      description:
+        locale === "ar"
+          ? "الصفحة التي تحاول الوصول إليها غير متاحة حاليًا."
+          : "The page you are trying to reach is currently unavailable.",
+    }
+  }
+
+  const resolvedHost = resolveRestaurantHost(restaurant, hostHeader, getRootDomain())
+  const protocol = resolveProtocol(hostHeader)
+  const basePath = `/${locale}`
+  const canonicalUrl = page.seo?.canonical_url ?? `${protocol}://${resolvedHost}${basePath}/${PAGE_SLUG}`
+
+  const title =
+    page.seo?.title ??
+    (typeof restaurant.name === "object"
+      ? restaurant.name?.[locale] ?? restaurant.name?.ar ?? restaurant.name?.en
+      : restaurant.name) ??
+    "Meelza"
+
+  const description =
+    page.seo?.description ??
+    (typeof restaurant.description === "object"
+      ? restaurant.description?.[locale] ?? restaurant.description?.ar ?? restaurant.description?.en
+      : restaurant.description) ??
+    ""
+
+  const keywords =
+    (page.seo?.keywords && page.seo.keywords.length > 0
+      ? page.seo.keywords
+      : [
+          locale === "ar" ? "مطعم" : "Restaurant",
+          typeof restaurant.name === "object" ? restaurant.name?.[locale] ?? restaurant.name?.ar : restaurant.name,
+        ].filter(Boolean)) ?? []
+
+  const ogImage = page.seo?.og_image || restaurant.logo || "/placeholder.svg?height=400&width=800"
+
+  return {
+    title,
+    description,
+    keywords,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: page.seo?.og_title ?? title,
+      description: page.seo?.og_description ?? description,
+      images: [ogImage],
+      type: page.seo?.og_type ?? "website",
+    },
+    twitter: {
+      card: page.seo?.twitter_card ?? "summary_large_image",
+      title: page.seo?.twitter_title ?? title,
+      description: page.seo?.twitter_description ?? description,
+      images: page.seo?.twitter_image ? [page.seo.twitter_image] : [ogImage],
+    },
+  }
 }

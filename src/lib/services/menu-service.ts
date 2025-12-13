@@ -10,6 +10,80 @@ function convertToPlainObject<T>(doc: T): any {
   return JSON.parse(JSON.stringify(doc))
 }
 
+export interface MenuItemSummary {
+  _id?: string
+  id?: string
+  categoryId?: string
+  name?: string
+  description?: string
+  price?: number
+  image?: string
+  tags?: string[]
+  isAvailable?: boolean
+  position?: number
+  badge?: string
+}
+
+export const flattenMenuItems = (menu: MenuType | null): MenuItemSummary[] => {
+  if (!menu) return []
+  const items: MenuItemSummary[] = []
+  menu.categories?.forEach((cat: any) => {
+    const catId = cat._id?.toString?.() ?? cat.id
+    const catKey = cat.slug ?? cat.key ?? (typeof cat.name === "string" ? cat.name : undefined)
+    cat.menuItems?.forEach((item: any) => {
+      items.push({
+        _id: item._id?.toString?.(),
+        id: item.id,
+        categoryId: catId,
+        categoryKey: catKey,
+        name: (item.name as any)?.ar ?? (item.name as any)?.en ?? item.name,
+        description:
+          (item.description as any)?.ar ??
+          (item.description as any)?.en ??
+          item.description,
+        price: item.price,
+        image: item.image,
+        tags: item.tags ?? [],
+        isAvailable: item.isAvailable,
+        position: item.position ?? item.order ?? 0,
+        badge: item.badge,
+      })
+    })
+  })
+  return items
+}
+
+// لو جالك menu عبر API كـ plain object بنفس الهيكل
+export const flattenMenuPayload = (menuPayload: any): MenuItemSummary[] => {
+  if (!menuPayload) return []
+  const categories = (menuPayload.categories as any[]) ?? []
+  const items: MenuItemSummary[] = []
+  categories.forEach((cat) => {
+    const catId = cat._id?.toString?.() ?? cat.id
+    const catKey = cat.slug ?? cat.key ?? (typeof cat.name === "string" ? cat.name : undefined)
+    ;(cat.menuItems as any[] | undefined)?.forEach((item) => {
+      items.push({
+        _id: item._id?.toString?.(),
+        id: item.id,
+        categoryId: catId,
+        categoryKey: catKey,
+        name: (item.name as any)?.ar ?? (item.name as any)?.en ?? item.name,
+        description:
+          (item.description as any)?.ar ??
+          (item.description as any)?.en ??
+          item.description,
+        price: item.price,
+        image: item.image,
+        tags: item.tags ?? [],
+        isAvailable: item.isAvailable,
+        position: item.position ?? item.order ?? 0,
+        badge: item.badge,
+      })
+    })
+  })
+  return items
+}
+
 export async function getMenuByRestaurantId(restaurantId: string): Promise<MenuType | null> {
   try {
     await connectToDatabase()

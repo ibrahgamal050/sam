@@ -39,7 +39,9 @@ export function RestaurantHome() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const params = useParams()
-  const slug = params?.slug as string
+  const rawLocale = params?.lng
+  const locale = (Array.isArray(rawLocale) ? rawLocale[0] : rawLocale) ?? "ar"
+  const basePath = `/${locale}`
 
   useEffect(() => {
     const fetchData = async () => {
@@ -102,7 +104,7 @@ export function RestaurantHome() {
     if (restaurant) {
       fetchData()
     }
-  }, [restaurant, slug])
+  }, [restaurant, locale])
 
   if (restaurantLoading || isLoading) {
     return <HomePageSkeleton />
@@ -168,10 +170,7 @@ export function RestaurantHome() {
         <section>
           <div className={`flex justify-between items-center mb-3 ${direction === "rtl" ? "flex-row-reverse" : ""}`}>
             <h2 className="text-xl font-semibold">{t("categories")}</h2>
-            <Link
-              href={`/${slug}/menu`}
-              className={`text-primary text-sm flex items-center ${direction === "rtl" ? "flex-row-reverse" : ""}`}
-            >
+            <Link href={`${basePath}/menu`} className={`text-primary text-sm flex items-center ${direction === "rtl" ? "flex-row-reverse" : ""}`}>
               {t("viewAll")}{" "}
               {direction === "rtl" ? (
                 <ChevronRight className="h-4 w-4 rotate-180 mr-1" />
@@ -183,7 +182,7 @@ export function RestaurantHome() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
             {categories.map((category) => (
-              <Link href={`/${slug}/menu?category=${encodeURIComponent(category.name)}`} key={category.name}>
+              <Link href={`${basePath}/menu?category=${encodeURIComponent(category.name)}`} key={category.name}>
                 <Card className="overflow-hidden h-32 hover:shadow-md transition-shadow">
                   <CardContent className="p-0 h-full relative">
                     <Image

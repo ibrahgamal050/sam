@@ -1,5 +1,5 @@
 import mongoose, { Schema, Model, Document } from 'mongoose';
-import {IComponent,ISEO,IPage,IPages } from "@/types"
+import {IComponent,ISEO,IPage,IPages } from "@/types/page"
 
 const componentSchema = new Schema<IComponent>({
   component_id: { type: String, required: true },
@@ -49,7 +49,8 @@ const PageSchema = new Schema<IPage>({
   isPublished: { type: Boolean, default: false },
   headerImage: { type: String, default: '/placeholder.svg?height=400&width=800' },
   seo: seoSchema,
-  components: [componentSchema],
+  components: { type: [componentSchema], default: [] },
+  sections: { type: [Schema.Types.Mixed], default: undefined },
   metadata: {
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now },

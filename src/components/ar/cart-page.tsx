@@ -2,45 +2,39 @@
 
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 import { ShoppingCart, ShoppingBag, Minus, Plus, Trash2 } from "lucide-react"
 
 import { useCart } from "@/contexts/cart-context"
 
-export function CartPageClient() {
-  const { items, addItem, decreaseItem, clearCart } = useCart()
-  const router = useRouter()
+const formatValue = (value: number) => {
+  if (!Number.isFinite(value)) return "0"
+  const normalized = Math.max(0, value)
+  return Number.isInteger(normalized) ? normalized.toFixed(0) : normalized.toFixed(2)
+}
 
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+export function CartPageClient() {
+  const { items, increaseItem, decreaseItem, clearCart } = useCart()
+  const router = useRouter()
+  const params = useParams()
+  const rawLocale = params?.lng
+  const locale = (Array.isArray(rawLocale) ? rawLocale[0] : rawLocale) ?? "ar"
+  const basePath = `/${locale}`
+
+  const subtotal = items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0)
   const taxes = Math.round(subtotal * 0.14)
   const delivery = items.length > 0 ? 20 : 0
   const total = subtotal + taxes + delivery
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0)
 
   const handleProceed = () => {
-    router.push("/ar/checkout")
+    router.push(`${basePath}/checkout`)
   }
 
   return (
     <div className="min-h-screen bg-white text-gray-900" dir="rtl">
       <div className="mx-auto w-full max-w-5xl px-4 pb-16 pt-10 sm:px-6 lg:pt-12">
-        <section className="relative mb-10 overflow-hidden rounded-[32px] border border-gray-200 bg-gradient-to-br from-[#f7f9fc] via-white to-white shadow-[0_25px_60px_-35px_rgba(15,23,42,0.35)]">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(99,102,241,0.12),_transparent_65%)]" />
-          <div className="relative flex flex-col gap-4 px-8 py-10 text-gray-900 sm:px-12">
-            <span className="inline-flex w-fit items-center gap-2 rounded-full bg-black/5 px-4 py-2 text-xs font-semibold text-gray-600">
-              <ShoppingCart className="h-4 w-4" /> سلة المشتريات
-            </span>
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <h1 className="text-3xl font-bold leading-tight sm:text-4xl">راجع اختياراتك قبل الإتمام</h1>
-              <p className="text-sm text-gray-600">
-                لديك {itemCount} {itemCount === 1 ? "عنصر" : "عناصر"} بقيمة إجمالية {total.toFixed(0)} ج.م
-              </p>
-            </div>
-            <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500">
-              <span className="rounded-full border border-gray-200 bg-white px-3 py-1">الأسعار شاملة الضريبة</span>
-              <span className="rounded-full border border-gray-200 bg-white px-3 py-1">رسوم التوصيل مبدئية</span>
-            </div>
-          </div>
-        </section>
+        
 
         {items.length === 0 ? (
           <section className="rounded-[32px] border border-gray-200 bg-white p-12 text-center shadow-[0_20px_55px_-40px_rgba(15,23,42,0.45)]">
@@ -52,7 +46,7 @@ export function CartPageClient() {
               استكشف المنيو وأضف أطباقك المفضلة. بإمكانك العودة للسلة في أي وقت للإتمام.
             </p>
             <Link
-              href="/ar/menu"
+              href={`${basePath}/menu`}
               className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-[#6c5ce7] px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-[#5a4bd1]"
             >
               تصفح المنيو الآن
@@ -66,9 +60,27 @@ export function CartPageClient() {
                   key={item.id}
                   className="flex items-center justify-between gap-4 rounded-3xl border border-gray-200 bg-white px-4 py-5 shadow-[0_15px_35px_-25px_rgba(15,23,42,0.25)]"
                 >
-                  <div>
+                  <div className="space-y-2">
                     <h3 className="text-sm font-semibold text-gray-900">{item.name}</h3>
-                    <p className="mt-1 text-xs text-gray-500">{item.price.toFixed(0)} ج.م</p>
+                    {item.variant?.name && <p className="text-xs text-gray-500">النوع: {item.variant.name}</p>}
+                    {item.extras.length > 0 && (
+                      <ul className="space-y-1 text-[11px] text-gray-500">
+                        {item.extras.map((extra) => (
+                          <li key={`${item.id}-${extra.id}`}>
+                            {extra.qty} × {extra.name || "إضافة"}{" "}
+                            {extra.price > 0 ? (
+                              <span className="text-gray-400">
+                                (+{formatValue(extra.price)} ج.م)
+                              </span>
+                            ) : null}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {item.note && <p className="text-[11px] text-gray-400">ملاحظة: {item.note}</p>}
+                    <p className="text-xs text-gray-500">
+                      {formatValue(item.unitPrice)} ج.م لكل عنصر
+                    </p>
                   </div>
                   <div className="flex items-center gap-3">
                     <button
@@ -82,7 +94,7 @@ export function CartPageClient() {
                     <button
                       className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f7c325] text-black transition hover:bg-[#ffd342]"
                       aria-label="زيادة الكمية"
-                      onClick={() => addItem({ id: item.id, name: item.name, price: item.price })}
+                      onClick={() => increaseItem(item.id)}
                     >
                       <Plus className="h-4 w-4" />
                     </button>
@@ -110,19 +122,19 @@ export function CartPageClient() {
               <div className="mt-5 space-y-3 text-sm text-gray-600">
                 <div className="flex justify-between">
                   <span>المجموع</span>
-                  <span>{subtotal.toFixed(0)} ج.م</span>
+                  <span>{formatValue(subtotal)} ج.م</span>
                 </div>
                 <div className="flex justify-between">
                   <span>الضريبة (14%)</span>
-                  <span>{taxes.toFixed(0)} ج.م</span>
+                  <span>{formatValue(taxes)} ج.م</span>
                 </div>
                 <div className="flex justify-between">
                   <span>التوصيل المتوقع</span>
-                  <span>{delivery.toFixed(0)} ج.م</span>
+                  <span>{formatValue(delivery)} ج.م</span>
                 </div>
                 <div className="flex justify-between border-t border-gray-200 pt-3 text-base font-semibold text-gray-900">
                   <span>الإجمالي</span>
-                  <span>{total.toFixed(0)} ج.م</span>
+                  <span>{formatValue(total)} ج.م</span>
                 </div>
               </div>
 
@@ -135,7 +147,7 @@ export function CartPageClient() {
               </button>
 
               <Link
-                href="/ar/menu"
+                href={`${basePath}/menu`}
                 className="mt-3 block text-center text-xs font-semibold text-[#6c5ce7] hover:text-[#5a4bd1]"
               >
                 متابعة التسوق

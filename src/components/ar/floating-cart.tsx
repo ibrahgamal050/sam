@@ -7,7 +7,7 @@ import { useCart } from "@/contexts/cart-context"
 export function FloatingCart() {
   const { items } = useCart()
   const count = items.reduce((s, i) => s + i.quantity, 0)
-  const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0)
+  const subtotal = items.reduce((s, i) => s + i.unitPrice * i.quantity, 0)
   if (count === 0) return null
 
   return (
@@ -26,4 +26,3 @@ export function FloatingCart() {
     </Link>
   )
 }
-

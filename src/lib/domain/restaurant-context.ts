@@ -11,7 +11,7 @@ export type RestaurantRequestContext = {
 }
 
 export async function resolveRestaurantFromHeaders(): Promise<RestaurantRequestContext> {
-  const headersList = headers()
+  const headersList = await headers()
   const hostHeader = headersList.get("host") ?? ""
   const { host: hostname, port } = splitHostAndPort(hostHeader)
   const restaurant = await getRestaurantByHost(hostname)

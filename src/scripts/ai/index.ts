@@ -2,7 +2,7 @@ import mongoose, { Schema, Document, Model } from 'mongoose';
 import generateBranchData from './branches.js';
 import getRestaurantHours from './hours.js';
 import getRestaurantReviews from './reviews.js';
-import generateAboutPage from './about';
+import generateAboutPage from './about.js';
 import generateHomePage from './home.js';
 import { IRestaurant, IPages } from '@/types';
 import RestaurantModel from '@/models/restaurant'

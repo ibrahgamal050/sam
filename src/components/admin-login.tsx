@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState } from "react"
-import { useAdminAuth } from "@/contexts/admin-auth-context"
+import { useAdminAuth } from "@/contexts/auth-context"
 import { useRestaurant } from "@/contexts/restaurant-context"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 

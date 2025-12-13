@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import { Types } from "mongoose";
+import { Types } from 'mongoose';
+import type { BuilderTheme } from './builder';
 
 
 export interface ISEO {
@@ -42,6 +43,16 @@ export interface IComponent {
   position: number;
 }
 
+export type BuilderSection = {
+  id?: string
+  key?: string
+  type?: string
+  position?: number
+  layout?: Record<string, any>
+  elements?: Array<Record<string, any>>
+  [key: string]: any
+}
+
 export interface IPage {
   _id: mongoose.Types.ObjectId;
   name: string;
@@ -52,6 +63,8 @@ export interface IPage {
   headerImage: string;
   seo: ISEO;
   components: IComponent[];
+  sections?: BuilderSection[];
+  theme?: BuilderTheme;
   metadata: {
     created_at: Date;
     updated_at: Date;

@@ -1,0 +1,1309 @@
+
+> meelza-sites@0.1.0 dev /Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites
+> next dev -p 3000
+
+ [33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/ibrahimgamal/My project/meelza.com/pnpm-lock.yaml as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * /Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/pnpm-lock.yaml
+
+   [1m[38;2;173;127;168m▲ Next.js 15.5.4[39m[22m
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.144:3000
+   - Environments: .env
+   - Experiments (use with caution):
+     [1m✓[22m webpackBuildWorker
+     [1m✓[22m parallelServerCompiles
+     [1m✓[22m parallelServerBuildTraces
+
+ [32m[1m✓[22m[39m Starting...
+ [32m[1m✓[22m[39m Ready in 11.2s
+ [37m[1m○[22m[39m Compiling /middleware ...
+ [32m[1m✓[22m[39m Compiled /middleware in 1664ms (159 modules)
+ [37m[1m○[22m[39m Compiling /api/subdomains ...
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 2.4s (346 modules)
+ GET /api/subdomains [32m200[39m in 6096ms
+ [37m[1m○[22m[39m Compiling /[lng]/[...slug] ...
+ [32m[1m✓[22m[39m Compiled /[lng]/[...slug] in 7.4s (1062 modules)
+ [37m[1m○[22m[39m Compiling /[lng] ...
+ [32m[1m✓[22m[39m Compiled /[lng] in 7.5s (1083 modules)
+ GET /ar/home [32m200[39m in 23319ms
+ [37m[1m○[22m[39m Compiling /api/restaurant ...
+ GET / [32m200[39m in 15003ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/auth/session [32m200[39m in 6112ms
+ GET /api/auth/session [32m200[39m in 6114ms
+ GET /api/auth/session [32m200[39m in 6123ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 6562ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /favicon.ico [32m200[39m in 8932ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ POST /api/zones/check-delivery [32m200[39m in 2263ms
+ POST /api/zones/check-delivery [32m200[39m in 2282ms
+ POST /api/zones/check-delivery [32m200[39m in 2289ms
+ POST /api/zones/check-delivery [32m200[39m in 2287ms
+ POST /api/zones/check-delivery [32m200[39m in 3730ms
+ POST /api/zones/check-delivery [32m200[39m in 3077ms
+ GET / [32m200[39m in 6884ms
+ POST /api/zones/check-delivery [32m200[39m in 1414ms
+ POST /api/zones/check-delivery [32m200[39m in 1500ms
+ GET /api/auth/session [32m200[39m in 115ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 411ms
+ GET /placeholder-user.jpg [33m404[39m in 1002ms
+ GET /favicon.ico [32m200[39m in 1868ms
+ GET /placeholder-user.jpg [33m404[39m in 431ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /favicon.ico [32m200[39m in 648ms
+ GET /ar/menu [32m200[39m in 4516ms
+ GET /images/el-haty/placeholder.svg?height=200&width=300 [33m404[39m in 498ms
+ [32m[1m✓[22m[39m Compiled /[lng]/menu in 2.2s (1943 modules)
+ GET /images/el-haty/placeholder.svg?height=200&width=300 [33m404[39m in 1473ms
+ GET / [32m200[39m in 1517ms
+ GET /ar/menu [32m200[39m in 1958ms
+ [32m[1m✓[22m[39m Compiled in 811ms (1943 modules)
+ GET / [32m200[39m in 1026ms
+ GET /images/el-haty/placeholder.svg?height=200&width=300 [33m404[39m in 807ms
+ GET /ar/menu [32m200[39m in 837ms
+ [32m[1m✓[22m[39m Compiled in 1637ms (1927 modules)
+ GET /ar/menu [32m200[39m in 1919ms
+ GET /images/el-haty/placeholder.svg?height=200&width=300 [33m404[39m in 1059ms
+ GET / [32m200[39m in 2219ms
+ [32m[1m✓[22m[39m Compiled in 1859ms (1927 modules)
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 471ms (1113 modules)
+ GET /api/subdomains [32m200[39m in 903ms
+ GET /api/subdomains [32m200[39m in 504ms
+ GET /api/subdomains [32m200[39m in 907ms
+ GET /ar/menu [32m200[39m in 492ms
+ GET / [32m200[39m in 2007ms
+ GET /ar/menu [32m200[39m in 3414ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 1313ms
+ [37m[1m○[22m[39m Compiling /api/restaurant ...
+ [32m[1m✓[22m[39m Compiled /api/restaurant in 2.7s (1206 modules)
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/auth/session [32m200[39m in 4004ms
+ GET /api/auth/session [32m200[39m in 2926ms
+ GET /api/auth/session [32m200[39m in 4030ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 4599ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /images/el-haty/placeholder.svg?height=200&width=300 [33m404[39m in 4114ms
+ [37m[1m○[22m[39m Compiling /api/zones/check-delivery ...
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /favicon.ico [32m200[39m in 4333ms
+ POST /api/zones/check-delivery [32m200[39m in 956ms
+ POST /api/zones/check-delivery [32m200[39m in 957ms
+ POST /api/zones/check-delivery [32m200[39m in 959ms
+ POST /api/zones/check-delivery [32m200[39m in 959ms
+ POST /api/zones/check-delivery [32m200[39m in 175ms
+ POST /api/zones/check-delivery [32m200[39m in 91ms
+ POST /api/zones/check-delivery [32m200[39m in 107ms
+ POST /api/zones/check-delivery [32m200[39m in 103ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /ar/menu [32m200[39m in 828ms
+ GET / [32m200[39m in 868ms
+ GET /images/el-haty/placeholder.svg?height=200&width=300 [33m404[39m in 704ms
+ [31m[1m⨯[22m[39m ./src/app/[lng]/(core)/menu/page.tsx
+Error:   [31m×[0m Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/(core)/menu/page.tsx[0m:160:1]
+ [2m157[0m │         
+ [2m158[0m │       </div>
+ [2m159[0m │     )
+ [2m160[0m │   } catch (error) {
+     · [35;1m  ▲[0m
+ [2m161[0m │     console.error("Error fetching menu data:", error)
+ [2m162[0m │     return <ErrorDisplay />
+ [2m163[0m │   }
+     ╰────
+  [31m×[0m Expected '</', got 'jsx text (
+  [31m│[0m     )
+  [31m│[0m   } catch (error) )'
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/(core)/menu/page.tsx[0m:158:1]
+ [2m155[0m │             <MobileLayout restaurant={typedRestaurant}>
+ [2m156[0m │             <MenuPage menuData={menuData}  />
+ [2m157[0m │             
+ [2m158[0m │ [35;1m╭[0m[35;1m─[0m[35;1m▶[0m       </div>
+ [2m159[0m │ [35;1m│[0m       )
+ [2m160[0m │ [35;1m╰[0m[35;1m─[0m[35;1m▶[0m   } catch (error) {
+ [2m161[0m │         console.error("Error fetching menu data:", error)
+ [2m162[0m │         return <ErrorDisplay />
+ [2m163[0m │       }
+     ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/[lng]/(core)/menu/page.tsx
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET / [31m500[39m in 8129ms
+ GET /ar/menu [31m500[39m in 8128ms
+ GET /ar/menu [32m200[39m in 351ms
+ GET /ar/menu [32m200[39m in 3658ms
+ GET / [32m200[39m in 1806ms
+ GET / [32m200[39m in 2244ms
+ GET / [32m200[39m in 1095ms
+ GET /api/auth/session [32m200[39m in 305ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 1439ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 433ms
+ GET /api/auth/session [32m200[39m in 339ms
+ GET /api/auth/session [32m200[39m in 65ms
+ GET / [32m200[39m in 2182ms
+ GET /favicon.ico [32m200[39m in 1718ms
+ POST /api/zones/check-delivery [32m200[39m in 163ms
+ POST /api/zones/check-delivery [32m200[39m in 196ms
+ POST /api/zones/check-delivery [32m200[39m in 207ms
+ POST /api/zones/check-delivery [32m200[39m in 223ms
+ GET /images/el-haty/placeholder.svg?height=200&width=300 [33m404[39m in 957ms
+ GET /api/auth/session [32m200[39m in 34ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 190ms
+ GET /favicon.ico [32m200[39m in 544ms
+ GET /ar [32m200[39m in 707ms
+ GET /favicon.ico [32m200[39m in 761ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [31m[1m⨯[22m[39m ./src/app/[lng]/page.tsx
+Error:   [31m×[0m Expression expected
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/page.tsx[0m:172:1]
+ [2m169[0m │   if (builderSections?.length) {
+ [2m170[0m │     const orderedSections = sortSections(builderSections);
+ [2m171[0m │     return (
+ [2m172[0m │       </MobileLayout>
+     · [35;1m      ─[0m
+ [2m173[0m │       <main dir={direction} className="min-h-screen bg-neutral-50 text-stone-900">
+ [2m174[0m │         <div className="h-1 w-full" style={{ backgroundColor: accent }} />
+ [2m175[0m │         {orderedSections.map((section) =>
+     ╰────
+  [31m×[0m Unterminated regexp literal
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/page.tsx[0m:172:1]
+ [2m169[0m │   if (builderSections?.length) {
+ [2m170[0m │     const orderedSections = sortSections(builderSections);
+ [2m171[0m │     return (
+ [2m172[0m │       </MobileLayout>
+     · [35;1m       ──────────────[0m
+ [2m173[0m │       <main dir={direction} className="min-h-screen bg-neutral-50 text-stone-900">
+ [2m174[0m │         <div className="h-1 w-full" style={{ backgroundColor: accent }} />
+ [2m175[0m │         {orderedSections.map((section) =>
+     ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/[lng]/page.tsx
+ GET / [32m200[39m in 2380ms
+ GET /ar [32m200[39m in 2555ms
+ [31m[1m⨯[22m[39m ./src/app/[lng]/page.tsx
+Error:   [31m×[0m Expression expected
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/page.tsx[0m:172:1]
+ [2m169[0m │   if (builderSections?.length) {
+ [2m170[0m │     const orderedSections = sortSections(builderSections);
+ [2m171[0m │     return (
+ [2m172[0m │       </MobileLayout>
+     · [35;1m      ─[0m
+ [2m173[0m │       <main dir={direction} className="min-h-screen bg-neutral-50 text-stone-900">
+ [2m174[0m │         <div className="h-1 w-full" style={{ backgroundColor: accent }} />
+ [2m175[0m │         {orderedSections.map((section) =>
+     ╰────
+  [31m×[0m Unterminated regexp literal
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/page.tsx[0m:172:1]
+ [2m169[0m │   if (builderSections?.length) {
+ [2m170[0m │     const orderedSections = sortSections(builderSections);
+ [2m171[0m │     return (
+ [2m172[0m │       </MobileLayout>
+     · [35;1m       ──────────────[0m
+ [2m173[0m │       <main dir={direction} className="min-h-screen bg-neutral-50 text-stone-900">
+ [2m174[0m │         <div className="h-1 w-full" style={{ backgroundColor: accent }} />
+ [2m175[0m │         {orderedSections.map((section) =>
+     ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/[lng]/page.tsx
+ GET / [31m500[39m in 650ms
+ GET /ar [31m500[39m in 650ms
+ GET / [31m500[39m in 60ms
+ GET /ar [31m500[39m in 49ms
+ GET /favicon.ico [31m500[39m in 97ms
+ GET /favicon.ico [31m500[39m in 95ms
+ [31m[1m⨯[22m[39m ./src/app/[lng]/page.tsx
+Error:   [31m×[0m Expected ',', got 'dir'
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/page.tsx[0m:174:1]
+ [2m171[0m │     return (
+ [2m172[0m │        <MobileLayout restaurant={typedRestaurant}>
+ [2m173[0m │       </MobileLayout>
+ [2m174[0m │       <main dir={direction} className="min-h-screen bg-neutral-50 text-stone-900">
+     · [35;1m            ───[0m
+ [2m175[0m │         <div className="h-1 w-full" style={{ backgroundColor: accent }} />
+ [2m176[0m │         {orderedSections.map((section) =>
+ [2m177[0m │           renderSection(section, { theme: builderTheme, dataSources: { branches, menuItems }, locale })
+     ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/[lng]/page.tsx
+ GET /_next/static/webpack/3e013a163f25d099.webpack.hot-update.json [31m500[39m in 1575ms
+ GET /_next/static/webpack/3e013a163f25d099.webpack.hot-update.json [31m500[39m in 1578ms
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /ar [31m500[39m in 50ms
+ GET / [31m500[39m in 60ms
+ GET /favicon.ico [31m500[39m in 38ms
+ GET /favicon.ico [31m500[39m in 33ms
+ [31m[1m⨯[22m[39m ./src/app/[lng]/page.tsx
+Error:   [31m×[0m Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/page.tsx[0m:181:1]
+ [2m178[0m │         )}
+ [2m179[0m │       </main>
+ [2m180[0m │     );
+ [2m181[0m │   }
+     · [35;1m  ▲[0m
+ [2m182[0m │ 
+ [2m183[0m │   const cmsBlocks = mapPageToBlocks(page);
+     ╰────
+  [31m×[0m Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/page.tsx[0m:195:1]
+ [2m192[0m │       )}
+ [2m193[0m │     </main>
+ [2m194[0m │   );
+ [2m195[0m │ }
+     · [35;1m▲[0m
+ [2m196[0m │ 
+ [2m197[0m │ export async function generateMetadata({ params }: RouteParams): Promise<Metadata> {
+ [2m198[0m │   const { lng } = await params;
+     ╰────
+  [31m×[0m Expected '</', got 'const'
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/page.tsx[0m:198:1]
+ [2m195[0m │ }
+ [2m196[0m │ 
+ [2m197[0m │ export async function generateMetadata({ params }: RouteParams): Promise<Metadata> {
+ [2m198[0m │   const { lng } = await params;
+     · [35;1m  ─────[0m
+ [2m199[0m │   const locale = resolveLocale(lng);
+ [2m200[0m │   const { restaurant, page, hostHeader } = await loadHomeData(locale);
+     ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/[lng]/page.tsx
+ GET /_next/static/webpack/3e013a163f25d099.webpack.hot-update.json [31m500[39m in 939ms
+ GET /_next/static/webpack/3e013a163f25d099.webpack.hot-update.json [31m500[39m in 940ms
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /ar [31m500[39m in 435ms
+ GET / [31m500[39m in 279ms
+ GET /favicon.ico [31m500[39m in 62ms
+ GET /favicon.ico [31m500[39m in 59ms
+ [32m[1m✓[22m[39m Compiled /_error in 2.3s (2366 modules)
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ GET /_next/static/webpack/3e013a163f25d099.webpack.hot-update.json [33m404[39m in 3862ms
+ GET /_next/static/webpack/3e013a163f25d099.webpack.hot-update.json [33m404[39m in 3863ms
+ [31m[1m⨯[22m[39m ReferenceError: MobileLayout is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:172:9)
+[0m [90m 170 |[39m     [36mconst[39m orderedSections [33m=[39m sortSections(builderSections)[33m;[39m
+ [90m 171 |[39m     [36mreturn[39m (
+[31m[1m>[22m[39m[90m 172 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m     |[39m         [31m[1m^[22m[39m
+ [90m 173 |[39m     
+ [90m 174 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m
+ [90m 175 |[39m         [33m<[39m[33mdiv[39m className[33m=[39m[32m"h-1 w-full"[39m style[33m=[39m{{ backgroundColor[33m:[39m accent }} [33m/[39m[33m>[39m[0m {
+  digest: [32m'4179484805'[39m
+}
+ [31m[1m⨯[22m[39m ReferenceError: MobileLayout is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:172:9)
+[0m [90m 170 |[39m     [36mconst[39m orderedSections [33m=[39m sortSections(builderSections)[33m;[39m
+ [90m 171 |[39m     [36mreturn[39m (
+[31m[1m>[22m[39m[90m 172 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m     |[39m         [31m[1m^[22m[39m
+ [90m 173 |[39m     
+ [90m 174 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m
+ [90m 175 |[39m         [33m<[39m[33mdiv[39m className[33m=[39m[32m"h-1 w-full"[39m style[33m=[39m{{ backgroundColor[33m:[39m accent }} [33m/[39m[33m>[39m[0m {
+  digest: [32m'4179484805'[39m
+}
+ GET / [31m500[39m in 1201ms
+ GET /ar [31m500[39m in 2186ms
+ [31m[1m⨯[22m[39m ReferenceError: MobileLayout is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:172:9)
+[0m [90m 170 |[39m     [36mconst[39m orderedSections [33m=[39m sortSections(builderSections)[33m;[39m
+ [90m 171 |[39m     [36mreturn[39m (
+[31m[1m>[22m[39m[90m 172 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m     |[39m         [31m[1m^[22m[39m
+ [90m 173 |[39m     
+ [90m 174 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m
+ [90m 175 |[39m         [33m<[39m[33mdiv[39m className[33m=[39m[32m"h-1 w-full"[39m style[33m=[39m{{ backgroundColor[33m:[39m accent }} [33m/[39m[33m>[39m[0m {
+  digest: [32m'4179484805'[39m
+}
+ [31m[1m⨯[22m[39m ReferenceError: MobileLayout is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:172:9)
+[0m [90m 170 |[39m     [36mconst[39m orderedSections [33m=[39m sortSections(builderSections)[33m;[39m
+ [90m 171 |[39m     [36mreturn[39m (
+[31m[1m>[22m[39m[90m 172 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m     |[39m         [31m[1m^[22m[39m
+ [90m 173 |[39m     
+ [90m 174 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m
+ [90m 175 |[39m         [33m<[39m[33mdiv[39m className[33m=[39m[32m"h-1 w-full"[39m style[33m=[39m{{ backgroundColor[33m:[39m accent }} [33m/[39m[33m>[39m[0m {
+  digest: [32m'4179484805'[39m
+}
+ GET /favicon.ico [31m500[39m in 1339ms
+ GET /favicon.ico [31m500[39m in 1982ms
+ [31m[1m⨯[22m[39m ./src/app/[lng]/page.tsx
+Error:   [31m×[0m Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/page.tsx[0m:183:1]
+ [2m180[0m │       </main>
+ [2m181[0m │         </MobileLayout>
+ [2m182[0m │     );
+ [2m183[0m │   }
+     · [35;1m  ▲[0m
+ [2m184[0m │ 
+ [2m185[0m │   const cmsBlocks = mapPageToBlocks(page);
+     ╰────
+  [31m×[0m Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/page.tsx[0m:197:1]
+ [2m194[0m │       )}
+ [2m195[0m │     </main>
+ [2m196[0m │   );
+ [2m197[0m │ }
+     · [35;1m▲[0m
+ [2m198[0m │ 
+ [2m199[0m │ export async function generateMetadata({ params }: RouteParams): Promise<Metadata> {
+ [2m200[0m │   const { lng } = await params;
+     ╰────
+  [31m×[0m Expected '</', got 'const'
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/page.tsx[0m:200:1]
+ [2m197[0m │ }
+ [2m198[0m │ 
+ [2m199[0m │ export async function generateMetadata({ params }: RouteParams): Promise<Metadata> {
+ [2m200[0m │   const { lng } = await params;
+     · [35;1m  ─────[0m
+ [2m201[0m │   const locale = resolveLocale(lng);
+ [2m202[0m │   const { restaurant, page, hostHeader } = await loadHomeData(locale);
+     ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/[lng]/page.tsx
+ GET / [31m500[39m in 27ms
+ GET /ar [31m500[39m in 61ms
+ GET /favicon.ico [31m500[39m in 123ms
+ GET /favicon.ico [31m500[39m in 30ms
+ [31m[1m⨯[22m[39m ./src/app/[lng]/page.tsx
+Error:   [31m×[0m Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/page.tsx[0m:184:1]
+ [2m181[0m │         </MobileLayout>
+ [2m182[0m │         
+ [2m183[0m │     );
+ [2m184[0m │   }
+     · [35;1m  ▲[0m
+ [2m185[0m │ 
+ [2m186[0m │   const cmsBlocks = mapPageToBlocks(page);
+     ╰────
+  [31m×[0m Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/page.tsx[0m:198:1]
+ [2m195[0m │       )}
+ [2m196[0m │     </main>
+ [2m197[0m │   );
+ [2m198[0m │ }
+     · [35;1m▲[0m
+ [2m199[0m │ 
+ [2m200[0m │ export async function generateMetadata({ params }: RouteParams): Promise<Metadata> {
+ [2m201[0m │   const { lng } = await params;
+     ╰────
+  [31m×[0m Expected '</', got 'const'
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/page.tsx[0m:201:1]
+ [2m198[0m │ }
+ [2m199[0m │ 
+ [2m200[0m │ export async function generateMetadata({ params }: RouteParams): Promise<Metadata> {
+ [2m201[0m │   const { lng } = await params;
+     · [35;1m  ─────[0m
+ [2m202[0m │   const locale = resolveLocale(lng);
+ [2m203[0m │   const { restaurant, page, hostHeader } = await loadHomeData(locale);
+     ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/[lng]/page.tsx
+ GET /_next/static/webpack/3e013a163f25d099.webpack.hot-update.json [31m500[39m in 1140ms
+ GET /_next/static/webpack/3e013a163f25d099.webpack.hot-update.json [31m500[39m in 1110ms
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /ar [31m500[39m in 128ms
+ GET / [31m500[39m in 49ms
+ GET /favicon.ico [31m500[39m in 51ms
+ GET /favicon.ico [31m500[39m in 49ms
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [31m[1m⨯[22m[39m ./src/app/[lng]/page.tsx
+Error:   [31m×[0m Expected '>', got ')'
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/page.tsx[0m:183:1]
+ [2m180[0m │       </main>
+ [2m181[0m │         </MobileLayout>
+ [2m182[0m │         </
+ [2m183[0m │     );
+     · [35;1m    ─[0m
+ [2m184[0m │   }
+ [2m185[0m │ 
+ [2m186[0m │   const cmsBlocks = mapPageToBlocks(page);
+     ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/[lng]/page.tsx
+ [32m[1m✓[22m[39m Compiled in 2.4s (2366 modules)
+ GET /ar [32m200[39m in 4225ms
+ [32m[1m✓[22m[39m Compiled in 1ms (1376 modules)
+ [31m[1m⨯[22m[39m ReferenceError: MainNav is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:172:12)
+[0m [90m 170 |[39m     [36mconst[39m orderedSections [33m=[39m sortSections(builderSections)[33m;[39m
+ [90m 171 |[39m     [36mreturn[39m (
+[31m[1m>[22m[39m[90m 172 |[39m        [33m<[39m[33m>[39m [33m<[39m[33mMainNav[39m [33m/[39m[33m>[39m 
+ [90m     |[39m            [31m[1m^[22m[39m
+ [90m 173 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m 174 |[39m     
+ [90m 175 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m[0m {
+  digest: [32m'1695202402'[39m
+}
+ [31m[1m⨯[22m[39m ReferenceError: MainNav is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:172:12)
+[0m [90m 170 |[39m     [36mconst[39m orderedSections [33m=[39m sortSections(builderSections)[33m;[39m
+ [90m 171 |[39m     [36mreturn[39m (
+[31m[1m>[22m[39m[90m 172 |[39m        [33m<[39m[33m>[39m [33m<[39m[33mMainNav[39m [33m/[39m[33m>[39m 
+ [90m     |[39m            [31m[1m^[22m[39m
+ [90m 173 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m 174 |[39m     
+ [90m 175 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m[0m {
+  digest: [32m'1695202402'[39m
+}
+ [31m[1m⨯[22m[39m ReferenceError: MainNav is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:172:12)
+[0m [90m 170 |[39m     [36mconst[39m orderedSections [33m=[39m sortSections(builderSections)[33m;[39m
+ [90m 171 |[39m     [36mreturn[39m (
+[31m[1m>[22m[39m[90m 172 |[39m        [33m<[39m[33m>[39m [33m<[39m[33mMainNav[39m [33m/[39m[33m>[39m 
+ [90m     |[39m            [31m[1m^[22m[39m
+ [90m 173 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m 174 |[39m     
+ [90m 175 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m[0m {
+  digest: [32m'1695202402'[39m
+}
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET / [31m500[39m in 8798ms
+[ResponseAborted: ]
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ GET /ar [31m500[39m in 4852ms
+[ResponseAborted: ]
+ GET /_next/static/webpack/3e013a163f25d099.webpack.hot-update.json [33m404[39m in 8784ms
+ GET /_next/static/webpack/3e013a163f25d099.webpack.hot-update.json [33m404[39m in 8891ms
+ [31m[1m⨯[22m[39m ReferenceError: MainNav is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:172:12)
+[0m [90m 170 |[39m     [36mconst[39m orderedSections [33m=[39m sortSections(builderSections)[33m;[39m
+ [90m 171 |[39m     [36mreturn[39m (
+[31m[1m>[22m[39m[90m 172 |[39m        [33m<[39m[33m>[39m [33m<[39m[33mMainNav[39m [33m/[39m[33m>[39m 
+ [90m     |[39m            [31m[1m^[22m[39m
+ [90m 173 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m 174 |[39m     
+ [90m 175 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m[0m {
+  digest: [32m'1695202402'[39m
+}
+ [31m[1m⨯[22m[39m ReferenceError: MainNav is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:172:12)
+[0m [90m 170 |[39m     [36mconst[39m orderedSections [33m=[39m sortSections(builderSections)[33m;[39m
+ [90m 171 |[39m     [36mreturn[39m (
+[31m[1m>[22m[39m[90m 172 |[39m        [33m<[39m[33m>[39m [33m<[39m[33mMainNav[39m [33m/[39m[33m>[39m 
+ [90m     |[39m            [31m[1m^[22m[39m
+ [90m 173 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m 174 |[39m     
+ [90m 175 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m[0m {
+  digest: [32m'1695202402'[39m
+}
+ GET / [31m500[39m in 686ms
+ GET /ar [31m500[39m in 1356ms
+ [31m[1m⨯[22m[39m ReferenceError: MainNav is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:172:12)
+[0m [90m 170 |[39m     [36mconst[39m orderedSections [33m=[39m sortSections(builderSections)[33m;[39m
+ [90m 171 |[39m     [36mreturn[39m (
+[31m[1m>[22m[39m[90m 172 |[39m        [33m<[39m[33m>[39m [33m<[39m[33mMainNav[39m [33m/[39m[33m>[39m 
+ [90m     |[39m            [31m[1m^[22m[39m
+ [90m 173 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m 174 |[39m     
+ [90m 175 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m[0m {
+  digest: [32m'1695202402'[39m
+}
+ GET /favicon.ico [31m500[39m in 1029ms
+ [31m[1m⨯[22m[39m ReferenceError: MainNav is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:172:12)
+[0m [90m 170 |[39m     [36mconst[39m orderedSections [33m=[39m sortSections(builderSections)[33m;[39m
+ [90m 171 |[39m     [36mreturn[39m (
+[31m[1m>[22m[39m[90m 172 |[39m        [33m<[39m[33m>[39m [33m<[39m[33mMainNav[39m [33m/[39m[33m>[39m 
+ [90m     |[39m            [31m[1m^[22m[39m
+ [90m 173 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m 174 |[39m     
+ [90m 175 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m[0m {
+  digest: [32m'1695202402'[39m
+}
+ GET /favicon.ico [31m500[39m in 1529ms
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [32m[1m✓[22m[39m Compiled in 9.8s (2352 modules)
+ [31m[1m⨯[22m[39m ReferenceError: MainNav is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:172:12)
+[0m [90m 170 |[39m     [36mconst[39m orderedSections [33m=[39m sortSections(builderSections)[33m;[39m
+ [90m 171 |[39m     [36mreturn[39m (
+[31m[1m>[22m[39m[90m 172 |[39m        [33m<[39m[33m>[39m [33m<[39m[33mMainNav[39m [33m/[39m[33m>[39m 
+ [90m     |[39m            [31m[1m^[22m[39m
+ [90m 173 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m 174 |[39m     
+ [90m 175 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m[0m {
+  digest: [32m'4274245728'[39m
+}
+ [31m[1m⨯[22m[39m ReferenceError: MainNav is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:172:12)
+[0m [90m 170 |[39m     [36mconst[39m orderedSections [33m=[39m sortSections(builderSections)[33m;[39m
+ [90m 171 |[39m     [36mreturn[39m (
+[31m[1m>[22m[39m[90m 172 |[39m        [33m<[39m[33m>[39m [33m<[39m[33mMainNav[39m [33m/[39m[33m>[39m 
+ [90m     |[39m            [31m[1m^[22m[39m
+ [90m 173 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m 174 |[39m     
+ [90m 175 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m[0m {
+  digest: [32m'4274245728'[39m
+}
+ GET / [31m500[39m in 7848ms
+ GET /ar [31m500[39m in 8223ms
+ [31m[1m⨯[22m[39m ReferenceError: MainNav is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:172:12)
+[0m [90m 170 |[39m     [36mconst[39m orderedSections [33m=[39m sortSections(builderSections)[33m;[39m
+ [90m 171 |[39m     [36mreturn[39m (
+[31m[1m>[22m[39m[90m 172 |[39m        [33m<[39m[33m>[39m [33m<[39m[33mMainNav[39m [33m/[39m[33m>[39m 
+ [90m     |[39m            [31m[1m^[22m[39m
+ [90m 173 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m 174 |[39m     
+ [90m 175 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m[0m {
+  digest: [32m'4274245728'[39m
+}
+ [31m[1m⨯[22m[39m ReferenceError: MainNav is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:172:12)
+[0m [90m 170 |[39m     [36mconst[39m orderedSections [33m=[39m sortSections(builderSections)[33m;[39m
+ [90m 171 |[39m     [36mreturn[39m (
+[31m[1m>[22m[39m[90m 172 |[39m        [33m<[39m[33m>[39m [33m<[39m[33mMainNav[39m [33m/[39m[33m>[39m 
+ [90m     |[39m            [31m[1m^[22m[39m
+ [90m 173 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m 174 |[39m     
+ [90m 175 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m[0m {
+  digest: [32m'4274245728'[39m
+}
+ GET /favicon.ico [31m500[39m in 1093ms
+ GET /favicon.ico [31m500[39m in 1353ms
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [32m[1m✓[22m[39m Compiled in 5.9s (2363 modules)
+ [31m[1m⨯[22m[39m ReferenceError: typedRestaurant is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:175:34)
+[0m [90m 173 |[39m     [36mreturn[39m (
+ [90m 174 |[39m        [33m<[39m[33m>[39m [33m<[39m[33mMainNav[39m [33m/[39m[33m>[39m 
+[31m[1m>[22m[39m[90m 175 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m     |[39m                                  [31m[1m^[22m[39m
+ [90m 176 |[39m     
+ [90m 177 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m
+ [90m 178 |[39m         [33m<[39m[33mdiv[39m className[33m=[39m[32m"h-1 w-full"[39m style[33m=[39m{{ backgroundColor[33m:[39m accent }} [33m/[39m[33m>[39m[0m {
+  digest: [32m'1791343627'[39m
+}
+ [31m[1m⨯[22m[39m ReferenceError: typedRestaurant is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:175:34)
+[0m [90m 173 |[39m     [36mreturn[39m (
+ [90m 174 |[39m        [33m<[39m[33m>[39m [33m<[39m[33mMainNav[39m [33m/[39m[33m>[39m 
+[31m[1m>[22m[39m[90m 175 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m     |[39m                                  [31m[1m^[22m[39m
+ [90m 176 |[39m     
+ [90m 177 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m
+ [90m 178 |[39m         [33m<[39m[33mdiv[39m className[33m=[39m[32m"h-1 w-full"[39m style[33m=[39m{{ backgroundColor[33m:[39m accent }} [33m/[39m[33m>[39m[0m {
+  digest: [32m'1791343627'[39m
+}
+ GET / [31m500[39m in 4643ms
+ GET /ar [31m500[39m in 4843ms
+ [31m[1m⨯[22m[39m ReferenceError: typedRestaurant is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:175:34)
+[0m [90m 173 |[39m     [36mreturn[39m (
+ [90m 174 |[39m        [33m<[39m[33m>[39m [33m<[39m[33mMainNav[39m [33m/[39m[33m>[39m 
+[31m[1m>[22m[39m[90m 175 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m     |[39m                                  [31m[1m^[22m[39m
+ [90m 176 |[39m     
+ [90m 177 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m
+ [90m 178 |[39m         [33m<[39m[33mdiv[39m className[33m=[39m[32m"h-1 w-full"[39m style[33m=[39m{{ backgroundColor[33m:[39m accent }} [33m/[39m[33m>[39m[0m {
+  digest: [32m'1791343627'[39m
+}
+ [31m[1m⨯[22m[39m ReferenceError: typedRestaurant is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:175:34)
+[0m [90m 173 |[39m     [36mreturn[39m (
+ [90m 174 |[39m        [33m<[39m[33m>[39m [33m<[39m[33mMainNav[39m [33m/[39m[33m>[39m 
+[31m[1m>[22m[39m[90m 175 |[39m        [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{typedRestaurant}[33m>[39m
+ [90m     |[39m                                  [31m[1m^[22m[39m
+ [90m 176 |[39m     
+ [90m 177 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m
+ [90m 178 |[39m         [33m<[39m[33mdiv[39m className[33m=[39m[32m"h-1 w-full"[39m style[33m=[39m{{ backgroundColor[33m:[39m accent }} [33m/[39m[33m>[39m[0m {
+  digest: [32m'1791343627'[39m
+}
+ GET /favicon.ico [31m500[39m in 1004ms
+ GET /favicon.ico [31m500[39m in 957ms
+ [32m[1m✓[22m[39m Compiled in 2.6s (2363 modules)
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [37m[1m○[22m[39m Compiling /api/subdomains ...
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 1346ms (1393 modules)
+ GET /api/subdomains [32m200[39m in 1934ms
+ GET /api/subdomains [32m200[39m in 1938ms
+ GET / [32m200[39m in 1016ms
+ GET /ar [32m200[39m in 1299ms
+ [31m[1m⨯[22m[39m Error: useDeliveryAddress must be used within a DeliveryAddressProvider
+    at useDeliveryAddress (src/contexts/delivery-address-context.tsx:434:11)
+    at AddressSheet (src/components/ar/address/AddressSheet.tsx:42:25)
+[0m [90m 432 |[39m
+ [90m 433 |[39m   [36mif[39m ([33m![39mcontext) {
+[31m[1m>[22m[39m[90m 434 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m"useDeliveryAddress must be used within a DeliveryAddressProvider"[39m)
+ [90m     |[39m           [31m[1m^[22m[39m
+ [90m 435 |[39m   }
+ [90m 436 |[39m
+ [90m 437 |[39m   [36mreturn[39m context[0m {
+  digest: [32m'53255055'[39m
+}
+ [37m[1m○[22m[39m Compiling /api/restaurant ...
+ [31m[1m⨯[22m[39m Error: useDeliveryAddress must be used within a DeliveryAddressProvider
+    at useDeliveryAddress (src/contexts/delivery-address-context.tsx:434:11)
+    at AddressSheet (src/components/ar/address/AddressSheet.tsx:42:25)
+[0m [90m 432 |[39m
+ [90m 433 |[39m   [36mif[39m ([33m![39mcontext) {
+[31m[1m>[22m[39m[90m 434 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m"useDeliveryAddress must be used within a DeliveryAddressProvider"[39m)
+ [90m     |[39m           [31m[1m^[22m[39m
+ [90m 435 |[39m   }
+ [90m 436 |[39m
+ [90m 437 |[39m   [36mreturn[39m context[0m {
+  digest: [32m'53255055'[39m
+}
+ [32m[1m✓[22m[39m Compiled /api/restaurant in 2.2s (1486 modules)
+ GET /favicon.ico [31m500[39m in 3103ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/auth/session [32m200[39m in 2669ms
+ GET /api/auth/session [32m200[39m in 2671ms
+ GET /api/auth/session [32m200[39m in 2678ms
+ GET /api/auth/session [32m200[39m in 2684ms
+ GET /api/auth/session [32m200[39m in 2687ms
+ GET /api/auth/session [32m200[39m in 2693ms
+ GET /favicon.ico [31m500[39m in 3153ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 2782ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 2787ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [37m[1m○[22m[39m Compiling /api/zones/check-delivery ...
+ POST /api/zones/check-delivery [32m200[39m in 710ms
+ POST /api/zones/check-delivery [32m200[39m in 711ms
+ POST /api/zones/check-delivery [32m200[39m in 710ms
+ POST /api/zones/check-delivery [32m200[39m in 712ms
+ POST /api/zones/check-delivery [32m200[39m in 711ms
+ POST /api/zones/check-delivery [32m200[39m in 712ms
+ POST /api/zones/check-delivery [32m200[39m in 713ms
+ POST /api/zones/check-delivery [32m200[39m in 650ms
+ POST /api/zones/check-delivery [32m200[39m in 653ms
+ POST /api/zones/check-delivery [32m200[39m in 656ms
+ POST /api/zones/check-delivery [32m200[39m in 658ms
+ POST /api/zones/check-delivery [32m200[39m in 147ms
+ POST /api/zones/check-delivery [32m200[39m in 148ms
+ POST /api/zones/check-delivery [32m200[39m in 151ms
+ POST /api/zones/check-delivery [32m200[39m in 152ms
+ POST /api/zones/check-delivery [32m200[39m in 1528ms
+ GET /ar/menu [32m200[39m in 688ms
+ [31m[1m⨯[22m[39m Error: useDeliveryAddress must be used within a DeliveryAddressProvider
+    at useDeliveryAddress (src/contexts/delivery-address-context.tsx:434:11)
+    at AddressSheet (src/components/ar/address/AddressSheet.tsx:42:25)
+[0m [90m 432 |[39m
+ [90m 433 |[39m   [36mif[39m ([33m![39mcontext) {
+[31m[1m>[22m[39m[90m 434 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m"useDeliveryAddress must be used within a DeliveryAddressProvider"[39m)
+ [90m     |[39m           [31m[1m^[22m[39m
+ [90m 435 |[39m   }
+ [90m 436 |[39m
+ [90m 437 |[39m   [36mreturn[39m context[0m {
+  digest: [32m'53255055'[39m
+}
+ GET /api/auth/session [32m200[39m in 27ms
+ POST /api/zones/check-delivery [32m200[39m in 158ms
+ POST /api/zones/check-delivery [32m200[39m in 160ms
+ GET /api/auth/session [32m200[39m in 30ms
+ GET /api/auth/session [32m200[39m in 41ms
+ POST /api/zones/check-delivery [32m200[39m in 122ms
+ POST /api/zones/check-delivery [32m200[39m in 123ms
+ GET /api/auth/session [32m200[39m in 24ms
+ POST /api/zones/check-delivery [32m200[39m in 127ms
+ POST /api/zones/check-delivery [32m200[39m in 110ms
+ POST /api/zones/check-delivery [32m200[39m in 93ms
+ GET /favicon.ico [31m500[39m in 1265ms
+ POST /api/zones/check-delivery [32m200[39m in 107ms
+ GET /images/el-haty/placeholder.svg?height=200&width=300 [33m404[39m in 674ms
+ GET /ar/branches [32m200[39m in 598ms
+ GET /api/auth/session [32m200[39m in 37ms
+ GET /api/auth/session [32m200[39m in 55ms
+ POST /api/zones/check-delivery [32m200[39m in 143ms
+ POST /api/zones/check-delivery [32m200[39m in 145ms
+ POST /api/zones/check-delivery [32m200[39m in 146ms
+ POST /api/zones/check-delivery [32m200[39m in 148ms
+ POST /api/zones/check-delivery [32m200[39m in 103ms
+ POST /api/zones/check-delivery [32m200[39m in 112ms
+ GET /api/auth/session [32m200[39m in 25ms
+ GET /api/auth/session [32m200[39m in 40ms
+ POST /api/zones/check-delivery [32m200[39m in 122ms
+ POST /api/zones/check-delivery [32m200[39m in 123ms
+ [31m[1m⨯[22m[39m Error: useDeliveryAddress must be used within a DeliveryAddressProvider
+    at useDeliveryAddress (src/contexts/delivery-address-context.tsx:434:11)
+    at AddressSheet (src/components/ar/address/AddressSheet.tsx:42:25)
+[0m [90m 432 |[39m
+ [90m 433 |[39m   [36mif[39m ([33m![39mcontext) {
+[31m[1m>[22m[39m[90m 434 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m"useDeliveryAddress must be used within a DeliveryAddressProvider"[39m)
+ [90m     |[39m           [31m[1m^[22m[39m
+ [90m 435 |[39m   }
+ [90m 436 |[39m
+ [90m 437 |[39m   [36mreturn[39m context[0m {
+  digest: [32m'53255055'[39m
+}
+ GET /favicon.ico [31m500[39m in 1335ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /ar/cart [32m200[39m in 3391ms
+ [31m[1m⨯[22m[39m Error: useDeliveryAddress must be used within a DeliveryAddressProvider
+    at useDeliveryAddress (src/contexts/delivery-address-context.tsx:434:11)
+    at AddressSheet (src/components/ar/address/AddressSheet.tsx:42:25)
+[0m [90m 432 |[39m
+ [90m 433 |[39m   [36mif[39m ([33m![39mcontext) {
+[31m[1m>[22m[39m[90m 434 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m"useDeliveryAddress must be used within a DeliveryAddressProvider"[39m)
+ [90m     |[39m           [31m[1m^[22m[39m
+ [90m 435 |[39m   }
+ [90m 436 |[39m
+ [90m 437 |[39m   [36mreturn[39m context[0m {
+  digest: [32m'53255055'[39m
+}
+ GET /favicon.ico [31m500[39m in 1605ms
+ [31m[1m⨯[22m[39m ./src/components/ar/cart-page.tsx
+Error:   [31m×[0m Unexpected token. Did you mean `{'>'}` or `&gt;`?
+    ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/components/ar/cart-page.tsx[0m:37:1]
+ [2m34[0m │   return (
+ [2m35[0m │     <div className="min-h-screen bg-white text-gray-900" dir="rtl">
+ [2m36[0m │       <div className="mx-auto w-full max-w-5xl px-4 pb-16 pt-10 sm:px-6 lg:pt-12">
+ [2m37[0m │         >
+    · [35;1m        ▲[0m
+ [2m38[0m │ 
+ [2m39[0m │         {items.length === 0 ? (
+ [2m40[0m │           <section className="rounded-[32px] border border-gray-200 bg-white p-12 text-center shadow-[0_20px_55px_-40px_rgba(15,23,42,0.45)]">
+    ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/ar/cart-page.tsx
+./src/app/[lng]/(core)/cart/page.tsx
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ [32m[1m✓[22m[39m Compiled /[lng]/cart in 4.3s (2484 modules)
+ GET /ar/cart [32m200[39m in 5001ms
+ GET /ar/cart [32m200[39m in 207ms
+ GET /ar/cart [32m200[39m in 1310ms
+ GET / [32m200[39m in 5462ms
+ GET / [32m200[39m in 1008ms
+ [37m[1m○[22m[39m Compiling /api/restaurant ...
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [31m[1m⨯[22m[39m Error: useDeliveryAddress must be used within a DeliveryAddressProvider
+    at useDeliveryAddress (src/contexts/delivery-address-context.tsx:434:11)
+    at AddressSheet (src/components/ar/address/AddressSheet.tsx:42:25)
+[0m [90m 432 |[39m
+ [90m 433 |[39m   [36mif[39m ([33m![39mcontext) {
+[31m[1m>[22m[39m[90m 434 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m"useDeliveryAddress must be used within a DeliveryAddressProvider"[39m)
+ [90m     |[39m           [31m[1m^[22m[39m
+ [90m 435 |[39m   }
+ [90m 436 |[39m
+ [90m 437 |[39m   [36mreturn[39m context[0m {
+  digest: [32m'53255055'[39m
+}
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/auth/session [32m200[39m in 1321ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 1731ms
+ GET /favicon.ico [31m500[39m in 2511ms
+ GET /ar/menu [32m200[39m in 1073ms
+ [31m[1m⨯[22m[39m Error: useDeliveryAddress must be used within a DeliveryAddressProvider
+    at useDeliveryAddress (src/contexts/delivery-address-context.tsx:434:11)
+    at AddressSheet (src/components/ar/address/AddressSheet.tsx:42:25)
+[0m [90m 432 |[39m
+ [90m 433 |[39m   [36mif[39m ([33m![39mcontext) {
+[31m[1m>[22m[39m[90m 434 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m"useDeliveryAddress must be used within a DeliveryAddressProvider"[39m)
+ [90m     |[39m           [31m[1m^[22m[39m
+ [90m 435 |[39m   }
+ [90m 436 |[39m
+ [90m 437 |[39m   [36mreturn[39m context[0m {
+  digest: [32m'53255055'[39m
+}
+ GET /api/auth/session [32m200[39m in 24ms
+ POST /api/zones/check-delivery [32m200[39m in 124ms
+ POST /api/zones/check-delivery [32m200[39m in 125ms
+ GET /api/auth/session [32m200[39m in 55ms
+ GET /api/auth/session [32m200[39m in 50ms
+ POST /api/zones/check-delivery [32m200[39m in 156ms
+ POST /api/zones/check-delivery [32m200[39m in 158ms
+ POST /api/zones/check-delivery [32m200[39m in 130ms
+ POST /api/zones/check-delivery [32m200[39m in 106ms
+ GET /api/auth/session [32m200[39m in 30ms
+ POST /api/zones/check-delivery [32m200[39m in 105ms
+ GET /favicon.ico [31m500[39m in 1579ms
+ POST /api/zones/check-delivery [32m200[39m in 122ms
+ GET /images/el-haty/placeholder.svg?height=200&width=300 [33m404[39m in 469ms
+ GET /ar/cart [32m200[39m in 49ms
+ [31m[1m⨯[22m[39m Error: useDeliveryAddress must be used within a DeliveryAddressProvider
+    at useDeliveryAddress (src/contexts/delivery-address-context.tsx:434:11)
+    at AddressSheet (src/components/ar/address/AddressSheet.tsx:42:25)
+[0m [90m 432 |[39m
+ [90m 433 |[39m   [36mif[39m ([33m![39mcontext) {
+[31m[1m>[22m[39m[90m 434 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m"useDeliveryAddress must be used within a DeliveryAddressProvider"[39m)
+ [90m     |[39m           [31m[1m^[22m[39m
+ [90m 435 |[39m   }
+ [90m 436 |[39m
+ [90m 437 |[39m   [36mreturn[39m context[0m {
+  digest: [32m'53255055'[39m
+}
+ GET /favicon.ico [31m500[39m in 1955ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /ar/checkout [32m200[39m in 1873ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [31m[1m⨯[22m[39m ./src/app/api/order-settings/route.ts:5:1
+[31m[1mModule not found[22m[39m: Can't resolve '[32m@/lib/dbConnect[39m'
+[0m [90m 3 |[39m [36mexport[39m [36mconst[39m dynamic [33m=[39m [32m"force-dynamic"[39m
+ [90m 4 |[39m
+[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m dbConnect [36mfrom[39m [32m"@/lib/dbConnect"[39m
+ [90m   |[39m [31m[1m^[22m[39m
+ [90m 6 |[39m [36mimport[39m [33mOrderSettings[39m [36mfrom[39m [32m"@/models/OrderSettings"[39m
+ [90m 7 |[39m [36mimport[39m [33mRestaurant[39m [36mfrom[39m [32m"@/models/Restaurant"[39m
+ [90m 8 |[39m [36mimport[39m type { [33mNextRequest[39m } [36mfrom[39m [32m"next/server"[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+ GET /favicon.ico [31m500[39m in 1827ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [31m500[39m in 1850ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [31m500[39m in 1861ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [31m500[39m in 1854ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [31m500[39m in 1855ms
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [31m500[39m in 1856ms
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [31m500[39m in 34ms
+ GET /_next/static/webpack/d9327140ffdb54b4.webpack.hot-update.json [31m500[39m in 35ms
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [31m500[39m in 39ms
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [31m500[39m in 304ms
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [31m500[39m in 547ms
+ GET /favicon.ico [31m500[39m in 69ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /_next/static/webpack/3e013a163f25d099.webpack.hot-update.json [31m500[39m in 4127ms
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [34m307[39m in 211ms
+ GET / [32m200[39m in 1433ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [32m[1m✓[22m[39m Compiled /auth/callback in 1843ms (2586 modules)
+ GET /auth/callback?code=66f3655682219528e650695a91ccf2cfc6ec5385db3f2b3ccfa8801fbb3e3f95&state=02293780-7c8c-4508-80d5-04c350143662 [32m200[39m in 2033ms
+ GET / [32m200[39m in 690ms
+ GET /ar/cart [32m200[39m in 384ms
+ GET /api/auth/session [32m200[39m in 419ms
+ GET /api/auth/session [32m200[39m in 472ms
+ [37m[1m○[22m[39m Compiling /api/restaurant ...
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [31m[1m⨯[22m[39m Error: useDeliveryAddress must be used within a DeliveryAddressProvider
+    at useDeliveryAddress (src/contexts/delivery-address-context.tsx:434:11)
+    at AddressSheet (src/components/ar/address/AddressSheet.tsx:42:25)
+[0m [90m 432 |[39m
+ [90m 433 |[39m   [36mif[39m ([33m![39mcontext) {
+[31m[1m>[22m[39m[90m 434 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m"useDeliveryAddress must be used within a DeliveryAddressProvider"[39m)
+ [90m     |[39m           [31m[1m^[22m[39m
+ [90m 435 |[39m   }
+ [90m 436 |[39m
+ [90m 437 |[39m   [36mreturn[39m context[0m {
+  digest: [32m'53255055'[39m
+}
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 5101ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /ar/checkout [32m200[39m in 3558ms
+ GET /favicon.ico [31m500[39m in 5585ms
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [34m307[39m in 99ms
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [34m307[39m in 23ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 774ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 756ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 762ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 765ms
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [34m307[39m in 22ms
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [34m307[39m in 12ms
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [34m307[39m in 15ms
+ [31m[1m⨯[22m[39m Error: useDeliveryAddress must be used within a DeliveryAddressProvider
+    at useDeliveryAddress (src/contexts/delivery-address-context.tsx:434:11)
+    at AddressSheet (src/components/ar/address/AddressSheet.tsx:42:25)
+[0m [90m 432 |[39m
+ [90m 433 |[39m   [36mif[39m ([33m![39mcontext) {
+[31m[1m>[22m[39m[90m 434 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m"useDeliveryAddress must be used within a DeliveryAddressProvider"[39m)
+ [90m     |[39m           [31m[1m^[22m[39m
+ [90m 435 |[39m   }
+ [90m 436 |[39m
+ [90m 437 |[39m   [36mreturn[39m context[0m {
+  digest: [32m'53255055'[39m
+}
+ GET /favicon.ico [31m500[39m in 2280ms
+ GET /auth/callback?code=abec1fc6ab6c08d6419d0b37cd076e2124b128035f05f22b4b7922656a369ca3&state=f2816e92-b0a0-42b0-8a81-7ebb37b77991 [34m307[39m in 610ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+
+./src/models/Restaurant.ts
+There are multiple modules with names that only differ in casing.
+This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+Use equal casing. Compare these module identifiers:
+* javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/models/Restaurant.ts|rsc
+    Used by 2 module(s), i. e.
+    javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/api/order-settings/route.ts|rsc
+* javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/models/restaurant.ts|rsc
+    Used by 1 module(s), i. e.
+    javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/page.tsx|rsc
+
+Import trace for requested module:
+./src/models/Restaurant.ts
+./src/app/api/order-settings/route.ts
+ GET / [32m200[39m in 7482ms
+ [31m[1m⨯[22m[39m Error: useDeliveryAddress must be used within a DeliveryAddressProvider
+    at useDeliveryAddress (src/contexts/delivery-address-context.tsx:434:11)
+    at AddressSheet (src/components/ar/address/AddressSheet.tsx:42:25)
+[0m [90m 432 |[39m
+ [90m 433 |[39m   [36mif[39m ([33m![39mcontext) {
+[31m[1m>[22m[39m[90m 434 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m"useDeliveryAddress must be used within a DeliveryAddressProvider"[39m)
+ [90m     |[39m           [31m[1m^[22m[39m
+ [90m 435 |[39m   }
+ [90m 436 |[39m
+ [90m 437 |[39m   [36mreturn[39m context[0m {
+  digest: [32m'53255055'[39m
+}
+ GET /favicon.ico [31m500[39m in 1598ms
+ GET /ar/checkout [32m200[39m in 47ms
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [34m307[39m in 53ms
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [34m307[39m in 12ms
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [34m307[39m in 26ms
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [34m307[39m in 21ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 259ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 261ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 280ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 284ms
+ [31m[1m⨯[22m[39m Error: useDeliveryAddress must be used within a DeliveryAddressProvider
+    at useDeliveryAddress (src/contexts/delivery-address-context.tsx:434:11)
+    at AddressSheet (src/components/ar/address/AddressSheet.tsx:42:25)
+[0m [90m 432 |[39m
+ [90m 433 |[39m   [36mif[39m ([33m![39mcontext) {
+[31m[1m>[22m[39m[90m 434 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m"useDeliveryAddress must be used within a DeliveryAddressProvider"[39m)
+ [90m     |[39m           [31m[1m^[22m[39m
+ [90m 435 |[39m   }
+ [90m 436 |[39m
+ [90m 437 |[39m   [36mreturn[39m context[0m {
+  digest: [32m'53255055'[39m
+}
+ GET /favicon.ico [31m500[39m in 2026ms
+ [31m[1m⨯[22m[39m Error: useDeliveryAddress must be used within a DeliveryAddressProvider
+    at useDeliveryAddress (src/contexts/delivery-address-context.tsx:434:11)
+    at AddressSheet (src/components/ar/address/AddressSheet.tsx:42:25)
+[0m [90m 432 |[39m
+ [90m 433 |[39m   [36mif[39m ([33m![39mcontext) {
+[31m[1m>[22m[39m[90m 434 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m"useDeliveryAddress must be used within a DeliveryAddressProvider"[39m)
+ [90m     |[39m           [31m[1m^[22m[39m
+ [90m 435 |[39m   }
+ [90m 436 |[39m
+ [90m 437 |[39m   [36mreturn[39m context[0m {
+  digest: [32m'53255055'[39m
+}
+ GET /favicon.ico [31m500[39m in 1814ms
+ GET /ar/menu [32m200[39m in 783ms
+ [31m[1m⨯[22m[39m Error: useDeliveryAddress must be used within a DeliveryAddressProvider
+    at useDeliveryAddress (src/contexts/delivery-address-context.tsx:434:11)
+    at AddressSheet (src/components/ar/address/AddressSheet.tsx:42:25)
+[0m [90m 432 |[39m
+ [90m 433 |[39m   [36mif[39m ([33m![39mcontext) {
+[31m[1m>[22m[39m[90m 434 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m"useDeliveryAddress must be used within a DeliveryAddressProvider"[39m)
+ [90m     |[39m           [31m[1m^[22m[39m
+ [90m 435 |[39m   }
+ [90m 436 |[39m
+ [90m 437 |[39m   [36mreturn[39m context[0m {
+  digest: [32m'53255055'[39m
+}
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+
+./src/models/Restaurant.ts
+There are multiple modules with names that only differ in casing.
+This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+Use equal casing. Compare these module identifiers:
+* javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/models/Restaurant.ts|rsc
+    Used by 2 module(s), i. e.
+    javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/api/order-settings/route.ts|rsc
+* javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/models/restaurant.ts|rsc
+    Used by 1 module(s), i. e.
+    javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/page.tsx|rsc
+
+Import trace for requested module:
+./src/models/Restaurant.ts
+./src/app/api/order-settings/route.ts
+ GET /api/auth/session [32m200[39m in 56ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+
+./src/models/Restaurant.ts
+There are multiple modules with names that only differ in casing.
+This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+Use equal casing. Compare these module identifiers:
+* javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/models/Restaurant.ts|rsc
+    Used by 2 module(s), i. e.
+    javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/api/order-settings/route.ts|rsc
+* javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/models/restaurant.ts|rsc
+    Used by 1 module(s), i. e.
+    javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/page.tsx|rsc
+
+Import trace for requested module:
+./src/models/Restaurant.ts
+./src/app/api/order-settings/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+
+./src/models/Restaurant.ts
+There are multiple modules with names that only differ in casing.
+This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+Use equal casing. Compare these module identifiers:
+* javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/models/Restaurant.ts|rsc
+    Used by 2 module(s), i. e.
+    javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/api/order-settings/route.ts|rsc
+* javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/models/restaurant.ts|rsc
+    Used by 1 module(s), i. e.
+    javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/page.tsx|rsc
+
+Import trace for requested module:
+./src/models/Restaurant.ts
+./src/app/api/order-settings/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+
+./src/models/Restaurant.ts
+There are multiple modules with names that only differ in casing.
+This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+Use equal casing. Compare these module identifiers:
+* javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/models/Restaurant.ts|rsc
+    Used by 2 module(s), i. e.
+    javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/api/order-settings/route.ts|rsc
+* javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/models/restaurant.ts|rsc
+    Used by 1 module(s), i. e.
+    javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/page.tsx|rsc
+
+Import trace for requested module:
+./src/models/Restaurant.ts
+./src/app/api/order-settings/route.ts
+ GET /api/auth/session [32m200[39m in 923ms
+ GET /favicon.ico [31m500[39m in 2417ms
+ POST /api/zones/check-delivery [32m200[39m in 1065ms
+ POST /api/zones/check-delivery [32m200[39m in 1398ms
+ POST /api/zones/check-delivery [32m200[39m in 1401ms
+ POST /api/zones/check-delivery [32m200[39m in 161ms
+ POST /api/zones/check-delivery [32m200[39m in 189ms
+ POST /api/zones/check-delivery [32m200[39m in 1241ms
+ GET /api/auth/session [32m200[39m in 310ms
+ GET /api/auth/session [32m200[39m in 122ms
+ POST /api/zones/check-delivery [32m200[39m in 1034ms
+ POST /api/zones/check-delivery [32m200[39m in 1037ms
+ GET /images/el-haty/placeholder.svg?height=200&width=300 [33m404[39m in 1650ms
+ GET /ar/branches [32m200[39m in 1153ms
+ GET /api/auth/session [32m200[39m in 60ms
+ GET /api/auth/session [32m200[39m in 97ms
+ GET /api/auth/session [32m200[39m in 18ms
+ POST /api/zones/check-delivery [32m200[39m in 166ms
+ POST /api/zones/check-delivery [32m200[39m in 168ms
+ POST /api/zones/check-delivery [32m200[39m in 169ms
+ POST /api/zones/check-delivery [32m200[39m in 171ms
+ GET /api/auth/session [32m200[39m in 115ms
+ POST /api/zones/check-delivery [32m200[39m in 201ms
+ POST /api/zones/check-delivery [32m200[39m in 157ms
+ POST /api/zones/check-delivery [32m200[39m in 212ms
+ POST /api/zones/check-delivery [32m200[39m in 214ms
+ [31m[1m⨯[22m[39m Error: useDeliveryAddress must be used within a DeliveryAddressProvider
+    at useDeliveryAddress (src/contexts/delivery-address-context.tsx:434:11)
+    at AddressSheet (src/components/ar/address/AddressSheet.tsx:42:25)
+[0m [90m 432 |[39m
+ [90m 433 |[39m   [36mif[39m ([33m![39mcontext) {
+[31m[1m>[22m[39m[90m 434 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m"useDeliveryAddress must be used within a DeliveryAddressProvider"[39m)
+ [90m     |[39m           [31m[1m^[22m[39m
+ [90m 435 |[39m   }
+ [90m 436 |[39m
+ [90m 437 |[39m   [36mreturn[39m context[0m {
+  digest: [32m'53255055'[39m
+}
+ GET /favicon.ico [31m500[39m in 1332ms
+ GET /ar/cart [32m200[39m in 58ms
+ [31m[1m⨯[22m[39m Error: useDeliveryAddress must be used within a DeliveryAddressProvider
+    at useDeliveryAddress (src/contexts/delivery-address-context.tsx:434:11)
+    at AddressSheet (src/components/ar/address/AddressSheet.tsx:42:25)
+[0m [90m 432 |[39m
+ [90m 433 |[39m   [36mif[39m ([33m![39mcontext) {
+[31m[1m>[22m[39m[90m 434 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m"useDeliveryAddress must be used within a DeliveryAddressProvider"[39m)
+ [90m     |[39m           [31m[1m^[22m[39m
+ [90m 435 |[39m   }
+ [90m 436 |[39m
+ [90m 437 |[39m   [36mreturn[39m context[0m {
+  digest: [32m'53255055'[39m
+}
+ GET /favicon.ico [31m500[39m in 1396ms

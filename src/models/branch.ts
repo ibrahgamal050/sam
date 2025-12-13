@@ -1,35 +1,59 @@
-import mongoose, { Schema, type Document } from "mongoose"
-import type { Types } from "mongoose"
+import mongoose, { Schema, Types } from "mongoose"
 
-export interface IBranch extends Document {
+export interface IBranch {
+  _id: Types.ObjectId
   restaurantId: Types.ObjectId
   name: string
-  address: string
-  latitude: number
-  longitude: number
-  phone: string
-  openHours: {
-    weekdays: string
-    weekends: string
+  slug: string
+  phone?: string
+  whatsapp?: string
+  email?: string
+  address: {
+    line1: string
+    line2?: string
+    city?: string
+    region?: string
+    country?: string
+    postalCode?: string
+    location?: { type: "Point"; coordinates: [number, number] } // [lng, lat]
   }
+  openingHours?: Record<string, { open: boolean; intervals: { start: string; end: string }[] }>
+  isMain?: boolean
+  isActive: boolean
   createdAt: Date
   updatedAt: Date
 }
 
-const BranchSchema: Schema = new Schema(
-  {
-    restaurantId: { type: Schema.Types.ObjectId, ref: "Restaurant", required: true, index: true },
-    name: { type: String, required: true },
-    address: { type: String, required: true },
-    latitude: { type: Number },
-    longitude: { type: Number },
-    phone: { type: String },
-    openHours: {
-      weekdays: { type: String },
-      weekends: { type: String },
-    },
-  },
-  { timestamps: true },
+const point = new Schema(
+  { type: { type: String, enum: ["Point"], default: "Point" }, coordinates: { type: [Number], default: [0, 0] } },
+  { _id: false }
 )
 
-export default mongoose.models.Branch || mongoose.model<IBranch>("Branch", BranchSchema)
+const branchSchema = new Schema<IBranch>(
+  {
+    restaurantId: { type: Schema.Types.ObjectId, ref: "Restaurant", index: true, required: true },
+    name: { type: String, required: true },
+    slug: { type: String, required: true, index: true },
+    phone: String,
+    whatsapp: String,
+    email: String,
+    address: {
+      line1: { type: String, required: true },
+      line2: String,
+      city: String,
+      region: String,
+      country: String,
+      postalCode: String,
+      location: point,
+    },
+    openingHours: { type: Schema.Types.Mixed },
+    isMain: { type: Boolean, default: false },
+    isActive: { type: Boolean, default: true },
+  },
+  { timestamps: true }
+)
+
+branchSchema.index({ restaurantId: 1, slug: 1 }, { unique: true })
+branchSchema.index({ "address.location": "2dsphere" })
+
+export default mongoose.models.Branch || mongoose.model<IBranch>("Branch", branchSchema)

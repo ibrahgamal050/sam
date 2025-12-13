@@ -43,15 +43,16 @@ const formatDescription = (description?: string) => {
 }
 
 interface HomePageProps {
-  searchParams?: {
+  searchParams?: Promise<{
     q?: string
-  }
+  }>
 }
 
 export default async function HomePage({ searchParams }: HomePageProps) {
   await dbConnect()
 
-  const searchTerm = searchParams?.q?.trim() ?? ""
+  const params = searchParams ? await searchParams : {}
+  const searchTerm = params?.q?.trim() ?? ""
 
   const queryFilter = searchTerm
     ? {

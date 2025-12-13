@@ -26,7 +26,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ['meelza.site', 'localhost','images.meelza.com'],
+    domains: ['meelza.site', 'meelza.com', 'localhost', 'images.meelza.com', 'hadramotantar.com'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -39,6 +39,11 @@ const nextConfig = {
         port: '3000',
         pathname: '/images/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'hadramotantar.com',
+        pathname: '/**',
+      },
     ],
   },
   
@@ -47,6 +52,15 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+   async rewrites() {
+    return [
+     
+      {
+        source: '/api/auth/:path*',
+        destination: 'http://localhost:3003/api/v1/public/auth/:path*',
+      },
+    ]
+  }
 }
 
 if (userConfig) {

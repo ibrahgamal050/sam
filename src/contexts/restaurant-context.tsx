@@ -1,58 +1,18 @@
 "use client"
 
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
-import { useParams } from "next/navigation"
+import { createContext, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react"
+import type { IRestaurant } from "@/types/restaurant"
 
-interface Restaurant {
-  _id: string
-  name: string
-  subdomain: string
-  logo: string
-  coverImage: string
-  description: string
-  themeColor: string
-  secondaryColor: string
-  phone: string
-  email: string
-  website?: string
-  location: {
-    address: string
-    latitude?: number
-    longitude?: number
-  }
-  social: {
-    facebook?: string
-    instagram?: string
-    tiktok?: string
-    twitter?: string
-  }
-  meta: {
-    title: string
-    description: string
-    keywords?: string
-    image?: string
-  }
-  pages?: Array<{
-    slug: string
-    meta: {
-      title: string
-      description: string
-      keywords?: string
-      image?: string
-    }
-  }>
-}
-
-interface RestaurantContextType {
-  restaurant: Restaurant | null
+type RestaurantContextType = {
+  restaurant: IRestaurant | null
   isLoading: boolean
   error: string | null
 }
 
-interface RestaurantContextType {
-  restaurant: Restaurant | null
-  isLoading: boolean
-  error: string | null
+type RestaurantProviderProps = {
+  children: ReactNode
+  initialRestaurant?: IRestaurant | null
+  initialSubdomain?: string | null
 }
 
 const RestaurantContext = createContext<RestaurantContextType>({
@@ -63,38 +23,131 @@ const RestaurantContext = createContext<RestaurantContextType>({
 
 export const useRestaurant = () => useContext(RestaurantContext)
 
-export const RestaurantProvider = ({ children }: { children: ReactNode }) => {
-  const [restaurant, setRestaurant] = useState<Restaurant | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+function extractSubdomainFromHost(hostname: string) {
+  // localhost والديف: حط قيمة افتراضية أو اسحب من localStorage
+  if (hostname === "localhost" || hostname.endsWith(".localhost")) {
+    return localStorage.getItem("devSubdomain") || "pizzamaster"
+  }
+
+  // vercel preview: myapp-xyz.vercel.app -> myapp-xyz
+  if (hostname.endsWith(".vercel.app")) {
+    return hostname.replace(".vercel.app", "").split(".")[0] || ""
+  }
+
+  // دومين متعدد المستأجرين: sub.domain.tld -> sub
+  const parts = hostname.split(".")
+  if (parts.length >= 3) return parts[0]
+
+  // دومين مخصص بدون sub (example.com) -> خلّيها فاضية (هتحتاج alias على السيرفر)
+  return ""
+}
+
+export const RestaurantProvider = ({
+  children,
+  initialRestaurant = null,
+  initialSubdomain = null,
+}: RestaurantProviderProps) => {
+  const [restaurant, setRestaurant] = useState<IRestaurant | null>(initialRestaurant)
+  const [isLoading, setIsLoading] = useState<boolean>(!initialRestaurant)
   const [error, setError] = useState<string | null>(null)
+  const [subdomain, setSubdomain] = useState<string>(initialSubdomain ?? "")
+  const lastFetchKeyRef = useRef<string | null>(
+    initialRestaurant ? (initialSubdomain ?? "__no_subdomain__") : null,
+  )
+
+  // استخرج الـ subdomain من المتصفح
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const sd = extractSubdomainFromHost(window.location.hostname)
+    setSubdomain(sd)
+  }, [])
 
   useEffect(() => {
+    let cancelled = false
+
     const fetchRestaurant = async () => {
       try {
         setIsLoading(true)
         setError(null)
 
-        // Fetch restaurant data from API using the current hostname
-        // No need to extract slug from params
-        const response = await fetch('/api/restaurant')
+        const url = subdomain
+          ? `/api/restaurant?subdomain=${encodeURIComponent(subdomain)}`
+          : `/api/restaurant`
+
+        const response = await fetch(url, {
+          headers: subdomain ? { "x-meelza-subdomain": subdomain } : undefined,
+          cache: "no-store",
+        })
 
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}))
-          throw new Error(errorData.error || "Failed to fetch restaurant data")
+          throw new Error(errorData.message || errorData.error || "Failed to fetch restaurant data")
         }
 
         const data = await response.json()
-        setRestaurant(data)
+
+        if (!cancelled) {
+          setRestaurant(data)
+        }
       } catch (err) {
-        console.error("Error fetching restaurant:", err)
-        setError(err instanceof Error ? err.message : "Failed to load restaurant data")
+        if (!cancelled) {
+          console.error("Error fetching restaurant:", err)
+          setError(err instanceof Error ? err.message : "Failed to load restaurant data")
+          if (!initialRestaurant) {
+            setRestaurant(null)
+          }
+        }
       } finally {
-        setIsLoading(false)
+        if (!cancelled) {
+          setIsLoading(false)
+        }
       }
     }
 
-    fetchRestaurant()
-  }, []) // No dependency on params anymore
+    const fetchKey = subdomain || "__no_subdomain__"
+    const isLocalhostContext =
+      typeof window !== "undefined" &&
+      (window.location.hostname === "localhost" || window.location.hostname.endsWith(".localhost"))
+    const hasMatchingRestaurant = Boolean(
+      subdomain && restaurant && restaurant.subdomain === subdomain,
+    )
 
-  return <RestaurantContext.Provider value={{ restaurant, isLoading, error }}>{children}</RestaurantContext.Provider>
+    if (!initialRestaurant && subdomain === "" && isLocalhostContext) {
+      setIsLoading(false)
+      return undefined
+    }
+
+    if (hasMatchingRestaurant) {
+      lastFetchKeyRef.current = fetchKey
+      setIsLoading(false)
+      return undefined
+    }
+
+    if (lastFetchKeyRef.current === fetchKey && restaurant) {
+      setIsLoading(false)
+      return undefined
+    }
+
+    lastFetchKeyRef.current = fetchKey
+    void fetchRestaurant()
+
+    return () => {
+      cancelled = true
+    }
+  }, [initialRestaurant, restaurant, subdomain])
+
+  const contextValue = useMemo(
+    () => ({
+      restaurant,
+      isLoading,
+      error,
+    }),
+    [restaurant, isLoading, error],
+  )
+
+  return (
+    <RestaurantContext.Provider value={contextValue}>
+      {children}
+    </RestaurantContext.Provider>
+  )
 }

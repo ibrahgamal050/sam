@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react"
 import { useEffect, useMemo, useState } from "react"
-import { useSession } from "next-auth/react"
+import { useSession } from '@/lib/nextauth-shim'
 import { useRouter } from "next/navigation"
 import { z } from "zod"
 import { Controller, useForm } from "react-hook-form"

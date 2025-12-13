@@ -1,4 +1,3 @@
-import { Siren } from 'lucide-react';
 import mongoose from 'mongoose';
 
 const SizeSchema = new mongoose.Schema({
@@ -6,7 +5,7 @@ const SizeSchema = new mongoose.Schema({
     en: { type: String, required: true }, // اسم الحجم بالإنجليزية
     ar: { type: String, required: true }, // اسم الحجم بالعربية
   },
-  price: { type: Number, required: false }, // سعر الحجم
+  price: { type: Number, required: true }, // سعر الحجم
 });
 
 const menuImageSchema = new mongoose.Schema({
@@ -20,20 +19,24 @@ const menuItemSchema = new mongoose.Schema({
     en: {
       type: String,
       required: false, // جعل الاسم باللغة الإنجليزية اختياريًا
+      maxlength: [120, 'Name cannot be more than 60 characters in English'],
     },
     ar: {
       type: String,
       required: false, // جعل الاسم باللغة العربية اختياريًا
+      maxlength: [120, 'Name cannot be more than 60 characters in Arabic'],
     }
   },
   description: {
     en: {
       type: String,
       required: false,
+      maxlength: [500, 'Description cannot be more than 200 characters in English'],
     },
     ar: {
       type: String,
       required: false,
+      maxlength: [500, 'Description cannot be more than 200 characters in Arabic'],
     }
   },
   price: {
@@ -45,7 +48,16 @@ const menuItemSchema = new mongoose.Schema({
     type: String,
     default: '/placeholder.svg?height=200&width=300',
   },
-  sizes: [SizeSchema]
+  sizes: [SizeSchema],
+  isAvailable: {
+    type: Boolean,
+    default: true,
+  },
+  stock: {
+    type: Number,
+    min: [0, 'Stock cannot be negative'],
+    default: null,
+  },
 });
 
 
@@ -55,18 +67,22 @@ const categorySchema = new mongoose.Schema({
     en: {
       type: String,
       required: [true, 'Please provide a name for the category in English.'],
+      maxlength: [100, 'Category name cannot be more than 30 characters in English'],
     },
     ar: {
       type: String,
       required: [true, 'Please provide a name for the category in Arabic.'],
+      maxlength: [100, 'Category name cannot be more than 30 characters in Arabic'],
     }
   },
   description: {
     en: {
       type: String,
+      maxlength: [100, 'Description cannot be more than 100 characters in English'],
     },
     ar: {
       type: String,
+      maxlength: [100, 'Description cannot be more than 100 characters in Arabic'],
     }
   },
   image: {
@@ -89,16 +105,6 @@ const restaurantMenuSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please provide a name for the restaurant.'],
     maxlength: [50, 'Restaurant name cannot be more than 50 characters'],
-  },
-  currency:{
-    ar:{
-      type: String,
-      maxlength: [50, 'Restaurant name cannot be more than 50 characters'],
-    },
-    en:{
-      type: String,
-      maxlength: [50, 'Restaurant name cannot be more than 50 characters'],
-    },
   },
   
   categories: [categorySchema], // Embed categories directly within the restaurant

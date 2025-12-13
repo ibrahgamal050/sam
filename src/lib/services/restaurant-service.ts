@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
-import Restaurant from "@/models/restaurant"
-import connectToDatabase from "@/lib/db"
+import Restaurant from "@/models/Restaurant"
+import dbConnect from "@/lib/db"
 import type { IRestaurant as RestaurantType } from "@/types/restaurant"
 import { extractPlatformSubdomain, getRootDomain, normalizeHost } from "@/lib/host-utils"
 
@@ -11,7 +11,7 @@ function convertToPlainObject(doc: unknown): RestaurantType {
 
 export async function getAllRestaurants(): Promise<RestaurantType[]> {
   try {
-    await connectToDatabase()
+    await dbConnect()
     const restaurants = await Restaurant.find({}).sort({ createdAt: -1 })
     return restaurants.map(convertToPlainObject)
   } catch (error) {
@@ -22,7 +22,7 @@ export async function getAllRestaurants(): Promise<RestaurantType[]> {
 
 export async function getRestaurantById(id: string): Promise<RestaurantType | null> {
   try {
-    await connectToDatabase()
+    await dbConnect()
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return null
@@ -42,7 +42,7 @@ const ALIAS_ACTIVE_CONDITION = {
 
 export async function getRestaurantBySubdomain(subdomain: string): Promise<RestaurantType | null> {
   try {
-    await connectToDatabase()
+    await dbConnect()
     const normalized = subdomain?.trim().toLowerCase()
     if (!normalized) {
       return null
@@ -72,7 +72,7 @@ export async function getRestaurantByHost(host: string): Promise<RestaurantType 
   }
 
   try {
-    await connectToDatabase()
+    await dbConnect()
 
     const subdomain = extractPlatformSubdomain(normalizedHost, rootDomain)
     if (subdomain) {
@@ -107,7 +107,7 @@ export async function createRestaurant(
   data: Omit<RestaurantType, "_id" | "createdAt" | "updatedAt">,
 ): Promise<RestaurantType> {
   try {
-    await connectToDatabase()
+    await dbConnect()
     const restaurant = new Restaurant(data)
     await restaurant.save()
     return convertToPlainObject(restaurant)
@@ -125,7 +125,7 @@ export async function createRestaurant(
 
 export async function updateRestaurant(id: string, data: Partial<RestaurantType>): Promise<RestaurantType | null> {
   try {
-    await connectToDatabase()
+    await dbConnect()
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return null
@@ -148,7 +148,7 @@ export async function updateRestaurant(id: string, data: Partial<RestaurantType>
 
 export async function deleteRestaurant(id: string): Promise<boolean> {
   try {
-    await connectToDatabase()
+    await dbConnect()
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return false
@@ -165,7 +165,7 @@ export async function deleteRestaurant(id: string): Promise<boolean> {
 // Advanced queries
 export async function searchRestaurants(query: string): Promise<RestaurantType[]> {
   try {
-    await connectToDatabase()
+    await dbConnect()
     const restaurants = await Restaurant.find({ $text: { $search: query } }, { score: { $meta: "textScore" } }).sort({
       score: { $meta: "textScore" },
     })
@@ -179,7 +179,7 @@ export async function searchRestaurants(query: string): Promise<RestaurantType[]
 
 export async function getRestaurantStats(): Promise<any> {
   try {
-    await connectToDatabase()
+    await dbConnect()
 
     const stats = await Restaurant.aggregate([
       {

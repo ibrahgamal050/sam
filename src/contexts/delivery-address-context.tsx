@@ -1,7 +1,8 @@
 "use client"
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react"
-import { useSession } from "next-auth/react"
+import { useSession } from "@/lib/nextauth-shim"
+import type { BranchSummary } from "@/lib/branch-utils"
 
 export interface DeliveryAddress {
   id: string
@@ -11,6 +12,7 @@ export interface DeliveryAddress {
   lat: number
   lng: number
   isDefault?: boolean
+  tenantKey?: string | null
 }
 
 interface DeliveryAddressContextValue {
@@ -25,6 +27,12 @@ interface DeliveryAddressContextValue {
   deleteAddress: (id: string) => Promise<void>
   setDefaultAddress: (id: string) => Promise<void>
   isLoading: boolean
+  fulfillmentType: FulfillmentType
+  setFulfillmentType: (type: FulfillmentType) => void
+  pickupBranch: BranchSummary | null
+  setPickupBranch: (branch: BranchSummary | null) => void
+  deliveryBranch: BranchSummary | null
+  setDeliveryBranch: (branch: BranchSummary | null) => void
 }
 
 const DEFAULT_ADDRESSES: DeliveryAddress[] = [
@@ -36,6 +44,7 @@ const DEFAULT_ADDRESSES: DeliveryAddress[] = [
     lat: 30.0376,
     lng: 31.2118,
     isDefault: true,
+    tenantKey: null,
   },
   {
     id: "2",
@@ -44,6 +53,7 @@ const DEFAULT_ADDRESSES: DeliveryAddress[] = [
     city: "القاهرة",
     lat: 30.0902,
     lng: 31.3234,
+    tenantKey: null,
   },
   {
     id: "3",
@@ -52,8 +62,11 @@ const DEFAULT_ADDRESSES: DeliveryAddress[] = [
     city: "القاهرة",
     lat: 29.9604,
     lng: 31.2599,
+    tenantKey: null,
   },
 ]
+
+export type FulfillmentType = "delivery" | "pickup"
 
 const DeliveryAddressContext = createContext<DeliveryAddressContextValue | undefined>(undefined)
 
@@ -63,6 +76,18 @@ export function DeliveryAddressProvider({ children }: { children: ReactNode }) {
   const [selectedAddress, setSelectedAddress] = useState<DeliveryAddress | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const hasFetchedRef = useRef(false)
+  const tenantKeyRef = useRef<string | null>(null)
+  const [fulfillmentType, setFulfillmentTypeState] = useState<FulfillmentType>("delivery")
+  const [pickupBranch, setPickupBranchState] = useState<BranchSummary | null>(null)
+  const [deliveryBranch, setDeliveryBranchState] = useState<BranchSummary | null>(null)
+
+  const getTenantKey = useCallback((): string | null => {
+    if (typeof window !== "undefined") {
+      const host = window.location.host.toLowerCase()
+      tenantKeyRef.current = tenantKeyRef.current ?? host
+    }
+    return tenantKeyRef.current
+  }, [])
 
   const normalizeAddress = useCallback((address: any): DeliveryAddress => ({
     id: address.id ?? address._id ?? "",
@@ -72,9 +97,11 @@ export function DeliveryAddressProvider({ children }: { children: ReactNode }) {
     lat: typeof address.lat === "number" ? address.lat : Number(address.lat ?? 0),
     lng: typeof address.lng === "number" ? address.lng : Number(address.lng ?? 0),
     isDefault: Boolean(address.isDefault),
+    tenantKey: typeof address.tenantKey === "string" ? address.tenantKey : null,
   }), [])
 
   const applyAddresses = useCallback((list: DeliveryAddress[]) => {
+    const tenantKey = getTenantKey()
     setAddresses(list)
     setSelectedAddress((current) => {
       if (!list.length) {
@@ -88,15 +115,28 @@ export function DeliveryAddressProvider({ children }: { children: ReactNode }) {
         }
       }
 
-      return list.find((addr) => addr.isDefault) ?? list[0]
+      const tenantDefault = tenantKey
+        ? list.find((addr) => addr.tenantKey === tenantKey && addr.isDefault)
+        : null
+      if (tenantDefault) return tenantDefault
+      const anyDefault = list.find((addr) => addr.isDefault)
+      if (anyDefault) return anyDefault
+      const tenantAny = tenantKey ? list.find((addr) => addr.tenantKey === tenantKey) : null
+      return tenantAny ?? list[0]
     })
-  }, [])
+  }, [getTenantKey])
 
   const loadAddressesFromServer = useCallback(async () => {
+    const tenantKey = getTenantKey()
     try {
       setIsLoading(true)
-      const response = await fetch("/api/account/addresses")
-
+      const url = new URL("/api/account/addresses", window.location.origin)
+      if (tenantKey) {
+        url.searchParams.set("tenantKey", tenantKey)
+      }
+      const response = await fetch(url.toString(), {
+        credentials: 'include',
+      })
       if (!response.ok) {
         throw new Error("Failed to load addresses")
       }
@@ -113,9 +153,13 @@ export function DeliveryAddressProvider({ children }: { children: ReactNode }) {
       setIsLoading(false)
       hasFetchedRef.current = true
     }
-  }, [applyAddresses, normalizeAddress])
+  }, [applyAddresses, normalizeAddress, getTenantKey])
 
   useEffect(() => {
+    if (typeof window !== "undefined" && !tenantKeyRef.current) {
+      tenantKeyRef.current = window.location.host.toLowerCase()
+    }
+
     if (status === "authenticated" && !hasFetchedRef.current) {
       loadAddressesFromServer()
     }
@@ -143,20 +187,39 @@ export function DeliveryAddressProvider({ children }: { children: ReactNode }) {
     [addresses],
   )
 
+  const setFulfillmentType = useCallback((type: FulfillmentType) => {
+    setFulfillmentTypeState(type)
+  }, [])
+
+  const setPickupBranch = useCallback((branch: BranchSummary | null) => {
+    setPickupBranchState(branch)
+  }, [])
+
+  const setDeliveryBranch = useCallback((branch: BranchSummary | null) => {
+    setDeliveryBranchState(branch)
+  }, [])
+
   const addAddress = useCallback(
     async (address: Omit<DeliveryAddress, "id"> & { id?: string; isDefault?: boolean }) => {
+      const tenantKey = getTenantKey()
       const generatedId = address.id ?? (typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : Date.now().toString())
       const newAddress: DeliveryAddress = {
         ...address,
         id: generatedId,
         isDefault: address.isDefault ?? false,
+        tenantKey,
       }
 
       if (status === "authenticated") {
-        const response = await fetch("/api/account/addresses", {
+        const url = new URL("/api/account/addresses", window.location.origin)
+        if (tenantKey) {
+          url.searchParams.set("tenantKey", tenantKey)
+        }
+        const response = await fetch(url.toString(), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...address, id: address.id }),
+          body: JSON.stringify({ ...address, id: address.id, tenantKey }),
+          credentials: 'include',
         })
 
         if (!response.ok) {
@@ -166,7 +229,9 @@ export function DeliveryAddressProvider({ children }: { children: ReactNode }) {
         const saved = normalizeAddress(await response.json())
 
         setAddresses((prev) => {
-          const others = saved.isDefault ? prev.map((item) => ({ ...item, isDefault: false })) : prev
+        const others = saved.isDefault
+          ? prev.map((item) => (item.tenantKey === saved.tenantKey ? { ...item, isDefault: false } : item))
+          : prev
           return [saved, ...others.filter((item) => item.id !== saved.id)]
         })
 
@@ -181,16 +246,22 @@ export function DeliveryAddressProvider({ children }: { children: ReactNode }) {
       setSelectedAddress(newAddress)
       return newAddress
     },
-    [status, normalizeAddress],
+    [status, normalizeAddress, getTenantKey],
   )
 
   const updateAddress = useCallback(
     async (id: string, updates: Partial<Omit<DeliveryAddress, "id">> & { isDefault?: boolean }) => {
+      const tenantKey = getTenantKey()
       if (status === "authenticated") {
-        const response = await fetch(`/api/account/addresses/${id}`, {
+        const url = new URL(`/api/account/addresses/${id}`, window.location.origin)
+        if (tenantKey) {
+          url.searchParams.set("tenantKey", tenantKey)
+        }
+        const response = await fetch(url.toString(), {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(updates),
+          body: JSON.stringify({ ...updates, tenantKey }),
+          credentials: 'include',
         })
 
         if (!response.ok) {
@@ -200,19 +271,25 @@ export function DeliveryAddressProvider({ children }: { children: ReactNode }) {
         const updated = normalizeAddress(await response.json())
 
         setAddresses((prev) => {
-          const mapped = prev.map((item) => (item.id === id ? { ...item, ...updated } : item))
+          const mapped = prev.map((item) =>
+            item.id === id ? { ...item, ...updated } : item,
+          )
           if (updated.isDefault) {
-            return mapped.map((item) => ({ ...item, isDefault: item.id === updated.id }))
+            return mapped.map((item) =>
+              item.tenantKey === updated.tenantKey
+                ? { ...item, isDefault: item.id === updated.id }
+                : item,
+            )
           }
           return mapped
         })
 
         setSelectedAddress((prev) => {
-          if (!prev) return updated.isDefault ? updated : prev
-          if (prev.id === updated.id) return updated
-          if (updated.isDefault) return updated
-          return prev
-        })
+        if (!prev) return updated.isDefault ? updated : prev
+        if (prev.id === updated.id) return updated
+        if (updated.isDefault) return updated
+        return prev
+      })
 
         return updated
       }
@@ -230,7 +307,11 @@ export function DeliveryAddressProvider({ children }: { children: ReactNode }) {
         })
 
         if (updates.isDefault) {
-          return mapped.map((item) => ({ ...item, isDefault: item.id === id }))
+          return mapped.map((item) =>
+            item.tenantKey === updatedLocal?.tenantKey
+              ? { ...item, isDefault: item.id === id }
+              : item,
+          )
         }
 
         return mapped
@@ -249,14 +330,20 @@ export function DeliveryAddressProvider({ children }: { children: ReactNode }) {
 
       return updatedLocal
     },
-    [status, normalizeAddress, addresses],
+    [status, normalizeAddress, addresses, getTenantKey],
   )
 
   const deleteAddress = useCallback(
     async (id: string) => {
+      const tenantKey = getTenantKey()
       if (status === "authenticated") {
-        const response = await fetch(`/api/account/addresses/${id}`, {
+        const url = new URL(`/api/account/addresses/${id}`, window.location.origin)
+        if (tenantKey) {
+          url.searchParams.set("tenantKey", tenantKey)
+        }
+        const response = await fetch(url.toString(), {
           method: "DELETE",
+          credentials: 'include',
         })
 
         if (!response.ok) {
@@ -272,7 +359,11 @@ export function DeliveryAddressProvider({ children }: { children: ReactNode }) {
           }
 
           if (!current || current.id === id) {
-            return remaining.find((item) => item.isDefault) ?? remaining[0]
+            return (
+              remaining.find((item) => item.isDefault && item.tenantKey === tenantKey) ??
+              remaining.find((item) => item.isDefault) ??
+              remaining[0]
+            )
           }
 
           const stillExists = remaining.find((item) => item.id === current.id)
@@ -280,12 +371,16 @@ export function DeliveryAddressProvider({ children }: { children: ReactNode }) {
             return stillExists
           }
 
-          return remaining.find((item) => item.isDefault) ?? remaining[0]
+          return (
+            remaining.find((item) => item.isDefault && item.tenantKey === tenantKey) ??
+            remaining.find((item) => item.isDefault) ??
+            remaining[0]
+          )
         })
         return remaining
       })
     },
-    [status],
+    [status, getTenantKey],
   )
 
   const setDefaultAddress = useCallback(
@@ -305,8 +400,28 @@ export function DeliveryAddressProvider({ children }: { children: ReactNode }) {
       deleteAddress,
       setDefaultAddress,
       isLoading,
+      fulfillmentType,
+      setFulfillmentType,
+      pickupBranch,
+      setPickupBranch,
+      deliveryBranch,
+      setDeliveryBranch,
     }),
-    [addresses, selectedAddress, addAddress, updateAddress, deleteAddress, setDefaultAddress, isLoading],
+    [
+      addresses,
+      selectedAddress,
+      addAddress,
+      updateAddress,
+      deleteAddress,
+      setDefaultAddress,
+      isLoading,
+      fulfillmentType,
+      setFulfillmentType,
+      pickupBranch,
+      setPickupBranch,
+      deliveryBranch,
+      setDeliveryBranch,
+    ],
   )
 
   return <DeliveryAddressContext.Provider value={value}>{children}</DeliveryAddressContext.Provider>

@@ -27,13 +27,8 @@ export function PostsPage() {
 
   const basePath = useMemo(() => {
     const segments = pathname?.split("/").filter(Boolean) ?? []
-    if (segments[0] === "sites") {
-      const localeSegment = segments[1] ?? ""
-      return localeSegment ? `/${localeSegment}` : ""
-    }
-
     const localeSegment = segments[0] ?? ""
-    return localeSegment ? `/${localeSegment}` : ""
+    return localeSegment ? `/${localeSegment}` : "/ar"
   }, [pathname])
 
   useEffect(() => {
