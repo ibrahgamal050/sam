@@ -4,7 +4,7 @@ export const dynamic = "force-dynamic"
 
 import dbConnect from "@/lib/db"
 import OrderSettings from "@/models/OrderSettings"
-import Restaurant from "@/models/Restaurant"
+import Restaurant from "@/models/restaurant"
 import type { NextRequest } from "next/server"
 
 /** قيم افتراضية سليمة للاستهلاك في الواجهة */

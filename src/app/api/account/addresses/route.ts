@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { randomUUID } from "crypto"
 import { z } from "zod"
 
-import dbConnect from "@/lib/dbConnect"
+import dbConnect from "@/lib/db"
 import User from "@/models/User"
 import { getAuth } from "@/lib/auth/auth-server"
 

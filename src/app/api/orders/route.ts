@@ -4,9 +4,9 @@ import { getAuth } from "@/lib/auth/auth-server"
 import { z } from "zod"
 import { Types, startSession } from "mongoose"
 
-import Restaurant from "@/models/Restaurant"
-import Menu from "@/models/Menu"
-import Order from "@/models/Order"
+import Restaurant from "@/models/restaurant"
+import Menu from "@/models/menu"
+import Order from "@/models/order"
 import OrderSettings from "@/models/OrderSettings"
 import { emitOrderEvent } from "@/lib/orderEvents"
 

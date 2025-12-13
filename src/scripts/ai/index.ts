@@ -5,7 +5,7 @@ import getRestaurantReviews from './reviews.js';
 import generateAboutPage from './about.js';
 import generateHomePage from './home.js';
 import { IRestaurant, IPages } from '@/types';
-import RestaurantModel from '@/models/restaurant'
+import RestaurantModel from '@/models/restaurant.js'
 import generateInfoData from './info.js'
 import Pages from '@/models/page'
 import generatemenuPage from './menuPage.js';

@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import Restaurant from "@/models/Restaurant"
+import Restaurant from "@/models/restaurant"
 import dbConnect from "@/lib/db"
 import type { IRestaurant as RestaurantType } from "@/types/restaurant"
 import { extractPlatformSubdomain, getRootDomain, normalizeHost } from "@/lib/host-utils"
