@@ -1642,3 +1642,30 @@ Import trace for requested module:
  POST /api/zones/check-delivery [32m200[39m in 1707ms
  POST /api/zones/check-delivery [32m200[39m in 1923ms
  GET / [32m200[39m in 2511ms
+ GET /ar/cart [32m200[39m in 540ms
+ GET /api/auth/session [32m200[39m in 98ms
+ GET /api/auth/session [32m200[39m in 94ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 187ms
+ GET /api/account/addresses?tenantKey=el-haty.localhost%3A3000 [32m200[39m in 254ms
+ [31m[1m⨯[22m[39m Error: useDeliveryAddress must be used within a DeliveryAddressProvider
+    at useDeliveryAddress (src/contexts/delivery-address-context.tsx:434:11)
+    at AddressSheet (src/components/ar/address/AddressSheet.tsx:42:25)
+[0m [90m 432 |[39m
+ [90m 433 |[39m   [36mif[39m ([33m![39mcontext) {
+[31m[1m>[22m[39m[90m 434 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m"useDeliveryAddress must be used within a DeliveryAddressProvider"[39m)
+ [90m     |[39m           [31m[1m^[22m[39m
+ [90m 435 |[39m   }
+ [90m 436 |[39m
+ [90m 437 |[39m   [36mreturn[39m context[0m {
+  digest: [32m'53255055'[39m
+}
+ GET /favicon.ico [31m500[39m in 1590ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/subdomains [32m200[39m in 269ms
+ GET /api/subdomains [32m200[39m in 268ms
+ GET /ar/cart [32m200[39m in 289ms
+ GET / [32m200[39m in 977ms
