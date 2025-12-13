@@ -7,6 +7,7 @@ import { extractPlatformSubdomain, getRootDomain } from "@/lib/host-utils"
 import type { IRestaurant } from "@/types/restaurant"
 import { MainNav } from "@/components/ar/header/main-nav"
 import { MobileLayout } from "@/components/ar/mobile-layout"
+import MeelzaFooter from "@/components/meelza-footer"
 
 const SUPPORTED_LOCALES = new Set(["ar", "en"])
 
@@ -54,6 +55,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
             <div className="hidden lg:block flex-1">{children}</div>
            
           </div>
+          <MeelzaFooter/>
         </CartProvider>
       </DeliveryAddressProvider>
     </RestaurantProvider>

@@ -19,25 +19,215 @@
      [1m✓[22m parallelServerBuildTraces
 
  [32m[1m✓[22m[39m Starting...
- [32m[1m✓[22m[39m Ready in 5.9s
- [32m[1m✓[22m[39m Compiled /middleware in 370ms (159 modules)
+ [32m[1m✓[22m[39m Ready in 3.4s
+ [32m[1m✓[22m[39m Compiled /middleware in 482ms (159 modules)
  [37m[1m○[22m[39m Compiling /api/subdomains ...
- [32m[1m✓[22m[39m Compiled /api/subdomains in 725ms (346 modules)
- GET /api/subdomains [32m200[39m in 3203ms
- [37m[1m○[22m[39m Compiling /[lng]/[...slug] ...
- [32m[1m✓[22m[39m Compiled /[lng]/[...slug] in 2.4s (1062 modules)
- GET /ar/about [32m200[39m in 7042ms
- GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 1894ms
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 877ms (346 modules)
+ GET /api/subdomains [32m200[39m in 3403ms
+ [37m[1m○[22m[39m Compiling /[lng] ...
+ [32m[1m✓[22m[39m Compiled /[lng] in 1428ms (1066 modules)
+ GET / [32m200[39m in 4169ms
+ [37m[1m○[22m[39m Compiling /api/restaurant ...
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/auth/session [32m200[39m in 2235ms
+ GET /api/auth/session [32m200[39m in 2237ms
+ GET /api/auth/session [32m200[39m in 2237ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 2417ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /favicon.ico [31m500[39m in 2778ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ POST /api/zones/check-delivery [32m200[39m in 718ms
+ POST /api/zones/check-delivery [32m200[39m in 420ms
+ POST /api/zones/check-delivery [32m200[39m in 799ms
+ GET / [32m200[39m in 864ms
+ POST /api/zones/check-delivery [32m200[39m in 116ms
+ POST /api/zones/check-delivery [32m200[39m in 105ms
+ POST /api/zones/check-delivery [32m200[39m in 232ms
+ POST /api/zones/check-delivery [32m200[39m in 1112ms
+ POST /api/zones/check-delivery [32m200[39m in 1302ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /ar/cart [32m200[39m in 1946ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 1203ms
+ GET /api/auth/session [32m200[39m in 61ms
+ POST /api/zones/check-delivery [32m200[39m in 178ms
+ POST /api/zones/check-delivery [32m200[39m in 180ms
+ POST /api/zones/check-delivery [32m200[39m in 181ms
+ POST /api/zones/check-delivery [32m200[39m in 182ms
+ POST /api/zones/check-delivery [32m200[39m in 92ms
+ POST /api/zones/check-delivery [32m200[39m in 182ms
+ GET /api/auth/session [32m200[39m in 63ms
+ GET /api/auth/session [32m200[39m in 78ms
+ GET /api/auth/session [32m200[39m in 79ms
+ POST /api/zones/check-delivery [32m200[39m in 159ms
+ POST /api/zones/check-delivery [32m200[39m in 160ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 1010ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /ar/branches [32m200[39m in 1864ms
+ GET /api/auth/session [32m200[39m in 47ms
+ POST /api/zones/check-delivery [32m200[39m in 125ms
+ POST /api/zones/check-delivery [32m200[39m in 128ms
+ POST /api/zones/check-delivery [32m200[39m in 130ms
+ POST /api/zones/check-delivery [32m200[39m in 132ms
+ POST /api/zones/check-delivery [32m200[39m in 135ms
+ POST /api/zones/check-delivery [32m200[39m in 103ms
+ GET /api/auth/session [32m200[39m in 30ms
+ GET /api/auth/session [32m200[39m in 46ms
+ GET /api/auth/session [32m200[39m in 47ms
+ POST /api/zones/check-delivery [32m200[39m in 239ms
+ POST /api/zones/check-delivery [32m200[39m in 249ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 1054ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [32m[1m✓[22m[39m Compiled /[lng]/menu in 1747ms (1920 modules)
+ [32m[1m✓[22m[39m Compiled in 2.7s (1934 modules)
+ GET /ar/menu [32m200[39m in 5322ms
+ GET /ar/menu [32m200[39m in 1236ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ [37m[1m○[22m[39m Compiling /api/zones/check-delivery ...
+ [32m[1m✓[22m[39m Compiled /api/zones/check-delivery in 1648ms (1209 modules)
+ [32m[1m✓[22m[39m Compiled (1212 modules)
+ GET /api/auth/session [32m200[39m in 2843ms
+ GET /favicon.ico [31m500[39m in 4255ms
+ POST /api/zones/check-delivery [32m200[39m in 2896ms
+ POST /api/zones/check-delivery [32m200[39m in 2895ms
+ POST /api/zones/check-delivery [32m200[39m in 2904ms
+ GET /api/auth/session [32m200[39m in 21ms
+ POST /api/zones/check-delivery [32m200[39m in 111ms
+ GET /api/auth/session [32m200[39m in 43ms
+ POST /api/zones/check-delivery [32m200[39m in 125ms
+ POST /api/zones/check-delivery [32m200[39m in 117ms
+ POST /api/zones/check-delivery [32m200[39m in 120ms
+ GET /api/auth/session [32m200[39m in 44ms
+ POST /api/zones/check-delivery [32m200[39m in 3373ms
+ GET /placeholder.jpg [33m404[39m in 1440ms
+ GET /images/karamelsham/placeholder.svg?height=200&width=300 [33m404[39m in 765ms
+ GET /placeholder.jpg [33m404[39m in 800ms
+ GET /ar [32m200[39m in 699ms
+ GET /api/auth/session [32m200[39m in 19ms
+ POST /api/zones/check-delivery [32m200[39m in 107ms
+ POST /api/zones/check-delivery [32m200[39m in 115ms
+ POST /api/zones/check-delivery [32m200[39m in 115ms
+ POST /api/zones/check-delivery [32m200[39m in 117ms
+ POST /api/zones/check-delivery [32m200[39m in 119ms
+ POST /api/zones/check-delivery [32m200[39m in 85ms
+ GET /api/auth/session [32m200[39m in 23ms
+ GET /api/auth/session [32m200[39m in 64ms
+ GET /api/auth/session [32m200[39m in 65ms
+ POST /api/zones/check-delivery [32m200[39m in 225ms
+ POST /api/zones/check-delivery [32m200[39m in 228ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 1795ms
+ GET /api/auth/session [32m200[39m in 37ms
+ GET /ar [32m200[39m in 1688ms
  [37m[1m○[22m[39m Compiling /api/restaurant ...
  [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
 Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
 
 Import trace for requested module:
 ./src/app/api/restaurant/route.ts
- GET /api/auth/session [32m200[39m in 3386ms
- GET /api/auth/session [32m200[39m in 3386ms
- GET /api/auth/session [32m200[39m in 3401ms
- GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 3703ms
  [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
 Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
 
@@ -48,14 +238,127 @@ Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/servi
 
 Import trace for requested module:
 ./src/app/api/restaurant/route.ts
- POST /api/zones/check-delivery [32m200[39m in 1440ms
- POST /api/zones/check-delivery [32m200[39m in 1446ms
- POST /api/zones/check-delivery [32m200[39m in 1450ms
- POST /api/zones/check-delivery [32m200[39m in 118ms
+ GET /api/auth/session [32m200[39m in 800ms
+ GET /api/auth/session [32m200[39m in 801ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 1011ms
+ POST /api/zones/check-delivery [32m200[39m in 102ms
+ POST /api/zones/check-delivery [32m200[39m in 113ms
+ POST /api/zones/check-delivery [32m200[39m in 113ms
+ POST /api/zones/check-delivery [32m200[39m in 107ms
+ POST /api/zones/check-delivery [32m200[39m in 96ms
+ POST /api/zones/check-delivery [32m200[39m in 105ms
+ POST /api/zones/check-delivery [32m200[39m in 230ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ POST /api/zones/check-delivery [32m200[39m in 942ms
+ GET /favicon.ico [31m500[39m in 1742ms
+ [32m[1m✓[22m[39m Compiled /api/restaurant in 2.2s (1934 modules)
+ [37m[1m○[22m[39m Compiling /api/subdomains ...
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 627ms (1118 modules)
+ GET /api/subdomains [32m200[39m in 1101ms
+ GET /ar [32m200[39m in 1168ms
+ GET /ar [32m200[39m in 645ms
+ [32m[1m✓[22m[39m Compiled /api/restaurant in 325ms (1211 modules)
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/auth/session [32m200[39m in 764ms
+ GET /api/auth/session [32m200[39m in 765ms
+ GET /api/auth/session [32m200[39m in 765ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 887ms
+ GET /favicon.ico [31m500[39m in 1414ms
+ [37m[1m○[22m[39m Compiling /api/zones/check-delivery ...
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ POST /api/zones/check-delivery [32m200[39m in 755ms
+ POST /api/zones/check-delivery [32m200[39m in 757ms
+ POST /api/zones/check-delivery [32m200[39m in 759ms
+ POST /api/zones/check-delivery [32m200[39m in 761ms
+ POST /api/zones/check-delivery [32m200[39m in 571ms
+ POST /api/zones/check-delivery [32m200[39m in 131ms
+ POST /api/zones/check-delivery [32m200[39m in 100ms
+ POST /api/zones/check-delivery [32m200[39m in 104ms
+ [32m[1m✓[22m[39m Compiled /api/zones/check-delivery in 2.8s (1934 modules)
+ GET /ar [32m200[39m in 1440ms
+ GET /ar [32m200[39m in 1175ms
+ [32m[1m✓[22m[39m Compiled /api/restaurant in 415ms (1209 modules)
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/auth/session [32m200[39m in 1033ms
+ GET /api/auth/session [32m200[39m in 1034ms
+ GET /api/auth/session [32m200[39m in 1035ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 1118ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /favicon.ico [31m500[39m in 1744ms
+ [37m[1m○[22m[39m Compiling /api/zones/check-delivery ...
+ POST /api/zones/check-delivery [32m200[39m in 610ms
+ POST /api/zones/check-delivery [32m200[39m in 612ms
+ POST /api/zones/check-delivery [32m200[39m in 613ms
+ POST /api/zones/check-delivery [32m200[39m in 619ms
+ POST /api/zones/check-delivery [32m200[39m in 546ms
+ POST /api/zones/check-delivery [32m200[39m in 205ms
+ POST /api/zones/check-delivery [32m200[39m in 104ms
  POST /api/zones/check-delivery [32m200[39m in 144ms
- POST /api/zones/check-delivery [32m200[39m in 147ms
- POST /api/zones/check-delivery [32m200[39m in 469ms
- POST /api/zones/check-delivery [32m200[39m in 2347ms
+ [32m[1m✓[22m[39m Compiled /api/zones/check-delivery in 2.2s (1934 modules)
+ GET /ar [32m200[39m in 1242ms
+ GET /ar [32m200[39m in 805ms
+ [32m[1m✓[22m[39m Compiled /api/restaurant in 364ms (1209 modules)
  [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
     at useCart (src/contexts/cart-context.tsx:377:19)
     at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
@@ -66,78 +369,50 @@ Import trace for requested module:
  [90m 378 |[39m   [36mreturn[39m ctx
  [90m 379 |[39m }
  [90m 380 |[39m[0m {
-  digest: [32m'1746987863'[39m
+  digest: [32m'3485297733'[39m
 }
- GET /ar [32m200[39m in 7002ms
- GET /ar [32m200[39m in 1459ms
- GET /ar [32m200[39m in 1776ms
- GET /favicon.ico [31m500[39m in 7961ms
- GET /api/auth/session [32m200[39m in 82ms
- GET /api/auth/session [32m200[39m in 140ms
- POST /api/zones/check-delivery [32m200[39m in 219ms
- POST /api/zones/check-delivery [32m200[39m in 224ms
- POST /api/zones/check-delivery [32m200[39m in 228ms
- POST /api/zones/check-delivery [32m200[39m in 231ms
- POST /api/zones/check-delivery [32m200[39m in 147ms
- POST /api/zones/check-delivery [32m200[39m in 141ms
- GET /api/auth/session [32m200[39m in 50ms
- GET /api/auth/session [32m200[39m in 112ms
- POST /api/zones/check-delivery [32m200[39m in 354ms
- POST /api/zones/check-delivery [32m200[39m in 359ms
- [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
-    at useCart (src/contexts/cart-context.tsx:377:19)
-    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
-[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
- [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
-[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
- [90m     |[39m                   [31m[1m^[22m[39m
- [90m 378 |[39m   [36mreturn[39m ctx
- [90m 379 |[39m }
- [90m 380 |[39m[0m {
-  digest: [32m'1746987863'[39m
-}
- GET /favicon.ico [31m500[39m in 1357ms
- GET /ar [32m200[39m in 864ms
- GET /api/auth/session [32m200[39m in 41ms
- GET /api/auth/session [32m200[39m in 72ms
- GET /api/auth/session [32m200[39m in 73ms
- GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 188ms
- POST /api/zones/check-delivery [32m200[39m in 109ms
- POST /api/zones/check-delivery [32m200[39m in 118ms
- POST /api/zones/check-delivery [32m200[39m in 112ms
- POST /api/zones/check-delivery [32m200[39m in 126ms
- POST /api/zones/check-delivery [32m200[39m in 125ms
- POST /api/zones/check-delivery [32m200[39m in 114ms
- POST /api/zones/check-delivery [32m200[39m in 124ms
- POST /api/zones/check-delivery [32m200[39m in 126ms
- [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
-    at useCart (src/contexts/cart-context.tsx:377:19)
-    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
-[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
- [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
-[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
- [90m     |[39m                   [31m[1m^[22m[39m
- [90m 378 |[39m   [36mreturn[39m ctx
- [90m 379 |[39m }
- [90m 380 |[39m[0m {
-  digest: [32m'1746987863'[39m
-}
- GET /favicon.ico [31m500[39m in 1099ms
- GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 811ms
- GET /ar [32m200[39m in 1886ms
- GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 1142ms
- GET /api/auth/session [32m200[39m in 42ms
- GET /api/auth/session [32m200[39m in 84ms
- GET /api/auth/session [32m200[39m in 89ms
- POST /api/zones/check-delivery [32m200[39m in 135ms
- POST /api/zones/check-delivery [32m200[39m in 136ms
- POST /api/zones/check-delivery [32m200[39m in 138ms
- POST /api/zones/check-delivery [32m200[39m in 139ms
- GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 357ms
- POST /api/zones/check-delivery [32m200[39m in 95ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/auth/session [32m200[39m in 816ms
+ GET /api/auth/session [32m200[39m in 817ms
+ GET /api/auth/session [32m200[39m in 818ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 899ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [37m[1m○[22m[39m Compiling /api/zones/check-delivery ...
+ POST /api/zones/check-delivery [32m200[39m in 511ms
+ POST /api/zones/check-delivery [32m200[39m in 512ms
+ POST /api/zones/check-delivery [32m200[39m in 514ms
+ POST /api/zones/check-delivery [32m200[39m in 379ms
+ POST /api/zones/check-delivery [32m200[39m in 516ms
+ GET /favicon.ico [31m500[39m in 1543ms
+ POST /api/zones/check-delivery [32m200[39m in 97ms
  POST /api/zones/check-delivery [32m200[39m in 99ms
  POST /api/zones/check-delivery [32m200[39m in 100ms
- POST /api/zones/check-delivery [32m200[39m in 102ms
+ GET /ar [32m200[39m in 1284ms
+ GET /api/auth/session [32m200[39m in 41ms
+ GET /api/auth/session [32m200[39m in 56ms
+ GET /api/auth/session [32m200[39m in 58ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 135ms
+ POST /api/zones/check-delivery [32m200[39m in 95ms
+ POST /api/zones/check-delivery [32m200[39m in 105ms
+ POST /api/zones/check-delivery [32m200[39m in 107ms
+ POST /api/zones/check-delivery [32m200[39m in 109ms
+ POST /api/zones/check-delivery [32m200[39m in 95ms
+ POST /api/zones/check-delivery [32m200[39m in 103ms
+ POST /api/zones/check-delivery [32m200[39m in 119ms
+ POST /api/zones/check-delivery [32m200[39m in 234ms
  [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
     at useCart (src/contexts/cart-context.tsx:377:19)
     at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
@@ -148,6 +423,6 @@ Import trace for requested module:
  [90m 378 |[39m   [36mreturn[39m ctx
  [90m 379 |[39m }
  [90m 380 |[39m[0m {
-  digest: [32m'1746987863'[39m
+  digest: [32m'3485297733'[39m
 }
- GET /favicon.ico [31m500[39m in 1384ms
+ GET /favicon.ico [31m500[39m in 1529ms
