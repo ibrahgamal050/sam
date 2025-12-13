@@ -41,7 +41,11 @@ export const toBranchSummary = (branch: IBranch | (Partial<IBranch> & { _id?: st
     id: normalizeBranchId(id),
     name: (branch as any)?.name?.ar || (branch as any)?.name?.en || "فرع",
     address: (branch as any)?.location?.address?.ar || (branch as any)?.location?.address?.en || "",
-    city: (branch as any)?.location?.city || "",
+    city:
+      (branch as any)?.location?.city?.ar ||
+      (branch as any)?.location?.city?.en ||
+      (branch as any)?.location?.city ||
+      "",
     phone: (branch as any)?.phone || "",
     latitude,
     longitude,

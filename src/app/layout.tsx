@@ -49,11 +49,9 @@ export default function RootLayout({
         <Script id="gtag-init" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-3DKRV4XY0P');
-</script>
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-3DKRV4XY0P');
           `}
         </Script>
       </body>

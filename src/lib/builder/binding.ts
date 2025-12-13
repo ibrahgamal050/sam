@@ -100,9 +100,17 @@ const toRenderableString = (value: unknown, locale?: string): string | undefined
 }
 
 export const resolveTextValue = (text: TextContent, options?: BuilderRenderOptions): string => {
-  const bound = text.binding ? toRenderableString(resolveBindingValue(text.binding, options), options?.locale) : undefined
-  const fallback = toRenderableString(text.value, options?.locale)
-  return bound ?? fallback ?? ""
+  const bound = text.binding ? resolveBindingValue(text.binding, options) : undefined
+  const fallback = text.value
+  const candidates = [bound, fallback]
+
+  for (const candidate of candidates) {
+    const rendered = toRenderableString(candidate, options?.locale)
+    if (rendered !== undefined) return rendered
+    if (candidate === 0 || candidate === false) return String(candidate)
+  }
+
+  return ""
 }
 
 export const normalizeTextContent = (element: { text?: TextContent; value?: string; settings?: TextSettings }): TextContent => {

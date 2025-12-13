@@ -11,7 +11,7 @@ import { MapPin, Navigation, X } from "lucide-react"
 import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
 
-import { useDeliveryAddress } from "@/contexts/delivery-address-context"
+import { useDeliveryAddress, useDeliveryAddressOptional } from "@/contexts/delivery-address-context"
 import { useRestaurant } from "@/contexts/restaurant-context"
 import { ZonesAPI } from "@/lib/api/zones"
 import type { DeliveryZone } from "@/types/delivery-zones"
@@ -25,6 +25,11 @@ type DeliveryState = { isAvailable: boolean; fee: number | null; zones: Delivery
 type Props = { className?: string }
 
 export default function AddressSheet({ className }: Props) {
+  const maybeContext = useDeliveryAddressOptional()
+  if (!maybeContext) {
+    return null
+  }
+
   const { toast } = useToast()
   const { restaurant } = useRestaurant()
   const {

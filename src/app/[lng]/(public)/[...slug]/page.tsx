@@ -123,7 +123,7 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 
   const title =
     seo.title ??
-    page.name ??
+    (typeof page.name === "string" ? page.name : page.name?.[locale] ?? page.name?.ar ?? page.name?.en) ??
     (typeof restaurant.name === "object"
       ? restaurant.name?.[locale] ?? restaurant.name?.ar ?? restaurant.name?.en
       : restaurant.name) ??
@@ -131,6 +131,9 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
 
   const description =
     seo.description ??
+    (typeof page.seo?.description === "string"
+      ? page.seo.description
+      : page.seo?.description?.[locale] ?? page.seo?.description?.ar ?? page.seo?.description?.en) ??
     (typeof restaurant.description === "object"
       ? restaurant.description?.[locale] ?? restaurant.description?.ar ?? restaurant.description?.en
       : restaurant.description) ??
@@ -216,14 +219,20 @@ const resolvedParams = await params
           <div className="relative mx-auto h-56 w-full max-w-4xl overflow-hidden rounded-3xl md:h-72">
             <img
               src={toAbsoluteUrl(page.headerImage, host, protocol) ?? FALLBACK_IMAGE}
-              alt={page.name}
+              alt={typeof page.name === "string" ? page.name : page.name?.[locale] ?? page.name?.ar ?? page.name?.en ?? ""}
               className="h-full w-full object-cover"
             />
           </div>
           <div className="space-y-2">
-            <h1 className="text-3xl font-semibold md:text-4xl">{page.name}</h1>
+            <h1 className="text-3xl font-semibold md:text-4xl">
+              {typeof page.name === "string" ? page.name : page.name?.[locale] ?? page.name?.ar ?? page.name?.en ?? ""}
+            </h1>
             {page.seo?.description && (
-              <p className="mx-auto max-w-2xl text-sm text-muted-foreground md:text-base">{page.seo.description}</p>
+              <p className="mx-auto max-w-2xl text-sm text-muted-foreground md:text-base">
+                {typeof page.seo.description === "string"
+                  ? page.seo.description
+                  : page.seo.description?.[locale] ?? page.seo.description?.ar ?? page.seo.description?.en ?? ""}
+              </p>
             )}
           </div>
         </header>

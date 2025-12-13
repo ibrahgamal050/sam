@@ -70,6 +70,8 @@ export type FulfillmentType = "delivery" | "pickup"
 
 const DeliveryAddressContext = createContext<DeliveryAddressContextValue | undefined>(undefined)
 
+export const useDeliveryAddressOptional = () => useContext(DeliveryAddressContext)
+
 export function DeliveryAddressProvider({ children }: { children: ReactNode }) {
   const { status } = useSession()
   const [addresses, setAddresses] = useState<DeliveryAddress[]>([])

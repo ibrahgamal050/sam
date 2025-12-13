@@ -33,8 +33,10 @@ import {
   renderRatingBadge,
   renderBadgeElement,
   renderButtonsElement,
+  renderMapElement,
   renderTimelineElement,
   renderCardElement,
+  renderLinkCardElement,
   renderCarouselElement,
   renderAccordionElement,
 } from "./domain-elements"
@@ -137,10 +139,14 @@ export const renderElement = (
       return renderBadgeElement(normalized, options)
     case "buttons":
       return renderButtonsElement(normalized, options)
+    case "map":
+      return renderMapElement(normalized, options)
     case "timeline":
       return renderTimelineElement(normalized, options)
     case "card":
       return renderCardElement(normalized, options)
+    case "link-card":
+      return renderLinkCardElement(normalized, options)
     case "carousel":
       return renderCarouselElement(normalized, options)
     case "accordion":
@@ -155,6 +161,7 @@ export const renderSection = (
   options: BuilderRenderOptions = {},
 ): ReactNode => {
   const layout = section.layout ?? {}
+  const elements = section.elements ?? []
   const isGrid = Boolean(layout.grid)
   const containerClass = containerClassMap[layout.container ?? "full"]
   const baseDisplayClass = isGrid ? "grid" : "flex"
@@ -217,8 +224,8 @@ export const renderSection = (
 
   if (section.type === "branches") {
     const branches = (sectionContext.dataSources?.branches as BranchSummary[] | undefined) ?? []
-    const nonGridElements = sortByPosition(section.elements).filter((el) => el.type !== "grid")
-    const gridElement = section.elements.find((el) => el.type === "grid") as GridElement | undefined
+    const nonGridElements = sortByPosition(elements).filter((el) => el.type !== "grid")
+    const gridElement = elements.find((el) => el.type === "grid") as GridElement | undefined
 
     const elementContext = gridElement ? getElementContext(gridElement, sectionContext) : sectionContext
     const layoutResult = gridElement ? elementLayoutStyle(gridElement.id, gridElement.layout) : { style: {} as CSSProperties }
@@ -243,7 +250,11 @@ export const renderSection = (
           style={wrapperStyle}
         >
           <div className={contentClasses} style={contentStyle} data-section-content={section.id}>
-            {nonGridElements.map((element) => renderElement(element, sectionContext))}
+            {nonGridElements.map((element, index) => (
+              <Fragment key={element.id ?? `${section.id}-non-grid-${index}`}>
+                {renderElement(element, sectionContext)}
+              </Fragment>
+            ))}
             <div
               className={cn(
                 "grid w-full",
@@ -282,7 +293,11 @@ export const renderSection = (
         style={wrapperStyle}
       >
         <div className={contentClasses} style={contentStyle} data-section-content={section.id}>
-          {sortByPosition(section.elements).map((element) => renderElement(element, sectionContext))}
+          {sortByPosition(elements).map((element, index) => (
+            <Fragment key={element.id ?? `${section.id}-element-${index}`}>
+              {renderElement(element, sectionContext)}
+            </Fragment>
+          ))}
         </div>
       </section>
     </Fragment>

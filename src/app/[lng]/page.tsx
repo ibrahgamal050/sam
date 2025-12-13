@@ -12,7 +12,6 @@ import { resolveRestaurantFromHeaders } from "@/lib/domain/restaurant-context";
 import { getRootDomain, resolveRestaurantHost } from "@/lib/host-utils";
 import { getPageBySlug } from "@/lib/services/page-service";
 import { getPageBuilderSections, sortSections } from "@/lib/builder-sections";
-import { getTenantAccent, getTenantBuilderSections } from "@/lib/server/tenants";
 import { toBranchSummary, type BranchSummary } from "@/lib/branch-utils";
 import { flattenMenuItems, flattenMenuPayload, getMenuByRestaurantId, type MenuItemSummary } from "@/lib/services/menu-service";
 
@@ -156,17 +155,11 @@ let typedRestaurant: IRestaurant | null = null
   }
 
   // حدّد السلاج (subdomain) واستخدمه في الثيم/التخصيص
-  const slug =
-    restaurant.subdomain?.toLowerCase?.() ||
-    restaurant.slug?.toLowerCase?.() ||
-    "demo-restaurant";
-
-  // حوّل JSON → Sections؛ لو فاضي استخدم صفحة افتراضية من tenants.ts
-  const builderSections = getPageBuilderSections(page) ?? getTenantBuilderSections(slug);
+  const builderSections = getPageBuilderSections(page);
   const builderTheme = page?.theme;
 
   const direction = locale === "ar" ? "rtl" : "ltr";
-  const accent = getTenantAccent(slug) ?? "#16a34a";
+  const accent = builderTheme?.palette?.primary ?? "#16a34a";
 
   if (builderSections?.length) {
     const orderedSections = sortSections(builderSections);

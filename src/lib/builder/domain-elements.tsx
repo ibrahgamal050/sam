@@ -8,8 +8,10 @@ import type {
   RatingBadgeElement,
   BadgeElement,
   ButtonsElement,
+  MapElement,
   TimelineElement,
   CardElement,
+  LinkCardElement,
   CarouselElement,
   AccordionElement,
   CtaGroupElement,
@@ -217,6 +219,54 @@ export const renderButtonsElement = (element: ButtonsElement, options: BuilderRe
   return renderCtaGroupElement(group, options)
 }
 
+export const renderMapElement = (element: MapElement, options: BuilderRenderOptions) => {
+  const layout = elementLayoutStyle(element.id, element.layout)
+  const map = element.map ?? {}
+  const mode = map.mode ?? "link"
+  const title = map.title ?? "الخريطة والفروع"
+  const note = map.note
+  const href = map.href ?? "/branches"
+  const palette = options.theme?.palette
+
+  return (
+    <Fragment key={element.id}>
+      {layout.css ? <style data-element-style={element.id} dangerouslySetInnerHTML={{ __html: layout.css }} /> : null}
+      <div
+        data-element-id={element.id}
+        className={cn(
+          "flex h-full flex-col gap-3 rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-sm shadow-black/5",
+          elementLayoutClasses(element.layout),
+        )}
+        style={layout.style}
+      >
+        <div className="flex flex-col gap-1">
+          <h3 className="text-lg font-bold text-slate-900">{title}</h3>
+          {note ? <p className="text-sm text-slate-600 leading-relaxed">{note}</p> : null}
+        </div>
+        {mode === "embed" && map.lat !== undefined && map.lng !== undefined ? (
+          <div className="relative overflow-hidden rounded-xl border border-slate-200 bg-slate-50" style={{ minHeight: "220px" }}>
+            <iframe
+              title={title}
+              src={`https://www.google.com/maps?q=${map.lat},${map.lng}&z=${map.zoom ?? 14}&output=embed`}
+              className="h-full w-full"
+              loading="lazy"
+            />
+          </div>
+        ) : (
+          <a
+            href={href}
+            className="inline-flex items-center gap-2 text-sm font-semibold"
+            style={{ color: palette?.primary ?? "#b91c1c" }}
+          >
+            <span>افتح صفحة الفروع</span>
+            <span aria-hidden>→</span>
+          </a>
+        )}
+      </div>
+    </Fragment>
+  )
+}
+
 export const renderTimelineElement = (element: TimelineElement, options: BuilderRenderOptions) => {
   const layout = elementLayoutStyle(element.id, element.layout)
   const items = element.timeline?.items ?? []
@@ -266,6 +316,32 @@ export const renderCardElement = (element: CardElement, options: BuilderRenderOp
         {card.title ? <h3 className="text-lg font-bold" dangerouslySetInnerHTML={{ __html: card.title }} /> : null}
         {card.text ? <p className="text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: card.text }} /> : null}
       </article>
+    </Fragment>
+  )
+}
+
+export const renderLinkCardElement = (element: LinkCardElement, options: BuilderRenderOptions) => {
+  const layout = elementLayoutStyle(element.id, element.layout)
+  const card = element.linkCard ?? {}
+  const bg = card.theme?.bg ?? "rgba(255,255,255,0.08)"
+  const textColor = card.theme?.text ?? options.theme?.palette?.text ?? "#0f172a"
+
+  return (
+    <Fragment key={element.id}>
+      {layout.css ? <style data-element-style={element.id} dangerouslySetInnerHTML={{ __html: layout.css }} /> : null}
+      <a
+        data-element-id={element.id}
+        href={card.href ?? "#"}
+        className={cn(
+          "flex h-full flex-col gap-2 rounded-2xl p-4 transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/10",
+          elementLayoutClasses(element.layout),
+        )}
+        style={{ ...layout.style, backgroundColor: bg, color: textColor }}
+      >
+        {card.icon ? <span className="text-xl" aria-hidden="true">{card.icon}</span> : null}
+        {card.title ? <h3 className="text-lg font-bold" dangerouslySetInnerHTML={{ __html: card.title }} /> : null}
+        {card.text ? <p className="text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: card.text }} /> : null}
+      </a>
     </Fragment>
   )
 }

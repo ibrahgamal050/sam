@@ -106,7 +106,12 @@ export const renderTextElement = (
     style.WebkitBackgroundClip = "text"
     style.color = "transparent"
   }
-  const textValue = resolveTextValue(textContent, elementContext)
+  const rawTextValue = resolveTextValue(textContent, elementContext) as unknown
+  const textValue = typeof rawTextValue === "string"
+    ? rawTextValue
+    : typeof rawTextValue === "number" || typeof rawTextValue === "boolean"
+      ? String(rawTextValue)
+      : ""
 
   return (
     <Fragment key={element.id}>

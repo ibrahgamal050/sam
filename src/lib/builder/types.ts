@@ -11,6 +11,9 @@ export interface ThemePalette {
   text?: string
   muted?: string
   background?: string
+  success?: string
+  danger?: string
+  warning?: string
 }
 
 export interface ThemeTypography {
@@ -128,6 +131,10 @@ export type SectionType =
   | "cta"
   | "testimonials"
   | "faq"
+  | "features"
+  | "seo-content"
+  | "links-grid"
+  | "categories"
   | "custom"
 
 export type SectionContainer = "full" | "xl" | "lg" | "md" | "sm" | "page"
@@ -293,7 +300,27 @@ export interface ImageElement extends ElementBase {
   ratio?: string
 }
 
-export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost"
+export type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "outline"
+  | "ghost"
+  | "link"
+  | "solid-dark"
+  | "solid-light"
+  | "gradient"
+  | "danger"
+  | "success"
+  | "order"
+  | "call"
+  | "map"
+  | "add-to-cart"
+  | "icon"
+  | "icon-left"
+  | "icon-right"
+  | "fab"
+  | "loading"
+  | "disabled"
 
 export interface ButtonElement extends ElementBase {
   type: "button"
@@ -303,6 +330,8 @@ export interface ButtonElement extends ElementBase {
   variant?: ButtonVariant
   iconLeft?: string
   iconRight?: string
+  state?: "default" | "loading" | "disabled"
+  floating?: boolean
 }
 
 export interface CtaGroupElement extends ElementBase {
@@ -426,6 +455,19 @@ export interface ButtonsElement extends ElementBase {
   }
 }
 
+export interface MapElement extends ElementBase {
+  type: "map"
+  map?: {
+    title?: string
+    note?: string
+    mode?: "link" | "embed"
+    href?: string
+    lat?: number
+    lng?: number
+    zoom?: number
+  }
+}
+
 export interface TimelineElement extends ElementBase {
   type: "timeline"
   timeline?: {
@@ -441,6 +483,20 @@ export interface CardElement extends ElementBase {
   card?: {
     title?: string
     text?: string
+    icon?: string
+    theme?: {
+      bg?: string
+      text?: string
+    }
+  }
+}
+
+export interface LinkCardElement extends ElementBase {
+  type: "link-card"
+  linkCard?: {
+    title?: string
+    text?: string
+    href?: string
     icon?: string
     theme?: {
       bg?: string
@@ -466,8 +522,10 @@ export type Element =
   | RatingBadgeElement
   | BadgeElement
   | ButtonsElement
+  | MapElement
   | TimelineElement
   | CardElement
+  | LinkCardElement
   | CarouselElement
   | AccordionElement
 
