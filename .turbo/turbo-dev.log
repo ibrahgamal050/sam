@@ -1669,3 +1669,19 @@ Import trace for requested module:
  GET /api/subdomains [32m200[39m in 268ms
  GET /ar/cart [32m200[39m in 289ms
  GET / [32m200[39m in 977ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/subdomains [32m200[39m in 359ms
+ GET /api/subdomains [32m200[39m in 359ms
+ GET /ar/cart [32m200[39m in 192ms
+ GET /ar/cart [32m200[39m in 197ms
+ GET / [32m200[39m in 862ms
+ GET / [32m200[39m in 737ms
