@@ -1307,3 +1307,35 @@ Import trace for requested module:
   digest: [32m'53255055'[39m
 }
  GET /favicon.ico [31m500[39m in 1396ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+
+./src/models/Restaurant.ts
+There are multiple modules with names that only differ in casing.
+This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+Use equal casing. Compare these module identifiers:
+* javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/models/Restaurant.ts|rsc
+    Used by 2 module(s), i. e.
+    javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/api/order-settings/route.ts|rsc
+* javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/models/restaurant.ts|rsc
+    Used by 1 module(s), i. e.
+    javascript/auto|/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js!/Users/ibrahimgamal/My project/meelza.com/node_modules/.pnpm/next@15.5.4_@opentelemetry+api@1.9.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js??ruleSet[1].rules[16].oneOf[4].use[0]!/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/page.tsx|rsc
+
+Import trace for requested module:
+./src/models/Restaurant.ts
+./src/app/api/order-settings/route.ts
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 4.2s (2485 modules)
+ GET /api/subdomains [32m200[39m in 4069ms
+ GET /api/subdomains [32m200[39m in 4072ms
+ GET /ar/cart [32m200[39m in 689ms
+ GET /ar/cart [32m200[39m in 717ms
+ GET / [32m200[39m in 1018ms
+ GET / [32m200[39m in 1739ms
+ [32m[1m✓[22m[39m Compiled in 2.9s (1037 modules)
+ GET /api/subdomains [32m200[39m in 222ms
+ GET /api/subdomains [32m200[39m in 225ms
+ GET /ar/cart [32m200[39m in 206ms
+ GET / [32m200[39m in 723ms
