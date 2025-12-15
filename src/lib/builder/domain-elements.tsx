@@ -1,5 +1,16 @@
 import { Fragment } from "react"
 import { cn } from "@/lib/utils"
+import {
+  Percent,
+  List,
+  Zap,
+  Flame,
+  Handshake,
+  Users,
+  Gift,
+  MapPin,
+  Phone,
+} from "lucide-react"
 import type {
   BuilderRenderOptions,
   MenuItemCardElement,
@@ -21,6 +32,24 @@ import type { MenuItemSummary } from "@/lib/services/menu-service"
 import type { BranchSummary } from "@/lib/branch-utils"
 import { elementLayoutClasses, elementLayoutStyle, gradientBackground } from "./layout"
 import { renderCtaGroupElement } from "./button"
+
+const iconMap = {
+  percent: Percent,
+  list: List,
+  zap: Zap,
+  flame: Flame,
+  handshake: Handshake,
+  users: Users,
+  gift: Gift,
+  map: MapPin,
+  phone: Phone,
+} as const
+
+const renderMappedIcon = (key?: string) => {
+  if (!key) return null
+  const Icon = iconMap[key as keyof typeof iconMap]
+  return Icon ? <Icon className="h-5 w-5" aria-hidden="true" /> : null
+}
 
 export const renderMenuItemCard = (
   element: MenuItemCardElement,
@@ -302,6 +331,7 @@ export const renderCardElement = (element: CardElement, options: BuilderRenderOp
   const card = element.card ?? {}
   const bg = card.theme?.bg ?? "rgba(255,205,5,0.10)"
   const textColor = card.theme?.text ?? "#0f172a"
+  const iconNode = renderMappedIcon(card.icon)
 
   return (
     <Fragment key={element.id}>
@@ -314,7 +344,7 @@ export const renderCardElement = (element: CardElement, options: BuilderRenderOp
         )}
         style={{ ...layout.style, backgroundColor: bg, color: textColor }}
       >
-        {card.icon ? <span className="text-xl" aria-hidden="true">{card.icon}</span> : null}
+        {iconNode ? <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-white/15 text-current">{iconNode}</span> : null}
         {card.title ? <h3 className="text-lg font-bold" dangerouslySetInnerHTML={{ __html: card.title }} /> : null}
         {card.text ? <p className="text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: card.text }} /> : null}
       </article>
@@ -327,6 +357,7 @@ export const renderLinkCardElement = (element: LinkCardElement, options: Builder
   const card = element.linkCard ?? {}
   const bg = card.theme?.bg ?? "rgba(255,255,255,0.08)"
   const textColor = card.theme?.text ?? options.theme?.palette?.text ?? "#0f172a"
+  const iconNode = renderMappedIcon(card.icon)
 
   return (
     <Fragment key={element.id}>
@@ -340,7 +371,7 @@ export const renderLinkCardElement = (element: LinkCardElement, options: Builder
         )}
         style={{ ...layout.style, backgroundColor: bg, color: textColor }}
       >
-        {card.icon ? <span className="text-xl" aria-hidden="true">{card.icon}</span> : null}
+        {iconNode ? <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-white/12 text-current">{iconNode}</span> : null}
         {card.title ? <h3 className="text-lg font-bold" dangerouslySetInnerHTML={{ __html: card.title }} /> : null}
         {card.text ? <p className="text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: card.text }} /> : null}
       </a>
