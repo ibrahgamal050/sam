@@ -233,7 +233,8 @@ export async function middleware(request: NextRequest) {
     hostWithoutPort === "127.0.0.1" ||
     (rootDomainEnv ? hostWithoutPort === rootDomainEnv : false)
 
-  if (isXmlRequest && isRootHost) {
+  // Allow XML (sitemap/robots) to bypass locale rewrites on any host
+  if (isXmlRequest) {
     return NextResponse.next()
   }
 

@@ -4,6 +4,7 @@ import dbConnect from "@/lib/db"
 import { getRestaurantByHost } from "@/lib/services/restaurant-service"
 import { getRootDomain, normalizeHost, resolveRestaurantHost } from "@/lib/host-utils"
 import Post from "@/models/post"
+import Pages from "@/models/page"
 
 // ====== إعدادات عامة ======
 const LOCALE_SEGMENT = "ar"
@@ -16,6 +17,10 @@ const STATIC_PRIORITY = "0.8"
 // إعدادات البوستات
 const POSTS_CHANGEFREQ = "weekly"
 const POSTS_PRIORITY = "0.7"
+
+// إعدادات الصفحات المخصصة
+const PAGES_CHANGEFREQ = "weekly"
+const PAGES_PRIORITY = "0.7"
 // لو عايز تحد عدد البوستات في السايت ماب (لأداء أفضل)
 const POSTS_LIMIT = 1000
 
@@ -65,15 +70,12 @@ export async function GET(req: Request) {
 
   // ====== روابط الصفحات الثابتة ======
   const restaurantLastmod = toIsoSafe(restaurant.updatedAt ?? new Date())
-  const staticUrlsXml = STATIC_PATHS.map((p) => {
-    const loc = escapeXml(buildUrl(baseUrl, p))
-    return `  <url>
-    <loc>${loc}</loc>
-    <lastmod>${restaurantLastmod}</lastmod>
-    <changefreq>${STATIC_CHANGEFREQ}</changefreq>
-    <priority>${STATIC_PRIORITY}</priority>
-  </url>`
-  }).join("\n")
+  const staticEntries = STATIC_PATHS.map((p) => ({
+    loc: buildUrl(baseUrl, p),
+    lastmod: restaurantLastmod,
+    changefreq: STATIC_CHANGEFREQ,
+    priority: STATIC_PRIORITY,
+  }))
 
   // ====== روابط البوستات (تلقائي) ======
   await dbConnect()
@@ -87,26 +89,66 @@ export async function GET(req: Request) {
     .limit(POSTS_LIMIT)
     .lean()
 
-  const postsUrlsXml = posts
-    .map((post: any) => {
-      const slug = (post?.seo?.slug as string) || String(post?._id)
-      const postUrl = `${baseUrl}/posts/${slug}`
-      const lastmod = toIsoSafe(post?.updatedAt ?? post?.createdAt ?? new Date())
-      return `  <url>
-    <loc>${escapeXml(postUrl)}</loc>
-    <lastmod>${lastmod}</lastmod>
-    <changefreq>${POSTS_CHANGEFREQ}</changefreq>
-    <priority>${POSTS_PRIORITY}</priority>
-  </url>`
-    })
+  const postEntries = posts.map((post: any) => {
+    const slug = (post?.seo?.slug as string) || String(post?._id)
+    const postUrl = `${baseUrl}/posts/${slug}`
+    const lastmod = toIsoSafe(post?.updatedAt ?? post?.createdAt ?? new Date())
+    return {
+      loc: postUrl,
+      lastmod,
+      changefreq: POSTS_CHANGEFREQ,
+      priority: POSTS_PRIORITY,
+    }
+  })
+
+  // ====== روابط صفحات البيلدر ======
+  const pagesDoc = await Pages.findOne(
+    { restaurantId: restaurant._id },
+    { pages: 1 },
+  ).lean()
+
+  const pages = (pagesDoc?.pages as any[])?.filter(
+    (page) => page?.isPublished && page?.language?.toLowerCase?.() === LOCALE_SEGMENT,
+  )
+
+  const pageEntries =
+    pages?.map((page) => {
+      const slug = page?.slug || ""
+      const pageUrl = buildUrl(baseUrl, slug)
+      const lastmod = toIsoSafe(page?.metadata?.updated_at ?? page?.metadata?.created_at ?? new Date())
+      return {
+        loc: pageUrl,
+        lastmod,
+        changefreq: PAGES_CHANGEFREQ,
+        priority: PAGES_PRIORITY,
+      }
+    }) ?? []
+
+  // Combine and dedupe by loc
+  const mergedByLoc = new Map<string, { loc: string; lastmod: string; changefreq: string; priority: string }>()
+  for (const entry of [...staticEntries, ...postEntries, ...pageEntries]) {
+    const normalizedLoc = escapeXml(entry.loc)
+    if (!mergedByLoc.has(normalizedLoc)) {
+      mergedByLoc.set(normalizedLoc, { ...entry, loc: normalizedLoc })
+    }
+  }
+
+  const urlsXml = Array.from(mergedByLoc.values())
+    .map(
+      (entry) => `  <url>
+    <loc>${entry.loc}</loc>
+    <lastmod>${entry.lastmod}</lastmod>
+    <changefreq>${entry.changefreq}</changefreq>
+    <priority>${entry.priority}</priority>
+  </url>`,
+    )
     .join("\n")
 
   // ====== XML النهائي ======
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${staticUrlsXml}
-${postsUrlsXml ? "\n" + postsUrlsXml : ""}
+${urlsXml}
 </urlset>`
 
   return new NextResponse(xml, {

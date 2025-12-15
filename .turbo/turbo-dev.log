@@ -426,3 +426,670 @@ Import trace for requested module:
   digest: [32m'3485297733'[39m
 }
  GET /favicon.ico [31m500[39m in 1529ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 1405ms (1118 modules)
+ GET /api/subdomains [32m200[39m in 2429ms
+ GET /ar [32m200[39m in 1662ms
+ [32m[1m✓[22m[39m Compiled /api/restaurant in 265ms (1211 modules)
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/auth/session [32m200[39m in 937ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 1103ms
+ GET /favicon.ico [32m200[39m in 1499ms
+ GET /ar [32m200[39m in 566ms
+ GET /api/auth/session [32m200[39m in 22ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 107ms
+ GET /favicon.ico [32m200[39m in 584ms
+ GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 613ms
+ GET /ar [32m200[39m in 891ms
+ GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 639ms
+ GET /api/auth/session [32m200[39m in 88ms
+ GET /api/auth/session [32m200[39m in 115ms
+ GET /api/auth/session [32m200[39m in 117ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 323ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ [37m[1m○[22m[39m Compiling /api/zones/check-delivery ...
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ POST /api/zones/check-delivery [32m200[39m in 752ms
+ POST /api/zones/check-delivery [32m200[39m in 555ms
+ POST /api/zones/check-delivery [32m200[39m in 785ms
+ POST /api/zones/check-delivery [32m200[39m in 114ms
+ POST /api/zones/check-delivery [32m200[39m in 116ms
+ POST /api/zones/check-delivery [32m200[39m in 98ms
+ GET /favicon.ico [31m500[39m in 1353ms
+ POST /api/zones/check-delivery [32m200[39m in 1428ms
+ POST /api/zones/check-delivery [32m200[39m in 1431ms
+ GET /ar [32m200[39m in 909ms
+ GET /api/auth/session [32m200[39m in 34ms
+ GET /api/auth/session [32m200[39m in 74ms
+ GET /api/auth/session [32m200[39m in 75ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 157ms
+ POST /api/zones/check-delivery [32m200[39m in 111ms
+ POST /api/zones/check-delivery [32m200[39m in 119ms
+ POST /api/zones/check-delivery [32m200[39m in 96ms
+ POST /api/zones/check-delivery [32m200[39m in 116ms
+ POST /api/zones/check-delivery [32m200[39m in 118ms
+ POST /api/zones/check-delivery [32m200[39m in 98ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 919ms
+ POST /api/zones/check-delivery [32m200[39m in 861ms
+ POST /api/zones/check-delivery [32m200[39m in 862ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 1467ms (1118 modules)
+ GET /api/subdomains [32m200[39m in 1737ms
+ GET /ar [32m200[39m in 1413ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 698ms
+ [32m[1m✓[22m[39m Compiled /api/restaurant in 349ms (1211 modules)
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/auth/session [32m200[39m in 629ms
+ GET /api/auth/session [32m200[39m in 634ms
+ GET /api/auth/session [32m200[39m in 641ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 905ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ [37m[1m○[22m[39m Compiling /api/zones/check-delivery ...
+ POST /api/zones/check-delivery [32m200[39m in 753ms
+ POST /api/zones/check-delivery [32m200[39m in 754ms
+ POST /api/zones/check-delivery [32m200[39m in 755ms
+ POST /api/zones/check-delivery [32m200[39m in 750ms
+ POST /api/zones/check-delivery [32m200[39m in 756ms
+ POST /api/zones/check-delivery [32m200[39m in 99ms
+ POST /api/zones/check-delivery [32m200[39m in 114ms
+ POST /api/zones/check-delivery [32m200[39m in 114ms
+ GET /favicon.ico [31m500[39m in 1809ms
+ GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 1213ms
+ GET /ar/about [32m200[39m in 1055ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 1180ms
+ GET /api/subdomains [32m200[39m in 227ms
+ GET /ar/about [32m200[39m in 723ms
+ GET /api/auth/session [32m200[39m in 44ms
+ GET /api/auth/session [32m200[39m in 59ms
+ GET /api/auth/session [32m200[39m in 60ms
+ POST /api/zones/check-delivery [32m200[39m in 118ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 220ms
+ POST /api/zones/check-delivery [32m200[39m in 123ms
+ POST /api/zones/check-delivery [32m200[39m in 123ms
+ POST /api/zones/check-delivery [32m200[39m in 125ms
+ POST /api/zones/check-delivery [32m200[39m in 107ms
+ POST /api/zones/check-delivery [32m200[39m in 119ms
+ POST /api/zones/check-delivery [32m200[39m in 120ms
+ POST /api/zones/check-delivery [32m200[39m in 122ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 1334ms
+ GET /ar/contact [32m200[39m in 638ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 1037ms
+ GET /ar/contact [33m404[39m in 600ms
+ GET /api/auth/session [32m200[39m in 21ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 1300ms
+ GET /ar/contact [32m200[39m in 955ms
+ GET /api/auth/session [32m200[39m in 24ms
+ GET /api/auth/session [32m200[39m in 74ms
+ GET /api/auth/session [32m200[39m in 83ms
+ POST /api/zones/check-delivery [32m200[39m in 99ms
+ POST /api/zones/check-delivery [32m200[39m in 104ms
+ POST /api/zones/check-delivery [32m200[39m in 106ms
+ POST /api/zones/check-delivery [32m200[39m in 108ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 295ms
+ POST /api/zones/check-delivery [32m200[39m in 105ms
+ POST /api/zones/check-delivery [32m200[39m in 116ms
+ POST /api/zones/check-delivery [32m200[39m in 117ms
+ POST /api/zones/check-delivery [32m200[39m in 119ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 1219ms
+ GET /api/subdomains [32m200[39m in 193ms
+ GET /ar/posts [32m200[39m in 683ms
+ GET /api/auth/session [32m200[39m in 28ms
+ POST /api/zones/check-delivery [32m200[39m in 110ms
+ POST /api/zones/check-delivery [32m200[39m in 112ms
+ POST /api/zones/check-delivery [32m200[39m in 113ms
+ POST /api/zones/check-delivery [32m200[39m in 114ms
+ POST /api/zones/check-delivery [32m200[39m in 116ms
+ POST /api/zones/check-delivery [32m200[39m in 97ms
+ GET /api/auth/session [32m200[39m in 23ms
+ GET /api/auth/session [32m200[39m in 41ms
+ GET /api/auth/session [32m200[39m in 43ms
+ POST /api/zones/check-delivery [32m200[39m in 116ms
+ POST /api/zones/check-delivery [32m200[39m in 117ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 1359ms
+ GET /ar/branches [32m200[39m in 622ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 1069ms
+ GET /ar/branches [32m200[39m in 985ms
+ GET /api/auth/session [32m200[39m in 45ms
+ GET /api/auth/session [32m200[39m in 87ms
+ GET /api/auth/session [32m200[39m in 90ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 169ms
+ POST /api/zones/check-delivery [32m200[39m in 133ms
+ POST /api/zones/check-delivery [32m200[39m in 152ms
+ POST /api/zones/check-delivery [32m200[39m in 153ms
+ POST /api/zones/check-delivery [32m200[39m in 155ms
+ POST /api/zones/check-delivery [32m200[39m in 108ms
+ POST /api/zones/check-delivery [32m200[39m in 94ms
+ POST /api/zones/check-delivery [32m200[39m in 96ms
+ POST /api/zones/check-delivery [32m200[39m in 110ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 1423ms
+ GET /ar/menu [32m200[39m in 579ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /api/auth/session [32m200[39m in 186ms
+ GET /api/auth/session [32m200[39m in 58ms
+ POST /api/zones/check-delivery [32m200[39m in 280ms
+ POST /api/zones/check-delivery [32m200[39m in 282ms
+ POST /api/zones/check-delivery [32m200[39m in 137ms
+ GET /api/auth/session [32m200[39m in 29ms
+ POST /api/zones/check-delivery [32m200[39m in 119ms
+ POST /api/zones/check-delivery [32m200[39m in 123ms
+ POST /api/zones/check-delivery [32m200[39m in 115ms
+ GET /api/auth/session [32m200[39m in 44ms
+ POST /api/zones/check-delivery [32m200[39m in 142ms
+ POST /api/zones/check-delivery [32m200[39m in 146ms
+ GET /favicon.ico [31m500[39m in 1257ms
+ GET /images/antarkababgy/placeholder.svg?height=200&width=300 [33m404[39m in 626ms
+ GET /api/auth/session [32m200[39m in 19ms
+ POST /api/zones/check-delivery [32m200[39m in 116ms
+ POST /api/zones/check-delivery [32m200[39m in 119ms
+ POST /api/zones/check-delivery [32m200[39m in 121ms
+ POST /api/zones/check-delivery [32m200[39m in 124ms
+ POST /api/zones/check-delivery [32m200[39m in 127ms
+ POST /api/zones/check-delivery [32m200[39m in 98ms
+ GET /api/auth/session [32m200[39m in 26ms
+ GET /api/auth/session [32m200[39m in 27ms
+ GET /api/auth/session [32m200[39m in 28ms
+ POST /api/zones/check-delivery [32m200[39m in 104ms
+ POST /api/zones/check-delivery [32m200[39m in 105ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 1727ms
+ GET /api/subdomains [32m200[39m in 1149ms
+ GET /sitemap.xml [33m404[39m in 1263ms
+ GET /api/auth/session [32m200[39m in 36ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 788ms
+ GET /sitemap.xml [33m404[39m in 550ms
+ GET /api/auth/session [32m200[39m in 85ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 826ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /sitemap.xml [32m200[39m in 514ms
+ GET /sitemap.xml [33m404[39m in 1136ms
+ GET /api/auth/session [32m200[39m in 40ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 693ms
+ GET /sitemap-root.xml [33m404[39m in 403ms
+ GET /api/auth/session [32m200[39m in 19ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 720ms
+ GET /sitemap.xml [33m404[39m in 445ms
+ GET /api/auth/session [32m200[39m in 58ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 657ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /sitemap.xml [32m200[39m in 447ms
+ GET /sitemap.xml [33m404[39m in 402ms
+ GET /api/auth/session [32m200[39m in 46ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 689ms
+ GET /sitemap.xml [33m404[39m in 533ms
+ GET /api/auth/session [32m200[39m in 79ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 738ms
+ GET /sitemap.xml [33m404[39m in 513ms
+ GET /api/auth/session [32m200[39m in 54ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 664ms
+ GET /api/subdomains [32m200[39m in 249ms
+ GET /sitemap.xml [33m404[39m in 458ms
+ GET /api/auth/session [32m200[39m in 28ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 830ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [32m[1m✓[22m[39m Compiled /sitemap.xml in 1329ms (2035 modules)
+ GET /sitemap.xml [32m200[39m in 1567ms
+ GET /favicon.ico [33m404[39m in 663ms
+ GET /sitemap-root.xml [33m404[39m in 160ms
+ GET /api/auth/session [32m200[39m in 44ms
+ GET /sitemap.xml [33m404[39m in 575ms
+ GET /api/auth/session [32m200[39m in 70ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 782ms
+ [32m[1m✓[22m[39m Compiled in 700ms (994 modules)
+ GET /sitemap.xml [32m200[39m in 186ms
+ GET /sitemap.xml [32m200[39m in 319ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 1772ms
+ [32m[1m✓[22m[39m Compiled in 2.8s (1934 modules)
+ [32m[1m✓[22m[39m Compiled in 695ms (835 modules)
+ [32m[1m✓[22m[39m Compiled /sitemap.xml in 420ms (1119 modules)
+ GET /sitemap.xml [32m200[39m in 1288ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 924ms
+ GET /sitemap.xml [32m200[39m in 514ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3485297733'[39m
+}
+ GET /favicon.ico [31m500[39m in 900ms
+ GET /sitemap.xml [32m200[39m in 531ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 20321ms
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 37448ms
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 48019ms
+ [31m[1m⨯[22m[39m [TypeError: frame.join is not a function] { digest: [32m'2857873247'[39m }
+ [31m[1m⨯[22m[39m [TypeError: frame.join is not a function] { digest: [32m'2857873247'[39m }
+ [31m[1m⨯[22m[39m [TypeError: frame.join is not a function] { digest: [32m'2857873247'[39m }
+ [31m[1m⨯[22m[39m [TypeError: Cannot read properties of undefined (reading 'length')] {
+  digest: [32m'2313032948'[39m
+}
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 47417ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 48372ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 49121ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 47766ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 55593ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 49484ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 50055ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 50150ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 57848ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 62045ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 58946ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 50466ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 49324ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 51267ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 50522ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 47990ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 49410ms
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 60714ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 48640ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 48924ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 49155ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 64181ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 56151ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 56163ms
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 73159ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 57635ms
+ GET /api/restaurants/hadramotantar/branches [33m404[39m in 61915ms
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+[RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection: [RangeError: Maximum call stack size exceeded]
+ [31m[1m⨯[22m[39m unhandledRejection:  [RangeError: Maximum call stack size exceeded]
+ GET /favicon.ico [32m200[39m in 81334ms
+ GET /sitemap.xml [32m200[39m in 15974ms
