@@ -132,6 +132,10 @@ export type SectionType =
   | "testimonials"
   | "faq"
   | "features"
+  | "pricing"
+  | "stats"
+  | "logos"
+  | "newsletter"
   | "seo-content"
   | "links-grid"
   | "categories"
@@ -231,6 +235,8 @@ export type ElementType =
   | "text"
   | "image"
   | "button"
+  | "badge"
+  | "buttons"
   | "cta-group"
   | "row"
   | "stack"
@@ -242,6 +248,12 @@ export type ElementType =
   | "branch-card"
   | "social-links"
   | "rating-badge"
+  | "map"
+  | "timeline"
+  | "card"
+  | "link-card"
+  | "carousel"
+  | "accordion"
 
 export type TextAlign = "start" | "center" | "end" | "justify"
 export type TextSize = "sm" | "md" | "lg" | "xl"
@@ -418,7 +430,19 @@ export interface SocialLinksElement extends ElementBase {
   type: "social-links"
   align?: ResponsiveValue<AlignValue>
   gap?: ResponsiveValue<string>
-  links: Array<{ label: string; href: string; icon?: string }>
+  background?: string
+  buttonColor?: string
+  buttonTextColor?: string
+  buttonVariant?: "solid" | "outline"
+  links: Array<{
+    label: string
+    href: string
+    icon?: string
+    color?: string
+    textColor?: string
+    background?: string
+    variant?: "solid" | "outline"
+  }>
 }
 
 export interface RatingBadgeElement extends ElementBase {

@@ -1,4 +1,4 @@
-import { Fragment } from "react"
+import { Fragment, type CSSProperties } from "react"
 import { cn } from "@/lib/utils"
 import {
   Percent,
@@ -134,6 +134,9 @@ export const renderSocialLinks = (element: SocialLinksElement, options: BuilderR
   const links = element.links ?? []
   const dir = options.locale === "ar" ? "rtl" : "ltr"
   const alignClass = element.align === "center" ? "justify-center" : element.align === "end" ? "justify-end" : "justify-start"
+  const defaultColor = element.buttonColor ?? "#0f172a"
+  const defaultTextColor = element.buttonTextColor ?? "#0f172a"
+  const defaultVariant = element.buttonVariant ?? "outline"
 
   return (
     <Fragment key={element.id}>
@@ -145,19 +148,37 @@ export const renderSocialLinks = (element: SocialLinksElement, options: BuilderR
           alignClass,
           elementLayoutClasses(element.layout),
         )}
-        style={layout.style}
+        style={{ ...layout.style, background: element.background ?? layout.style?.background }}
         dir={dir}
       >
-        {links.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className="mr-2 mb-2 inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-1.5 text-sm text-slate-700 hover:border-amber-400 hover:text-amber-700"
-          >
-            {link.icon ? <span className="text-base" aria-hidden="true">{link.icon}</span> : null}
-            <span>{link.label}</span>
-          </a>
-        ))}
+        {links.map((link) => {
+          const color = link.color ?? defaultColor
+          const textColor = link.textColor ?? defaultTextColor
+          const variant = link.variant ?? defaultVariant
+          const isSolid = variant === "solid"
+          const background = link.background ?? (isSolid ? color : "transparent")
+
+          const style = {
+            backgroundColor: background,
+            color: isSolid ? textColor : textColor ?? color,
+            borderColor: color,
+          } satisfies CSSProperties
+
+          return (
+            <a
+              key={link.href}
+              href={link.href}
+              className={cn(
+                "mr-2 mb-2 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors",
+                isSolid ? "border border-transparent" : "border",
+              )}
+              style={style}
+            >
+              {link.icon ? <span className="text-base" aria-hidden="true">{link.icon}</span> : null}
+              <span>{link.label}</span>
+            </a>
+          )
+        })}
       </div>
     </Fragment>
   )
