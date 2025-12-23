@@ -40,6 +40,10 @@ import {
   renderCarouselElement,
   renderAccordionElement,
 } from "./domain-elements"
+import { renderCategoriesSection } from "./categories"
+import { resolveBindingValue } from "./binding"
+import { renderOrdersListSection } from "./orders-section"
+import { renderOrdersShellSection } from "./orders-shell-server"
 
 const normalizeElementShape = (element: Element): Element => {
   if (element.type === "stack" && (element as any).stack) {
@@ -160,8 +164,28 @@ export const renderSection = (
   section: Section,
   options: BuilderRenderOptions = {},
 ): ReactNode => {
+  const normalizedType = String(section.type ?? "").toLowerCase()
+  const bindingValue = resolveBindingValue(section.dataBinding, options)
+  const boundKey = section.dataBinding?.as
+  const extendedOptions: BuilderRenderOptions =
+    boundKey && bindingValue !== undefined
+      ? {
+          ...options,
+          dataSources: {
+            ...(options.dataSources ?? {}),
+            [boundKey]: bindingValue,
+          },
+        }
+      : options
+
   const layout = section.layout ?? {}
   const elements = section.elements ?? []
+  if (normalizedType === "orders-list") {
+    return renderOrdersListSection(section as any, extendedOptions)
+  }
+  if (normalizedType === "orders-shell" || normalizedType === "ordersshell") {
+    return renderOrdersShellSection(section as any, extendedOptions)
+  }
   const isGrid = Boolean(layout.grid)
   const containerClass = containerClassMap[layout.container ?? "full"]
   const baseDisplayClass = isGrid ? "grid" : "flex"
@@ -173,8 +197,8 @@ export const renderSection = (
   const gridColsClasses = layout.grid?.cols
     ? buildResponsiveClasses(layout.grid.cols, (value) => gridColsClass(value))
     : []
-  const sectionTheme = mergeThemes(options.theme, section.theme)
-  const sectionContext = sectionTheme ? { ...options, theme: sectionTheme } : options
+  const sectionTheme = mergeThemes(extendedOptions.theme, section.theme)
+  const sectionContext = sectionTheme ? { ...extendedOptions, theme: sectionTheme } : extendedOptions
   const activeTheme = sectionContext.theme
   const themeVars = themeToCssVariables(activeTheme)
   const layoutResult = sectionLayoutStyle(section.id, layout)
@@ -295,7 +319,9 @@ export const renderSection = (
         <div className={contentClasses} style={contentStyle} data-section-content={section.id}>
           {sortByPosition(elements).map((element, index) => (
             <Fragment key={element.id ?? `${section.id}-element-${index}`}>
-              {renderElement(element, sectionContext)}
+              {section.type === "categories"
+                ? renderCategoriesSection(element, sectionContext)
+                : renderElement(element, sectionContext)}
             </Fragment>
           ))}
         </div>

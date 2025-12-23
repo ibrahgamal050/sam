@@ -1,7 +1,6 @@
 // app/(sites)/[lng]/page.tsx
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
-import { MobileLayout } from "@/components/ar/mobile-layout"
 import { MainNav } from "@/components/ar/header/main-nav"
 
 import type { Metadata } from "next";
@@ -28,6 +27,7 @@ type RouteParams = {
   params: Promise<{
     lng: string;
   }>;
+  searchParams?: Promise<Record<string, string | string[]>>;
 };
 
 const resolveLocale = (value?: string): Locale => {
@@ -51,6 +51,7 @@ type LoadedHomeData =
       locale: Locale;
       branches: BranchSummary[];
       menuItems: MenuItemSummary[];
+      menu?: any;
     }
   | {
       restaurant: null;
@@ -59,6 +60,7 @@ type LoadedHomeData =
       locale: Locale;
       branches: BranchSummary[];
       menuItems: MenuItemSummary[];
+      menu?: any;
     };
 
 async function fetchBranches(subdomainOrSlug: string, hostHeader: string): Promise<BranchSummary[]> {
@@ -115,6 +117,7 @@ async function loadHomeData(locale: Locale): Promise<LoadedHomeData> {
     locale,
     branches,
     menuItems,
+    menu,
   };
   
 } 
@@ -143,10 +146,11 @@ function mapPageToBlocks(page: IPage | null | undefined): AnyBlock[] {
     .filter(Boolean) as AnyBlock[];
 }
 
-export default async function HomeRoute({ params }: RouteParams) {
+export default async function HomeRoute({ params, searchParams }: RouteParams) {
   const { lng } = await params;
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
   const locale = resolveLocale(lng);
-  const { restaurant, page, hostHeader, branches, menuItems } = await loadHomeData(locale);
+  const { restaurant, page, hostHeader, branches, menuItems, menu } = await loadHomeData(locale);
 let typedRestaurant: IRestaurant | null = null
   // لازم يبقى في مطعم (من السب-دومين أو الدومين المخصص)
   if (!restaurant) {
@@ -165,15 +169,17 @@ let typedRestaurant: IRestaurant | null = null
     const orderedSections = sortSections(builderSections);
     return (
        <> <MainNav /> 
-       <MobileLayout restaurant={typedRestaurant}>
-    
       <main dir={direction} className="min-h-screen bg-neutral-50 text-stone-900">
         <div className="h-1 w-full" style={{ backgroundColor: accent }} />
         {orderedSections.map((section) =>
-          renderSection(section, { theme: builderTheme, dataSources: { branches, menuItems }, locale })
+          renderSection(section, {
+            theme: builderTheme,
+            dataSources: { branches, menuItems, menu },
+            locale,
+            searchParams: resolvedSearchParams,
+          })
         )}
       </main>
-        </MobileLayout>
         </>
     );
   }

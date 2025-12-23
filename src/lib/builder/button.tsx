@@ -1,11 +1,69 @@
 // src/lib/builder/button.tsx
-import { Fragment, type CSSProperties } from "react"
+import { Fragment, type CSSProperties, type ComponentType } from "react"
 import type { BuilderRenderOptions, ButtonElement, CtaGroupElement, ButtonVariant, ThemePalette, ResponsiveValue } from "./types"
 import { cn } from "@/lib/utils"
 import { elementLayoutStyle, elementLayoutClasses, sortByPosition, alignItemsMap, justifyContentMap } from "./layout"
 import { getElementContext, themeToCssVariables } from "./theme"
 import { normalizeTextContent, resolveBoundString, resolveTextValue } from "./binding"
 import { buildResponsiveClasses, hasResponsiveBase, mergeCssRules, resolveResponsiveStyle } from "./responsive"
+import {
+  Phone,
+  PhoneCall,
+  BookOpen,
+  MessageCircle,
+  MapPin,
+  Map,
+  ArrowRight,
+  ArrowUpRight,
+  ShoppingBag,
+  ShoppingCart,
+  ExternalLink,
+  ArrowLeft,
+  ArrowDown,
+  ChevronRight,
+  ChevronLeft,
+  Mail,
+} from "lucide-react"
+
+const normalizeIconName = (value?: string | null) => {
+  if (!value) return undefined
+  return value.toLowerCase().trim().replace(/[\s_]+/g, "-")
+}
+
+const ICONS: Record<string, ComponentType<{ className?: string }>> = {
+  phone: Phone,
+  call: PhoneCall,
+  "phone-call": PhoneCall,
+  telephone: Phone,
+  "book-open": BookOpen,
+  book: BookOpen,
+  menu: BookOpen,
+  "message-circle": MessageCircle,
+  chat: MessageCircle,
+  whatsapp: MessageCircle,
+  map: Map,
+  "map-pin": MapPin,
+  location: MapPin,
+  "arrow-right": ArrowRight,
+  "arrow-up-right": ArrowUpRight,
+  "arrow-left": ArrowLeft,
+  "arrow-down": ArrowDown,
+  "chevron-right": ChevronRight,
+  "chevron-left": ChevronLeft,
+  "shopping-bag": ShoppingBag,
+  bag: ShoppingBag,
+  cart: ShoppingCart,
+  "shopping-cart": ShoppingCart,
+  external: ExternalLink,
+  link: ExternalLink,
+  mail: Mail,
+}
+
+const resolveIcon = (name?: string | null) => {
+  const key = normalizeIconName(name)
+  if (!key) return null
+  return ICONS[key] ?? null
+}
 
 const buttonVariantClasses: Record<ButtonVariant, string> = {
   primary: "bg-rose-600 text-white hover:bg-rose-500 focus-visible:outline-rose-600",
@@ -199,19 +257,19 @@ export const renderButtonElement = (
         data-element-id={element.id}
         aria-disabled={isDisabled || isLoading}
       >
-        {element.iconLeft ? (
-          <span className="text-lg" aria-hidden="true">
-            {element.iconLeft}
-          </span>
-        ) : null}
+        {(() => {
+          const Icon = resolveIcon(element.iconLeft)
+          if (!Icon) return null
+          return <Icon className="h-4 w-4" aria-hidden="true" />
+        })()}
         {variant !== "icon" && (
           <span dangerouslySetInnerHTML={{ __html: textValue }} />
         )}
-        {element.iconRight ? (
-          <span className="text-lg" aria-hidden="true">
-            {element.iconRight}
-          </span>
-        ) : null}
+        {(() => {
+          const Icon = resolveIcon(element.iconRight)
+          if (!Icon) return null
+          return <Icon className="h-4 w-4" aria-hidden="true" />
+        })()}
         {isLoading ? <span className="ms-2 h-4 w-4 animate-spin rounded-full border-2 border-white/70 border-r-transparent" aria-hidden /> : null}
       </a>
     </Fragment>

@@ -40,6 +40,7 @@ export interface IOrderPayment {
 }
 
 export interface IOrder extends Document {
+  orderNumber: string
   restaurantId: mongoose.Types.ObjectId
   userId?: mongoose.Types.ObjectId
   type?: OrderType
@@ -52,6 +53,12 @@ export interface IOrder extends Document {
   deliveryLocation?: {
     lat?: number
     lng?: number
+  },
+   branchId?: mongoose.Types.ObjectId
+  branch?: {
+    name?: string
+    phone?: string
+    address?: string
   }
   totalPrice: number
   currency?: string
@@ -145,6 +152,12 @@ const OrderItemSchema = new Schema<IOrderItem>(
 
 const OrderSchema = new Schema<IOrder>(
   {
+     
+    orderNumber: {
+      type: String,
+      required: true,
+      index: true,
+    },
     restaurantId: { type: Schema.Types.ObjectId, required: true, index: true },
     userId: { type: Schema.Types.ObjectId, required: false },
     type: {
@@ -192,6 +205,13 @@ const OrderSchema = new Schema<IOrder>(
       index: true,
       set: normalizeOrReturn(normalizeValue(ORDER_STATUS_ALIAS_MAP)),
     },
+    branchId: { type: Schema.Types.ObjectId, ref: "Branch", index: true },
+branch: {
+  name: String,
+  phone: String,
+  address: String,
+},
+
     eta: { type: Date },
     notes: { type: String },
   },
@@ -201,6 +221,11 @@ const OrderSchema = new Schema<IOrder>(
 OrderSchema.index({ restaurantId: 1, createdAt: -1 })
 OrderSchema.index({ restaurantId: 1, 'payment.method': 1 })
 OrderSchema.index({ restaurantId: 1, status: 1 })
+OrderSchema.index(
+  { restaurantId: 1, orderNumber: 1 },
+  { unique: true }
+)
+
 
 const Order: Model<IOrder> =
   mongoose.models.Order || mongoose.model<IOrder>('Order', OrderSchema)

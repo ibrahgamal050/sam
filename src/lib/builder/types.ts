@@ -53,6 +53,15 @@ export interface DataBindingConfig {
   transform?: DataBindingTransform
   format?: DataBindingFormat
   fallback?: string
+  as?: string
+  mode?: "value" | "map"
+  map?: {
+    labelPath?: string
+    valuePath?: string
+    hrefTemplate?: string
+    iconPath?: string
+    prepend?: Array<{ label?: string; href?: string; value?: string }>
+  }
 }
 
 export interface BuilderMeta {
@@ -88,6 +97,7 @@ export interface BuilderRenderOptions {
   theme?: BuilderTheme
   dataSources?: BuilderDataSources
   locale?: string
+  searchParams?: Record<string, string | string[]>
 }
 
 export type LanguageCode = "ar" | "en"
@@ -120,6 +130,9 @@ export type SectionType =
   | "content"
   | "menu"
   | "menu-dynamic"
+  | "orders-list"
+  | "orders-shell"
+  | "ordersShell"
   | "gallery"
   | "bio"
   | "footer"
@@ -469,6 +482,7 @@ export interface ButtonsElement extends ElementBase {
   type: "buttons"
   buttons?: {
     align?: ResponsiveValue<AlignValue>
+    dataBinding?: DataBindingConfig
     items?: Array<{
       label?: string
       href?: string

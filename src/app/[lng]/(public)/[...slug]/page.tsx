@@ -13,7 +13,6 @@ import type { AnyBlock } from "@/types/blocks"
 import type { IPage } from "@/types/page"
 import type { IRestaurant } from "@/types/restaurant"
 import { renderSection } from "@/lib/builder"
-import { MobileLayout } from "@/components/ar/mobile-layout"
 export const dynamic = "force-dynamic"
 
 type PageParams = {
@@ -63,6 +62,7 @@ type LoadedContext = {
   slugPath: string
   branches: BranchSummary[]
   menuItems: MenuItemSummary[]
+  menu?: any
 }
 
 async function fetchBranches(subdomainOrSlug: string, hostHeader: string): Promise<BranchSummary[]> {
@@ -102,8 +102,7 @@ async function loadPageContext(params: PageParams): Promise<LoadedContext> {
   const branches = apiBranches.length ? apiBranches : fallbackBranches
   const menu = await getMenuByRestaurantId(restaurantId).catch(() => null)
   const menuItems = flattenMenuItems(menu)
-  
-  return { restaurant, hostHeader, page: page ?? null, locale, slugPath, branches, menuItems }
+  return { restaurant, hostHeader, page: page ?? null, locale, slugPath, branches, menuItems, menu }
 }
 
 export async function generateMetadata({ params }: { params: Promise<PageParams> }): Promise<Metadata> {
@@ -167,11 +166,18 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
   }
 }
 
-export default async function ContentPage({ params }: { params: Promise<PageParams> }) {
-  
+export default async function ContentPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<PageParams>
+  searchParams?: Promise<Record<string, string | string[]>>
+}) {
+
     let typedRestaurant: IRestaurant | null = null
 const resolvedParams = await params
-  const { restaurant, hostHeader, page, locale, branches, menuItems } = await loadPageContext(resolvedParams)
+  const resolvedSearchParams = searchParams ? await searchParams : undefined
+  const { restaurant, hostHeader, page, locale, branches, menuItems, menu } = await loadPageContext(resolvedParams)
   if (!restaurant || !page || (!page.isPublished && !page.template)) {
     return notFound()
   }
@@ -187,7 +193,6 @@ const resolvedParams = await params
     const orderedSections = sortSections(builderSections)
     return (
       <> <MainNav /> 
-       <MobileLayout restaurant={typedRestaurant}>
       <main dir={direction} className="min-h-screen bg-background text-foreground">
        
         {structuredData && (
@@ -195,11 +200,15 @@ const resolvedParams = await params
         )}
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-10 sm:px-6 lg:px-8">
           {orderedSections.map((section) =>
-            renderSection(section, { theme: builderTheme, dataSources: { branches, menuItems }, locale })
+            renderSection(section, {
+              theme: builderTheme,
+              dataSources: { branches, menuItems, menu },
+              locale,
+              searchParams: resolvedSearchParams,
+            })
           )}
         </div>
       </main>
-      </MobileLayout>
       </>
     )
   }

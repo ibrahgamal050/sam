@@ -589,32 +589,11 @@ export default function CheckoutPage() {
               notes: notes || undefined,
             }
 
-      const orderItems = itemsBlock.map((item) => {
-        const extrasDetails: CartExtraSelection[] = Array.isArray(item.extrasDetails)
-          ? (item.extrasDetails as CartExtraSelection[])
-          : []
-
-        return {
-          productId: item.itemId,
-          name: item.name,
-          quantity: item.qty,
-          price: item.unitPrice,
-          total: item.total,
-          variantId: item.variantId,
-          variantName: item.variantName,
-          extras: item.extras,
-          extrasDetails: extrasDetails.map((extra) => ({
-            id: extra.id,
-            name: extra.name,
-            price: extra.price,
-            quantity: extra.qty,
-            groupId: extra.groupId,
-            groupName: extra.groupName,
-          })),
-          note: item.note,
-        }
-      })
-
+    const orderItems = itemsBlock.map((item) => ({
+  productId: item.itemId,
+  name: item.name,
+  qty: item.qty,
+}))
       const payload = {
         restaurantId: restaurantId as string,
         type,
@@ -636,7 +615,7 @@ export default function CheckoutPage() {
         ;(payload as any).deliveryZoneId = deliveryZoneId
       }
 
-      const res = await fetch('/api/v0/orders', {
+      const res = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Idempotency-Key': uuidv4() },
         body: JSON.stringify(payload),
@@ -649,8 +628,9 @@ export default function CheckoutPage() {
         throw new Error(String(msg))
       }
 
-      const created: any = body
-      const createdId = created?.orderId || created?.data?._id || created?._id || created?.id
+    const created: any = body
+const createdId = created?.orderId || created?.data?._id || created?._id || created?.id
+
 
       if (paymentMethod === 'CASH' || paymentMethod === 'CARD') {
         clearCart?.()
@@ -713,7 +693,7 @@ export default function CheckoutPage() {
 
   return (
     <main dir={direction} className="min-h-screen bg-[#f4f2ff] pb-36">
-      <form onSubmit={handleProceedToPayment} className="mx-auto flex w-full max-w-4xl flex-col gap-6 px-4 pt-6 sm:px-6">
+      <form id="checkout-form" onSubmit={handleProceedToPayment} className="mx-auto flex w-full max-w-4xl flex-col gap-6 px-4 pt-6 sm:px-6">
         <header className="flex items-center gap-3">
           <Button
             type="button"
@@ -808,7 +788,8 @@ export default function CheckoutPage() {
         />
       </form>
 
-      <footer className="fixed inset-x-0 bottom-0 border-t border-[#e0dcff] bg-white/95 backdrop-blur">
+     <footer className="fixed inset-x-0 bottom-0 z-50 border-t border-[#e0dcff] bg-white/95 backdrop-blur">
+
         <div className="mx-auto flex w-full max-w-4xl items-center gap-4 px-4 py-4 sm:px-6" dir={direction}>
           <div className="flex-1">
             <p className="text-xs font-medium text-gray-500">{timeLabel}</p>
@@ -816,11 +797,14 @@ export default function CheckoutPage() {
           </div>
           <Button
             type="submit"
+             form="checkout-form"
             className="flex-1 rounded-2xl bg-[#6c5ce7] text-sm font-semibold text-white shadow-lg hover:bg-[#5948d3]"
             disabled={!canSubmitFinal}
           >
             {isSubmitting ? t.payButtonProcessing : `${t.payButton} • ${formattedTotal}`}
           </Button>
+       
+
         </div>
       </footer>
 

@@ -71,6 +71,13 @@ export const buildPlatformHost = (
 
   const { host, port } = splitHostAndPort(requestHost)
 
+  // Avoid duplicating subdomain for local dev hosts that already include it (e.g. foo.localhost:3000)
+  const hasLocalSuffix = host.endsWith(".localhost")
+  const alreadyPrefixed = hasLocalSuffix && host.startsWith(`${subdomain}.`)
+  if (!rootDomain && alreadyPrefixed) {
+    return port ? `${host}:${port}` : host
+  }
+
   if (isLocalhost(host)) {
     const targetHost = `${subdomain}.localhost`
     return port ? `${targetHost}:${port}` : targetHost

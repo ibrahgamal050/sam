@@ -1,4 +1,4 @@
-import { Fragment, type CSSProperties } from "react"
+import { Fragment } from "react"
 import { cn } from "@/lib/utils"
 import {
   Percent,
