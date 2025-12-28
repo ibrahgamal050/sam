@@ -2,6 +2,7 @@
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 import { MainNav } from "@/components/ar/header/main-nav"
+import { MobileLayout } from "@/components/ar/mobile-layout"
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -169,6 +170,7 @@ let typedRestaurant: IRestaurant | null = null
     const orderedSections = sortSections(builderSections);
     return (
        <> <MainNav /> 
+        <MobileLayout restaurant={restaurant}>
       <main dir={direction} className="min-h-screen bg-neutral-50 text-stone-900">
         <div className="h-1 w-full" style={{ backgroundColor: accent }} />
         {orderedSections.map((section) =>
@@ -180,6 +182,7 @@ let typedRestaurant: IRestaurant | null = null
           })
         )}
       </main>
+      </MobileLayout>
         </>
     );
   }

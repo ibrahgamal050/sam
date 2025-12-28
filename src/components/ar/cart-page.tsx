@@ -26,6 +26,7 @@ export function CartPageClient() {
   const delivery = items.length > 0 ? 20 : 0
   const total = subtotal + taxes + delivery
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0)
+  const hasItems = itemCount > 0
 
   const handleProceed = () => {
     router.push(`${basePath}/checkout`)
@@ -33,7 +34,7 @@ export function CartPageClient() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900" dir="rtl">
-      <div className="mx-auto w-full max-w-5xl px-4 pb-16 pt-10 sm:px-6 lg:pt-12">
+      <div className="mx-auto w-full max-w-5xl px-4 pb-32 pt-10 sm:px-6 lg:pt-12">
         
 
         {items.length === 0 ? (
@@ -138,13 +139,6 @@ export function CartPageClient() {
                 </div>
               </div>
 
-              <button
-                type="button"
-                onClick={handleProceed}
-                className="mt-5 w-full rounded-2xl bg-[#6c5ce7] px-4 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-[#5a4bd1]"
-              >
-                المتابعة لإتمام الطلب
-              </button>
 
               <Link
                 href={`${basePath}/menu`}
@@ -155,6 +149,24 @@ export function CartPageClient() {
             </aside>
           </div>
         )}
+
+        {hasItems ? (
+          <div className="fixed inset-x-0 bottom-0 z-30 border-t border-gray-200 bg-white/95 px-4 py-3 shadow-[0_-12px_30px_-20px_rgba(15,23,42,0.35)] backdrop-blur md:hidden">
+            <div className="mx-auto flex w-full max-w-5xl items-center gap-3">
+              <div className="flex flex-1 items-center justify-between text-sm font-semibold text-gray-900">
+                <span>الإجمالي</span>
+                <span>{formatValue(total)} ج.م</span>
+              </div>
+              <button
+                type="button"
+                onClick={handleProceed}
+                className="w-[45%] min-w-[180px] rounded-2xl bg-[#6c5ce7] px-4 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-[#5a4bd1]"
+              >
+                المتابعة لإتمام الطلب
+              </button>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   )

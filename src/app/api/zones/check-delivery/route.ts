@@ -7,6 +7,7 @@ import { normalizeHost } from "@/lib/host-utils"
 import { getRestaurantByHost } from "@/lib/services/restaurant-service"
 
 const EARTH_RADIUS_METERS = 6371000
+const CACHE_TTL_MS = 30_000
 
 const toZoneResponse = (zone: any) => ({
   id: zone._id?.toString() ?? "",
@@ -47,6 +48,80 @@ function haversineDistanceMeters(lat1: number, lng1: number, lat2: number, lng2:
   return EARTH_RADIUS_METERS * c
 }
 
+type CacheResult = {
+  isDeliveryAvailable: boolean
+  zones: any[]
+  lowestDeliveryFee: number | null
+  location: { lat: number; lng: number }
+}
+
+// In-memory cache for environments without Redis
+const memoryCache = new Map<string, { expiresAt: number; value: CacheResult }>()
+
+const redisConfig = {
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+}
+
+const hasRedis = Boolean(redisConfig.url && redisConfig.token)
+
+const buildCacheKey = (restaurantId: string, zoneId: string | undefined, lat: number, lng: number) =>
+  `${restaurantId}:${zoneId ?? "any"}:${lat.toFixed(5)}:${lng.toFixed(5)}`
+
+async function getFromRedis(key: string): Promise<CacheResult | null> {
+  if (!hasRedis) return null
+  try {
+    const res = await fetch(`${redisConfig.url}/get/${encodeURIComponent(key)}`, {
+      headers: { Authorization: `Bearer ${redisConfig.token}` },
+      cache: "no-store",
+    })
+    if (!res.ok) return null
+    const json = await res.json()
+    if (!json?.result) return null
+    return JSON.parse(json.result) as CacheResult
+  } catch {
+    return null
+  }
+}
+
+async function setRedis(key: string, value: CacheResult, ttlMs: number) {
+  if (!hasRedis) return
+  try {
+    await fetch(`${redisConfig.url}/set/${encodeURIComponent(key)}`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${redisConfig.token}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        value: JSON.stringify(value),
+        ex: Math.max(1, Math.floor(ttlMs / 1000)),
+      }),
+    })
+  } catch {
+    // ignore cache write errors
+  }
+}
+
+async function getCachedResult(key: string): Promise<CacheResult | null> {
+  const now = Date.now()
+  const cached = memoryCache.get(key)
+  if (cached && cached.expiresAt > now) {
+    return cached.value
+  }
+  if (hasRedis) {
+    const redisValue = await getFromRedis(key)
+    if (redisValue) {
+      memoryCache.set(key, { value: redisValue, expiresAt: now + CACHE_TTL_MS })
+      return redisValue
+    }
+  }
+  return null
+}
+
+async function setCachedResult(key: string, value: CacheResult) {
+  const expiresAt = Date.now() + CACHE_TTL_MS
+  memoryCache.set(key, { value, expiresAt })
+  await setRedis(key, value, CACHE_TTL_MS)
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json().catch(() => null)
@@ -55,10 +130,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "بيانات غير صالحة" }, { status: 400 })
     }
 
-    let { restaurantId, lat, lng } = body as {
+    let { restaurantId, lat, lng, zoneId } = body as {
       restaurantId?: string
       lat?: number
       lng?: number
+      zoneId?: string
     }
 
     if (!restaurantId) {
@@ -77,6 +153,12 @@ export async function POST(request: Request) {
 
     if (!restaurantId || typeof lat !== "number" || typeof lng !== "number") {
       return NextResponse.json({ error: "parameters restaurantId, lat, lng are required" }, { status: 400 })
+    }
+
+    const cacheKey = buildCacheKey(restaurantId, zoneId, lat, lng)
+    const cached = await getCachedResult(cacheKey)
+    if (cached) {
+      return NextResponse.json({ ...cached, cached: true })
     }
 
     await dbConnect()
@@ -113,13 +195,16 @@ export async function POST(request: Request) {
         ? responseZones.reduce((min, zone) => Math.min(min, zone.delivery_fee), Number.POSITIVE_INFINITY)
         : Number.POSITIVE_INFINITY
     const lowestFee = Number.isFinite(lowestFeeValue) ? lowestFeeValue : null
-
-    return NextResponse.json({
+    const payload: CacheResult = {
       isDeliveryAvailable: responseZones.length > 0,
       zones: responseZones,
       lowestDeliveryFee: lowestFee,
       location: { lat, lng },
-    })
+    }
+
+    await setCachedResult(cacheKey, payload)
+
+    return NextResponse.json(payload)
   } catch (error) {
     console.error("Failed to check delivery availability", error)
     return NextResponse.json({ error: "تعذّر التحقق من نطاق التوصيل" }, { status: 500 })

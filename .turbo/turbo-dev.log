@@ -19,193 +19,2633 @@
      [1m✓[22m parallelServerBuildTraces
 
  [32m[1m✓[22m[39m Starting...
- [32m[1m✓[22m[39m Ready in 6.7s
+ [32m[1m✓[22m[39m Ready in 3.4s
  [37m[1m○[22m[39m Compiling /middleware ...
- [32m[1m✓[22m[39m Compiled /middleware in 669ms (159 modules)
+ [32m[1m✓[22m[39m Compiled /middleware in 1416ms (159 modules)
  [37m[1m○[22m[39m Compiling /api/subdomains ...
- [32m[1m✓[22m[39m Compiled /api/subdomains in 1134ms (346 modules)
- GET /api/subdomains [32m200[39m in 3834ms
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 2.3s (346 modules)
+ GET /api/subdomains [32m200[39m in 5324ms
  [37m[1m○[22m[39m Compiling /[lng]/[...slug] ...
- [32m[1m✓[22m[39m Compiled /[lng]/[...slug] in 8.4s (1091 modules)
- GET /ar/home [32m200[39m in 11886ms
- [37m[1m○[22m[39m Compiling /[lng] ...
+ [32m[1m✓[22m[39m Compiled /[lng]/[...slug] in 4.5s (1117 modules)
+ GET /ar/branches [32m200[39m in 7001ms
+ [37m[1m○[22m[39m Compiling /api/restaurant ...
  [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
 Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
 
 Import trace for requested module:
 ./src/app/api/restaurant/route.ts
- GET /api/auth/session [32m200[39m in 3206ms
- GET /api/auth/session [32m200[39m in 3207ms
- GET /api/auth/session [32m200[39m in 3208ms
- GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 3305ms
+ GET /api/auth/session [32m200[39m in 1177ms
+ GET /api/auth/session [32m200[39m in 1178ms
+ GET /api/auth/session [32m200[39m in 1179ms
  [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
 Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
 
 Import trace for requested module:
 ./src/app/api/restaurant/route.ts
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 1268ms
  [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
 Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
 
 Import trace for requested module:
 ./src/app/api/restaurant/route.ts
- GET /ar/contact [32m200[39m in 1225ms
- POST /api/zones/check-delivery [32m200[39m in 470ms
- POST /api/zones/check-delivery [32m200[39m in 472ms
- POST /api/zones/check-delivery [32m200[39m in 475ms
- POST /api/zones/check-delivery [32m200[39m in 99ms
- POST /api/zones/check-delivery [32m200[39m in 115ms
- POST /api/zones/check-delivery [32m200[39m in 122ms
- POST /api/zones/check-delivery [32m200[39m in 995ms
- POST /api/zones/check-delivery [32m200[39m in 595ms
- GET /ar/contact [32m200[39m in 415ms
- GET /api/auth/session [32m200[39m in 28ms
- GET /api/auth/session [32m200[39m in 13ms
- POST /api/zones/check-delivery [32m200[39m in 113ms
- POST /api/zones/check-delivery [32m200[39m in 115ms
- POST /api/zones/check-delivery [32m200[39m in 116ms
- POST /api/zones/check-delivery [32m200[39m in 118ms
+ POST /api/zones/check-delivery [32m200[39m in 447ms
+ POST /api/zones/check-delivery [32m200[39m in 449ms
+ POST /api/zones/check-delivery [32m200[39m in 452ms
+ POST /api/zones/check-delivery [32m200[39m in 100ms
+ POST /api/zones/check-delivery [32m200[39m in 202ms
+ POST /api/zones/check-delivery [32m200[39m in 203ms
+ POST /api/zones/check-delivery [32m200[39m in 972ms
+ POST /api/zones/check-delivery [32m200[39m in 982ms
+ GET /favicon.ico [32m200[39m in 2537ms
+ GET /menu2 [32m200[39m in 798ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 438ms
  GET /api/auth/session [32m200[39m in 38ms
- GET /api/auth/session [32m200[39m in 10ms
- POST /api/zones/check-delivery [32m200[39m in 119ms
- POST /api/zones/check-delivery [32m200[39m in 120ms
- POST /api/zones/check-delivery [32m200[39m in 121ms
- GET /favicon.ico [32m200[39m in 5794ms
- POST /api/zones/check-delivery [32m200[39m in 720ms
- GET /favicon.ico [32m200[39m in 701ms
- GET /ar/about [32m200[39m in 390ms
- GET /api/auth/session [32m200[39m in 25ms
- GET /api/auth/session [32m200[39m in 48ms
- POST /api/zones/check-delivery [32m200[39m in 117ms
- POST /api/zones/check-delivery [32m200[39m in 119ms
- POST /api/zones/check-delivery [32m200[39m in 121ms
- POST /api/zones/check-delivery [32m200[39m in 123ms
- POST /api/zones/check-delivery [32m200[39m in 97ms
+ GET /api/auth/session [32m200[39m in 46ms
+ GET /api/auth/session [32m200[39m in 97ms
+ GET /api/auth/session [32m200[39m in 116ms
+ GET /api/auth/session [32m200[39m in 117ms
+ GET /api/auth/session [32m200[39m in 120ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 181ms
+ POST /api/zones/check-delivery [32m200[39m in 161ms
+ POST /api/zones/check-delivery [32m200[39m in 170ms
+ POST /api/zones/check-delivery [32m200[39m in 171ms
+ POST /api/zones/check-delivery [32m200[39m in 173ms
+ POST /api/zones/check-delivery [32m200[39m in 101ms
+ POST /api/zones/check-delivery [32m200[39m in 102ms
+ POST /api/zones/check-delivery [32m200[39m in 105ms
+ GET /favicon.ico [32m200[39m in 473ms
+ POST /api/zones/check-delivery [32m200[39m in 587ms
+ [32m[1m✓[22m[39m Compiled /api/zones/check-delivery in 4.1s (1953 modules)
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 255ms (1138 modules)
+ GET /api/subdomains [32m200[39m in 945ms
+ GET /menu2 [32m200[39m in 496ms
+ [37m[1m○[22m[39m Compiling /[lng]/menu ...
+ [32m[1m✓[22m[39m Compiled /[lng]/menu in 918ms (1968 modules)
+ GET /menu [32m200[39m in 3936ms
+ [37m[1m○[22m[39m Compiling /api/restaurant ...
+ [32m[1m✓[22m[39m Compiled /api/restaurant in 1035ms (1151 modules)
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/auth/session [32m200[39m in 1309ms
+ GET /api/auth/session [32m200[39m in 1172ms
+ GET /api/auth/session [32m200[39m in 1396ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 1490ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /placeholder.jpg [33m404[39m in 2169ms
+ [37m[1m○[22m[39m Compiling /api/zones/check-delivery ...
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ POST /api/zones/check-delivery [32m200[39m in 713ms
+ POST /api/zones/check-delivery [32m200[39m in 714ms
+ POST /api/zones/check-delivery [32m200[39m in 715ms
+ POST /api/zones/check-delivery [32m200[39m in 718ms
+ GET /favicon.ico [32m200[39m in 2726ms
  POST /api/zones/check-delivery [32m200[39m in 93ms
- GET /api/auth/session [32m200[39m in 21ms
- GET /api/auth/session [32m200[39m in 38ms
- POST /api/zones/check-delivery [32m200[39m in 107ms
- POST /api/zones/check-delivery [32m200[39m in 110ms
- GET /favicon.ico [32m200[39m in 436ms
- GET /ar/posts [32m200[39m in 249ms
- GET /favicon.ico [32m200[39m in 514ms
- GET /api/auth/session [32m200[39m in 28ms
- GET /api/auth/session [32m200[39m in 38ms
- GET /api/auth/session [32m200[39m in 39ms
- GET /api/auth/session [32m200[39m in 39ms
- POST /api/zones/check-delivery [32m200[39m in 107ms
- POST /api/zones/check-delivery [32m200[39m in 109ms
- POST /api/zones/check-delivery [32m200[39m in 87ms
- POST /api/zones/check-delivery [32m200[39m in 107ms
- GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 143ms
- POST /api/zones/check-delivery [32m200[39m in 84ms
- POST /api/zones/check-delivery [32m200[39m in 92ms
- POST /api/zones/check-delivery [32m200[39m in 94ms
- POST /api/zones/check-delivery [32m200[39m in 94ms
- GET /favicon.ico [32m200[39m in 501ms
- GET /ar/branches [32m200[39m in 370ms
- GET /api/auth/session [32m200[39m in 29ms
- GET /api/auth/session [32m200[39m in 39ms
- POST /api/zones/check-delivery [32m200[39m in 108ms
+ POST /api/zones/check-delivery [32m200[39m in 95ms
+ POST /api/zones/check-delivery [32m200[39m in 118ms
+ POST /api/zones/check-delivery [32m200[39m in 126ms
+ GET /menu [32m200[39m in 1208ms
+ GET /api/auth/session [32m200[39m in 111ms
+ GET /api/auth/session [32m200[39m in 19ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 226ms
+ GET /placeholder.jpg [33m404[39m in 540ms
+ GET /api/auth/session [32m200[39m in 35ms
+ GET /favicon.ico [32m200[39m in 683ms
  POST /api/zones/check-delivery [32m200[39m in 109ms
  POST /api/zones/check-delivery [32m200[39m in 111ms
  POST /api/zones/check-delivery [32m200[39m in 113ms
- POST /api/zones/check-delivery [32m200[39m in 88ms
- POST /api/zones/check-delivery [32m200[39m in 92ms
- GET /api/auth/session [32m200[39m in 24ms
- GET /api/auth/session [32m200[39m in 37ms
- POST /api/zones/check-delivery [32m200[39m in 113ms
- POST /api/zones/check-delivery [32m200[39m in 115ms
- GET /favicon.ico [32m200[39m in 479ms
- [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
-Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
-
-Import trace for requested module:
-./src/app/api/restaurant/route.ts
- [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
-Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
-
-Import trace for requested module:
-./src/app/api/restaurant/route.ts
- GET /ar/menu [32m200[39m in 3644ms
- GET /ar/menu [32m200[39m in 532ms
- GET /ar [32m200[39m in 1271ms
- GET /api/auth/session [32m200[39m in 40ms
- GET /api/auth/session [32m200[39m in 66ms
- POST /api/zones/check-delivery [32m200[39m in 136ms
- POST /api/zones/check-delivery [32m200[39m in 139ms
- POST /api/zones/check-delivery [32m200[39m in 141ms
- POST /api/zones/check-delivery [32m200[39m in 143ms
- POST /api/zones/check-delivery [32m200[39m in 100ms
- POST /api/zones/check-delivery [32m200[39m in 89ms
- GET /api/auth/session [32m200[39m in 24ms
- GET /api/auth/session [32m200[39m in 46ms
- POST /api/zones/check-delivery [32m200[39m in 127ms
- POST /api/zones/check-delivery [32m200[39m in 129ms
- GET /favicon.ico [32m200[39m in 660ms
- GET /ar/menu [32m200[39m in 271ms
- GET /favicon.ico [32m200[39m in 624ms
- GET /api/auth/session [32m200[39m in 60ms
- POST /api/zones/check-delivery [32m200[39m in 167ms
- POST /api/zones/check-delivery [32m200[39m in 169ms
- POST /api/zones/check-delivery [32m200[39m in 177ms
- POST /api/zones/check-delivery [32m200[39m in 179ms
- POST /api/zones/check-delivery [32m200[39m in 181ms
- POST /api/zones/check-delivery [32m200[39m in 88ms
- GET /api/auth/session [32m200[39m in 26ms
- GET /api/auth/session [32m200[39m in 78ms
- GET /api/auth/session [32m200[39m in 80ms
- POST /api/zones/check-delivery [32m200[39m in 150ms
- POST /api/zones/check-delivery [32m200[39m in 151ms
- GET /favicon.ico [32m200[39m in 562ms
- GET /api/subdomains [32m200[39m in 195ms
- GET /ar/branches [32m200[39m in 520ms
- GET /ar/posts [32m200[39m in 258ms
- GET /favicon.ico [32m200[39m in 436ms
- GET /api/auth/session [32m200[39m in 33ms
- GET /api/auth/session [32m200[39m in 46ms
- GET /api/auth/session [32m200[39m in 47ms
- GET /api/auth/session [32m200[39m in 53ms
- POST /api/zones/check-delivery [32m200[39m in 116ms
- POST /api/zones/check-delivery [32m200[39m in 117ms
- POST /api/zones/check-delivery [32m200[39m in 92ms
- POST /api/zones/check-delivery [32m200[39m in 96ms
- GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 126ms
- POST /api/zones/check-delivery [32m200[39m in 91ms
- POST /api/zones/check-delivery [32m200[39m in 92ms
- POST /api/zones/check-delivery [32m200[39m in 93ms
- POST /api/zones/check-delivery [32m200[39m in 93ms
- GET /favicon.ico [32m200[39m in 552ms
- GET /ar/menu [32m200[39m in 279ms
- GET /api/auth/session [32m200[39m in 37ms
+ POST /api/zones/check-delivery [32m200[39m in 111ms
+ GET /ar/menu [32m200[39m in 1038ms
  GET /api/auth/session [32m200[39m in 21ms
- POST /api/zones/check-delivery [32m200[39m in 119ms
- POST /api/zones/check-delivery [32m200[39m in 120ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 105ms
+ GET /api/auth/session [32m200[39m in 26ms
+ GET /api/auth/session [32m200[39m in 32ms
+ POST /api/zones/check-delivery [32m200[39m in 156ms
+ POST /api/zones/check-delivery [32m200[39m in 158ms
  POST /api/zones/check-delivery [32m200[39m in 121ms
- POST /api/zones/check-delivery [32m200[39m in 122ms
- GET /api/auth/session [32m200[39m in 23ms
- GET /api/auth/session [32m200[39m in 9ms
- POST /api/zones/check-delivery [32m200[39m in 87ms
- GET /favicon.ico [32m200[39m in 714ms
- POST /api/zones/check-delivery [32m200[39m in 100ms
+ POST /api/zones/check-delivery [32m200[39m in 123ms
+ GET /api/auth/session [32m200[39m in 34ms
+ GET /api/auth/session [32m200[39m in 20ms
+ POST /api/zones/check-delivery [32m200[39m in 99ms
+ POST /api/zones/check-delivery [32m200[39m in 140ms
+ POST /api/zones/check-delivery [32m200[39m in 142ms
+ POST /api/zones/check-delivery [32m200[39m in 145ms
+ GET /favicon.ico [32m200[39m in 596ms
+ GET /placeholder.jpg [33m404[39m in 349ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /ar/menu [32m200[39m in 1436ms
+ GET /ar/menu [32m200[39m in 378ms
+ GET /api/auth/session [32m200[39m in 70ms
+ GET /api/auth/session [32m200[39m in 129ms
+ POST /api/zones/check-delivery [32m200[39m in 210ms
+ POST /api/zones/check-delivery [32m200[39m in 213ms
+ POST /api/zones/check-delivery [32m200[39m in 217ms
+ GET /api/auth/session [32m200[39m in 36ms
+ POST /api/zones/check-delivery [32m200[39m in 111ms
+ POST /api/zones/check-delivery [32m200[39m in 113ms
+ GET /api/auth/session [32m200[39m in 13ms
+ POST /api/zones/check-delivery [32m200[39m in 119ms
+ POST /api/zones/check-delivery [32m200[39m in 121ms
+ POST /api/zones/check-delivery [32m200[39m in 99ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 558ms
+ GET /ar/menu [32m200[39m in 627ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 447ms
+ GET /api/auth/session [32m200[39m in 27ms
+ GET /api/auth/session [32m200[39m in 93ms
+ GET /api/auth/session [32m200[39m in 95ms
+ GET /api/auth/session [32m200[39m in 97ms
+ GET /api/auth/session [32m200[39m in 97ms
+ GET /api/auth/session [32m200[39m in 37ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 140ms
+ GET /favicon.ico [32m200[39m in 663ms
+ POST /api/zones/check-delivery [32m200[39m in 133ms
+ POST /api/zones/check-delivery [32m200[39m in 153ms
+ POST /api/zones/check-delivery [32m200[39m in 156ms
+ POST /api/zones/check-delivery [32m200[39m in 131ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 401ms
+ POST /api/zones/check-delivery [32m200[39m in 101ms
+ POST /api/zones/check-delivery [32m200[39m in 113ms
+ POST /api/zones/check-delivery [32m200[39m in 129ms
+ POST /api/zones/check-delivery [32m200[39m in 130ms
+ GET /ar [32m200[39m in 657ms
+ GET /api/auth/session [32m200[39m in 24ms
+ GET /api/auth/session [32m200[39m in 37ms
+ GET /api/auth/session [32m200[39m in 38ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 122ms
+ POST /api/zones/check-delivery [32m200[39m in 91ms
+ POST /api/zones/check-delivery [32m200[39m in 98ms
+ POST /api/zones/check-delivery [32m200[39m in 101ms
+ POST /api/zones/check-delivery [32m200[39m in 107ms
+ POST /api/zones/check-delivery [32m200[39m in 93ms
+ POST /api/zones/check-delivery [32m200[39m in 96ms
+ POST /api/zones/check-delivery [32m200[39m in 108ms
+ POST /api/zones/check-delivery [32m200[39m in 118ms
+ GET /favicon.ico [32m200[39m in 480ms
+ GET /ar/menu [32m200[39m in 1012ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 449ms
+ GET /api/auth/session [32m200[39m in 37ms
+ GET /api/auth/session [32m200[39m in 39ms
+ GET /api/auth/session [32m200[39m in 33ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 282ms
+ POST /api/zones/check-delivery [32m200[39m in 177ms
+ POST /api/zones/check-delivery [32m200[39m in 181ms
  POST /api/zones/check-delivery [32m200[39m in 101ms
  POST /api/zones/check-delivery [32m200[39m in 103ms
- GET /images/mashwyatgedo/placeholder.svg?height=200&width=300 [33m404[39m in 293ms
- GET /images/mashwyatgedo/placeholder.svg?height=200&width=300 [33m404[39m in 337ms
- GET /images/mashwyatgedo/placeholder.svg?height=200&width=300 [33m404[39m in 387ms
- GET /images/mashwyatgedo/placeholder.svg?height=200&width=300 [33m404[39m in 342ms
- GET /api/subdomains [32m200[39m in 197ms
- GET /ar/menu [32m200[39m in 1244ms
- GET /api/auth/session [32m200[39m in 55ms
- GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 124ms
- GET /placeholder.svg?height=200&width=300 [33m404[39m in 585ms
+ POST /api/zones/check-delivery [32m200[39m in 101ms
+ POST /api/zones/check-delivery [32m200[39m in 107ms
+ GET /images/wahmyburger/placeholder.svg?height=200&width=300 [33m404[39m in 542ms
+ GET /favicon.ico [32m200[39m in 815ms
+ POST /api/zones/check-delivery [32m200[39m in 97ms
+ POST /api/zones/check-delivery [32m200[39m in 855ms
+ GET / [32m200[39m in 763ms
+ GET /api/auth/session [32m200[39m in 24ms
+ GET /api/auth/session [32m200[39m in 39ms
+ GET /api/auth/session [32m200[39m in 40ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 123ms
+ POST /api/zones/check-delivery [32m200[39m in 106ms
+ POST /api/zones/check-delivery [32m200[39m in 122ms
+ POST /api/zones/check-delivery [32m200[39m in 124ms
+ POST /api/zones/check-delivery [32m200[39m in 128ms
+ POST /api/zones/check-delivery [32m200[39m in 94ms
+ POST /api/zones/check-delivery [32m200[39m in 110ms
+ POST /api/zones/check-delivery [32m200[39m in 96ms
+ POST /api/zones/check-delivery [32m200[39m in 101ms
+ GET /favicon.ico [32m200[39m in 542ms
+ GET /ar/menu [32m200[39m in 421ms
+ GET /api/auth/session [32m200[39m in 39ms
+ POST /api/zones/check-delivery [32m200[39m in 183ms
+ POST /api/zones/check-delivery [32m200[39m in 184ms
+ POST /api/zones/check-delivery [32m200[39m in 185ms
+ POST /api/zones/check-delivery [32m200[39m in 185ms
  GET /api/auth/session [32m200[39m in 18ms
- GET /api/auth/session [32m200[39m in 13ms
- POST /api/zones/check-delivery [32m200[39m in 158ms
- POST /api/zones/check-delivery [32m200[39m in 151ms
- POST /api/zones/check-delivery [32m200[39m in 164ms
- POST /api/zones/check-delivery [32m200[39m in 157ms
- GET /favicon.ico [32m200[39m in 775ms
- GET /images/mashwyatgedo/placeholder.svg?height=200&width=300 [33m404[39m in 345ms
- GET /images/mashwyatgedo/placeholder.svg?height=200&width=300 [33m404[39m in 418ms
- GET /ar/posts [32m200[39m in 375ms
- GET /favicon.ico [32m200[39m in 463ms
+ GET /api/auth/session [32m200[39m in 27ms
+ GET /api/auth/session [32m200[39m in 16ms
+ POST /api/zones/check-delivery [32m200[39m in 107ms
+ POST /api/zones/check-delivery [32m200[39m in 108ms
+ POST /api/zones/check-delivery [32m200[39m in 108ms
+ POST /api/zones/check-delivery [32m200[39m in 89ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 513ms
+ GET /favicon.ico [32m200[39m in 502ms
+ [31m[1m⨯[22m[39m ./src/app/[lng]/(public)/[...slug]/page.tsx
+Error:   [31m×[0m Expected '</', got 'jsx text (
+  [31m│[0m       )'
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/(public)/[...slug]/page.tsx[0m:258:1]
+ [2m255[0m │                 })
+ [2m256[0m │               )}
+ [2m257[0m │             </div>
+ [2m258[0m │ [35;1m╭[0m[35;1m─[0m[35;1m▶[0m          </MobileLayout>
+ [2m259[0m │ [35;1m╰[0m[35;1m─[0m[35;1m▶[0m       </main>
+ [2m260[0m │           </>
+ [2m261[0m │         )
+ [2m262[0m │       }
+     ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/[lng]/(public)/[...slug]/page.tsx
+ [31m[1m⨯[22m[39m ./src/app/[lng]/(public)/[...slug]/page.tsx
+Error:   [31m×[0m Expected '</', got 'jsx text (
+  [31m│[0m       )'
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/(public)/[...slug]/page.tsx[0m:258:1]
+ [2m255[0m │                 })
+ [2m256[0m │               )}
+ [2m257[0m │             </div>
+ [2m258[0m │ [35;1m╭[0m[35;1m─[0m[35;1m▶[0m          </MobileLayout>
+ [2m259[0m │ [35;1m╰[0m[35;1m─[0m[35;1m▶[0m       </main>
+ [2m260[0m │           </>
+ [2m261[0m │         )
+ [2m262[0m │       }
+     ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/[lng]/(public)/[...slug]/page.tsx
+ GET /ar/menu [31m500[39m in 5076ms
+ [31m[1m⨯[22m[39m ./src/app/[lng]/(public)/[...slug]/page.tsx
+Error:   [31m×[0m Expected '>', got 'MobileLayout'
+     ╭─[[36;1;4m/Users/ibrahimgamal/My project/meelza.com/apps/meelza-sites/src/app/[lng]/(public)/[...slug]/page.tsx[0m:260:1]
+ [2m257[0m │         </div>
+ [2m258[0m │         
+ [2m259[0m │       </main>
+ [2m260[0m │        </MobileLayout>
+     · [35;1m         ────────────[0m
+ [2m261[0m │       </>
+ [2m262[0m │     )
+ [2m263[0m │   }
+     ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/[lng]/(public)/[...slug]/page.tsx
+ GET /ar/menu [31m500[39m in 3315ms
+ GET /ar/menu [31m500[39m in 31ms
+ GET /ar/menu [31m500[39m in 65ms
+ GET /ar/menu [31m500[39m in 31ms
+ GET /favicon.ico [31m500[39m in 95ms
+ [32m[1m✓[22m[39m Compiled /_error in 2.6s (2397 modules)
+ [37m[1m○[22m[39m Compiling /api/subdomains ...
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 841ms (1425 modules)
+ GET /_next/static/webpack/3e013a163f25d099.webpack.hot-update.json [33m404[39m in 3973ms
+ GET /api/subdomains [32m200[39m in 1233ms
+ GET /api/subdomains [32m200[39m in 185ms
+ GET /ar/menu [32m200[39m in 766ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 486ms
+ [37m[1m○[22m[39m Compiling /api/auth/session ...
+ [32m[1m✓[22m[39m Compiled /api/auth/session in 557ms (1518 modules)
+ GET /api/auth/session [32m200[39m in 628ms
+ GET /api/auth/session [32m200[39m in 630ms
+ GET /api/auth/session [32m200[39m in 631ms
+ GET /api/auth/session [32m200[39m in 633ms
+ GET /api/auth/session [32m200[39m in 634ms
+ GET /api/auth/session [32m200[39m in 637ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [37m[1m○[22m[39m Compiling /api/zones/check-delivery ...
+ POST /api/zones/check-delivery [32m200[39m in 738ms
+ POST /api/zones/check-delivery [32m200[39m in 739ms
+ POST /api/zones/check-delivery [32m200[39m in 740ms
+ POST /api/zones/check-delivery [32m200[39m in 734ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 752ms
+ POST /api/zones/check-delivery [32m200[39m in 100ms
+ POST /api/zones/check-delivery [32m200[39m in 111ms
+ POST /api/zones/check-delivery [32m200[39m in 111ms
+ POST /api/zones/check-delivery [32m200[39m in 221ms
+ GET /favicon.ico [32m200[39m in 1148ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /ar/menu [32m200[39m in 1175ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /ar/menu [32m200[39m in 492ms
+ [32m[1m✓[22m[39m Compiled /api/zones/check-delivery in 1163ms (2397 modules)
+ GET /ar/menu [32m200[39m in 703ms
+ GET /ar/menu [32m200[39m in 771ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 440ms
+ [32m[1m✓[22m[39m Compiled /api/auth/session in 450ms (1516 modules)
+ GET /api/auth/session [32m200[39m in 642ms
+ GET /api/auth/session [32m200[39m in 560ms
+ GET /api/auth/session [32m200[39m in 559ms
+ GET /api/auth/session [32m200[39m in 560ms
+ GET /api/auth/session [32m200[39m in 645ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /favicon.ico [32m200[39m in 1069ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [37m[1m○[22m[39m Compiling /api/restaurant ...
+ GET /api/auth/session [32m200[39m in 596ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 714ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 984ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ POST /api/zones/check-delivery [32m200[39m in 508ms
+ POST /api/zones/check-delivery [32m200[39m in 509ms
+ POST /api/zones/check-delivery [32m200[39m in 509ms
+ POST /api/zones/check-delivery [32m200[39m in 371ms
+ POST /api/zones/check-delivery [32m200[39m in 511ms
+ POST /api/zones/check-delivery [32m200[39m in 93ms
+ POST /api/zones/check-delivery [32m200[39m in 90ms
+ POST /api/zones/check-delivery [32m200[39m in 97ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /ar/menu [32m200[39m in 486ms
+ GET /ar/menu [32m200[39m in 793ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 446ms
+ GET /api/auth/session [32m200[39m in 32ms
+ GET /api/auth/session [32m200[39m in 43ms
+ GET /api/auth/session [32m200[39m in 29ms
+ GET /api/auth/session [32m200[39m in 93ms
+ GET /api/auth/session [32m200[39m in 94ms
+ GET /api/auth/session [32m200[39m in 95ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 193ms
+ POST /api/zones/check-delivery [32m200[39m in 132ms
+ POST /api/zones/check-delivery [32m200[39m in 139ms
+ POST /api/zones/check-delivery [32m200[39m in 141ms
+ POST /api/zones/check-delivery [32m200[39m in 144ms
+ POST /api/zones/check-delivery [32m200[39m in 123ms
+ POST /api/zones/check-delivery [32m200[39m in 115ms
+ POST /api/zones/check-delivery [32m200[39m in 126ms
+ POST /api/zones/check-delivery [32m200[39m in 128ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 481ms
+ GET /favicon.ico [32m200[39m in 514ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 692ms (1425 modules)
+ GET /api/subdomains [32m200[39m in 1007ms
+ GET /ar/menu [32m200[39m in 976ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 470ms
+ [32m[1m✓[22m[39m Compiled /api/auth/session in 478ms (1518 modules)
+ GET /api/auth/session [32m200[39m in 573ms
+ GET /api/auth/session [32m200[39m in 566ms
+ GET /api/auth/session [32m200[39m in 557ms
+ GET /api/auth/session [32m200[39m in 558ms
+ GET /api/auth/session [32m200[39m in 580ms
+ GET /api/auth/session [32m200[39m in 46ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [37m[1m○[22m[39m Compiling /api/zones/check-delivery ...
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /favicon.ico [32m200[39m in 1759ms
+ POST /api/zones/check-delivery [32m200[39m in 927ms
+ POST /api/zones/check-delivery [32m200[39m in 932ms
+ POST /api/zones/check-delivery [32m200[39m in 938ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 1061ms
+ POST /api/zones/check-delivery [32m200[39m in 102ms
+ POST /api/zones/check-delivery [32m200[39m in 126ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 1202ms
+ POST /api/zones/check-delivery [32m200[39m in 139ms
+ POST /api/zones/check-delivery [32m200[39m in 141ms
+ POST /api/zones/check-delivery [32m200[39m in 145ms
+ [32m[1m✓[22m[39m Compiled /api/zones/check-delivery in 5.3s (2397 modules)
+ GET /ar/menu [32m200[39m in 1087ms
+ GET /ar/menu [32m200[39m in 799ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 443ms
+ [37m[1m○[22m[39m Compiling /api/auth/session ...
+ [32m[1m✓[22m[39m Compiled /api/auth/session in 694ms (1516 modules)
+ GET /api/auth/session [32m200[39m in 1004ms
+ GET /api/auth/session [32m200[39m in 910ms
+ GET /api/auth/session [32m200[39m in 910ms
+ GET /api/auth/session [32m200[39m in 910ms
+ GET /api/auth/session [32m200[39m in 1007ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /favicon.ico [32m200[39m in 1460ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [37m[1m○[22m[39m Compiling /api/restaurant ...
+ GET /api/auth/session [32m200[39m in 620ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 782ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 1223ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ POST /api/zones/check-delivery [32m200[39m in 1046ms
+ POST /api/zones/check-delivery [32m200[39m in 1047ms
+ POST /api/zones/check-delivery [32m200[39m in 1048ms
+ POST /api/zones/check-delivery [32m200[39m in 759ms
+ POST /api/zones/check-delivery [32m200[39m in 1053ms
+ POST /api/zones/check-delivery [32m200[39m in 401ms
+ POST /api/zones/check-delivery [32m200[39m in 92ms
+ POST /api/zones/check-delivery [32m200[39m in 97ms
+ GET /placeholder-user.jpg [33m404[39m in 588ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /ar/menu [32m200[39m in 933ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 1103ms (1425 modules)
+ GET /api/subdomains [32m200[39m in 1586ms
+ GET /ar/menu [32m200[39m in 487ms
+ [32m[1m✓[22m[39m Compiled in 797ms (991 modules)
+ GET /ar/menu [32m200[39m in 610ms
+ GET /ar/menu [32m200[39m in 483ms
+ [32m[1m✓[22m[39m Compiled in 397ms (991 modules)
+ GET /ar/menu [32m200[39m in 405ms
+ GET /ar/menu [32m200[39m in 846ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 391ms
+ [37m[1m○[22m[39m Compiling /api/auth/session ...
+ [32m[1m✓[22m[39m Compiled /api/auth/session in 1028ms (1516 modules)
+ GET /api/auth/session [32m200[39m in 1120ms
+ GET /api/auth/session [32m200[39m in 1004ms
+ GET /api/auth/session [32m200[39m in 1002ms
+ GET /api/auth/session [32m200[39m in 1003ms
+ GET /api/auth/session [32m200[39m in 1147ms
+ GET /api/auth/session [32m200[39m in 24ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /favicon.ico [32m200[39m in 1608ms
+ [37m[1m○[22m[39m Compiling /api/zones/check-delivery ...
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ POST /api/zones/check-delivery [32m200[39m in 550ms
+ POST /api/zones/check-delivery [32m200[39m in 767ms
+ POST /api/zones/check-delivery [32m200[39m in 770ms
+ POST /api/zones/check-delivery [32m200[39m in 772ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 906ms
+ POST /api/zones/check-delivery [32m200[39m in 132ms
+ POST /api/zones/check-delivery [32m200[39m in 132ms
+ POST /api/zones/check-delivery [32m200[39m in 133ms
+ POST /api/zones/check-delivery [32m200[39m in 134ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 1157ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:47:35)
+    at Array.find (<anonymous>)
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:46:38)
+[0m [90m 45 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 46 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 47 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                   [31m[1m^[22m[39m
+ [90m 48 |[39m   )
+ [90m 49 |[39m
+ [90m 50 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:47:76)
+    at Array.find (<anonymous>)
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:46:38)
+[0m [90m 45 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 46 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 47 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                                                            [31m[1m^[22m[39m
+ [90m 48 |[39m   )
+ [90m 49 |[39m
+ [90m 50 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:20:35)
+    at Array.find (<anonymous>)
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:19:38)
+[0m [90m 18 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 19 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 20 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                   [31m[1m^[22m[39m
+ [90m 21 |[39m   )
+ [90m 22 |[39m
+ [90m 23 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:20:76)
+    at Array.find (<anonymous>)
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:19:38)
+[0m [90m 18 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 19 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 20 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                                                            [31m[1m^[22m[39m
+ [90m 21 |[39m   )
+ [90m 22 |[39m
+ [90m 23 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [33m404[39m in 3300ms
+ GET /api/auth/session [32m200[39m in 32ms
+ GET /favicon.ico [32m200[39m in 562ms
+ [32m[1m✓[22m[39m Compiled /[lng]/menu/[category] in 3.6s (2402 modules)
+ [37m[1m○[22m[39m Compiling /api/subdomains ...
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 2.5s (1429 modules)
+ GET /api/subdomains [32m200[39m in 3395ms
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:75:35)
+    at Array.find (<anonymous>)
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:74:38)
+[0m [90m 73 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 74 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 75 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                   [31m[1m^[22m[39m
+ [90m 76 |[39m   )
+ [90m 77 |[39m
+ [90m 78 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:75:76)
+    at Array.find (<anonymous>)
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:74:38)
+[0m [90m 73 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 74 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 75 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                                                            [31m[1m^[22m[39m
+ [90m 76 |[39m   )
+ [90m 77 |[39m
+ [90m 78 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:20:35)
+    at Array.find (<anonymous>)
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:19:38)
+[0m [90m 18 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 19 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 20 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                   [31m[1m^[22m[39m
+ [90m 21 |[39m   )
+ [90m 22 |[39m
+ [90m 23 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:20:76)
+    at Array.find (<anonymous>)
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:19:38)
+[0m [90m 18 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 19 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 20 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                                                            [31m[1m^[22m[39m
+ [90m 21 |[39m   )
+ [90m 22 |[39m
+ [90m 23 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [32m200[39m in 455ms
+ [32m[1m✓[22m[39m Compiled in 850ms (2421 modules)
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:47:35)
+    at Array.find (<anonymous>)
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:46:38)
+[0m [90m 45 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 46 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 47 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                   [31m[1m^[22m[39m
+ [90m 48 |[39m   )
+ [90m 49 |[39m
+ [90m 50 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:47:76)
+    at Array.find (<anonymous>)
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:46:38)
+[0m [90m 45 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 46 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 47 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                                                            [31m[1m^[22m[39m
+ [90m 48 |[39m   )
+ [90m 49 |[39m
+ [90m 50 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:20:35)
+    at Array.find (<anonymous>)
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:19:38)
+[0m [90m 18 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 19 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 20 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                   [31m[1m^[22m[39m
+ [90m 21 |[39m   )
+ [90m 22 |[39m
+ [90m 23 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:20:76)
+    at Array.find (<anonymous>)
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:19:38)
+[0m [90m 18 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 19 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 20 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                                                            [31m[1m^[22m[39m
+ [90m 21 |[39m   )
+ [90m 22 |[39m
+ [90m 23 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [32m200[39m in 548ms
+ [32m[1m✓[22m[39m Compiled in 2.3s (2421 modules)
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:75:35)
+    at Array.find (<anonymous>)
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:74:38)
+[0m [90m 73 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 74 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 75 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                   [31m[1m^[22m[39m
+ [90m 76 |[39m   )
+ [90m 77 |[39m
+ [90m 78 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:75:76)
+    at Array.find (<anonymous>)
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:74:38)
+[0m [90m 73 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 74 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 75 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                                                            [31m[1m^[22m[39m
+ [90m 76 |[39m   )
+ [90m 77 |[39m
+ [90m 78 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:20:35)
+    at Array.find (<anonymous>)
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:19:38)
+[0m [90m 18 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 19 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 20 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                   [31m[1m^[22m[39m
+ [90m 21 |[39m   )
+ [90m 22 |[39m
+ [90m 23 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:20:76)
+    at Array.find (<anonymous>)
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:19:38)
+[0m [90m 18 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 19 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 20 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                                                            [31m[1m^[22m[39m
+ [90m 21 |[39m   )
+ [90m 22 |[39m
+ [90m 23 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [32m200[39m in 415ms
+ [32m[1m✓[22m[39m Compiled in 1432ms (2402 modules)
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:20:35)
+    at Array.find (<anonymous>)
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:19:38)
+[0m [90m 18 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 19 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 20 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                   [31m[1m^[22m[39m
+ [90m 21 |[39m   )
+ [90m 22 |[39m
+ [90m 23 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:20:76)
+    at Array.find (<anonymous>)
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:19:38)
+[0m [90m 18 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 19 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 20 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                                                            [31m[1m^[22m[39m
+ [90m 21 |[39m   )
+ [90m 22 |[39m
+ [90m 23 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:88:35)
+    at Array.find (<anonymous>)
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:87:38)
+[0m [90m 86 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 87 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 88 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                   [31m[1m^[22m[39m
+ [90m 89 |[39m   )
+ [90m 90 |[39m
+ [90m 91 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:88:76)
+    at Array.find (<anonymous>)
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:87:38)
+[0m [90m 86 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 87 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 88 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                                                            [31m[1m^[22m[39m
+ [90m 89 |[39m   )
+ [90m 90 |[39m
+ [90m 91 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [32m200[39m in 887ms
+ [32m[1m✓[22m[39m Compiled in 1259ms (2402 modules)
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:87:35)
+    at Array.find (<anonymous>)
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:86:38)
+[0m [90m 85 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 86 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 87 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                   [31m[1m^[22m[39m
+ [90m 88 |[39m   )
+ [90m 89 |[39m
+ [90m 90 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:87:76)
+    at Array.find (<anonymous>)
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:86:38)
+[0m [90m 85 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 86 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 87 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                                                            [31m[1m^[22m[39m
+ [90m 88 |[39m   )
+ [90m 89 |[39m
+ [90m 90 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:20:35)
+    at Array.find (<anonymous>)
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:19:38)
+[0m [90m 18 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 19 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 20 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                   [31m[1m^[22m[39m
+ [90m 21 |[39m   )
+ [90m 22 |[39m
+ [90m 23 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:20:76)
+    at Array.find (<anonymous>)
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:19:38)
+[0m [90m 18 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 19 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 20 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                                                            [31m[1m^[22m[39m
+ [90m 21 |[39m   )
+ [90m 22 |[39m
+ [90m 23 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [32m200[39m in 565ms
+ [32m[1m✓[22m[39m Compiled in 748ms (2402 modules)
+ [31m[1m⨯[22m[39m ReferenceError: resolveLocale is not defined
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:85:18)
+[0m [90m 83 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m notFound()
+ [90m 84 |[39m
+[31m[1m>[22m[39m[90m 85 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                  [31m[1m^[22m[39m
+ [90m 86 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 87 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 88 |[39m[0m {
+  digest: [32m'3944268865'[39m
+}
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:20:35)
+    at Array.find (<anonymous>)
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:19:38)
+[0m [90m 18 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 19 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 20 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                   [31m[1m^[22m[39m
+ [90m 21 |[39m   )
+ [90m 22 |[39m
+ [90m 23 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at eval (src/app/[lng]/(public)/menu/[category]/page.tsx:20:76)
+    at Array.find (<anonymous>)
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:19:38)
+[0m [90m 18 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())
+ [90m 19 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind(
+[31m[1m>[22m[39m[90m 20 |[39m     (c[33m:[39m any) [33m=>[39m c[33m.[39mslug [33m===[39m params[33m.[39mcategory [33m||[39m c[33m.[39m_id[33m?[39m[33m.[39mtoString() [33m===[39m params[33m.[39mcategory
+ [90m    |[39m                                                                            [31m[1m^[22m[39m
+ [90m 21 |[39m   )
+ [90m 22 |[39m
+ [90m 23 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [32m200[39m in 437ms
+ [31m[1m⨯[22m[39m ./src/app/[lng]/(public)/menu/[category]/page.tsx
+Module parse failed: Identifier 'getCategorySlug' has already been declared (49:6)
+| }
+| const resolveLocale = (lng)=>String(lng).toLowerCase().startsWith("en") ? "en" : "ar";
+> const getCategorySlug = (c, locale)=>{
+|     const explicit = String(c?.slug ?? "").trim();
+|     if (explicit) return explicit;
+
+Import trace for requested module:
+./src/app/[lng]/(public)/menu/[category]/page.tsx
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [31m500[39m in 30ms
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [31m500[39m in 46ms
+ GET /favicon.ico [31m500[39m in 15ms
+ [32m[1m✓[22m[39m Compiled in 2.1s (2388 modules)
+ GET /_next/static/webpack/3e013a163f25d099.webpack.hot-update.json [31m500[39m in 1959ms
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:61:39)
+[0m [90m 59 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m {}
+ [90m 60 |[39m
+[31m[1m>[22m[39m[90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 64 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:63:47)
+[0m [90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 66 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:90:39)
+[0m [90m 88 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m notFound()
+ [90m 89 |[39m
+[31m[1m>[22m[39m[90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 93 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:92:47)
+[0m [90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 93 |[39m
+ [90m 94 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 95 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [33m404[39m in 942ms
+ [37m[1m○[22m[39m Compiling /api/auth/session ...
+ [32m[1m✓[22m[39m Compiled /api/auth/session in 5.1s (1520 modules)
+ GET /api/auth/session [32m200[39m in 5448ms
+ GET /favicon.ico [32m200[39m in 5624ms
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 300ms (1522 modules)
+ GET /api/subdomains [32m200[39m in 538ms
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:90:39)
+[0m [90m 88 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m notFound()
+ [90m 89 |[39m
+[31m[1m>[22m[39m[90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 93 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:61:39)
+[0m [90m 59 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m {}
+ [90m 60 |[39m
+[31m[1m>[22m[39m[90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 64 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:92:47)
+[0m [90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 93 |[39m
+ [90m 94 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 95 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:63:47)
+[0m [90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 66 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA-%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [32m200[39m in 639ms
+ GET /api/auth/session [32m200[39m in 37ms
+ GET /api/auth/session [32m200[39m in 64ms
+ GET /api/auth/session [32m200[39m in 66ms
+ GET /api/auth/session [32m200[39m in 68ms
+ GET /api/auth/session [32m200[39m in 71ms
+ GET /api/auth/session [32m200[39m in 30ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [37m[1m○[22m[39m Compiling /api/zones/check-delivery ...
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /favicon.ico [32m200[39m in 1131ms
+ POST /api/zones/check-delivery [32m200[39m in 854ms
+ POST /api/zones/check-delivery [32m200[39m in 856ms
+ POST /api/zones/check-delivery [32m200[39m in 857ms
+ POST /api/zones/check-delivery [32m200[39m in 859ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 944ms
+ POST /api/zones/check-delivery [32m200[39m in 114ms
+ POST /api/zones/check-delivery [32m200[39m in 120ms
+ POST /api/zones/check-delivery [32m200[39m in 122ms
+ POST /api/zones/check-delivery [32m200[39m in 126ms
+ GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 818ms
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:90:39)
+[0m [90m 88 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m notFound()
+ [90m 89 |[39m
+[31m[1m>[22m[39m[90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 93 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:61:39)
+[0m [90m 59 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m {}
+ [90m 60 |[39m
+[31m[1m>[22m[39m[90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 64 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:92:47)
+[0m [90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 93 |[39m
+ [90m 94 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 95 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:63:47)
+[0m [90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 66 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA-%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [32m200[39m in 701ms
+ GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 525ms
+ GET /api/auth/session [32m200[39m in 124ms
+ GET /api/auth/session [32m200[39m in 163ms
+ GET /api/auth/session [32m200[39m in 165ms
+ GET /api/auth/session [32m200[39m in 157ms
+ GET /api/auth/session [32m200[39m in 158ms
+ GET /api/auth/session [32m200[39m in 48ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 155ms
+ GET /favicon.ico [32m200[39m in 887ms
+ POST /api/zones/check-delivery [32m200[39m in 104ms
+ POST /api/zones/check-delivery [32m200[39m in 120ms
+ POST /api/zones/check-delivery [32m200[39m in 123ms
+ POST /api/zones/check-delivery [32m200[39m in 119ms
+ POST /api/zones/check-delivery [32m200[39m in 118ms
+ POST /api/zones/check-delivery [32m200[39m in 127ms
+ POST /api/zones/check-delivery [32m200[39m in 104ms
+ POST /api/zones/check-delivery [32m200[39m in 101ms
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:61:39)
+[0m [90m 59 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m {}
+ [90m 60 |[39m
+[31m[1m>[22m[39m[90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 64 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:90:39)
+[0m [90m 88 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m notFound()
+ [90m 89 |[39m
+[31m[1m>[22m[39m[90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 93 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:63:47)
+[0m [90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 66 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:92:47)
+[0m [90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 93 |[39m
+ [90m 94 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 95 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA-%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [32m200[39m in 398ms
+ GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 493ms
+ GET /api/auth/session [32m200[39m in 31ms
+ GET /api/auth/session [32m200[39m in 35ms
+ GET /api/auth/session [32m200[39m in 37ms
+ GET /api/auth/session [32m200[39m in 38ms
+ GET /api/auth/session [32m200[39m in 72ms
+ GET /api/auth/session [32m200[39m in 25ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 121ms
+ POST /api/zones/check-delivery [32m200[39m in 131ms
+ POST /api/zones/check-delivery [32m200[39m in 146ms
+ POST /api/zones/check-delivery [32m200[39m in 148ms
+ POST /api/zones/check-delivery [32m200[39m in 175ms
+ POST /api/zones/check-delivery [32m200[39m in 209ms
+ GET /favicon.ico [32m200[39m in 691ms
+ POST /api/zones/check-delivery [32m200[39m in 94ms
+ POST /api/zones/check-delivery [32m200[39m in 101ms
+ POST /api/zones/check-delivery [32m200[39m in 103ms
+ [31m[1m⨯[22m[39m ./src/app/[lng]/(public)/menu/[category]/page.tsx
+Module parse failed: Identifier 'getCategorySlug' has already been declared (49:6)
+| }
+| const resolveLocale = (lng)=>String(lng).toLowerCase().startsWith("en") ? "en" : "ar";
+> const getCategorySlug = (c, locale)=>{
+|     const explicit = String(c?.slug ?? "").trim();
+|     if (explicit) return explicit;
+
+Import trace for requested module:
+./src/app/[lng]/(public)/menu/[category]/page.tsx
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA-%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [31m500[39m in 34ms
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA-%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [31m500[39m in 18ms
+ GET /favicon.ico [31m500[39m in 15ms
+ [32m[1m✓[22m[39m Compiled /api/zones/check-delivery in 1993ms (2388 modules)
+ GET /_next/static/webpack/3e013a163f25d099.webpack.hot-update.json [31m500[39m in 1886ms
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:61:39)
+[0m [90m 59 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m {}
+ [90m 60 |[39m
+[31m[1m>[22m[39m[90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 64 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:90:39)
+[0m [90m 88 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m notFound()
+ [90m 89 |[39m
+[31m[1m>[22m[39m[90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 93 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:63:47)
+[0m [90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 66 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:92:47)
+[0m [90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 93 |[39m
+ [90m 94 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 95 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA-%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [32m200[39m in 974ms
+ [32m[1m✓[22m[39m Compiled /api/auth/session in 363ms (1520 modules)
+ GET /api/auth/session [32m200[39m in 727ms
+ GET /api/auth/session [32m200[39m in 728ms
+ GET /api/auth/session [32m200[39m in 728ms
+ GET /api/auth/session [32m200[39m in 728ms
+ GET /api/auth/session [32m200[39m in 730ms
+ GET /api/auth/session [32m200[39m in 29ms
+ [37m[1m○[22m[39m Compiling /api/restaurant ...
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /favicon.ico [32m200[39m in 3055ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ POST /api/zones/check-delivery [32m200[39m in 1829ms
+ POST /api/zones/check-delivery [32m200[39m in 1833ms
+ POST /api/zones/check-delivery [32m200[39m in 1835ms
+ POST /api/zones/check-delivery [32m200[39m in 1840ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 2779ms
+ POST /api/zones/check-delivery [32m200[39m in 92ms
+ POST /api/zones/check-delivery [32m200[39m in 107ms
+ POST /api/zones/check-delivery [32m200[39m in 108ms
+ POST /api/zones/check-delivery [32m200[39m in 109ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:90:39)
+[0m [90m 88 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m notFound()
+ [90m 89 |[39m
+[31m[1m>[22m[39m[90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 93 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:61:39)
+[0m [90m 59 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m {}
+ [90m 60 |[39m
+[31m[1m>[22m[39m[90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 64 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:92:47)
+[0m [90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 93 |[39m
+ [90m 94 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 95 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:63:47)
+[0m [90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 66 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA-%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [32m200[39m in 621ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:90:39)
+[0m [90m 88 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m notFound()
+ [90m 89 |[39m
+[31m[1m>[22m[39m[90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 93 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:61:39)
+[0m [90m 59 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m {}
+ [90m 60 |[39m
+[31m[1m>[22m[39m[90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 64 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:92:47)
+[0m [90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 93 |[39m
+ [90m 94 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 95 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:63:47)
+[0m [90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 66 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA-%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [32m200[39m in 426ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:90:39)
+[0m [90m 88 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m notFound()
+ [90m 89 |[39m
+[31m[1m>[22m[39m[90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 93 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:61:39)
+[0m [90m 59 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m {}
+ [90m 60 |[39m
+[31m[1m>[22m[39m[90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 64 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:63:47)
+[0m [90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 66 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:92:47)
+[0m [90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 93 |[39m
+ [90m 94 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 95 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA-%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [32m200[39m in 676ms
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:61:39)
+[0m [90m 59 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m {}
+ [90m 60 |[39m
+[31m[1m>[22m[39m[90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 64 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:90:39)
+[0m [90m 88 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m notFound()
+ [90m 89 |[39m
+[31m[1m>[22m[39m[90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 93 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:63:47)
+[0m [90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 66 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:92:47)
+[0m [90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 93 |[39m
+ [90m 94 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 95 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA-%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [32m200[39m in 516ms
+ GET /favicon.ico [32m200[39m in 1129ms
+ GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 584ms
+ [32m[1m✓[22m[39m Compiled /api/zones/check-delivery in 1618ms (2402 modules)
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:90:39)
+[0m [90m 88 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m notFound()
+ [90m 89 |[39m
+[31m[1m>[22m[39m[90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 93 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:61:39)
+[0m [90m 59 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m {}
+ [90m 60 |[39m
+[31m[1m>[22m[39m[90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 64 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:92:47)
+[0m [90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 93 |[39m
+ [90m 94 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 95 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:63:47)
+[0m [90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 66 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA-%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [32m200[39m in 597ms
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:61:39)
+[0m [90m 59 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m {}
+ [90m 60 |[39m
+[31m[1m>[22m[39m[90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 64 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:90:39)
+[0m [90m 88 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m notFound()
+ [90m 89 |[39m
+[31m[1m>[22m[39m[90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 93 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:63:47)
+[0m [90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 66 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:92:47)
+[0m [90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 93 |[39m
+ [90m 94 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 95 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA-%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [32m200[39m in 495ms
+ [32m[1m✓[22m[39m Compiled /api/auth/session in 407ms (1520 modules)
+ GET /api/auth/session [32m200[39m in 705ms
+ GET /api/auth/session [32m200[39m in 707ms
+ GET /api/auth/session [32m200[39m in 707ms
+ GET /api/auth/session [32m200[39m in 710ms
+ GET /api/auth/session [32m200[39m in 716ms
+ GET /api/auth/session [32m200[39m in 391ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [37m[1m○[22m[39m Compiling /api/zones/check-delivery ...
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /favicon.ico [32m200[39m in 2963ms
+ POST /api/zones/check-delivery [32m200[39m in 606ms
+ POST /api/zones/check-delivery [32m200[39m in 607ms
+ POST /api/zones/check-delivery [32m200[39m in 611ms
+ POST /api/zones/check-delivery [32m200[39m in 612ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 1084ms
+ POST /api/zones/check-delivery [32m200[39m in 113ms
+ POST /api/zones/check-delivery [32m200[39m in 120ms
+ POST /api/zones/check-delivery [32m200[39m in 125ms
+ POST /api/zones/check-delivery [32m200[39m in 132ms
+ [32m[1m✓[22m[39m Compiled /api/zones/check-delivery in 1646ms (2402 modules)
+ [37m[1m○[22m[39m Compiling /api/subdomains ...
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 544ms (1429 modules)
+ GET /api/subdomains [32m200[39m in 903ms
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:61:39)
+[0m [90m 59 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m {}
+ [90m 60 |[39m
+[31m[1m>[22m[39m[90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 64 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.lng`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:90:39)
+[0m [90m 88 |[39m   [36mif[39m ([33m![39mrestaurant) [36mreturn[39m notFound()
+ [90m 89 |[39m
+[31m[1m>[22m[39m[90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m    |[39m                                       [31m[1m^[22m[39m
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+ [90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m 93 |[39m[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[lng]/(public)/menu/[category]/page.tsx:63:47)
+[0m [90m 61 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 62 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 63 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 66 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m {}[0m
+Error: Route "/[lng]/menu/[category]" used `params.category`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CategoryPage (src/app/[lng]/(public)/menu/[category]/page.tsx:92:47)
+[0m [90m 90 |[39m   [36mconst[39m locale [33m=[39m resolveLocale(params[33m.[39mlng)
+ [90m 91 |[39m   [36mconst[39m menu [33m=[39m [36mawait[39m getMenuByRestaurantId(restaurant[33m.[39m_id[33m.[39mtoString())[33m.[39m[36mcatch[39m(() [33m=>[39m [36mnull[39m)
+[31m[1m>[22m[39m[90m 92 |[39m   [36mconst[39m slugParam [33m=[39m decodeURIComponent(params[33m.[39mcategory)
+ [90m    |[39m                                               [31m[1m^[22m[39m
+ [90m 93 |[39m
+ [90m 94 |[39m   [36mconst[39m category [33m=[39m menu[33m?[39m[33m.[39mcategories[33m?[39m[33m.[39mfind((c[33m:[39m any) [33m=>[39m getCategorySlug(c[33m,[39m locale) [33m===[39m slugParam)
+ [90m 95 |[39m   [36mif[39m ([33m![39mcategory) [36mreturn[39m notFound()[0m
+ GET /ar/menu/%D9%88%D8%AC%D8%A8%D8%A7%D8%AA-%D8%A7%D9%84%D8%B4%D8%A7%D9%88%D8%B1%D9%85%D8%A7 [32m200[39m in 385ms
+ GET /api/subdomains [32m200[39m in 830ms
+ GET /ar/branches [32m200[39m in 1145ms
+ [37m[1m○[22m[39m Compiling /api/zones/check-delivery ...
+ [32m[1m✓[22m[39m Compiled /api/zones/check-delivery in 1112ms (1522 modules)
+ [32m[1m✓[22m[39m Compiled (1525 modules)
+ GET /api/auth/session [32m200[39m in 1452ms
+ GET /api/auth/session [32m200[39m in 12ms
+ POST /api/zones/check-delivery [32m200[39m in 1512ms
+ POST /api/zones/check-delivery [32m200[39m in 1513ms
+ GET /api/auth/session [32m200[39m in 19ms
+ POST /api/zones/check-delivery [32m200[39m in 1579ms
+ POST /api/zones/check-delivery [32m200[39m in 112ms
+ GET /api/auth/session [32m200[39m in 21ms
+ POST /api/zones/check-delivery [32m200[39m in 487ms
+ POST /api/zones/check-delivery [32m200[39m in 469ms
+ POST /api/zones/check-delivery [32m200[39m in 2522ms
+ POST /api/zones/check-delivery [32m200[39m in 2524ms
+ GET /favicon.ico [32m200[39m in 946ms
+ [32m[1m✓[22m[39m Compiled in 2.7s (2402 modules)
+ [32m[1m✓[22m[39m Compiled in 521ms (992 modules)
+ [32m[1m✓[22m[39m Compiled in 523ms (992 modules)
+ [32m[1m✓[22m[39m Compiled in 429ms (992 modules)
+ [37m[1m○[22m[39m Compiling /api/subdomains ...
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 791ms (1429 modules)
+ GET /api/subdomains [32m200[39m in 1810ms
+ GET /ar/branches [32m200[39m in 869ms
+ [37m[1m○[22m[39m Compiling /api/auth/session ...
+ [32m[1m✓[22m[39m Compiled /api/auth/session in 535ms (1522 modules)
+ GET /api/auth/session [32m200[39m in 664ms
+ GET /api/auth/session [32m200[39m in 665ms
+ GET /api/auth/session [32m200[39m in 667ms
+ GET /api/auth/session [32m200[39m in 670ms
+ GET /api/auth/session [32m200[39m in 674ms
+ GET /api/auth/session [32m200[39m in 37ms
+ [37m[1m○[22m[39m Compiling /api/restaurant ...
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ GET /favicon.ico [32m200[39m in 4192ms
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/restaurant/route.ts
+Attempted import error: 'getRestaurantByAlias' is not exported from '@/lib/services/restaurant-service' (imported as 'getRestaurantByAlias').
+
+Import trace for requested module:
+./src/app/api/restaurant/route.ts
+ POST /api/zones/check-delivery [32m200[39m in 2287ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 4068ms
+ POST /api/zones/check-delivery [32m200[39m in 92ms
+ GET /ar/branches [32m200[39m in 1071ms
+ GET /ar/menu [32m200[39m in 432ms
+ GET /api/auth/session [32m200[39m in 50ms
+ GET /api/auth/session [32m200[39m in 164ms
+ GET /api/auth/session [32m200[39m in 164ms
+ GET /api/auth/session [32m200[39m in 165ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 744ms
+ GET /favicon.ico [32m200[39m in 590ms
+ GET /ar [32m200[39m in 312ms
+ GET /api/auth/session [32m200[39m in 36ms
+ GET /api/auth/session [32m200[39m in 51ms
+ GET /api/auth/session [32m200[39m in 52ms
+ GET /api/auth/session [32m200[39m in 54ms
+ GET /favicon.ico [32m200[39m in 389ms
+ GET /api/auth/session [32m200[39m in 79ms
+ GET /api/auth/session [32m200[39m in 101ms
+ GET /api/auth/session [32m200[39m in 103ms
+ GET /api/auth/session [32m200[39m in 104ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 569ms
+ GET /favicon.ico [32m200[39m in 560ms
+ POST /api/zones/check-delivery [32m200[39m in 91ms
+ GET /ar/branches [32m200[39m in 367ms
+ GET /api/auth/session [32m200[39m in 24ms
+ GET /api/auth/session [32m200[39m in 46ms
+ GET /api/auth/session [32m200[39m in 48ms
+ GET /api/auth/session [32m200[39m in 48ms
+ GET /favicon.ico [32m200[39m in 1951ms
+ [32m[1m✓[22m[39m Compiled /api/zones/check-delivery in 2.5s (2519 modules)
+ GET /ar/branches [32m200[39m in 3104ms
+ GET /placeholder-user.jpg [33m404[39m in 546ms
+ GET /ar [32m200[39m in 359ms
+ GET /api/auth/session [32m200[39m in 60ms
+ GET /api/auth/session [32m200[39m in 61ms
+ GET /api/auth/session [32m200[39m in 61ms
+ GET /api/auth/session [32m200[39m in 76ms
+ GET /favicon.ico [32m200[39m in 444ms
+ GET /ar/about [32m200[39m in 533ms
+ GET /api/auth/session [32m200[39m in 18ms
+ GET /api/auth/session [32m200[39m in 66ms
+ GET /api/auth/session [32m200[39m in 70ms
+ GET /api/auth/session [32m200[39m in 72ms
+ GET /images/karam-el-sham-interior.jpg [33m404[39m in 431ms
+ GET /favicon.ico [32m200[39m in 403ms
+ POST /api/zones/check-delivery [32m200[39m in 91ms
+ [37m[1m○[22m[39m Compiling /[lng]/cart ...
+ [32m[1m✓[22m[39m Compiled /[lng]/cart in 1751ms (2509 modules)
+ GET /ar/cart [32m200[39m in 2713ms
+ GET /favicon.ico [32m200[39m in 722ms
+ [37m[1m○[22m[39m Compiling /[lng]/checkout ...
+ [32m[1m✓[22m[39m Compiled /[lng]/checkout in 1198ms (2602 modules)
+ GET /ar/checkout [32m200[39m in 1828ms
+ [37m[1m○[22m[39m Compiling /api/order-settings ...
+ [32m[1m✓[22m[39m Compiled /api/order-settings in 1695ms (2608 modules)
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [34m307[39m in 1926ms
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [34m307[39m in 35ms
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [34m307[39m in 20ms
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [34m307[39m in 13ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 2061ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 2064ms
+ GET /auth/signin?callbackUrl=%2Far%2Fcheckout [34m307[39m in 14ms
+ GET /favicon.ico [32m200[39m in 4225ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 4444ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 4446ms
+ [37m[1m○[22m[39m Compiling /auth/callback ...
+ [32m[1m✓[22m[39m Compiled /auth/callback in 585ms (2611 modules)
+ GET /auth/callback?code=29eb0214f9c43a612046ebc8f58f3d17e1315043273af1ee274882173bcff4fa&state=20ab7e3d-9c07-4a2b-8cdd-a1783a4448d9 [34m307[39m in 1476ms
+ [37m[1m○[22m[39m Compiling / ...
+ [32m[1m✓[22m[39m Compiled / in 502ms (2618 modules)
+ GET / [32m200[39m in 2064ms
+ [33m[1m⚠[22m[39m The "images.domains" configuration is deprecated. Please use "images.remotePatterns" configuration instead.
+ [31m[1m⨯[22m[39m upstream image response failed for https://images.meelza.com/images//pizza-almohandseen/cover.jpg [33m404[39m
+ [31m[1m⨯[22m[39m upstream image response failed for https://images.meelza.com/images//burgerrepublic/logo.jpg [33m404[39m
+ [31m[1m⨯[22m[39m upstream image response failed for https://images.meelza.com/images//abdoelgazar/1758132325820-cover.jpg [33m404[39m
+ [31m[1m⨯[22m[39m upstream image response failed for https://images.meelza.com/images//abdoelgazar/cover.jpg [33m404[39m
+ [31m[1m⨯[22m[39m upstream image response failed for https://images.meelza.com/images//pizza-almohandseen/logo.jpg [33m404[39m
+ [31m[1m⨯[22m[39m upstream image response failed for https://images.meelza.com/images//burgerrepublic/cover.jpg [33m404[39m
+ GET /favicon.ico [33m404[39m in 164ms
+ GET /api/auth/session [32m200[39m in 152ms
+ [31m[1m⨯[22m[39m upstream image response failed for https://images.meelza.com/images//shawarmer/logo.jpg [33m404[39m
+ [31m[1m⨯[22m[39m upstream image response failed for https://images.meelza.com/images//shawarmer/cover.jpg [33m404[39m
+ [31m[1m⨯[22m[39m upstream image response failed for https://images.meelza.com/images//fish-market/logo.jpg [33m404[39m
+ [31m[1m⨯[22m[39m upstream image response failed for https://images.meelza.com/images//fish-market/cover.jpg [33m404[39m
+ [31m[1m⨯[22m[39m upstream image response failed for https://images.meelza.com/images//lasera/cover.jpg [33m404[39m
+ GET /ar/cart [32m200[39m in 204ms
+ [37m[1m○[22m[39m Compiling /api/restaurant ...
+ GET /favicon.ico [32m200[39m in 1489ms
+ [32m[1m✓[22m[39m Compiled /api/restaurant in 1580ms (1594 modules)
+ GET /api/auth/session [32m200[39m in 2505ms
+ GET /api/auth/session [32m200[39m in 2512ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 2632ms
+ [37m[1m○[22m[39m Compiling /api/account/addresses ...
+ [32m[1m✓[22m[39m Compiled /api/account/addresses in 596ms (2635 modules)
+ GET /api/account/addresses?tenantKey=karamelsham.localhost%3A3000 [32m200[39m in 832ms
+ GET /ar/checkout [32m200[39m in 64ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 193ms
+ [37m[1m○[22m[39m Compiling /api/account/profile ...
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ GET /api/account/profile [33m401[39m in 1827ms
+ GET /api/account/profile [33m401[39m in 1830ms
+ GET /api/account/profile [33m401[39m in 1832ms
+ GET /api/account/profile [33m401[39m in 15ms
+ GET /api/account/profile [33m401[39m in 38ms
+ GET /api/account/profile [33m401[39m in 40ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 1895ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 1898ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 1697ms
+ GET /favicon.ico [32m200[39m in 628ms
+ POST /api/zones/check-delivery [32m200[39m in 160ms
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ GET /api/zones?restaurantId=6821b946e7dc376d85eb878c&active=true [32m200[39m in 989ms
+ GET /api/zones?restaurantId=6821b946e7dc376d85eb878c&active=true [32m200[39m in 168ms
+ POST /api/zones/check-delivery [32m200[39m in 140ms
+ POST /api/account/addresses?tenantKey=karamelsham.localhost%3A3000 [32m200[39m in 317ms
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+[public/orders] unexpected Error: Item not found: 6821c2bdafc5552558be8f9d
+    at eval (src/lib/orders/items.service.ts:76:24)
+    at Array.map (<anonymous>)
+    at normalizeOrderItems (src/lib/orders/items.service.ts:73:51)
+    at async createPublicOrderService (src/lib/orders/service.ts:43:41)
+    at async POST (src/app/api/orders/route.ts:8:20)
+[0m [90m 74 |[39m     [36mconst[39m db [33m=[39m itemMap[33m.[39m[36mget[39m([33mString[39m(i[33m.[39mproductId))
+ [90m 75 |[39m     [36mif[39m ([33m![39mdb) {
+[31m[1m>[22m[39m[90m 76 |[39m       [36mconst[39m err[33m:[39m any [33m=[39m [36mnew[39m [33mError[39m([32m`Item not found: ${i.productId}`[39m)
+ [90m    |[39m                        [31m[1m^[22m[39m
+ [90m 77 |[39m       err[33m.[39mstatus [33m=[39m [35m404[39m
+ [90m 78 |[39m       err[33m.[39mcode [33m=[39m [32m"ITEM_NOT_FOUND"[39m
+ [90m 79 |[39m       [36mthrow[39m err[0m {
+  status: [33m404[39m,
+  code: [32m'ITEM_NOT_FOUND'[39m
+}
+ POST /api/orders [33m404[39m in 1013ms
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 3.2s (1066 modules)
+ GET /api/subdomains [32m200[39m in 4029ms
+ GET / [32m200[39m in 1653ms
+ [37m[1m○[22m[39m Compiling /api/restaurant ...
+ [32m[1m✓[22m[39m Compiled /api/restaurant in 701ms (1158 modules)
+ [32m[1m✓[22m[39m Compiled (1160 modules)
+ GET /api/auth/session [32m200[39m in 1524ms
+ GET /api/auth/session [32m200[39m in 1525ms
+ GET /api/auth/session [32m200[39m in 1529ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 1612ms
+ GET /favicon.ico [32m200[39m in 1846ms
+ [37m[1m○[22m[39m Compiling /api/account/addresses ...
+ [32m[1m✓[22m[39m Compiled /api/account/addresses in 4.5s (1175 modules)
+ GET /api/account/addresses?tenantKey=karamelsham.localhost%3A3000 [32m200[39m in 4941ms
+ [37m[1m○[22m[39m Compiling /api/zones/check-delivery ...
+ [32m[1m✓[22m[39m Compiled /api/zones/check-delivery in 3.7s (1178 modules)
+ POST /api/zones/check-delivery [32m200[39m in 3851ms
+ [32m[1m✓[22m[39m Compiled in 22.5s (2218 modules)
+ [31m[1m⨯[22m[39m ReferenceError: MobileLayout is not defined
+    at HomeRoute (src/app/[lng]/page.tsx:172:10)
+[0m [90m 170 |[39m     [36mreturn[39m (
+ [90m 171 |[39m        [33m<[39m[33m>[39m [33m<[39m[33mMainNav[39m [33m/[39m[33m>[39m 
+[31m[1m>[22m[39m[90m 172 |[39m         [33m<[39m[33mMobileLayout[39m restaurant[33m=[39m{restaurant}[33m>[39m
+ [90m     |[39m          [31m[1m^[22m[39m
+ [90m 173 |[39m       [33m<[39m[33mmain[39m dir[33m=[39m{direction} className[33m=[39m[32m"min-h-screen bg-neutral-50 text-stone-900"[39m[33m>[39m
+ [90m 174 |[39m         [33m<[39m[33mdiv[39m className[33m=[39m[32m"h-1 w-full"[39m style[33m=[39m{{ backgroundColor[33m:[39m accent }} [33m/[39m[33m>[39m
+ [90m 175 |[39m         {orderedSections[33m.[39mmap((section) [33m=>[39m[0m {
+  digest: [32m'1047863492'[39m
+}
+ GET / [32m200[39m in 679ms
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [33m[1m⚠[22m[39m Fast Refresh had to perform a full reload due to a runtime error.
+ [32m[1m✓[22m[39m Compiled in 4.6s (2204 modules)
+ GET / [32m200[39m in 3426ms
+ GET /api/auth/session [32m200[39m in 87ms
+ GET /api/auth/session [32m200[39m in 107ms
+ GET /api/auth/session [32m200[39m in 62ms
+ GET /api/auth/session [32m200[39m in 63ms
+ GET /api/auth/session [32m200[39m in 65ms
+ GET /api/auth/session [32m200[39m in 106ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 187ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3921770006'[39m
+}
+ GET /favicon.ico [31m500[39m in 892ms
+ GET /api/account/addresses?tenantKey=karamelsham.localhost%3A3000 [32m200[39m in 945ms
+ POST /api/zones/check-delivery [32m200[39m in 112ms
+ GET / [32m200[39m in 544ms
+ GET /api/auth/session [32m200[39m in 37ms
+ GET /api/auth/session [32m200[39m in 57ms
+ GET /api/auth/session [32m200[39m in 53ms
+ GET /api/auth/session [32m200[39m in 93ms
+ GET /api/auth/session [32m200[39m in 94ms
+ GET /api/auth/session [32m200[39m in 35ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 97ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3921770006'[39m
+}
+ GET /api/account/addresses?tenantKey=karamelsham.localhost%3A3000 [32m200[39m in 183ms
+ GET /favicon.ico [31m500[39m in 639ms
+ POST /api/zones/check-delivery [32m200[39m in 13ms
+ GET /ar [32m200[39m in 640ms
+ GET /api/auth/session [32m200[39m in 36ms
+ GET /api/auth/session [32m200[39m in 72ms
+ GET /api/auth/session [32m200[39m in 63ms
+ GET /api/auth/session [32m200[39m in 64ms
+ GET /api/auth/session [32m200[39m in 65ms
+ GET /api/auth/session [32m200[39m in 55ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 125ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3921770006'[39m
+}
+ GET /api/account/addresses?tenantKey=karamelsham.localhost%3A3000 [32m200[39m in 198ms
+ GET /favicon.ico [31m500[39m in 665ms
+ POST /api/zones/check-delivery [32m200[39m in 19ms
+ GET /en [32m200[39m in 466ms
+ GET /api/auth/session [32m200[39m in 56ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 138ms
+ GET /api/account/addresses?tenantKey=karamelsham.localhost%3A3000 [32m200[39m in 235ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3921770006'[39m
+}
+ GET /favicon.ico [31m500[39m in 1051ms
+ GET /ar [32m200[39m in 596ms
+ GET /api/auth/session [32m200[39m in 32ms
+ GET /api/auth/session [32m200[39m in 49ms
+ GET /api/auth/session [32m200[39m in 51ms
+ GET /api/auth/session [32m200[39m in 52ms
+ GET /api/auth/session [32m200[39m in 52ms
+ GET /api/auth/session [32m200[39m in 47ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 121ms
+ GET /api/account/addresses?tenantKey=karamelsham.localhost%3A3000 [32m200[39m in 214ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3921770006'[39m
+}
+ GET /favicon.ico [31m500[39m in 749ms
+ POST /api/zones/check-delivery [32m200[39m in 21ms
+ [37m[1m○[22m[39m Compiling /[lng]/[...slug] ...
+ [32m[1m✓[22m[39m Compiled /[lng]/[...slug] in 2.5s (1600 modules)
+ GET /ar/menu [32m200[39m in 3839ms
+ GET /api/auth/session [32m200[39m in 158ms
+ GET /api/auth/session [32m200[39m in 158ms
+ GET /api/auth/session [32m200[39m in 158ms
+ GET /api/auth/session [32m200[39m in 159ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 768ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3921770006'[39m
+}
+ GET /favicon.ico [31m500[39m in 1060ms
+ GET /ar/branches [32m200[39m in 415ms
+ GET /api/auth/session [32m200[39m in 29ms
+ GET /api/auth/session [32m200[39m in 41ms
+ GET /api/auth/session [32m200[39m in 42ms
+ GET /api/auth/session [32m200[39m in 44ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3921770006'[39m
+}
+ GET /favicon.ico [31m500[39m in 618ms
+ GET /ar/cart [32m200[39m in 53ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3921770006'[39m
+}
+ GET /favicon.ico [31m500[39m in 624ms
+ [32m[1m✓[22m[39m Compiled in 13.6s (2506 modules)
+ GET /ar/cart [32m200[39m in 168ms
+ GET /ar/cart [32m200[39m in 1396ms
+ [37m[1m○[22m[39m Compiling /api/restaurant ...
+ [32m[1m✓[22m[39m Compiled /api/restaurant in 669ms (1471 modules)
+ [32m[1m✓[22m[39m Compiled (1582 modules)
+ GET /api/auth/session [32m200[39m in 1743ms
+ GET /api/auth/session [32m200[39m in 1746ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 1787ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'4073002386'[39m
+}
+ [37m[1m○[22m[39m Compiling /api/account/addresses ...
+ [32m[1m✓[22m[39m Compiled /api/account/addresses in 614ms (1597 modules)
+ GET /api/account/addresses?tenantKey=karamelsham.localhost%3A3000 [32m200[39m in 857ms
+ GET /favicon.ico [31m500[39m in 3053ms
+ GET /ar/checkout [32m200[39m in 139ms
+ [37m[1m○[22m[39m Compiling /api/order-settings ...
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ GET /api/account/profile [33m401[39m in 3391ms
+ GET /api/account/profile [33m401[39m in 3392ms
+ GET /api/account/profile [33m401[39m in 3394ms
+ GET /api/account/profile [33m401[39m in 22ms
+ GET /api/account/profile [33m401[39m in 22ms
+ GET /api/account/profile [33m401[39m in 159ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 3617ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 3619ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 3621ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 276ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3921770006'[39m
+}
+ GET /favicon.ico [31m500[39m in 1796ms
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3921770006'[39m
+}
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ GET /ar/cart [32m200[39m in 2301ms
+ GET /favicon.ico [31m500[39m in 3118ms
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ GET /api/subdomains [32m200[39m in 718ms
+ GET /ar/menu [32m200[39m in 544ms
+ GET /api/auth/session [32m200[39m in 443ms
+ GET /api/auth/session [32m200[39m in 443ms
+ GET /api/auth/session [32m200[39m in 443ms
+ GET /api/auth/session [32m200[39m in 444ms
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 2091ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3921770006'[39m
+}
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ GET /favicon.ico [31m500[39m in 5559ms
+ POST /api/zones/check-delivery [32m200[39m in 5083ms
+ GET /ar/cart [32m200[39m in 120ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3921770006'[39m
+}
+ GET /favicon.ico [31m500[39m in 893ms
+ GET /ar/cart [32m200[39m in 346ms
+ GET /api/auth/session [32m200[39m in 70ms
+ GET /api/auth/session [32m200[39m in 99ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 208ms
+ GET /api/account/addresses?tenantKey=karamelsham.localhost%3A3000 [32m200[39m in 217ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3921770006'[39m
+}
+ GET /favicon.ico [31m500[39m in 1138ms
+ GET /ar/cart [32m200[39m in 187ms
+ GET /api/auth/session [32m200[39m in 19ms
+ GET /api/auth/session [32m200[39m in 66ms
+ GET /api/restaurant?subdomain=pizzamaster [32m200[39m in 173ms
+ GET /api/account/addresses?tenantKey=karamelsham.localhost%3A3000 [32m200[39m in 298ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3921770006'[39m
+}
+ GET /favicon.ico [31m500[39m in 1398ms
+ GET /ar/checkout [32m200[39m in 127ms
+ GET /api/account/profile [33m401[39m in 186ms
+ GET /api/account/profile [33m401[39m in 187ms
+ GET /api/account/profile [33m401[39m in 184ms
+ GET /api/account/profile [33m401[39m in 26ms
+ GET /api/account/profile [33m401[39m in 47ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 265ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 270ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 274ms
+ GET /api/account/profile [33m401[39m in 73ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 216ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3921770006'[39m
+}
+ GET /favicon.ico [31m500[39m in 855ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3921770006'[39m
+}
+ GET /favicon.ico [31m500[39m in 859ms
+ [31m[1m⨯[22m[39m Error: useCart must be used within CartProvider
+    at useCart (src/contexts/cart-context.tsx:377:19)
+    at BottomNavigation (src/components/ar/bottom-navigation.tsx:41:28)
+[0m [90m 375 |[39m [36mexport[39m [36mfunction[39m useCart() {
+ [90m 376 |[39m   [36mconst[39m ctx [33m=[39m useContext([33mCartContext[39m)
+[31m[1m>[22m[39m[90m 377 |[39m   [36mif[39m ([33m![39mctx) [36mthrow[39m [36mnew[39m [33mError[39m([32m"useCart must be used within CartProvider"[39m)
+ [90m     |[39m                   [31m[1m^[22m[39m
+ [90m 378 |[39m   [36mreturn[39m ctx
+ [90m 379 |[39m }
+ [90m 380 |[39m[0m {
+  digest: [32m'3921770006'[39m
+}
+ GET /ar/menu [32m200[39m in 510ms
+ GET /api/auth/session [32m200[39m in 44ms
+ GET /favicon.ico [31m500[39m in 808ms
+ GET /api/auth/session [32m200[39m in 122ms
+ GET /api/auth/session [32m200[39m in 123ms
+ GET /api/auth/session [32m200[39m in 124ms
+ GET /placeholder.svg?height=200&width=300 [33m404[39m in 464ms
+ POST /api/zones/check-delivery [32m200[39m in 93ms
+ [32m[1m✓[22m[39m Compiled /api/zones/check-delivery in 8.6s (2506 modules)
+ GET /ar/menu [32m200[39m in 2389ms
+ [37m[1m○[22m[39m Compiling /api/subdomains ...
+ [32m[1m✓[22m[39m Compiled /api/subdomains in 1293ms (1485 modules)
+ GET /api/subdomains [32m200[39m in 2547ms
+ GET /placeholder-user.jpg [33m404[39m in 658ms
+ GET /ar/cart [32m200[39m in 144ms
+ [32m[1m✓[22m[39m Compiled /[lng] in 428ms (1490 modules)
+ GET /ar/checkout [32m200[39m in 66ms
+ [37m[1m○[22m[39m Compiling /api/account/profile ...
+ [32m[1m✓[22m[39m Compiled /api/account/profile in 605ms (1493 modules)
+ GET /favicon.ico [32m200[39m in 5780ms
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ GET /api/account/profile [33m401[39m in 4733ms
+ GET /api/account/profile [33m401[39m in 4737ms
+ GET /api/account/profile [33m401[39m in 26ms
+ GET /api/account/profile [33m401[39m in 29ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 4796ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 4797ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 4808ms
+ GET /api/account/profile [33m401[39m in 27ms
+ GET /api/account/profile [33m401[39m in 44ms
+ GET /api/order-settings?restaurantId=6821b946e7dc376d85eb878c [32m200[39m in 292ms
+ GET /favicon.ico [32m200[39m in 614ms
+ [33m[1m⚠[22m[39m ./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+
+./src/app/api/account/profile/route.ts
+Attempted import error: 'User' is not exported from '@/models/User' (imported as 'User').
+
+Import trace for requested module:
+./src/app/api/account/profile/route.ts
+ [37m[1m○[22m[39m Compiling /sitemap.xml ...
+ [32m[1m✓[22m[39m Compiled /sitemap.xml in 14.3s (2512 modules)
+ GET /sitemap.xml [32m200[39m in 15835ms
+ [37m[1m○[22m[39m Compiling /[lng] ...
+ [32m[1m✓[22m[39m Compiled /[lng] in 1524ms (1491 modules)
+ GET /favicon.ico [32m200[39m in 3552ms
+ [32m[1m✓[22m[39m Compiled in 5.8s (2506 modules)
+ [32m[1m✓[22m[39m Compiled in 655ms (1040 modules)
+ [37m[1m○[22m[39m Compiling /sitemap.xml ...
+ [32m[1m✓[22m[39m Compiled /sitemap.xml in 528ms (1486 modules)
+ GET /sitemap.xml [32m200[39m in 2081ms
+ [32m[1m✓[22m[39m Compiled /[lng] in 465ms (1491 modules)
+ GET /favicon.ico [32m200[39m in 1493ms

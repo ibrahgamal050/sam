@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { CheckCircle2, MapPin, Navigation, AlertCircle } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -85,46 +85,67 @@ export default function CustomerDeliverySelector({ showIntro = true, onClose }: 
 
   const currentAddress = selectedAddress ?? addresses[0] ?? null
 
+  const lastKeyRef = useRef<string | null>(null)
+  const debounceRef = useRef<NodeJS.Timeout | null>(null)
+
   const checkDeliveryAvailability = useCallback(
     async (lat: number, lng: number) => {
+      const key = `${restaurantId ?? "none"}:${method}:${lat.toFixed(5)}:${lng.toFixed(5)}`
+
+      // Skip if pickup or no restaurant
       if (!restaurantId || method === "pickup") {
         setDeliveryInfo(null)
         if (method === "pickup") {
           setDeliveryBranch(null)
         }
+        lastKeyRef.current = key
         return true
       }
 
-      try {
-        setIsCheckingDelivery(true)
-        const result = await ZonesAPI.checkDelivery(restaurantId, lat, lng)
-        setDeliveryInfo({
-          isAvailable: result.isDeliveryAvailable,
-          fee: result.lowestDeliveryFee,
-          zones: result.zones,
-        })
-        if (result.isDeliveryAvailable) {
-          const assigned = determineDeliveryBranch(lat, lng, result.zones ?? [])
-          setDeliveryBranch(assigned)
-        } else {
-          setDeliveryBranch(null)
-        }
-        return result.isDeliveryAvailable
-      } catch (error) {
-        console.error("Error checking delivery:", error)
-        setDeliveryInfo({ isAvailable: false, fee: null, zones: [] })
-        setDeliveryBranch(null)
-        toast({
-          variant: "destructive",
-          title: "تعذر تحديد نطاق التوصيل",
-          description: "حدث خطأ أثناء التحقق من توفر التوصيل لهذا العنوان.",
-        })
-        return false
-      } finally {
-        setIsCheckingDelivery(false)
+      // No-op if nothing changed
+      if (lastKeyRef.current === key) return deliveryInfo?.isAvailable ?? true
+      lastKeyRef.current = key
+
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current)
+        debounceRef.current = null
       }
+
+      return new Promise<boolean>((resolve) => {
+        debounceRef.current = setTimeout(async () => {
+          setIsCheckingDelivery(true)
+          try {
+            const result = await ZonesAPI.checkDelivery(restaurantId, lat, lng, { debounceMs: 0 })
+            setDeliveryInfo({
+              isAvailable: result.isDeliveryAvailable,
+              fee: result.lowestDeliveryFee,
+              zones: result.zones,
+            })
+            if (result.isDeliveryAvailable) {
+              const assigned = determineDeliveryBranch(lat, lng, result.zones ?? [])
+              setDeliveryBranch(assigned)
+            } else {
+              setDeliveryBranch(null)
+            }
+            resolve(result.isDeliveryAvailable)
+          } catch (error) {
+            console.error("Error checking delivery:", error)
+            setDeliveryInfo({ isAvailable: false, fee: null, zones: [] })
+            setDeliveryBranch(null)
+            toast({
+              variant: "destructive",
+              title: "تعذر تحديد نطاق التوصيل",
+              description: "حدث خطأ أثناء التحقق من توفر التوصيل لهذا العنوان.",
+            })
+            resolve(false)
+          } finally {
+            setIsCheckingDelivery(false)
+          }
+        }, 500)
+        debounceRef.current.unref?.()
+      })
     },
-    [determineDeliveryBranch, method, restaurantId, setDeliveryBranch, toast],
+    [determineDeliveryBranch, method, restaurantId, setDeliveryBranch, toast, deliveryInfo?.isAvailable],
   )
 
   useEffect(() => {

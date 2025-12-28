@@ -38,8 +38,14 @@ export function BottomNavigation() {
   const pathname = normalizePath(pathnameRaw)
   const locale = resolveLocale(pathnameRaw)
   const navItems = buildNavItems(locale)
-  const { items } = useCart()
-  const cartCount = items.reduce((total, item) => total + item.quantity, 0)
+  // احتياطي في حال تم استخدامه خارج مزود السلة (مثلاً في بيئات معاينة)
+  let cartCount = 0
+  try {
+    const { items } = useCart()
+    cartCount = items.reduce((total, item) => total + item.quantity, 0)
+  } catch {
+    cartCount = 0
+  }
 
   return (
     <nav className="fixed inset-x-0 bottom-0 block md:hidden" aria-label={locale === "ar" ? "التنقل السفلي" : "Bottom navigation"}>

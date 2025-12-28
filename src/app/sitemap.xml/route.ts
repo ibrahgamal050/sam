@@ -2,15 +2,17 @@
 import { NextResponse } from "next/server"
 import dbConnect from "@/lib/db"
 import { getRestaurantByHost } from "@/lib/services/restaurant-service"
+import { getMenuByRestaurantId } from "@/lib/services/menu-service"
 import { getRootDomain, normalizeHost, resolveRestaurantHost } from "@/lib/host-utils"
 import Post from "@/models/post"
 import Pages from "@/models/page"
 
 // ====== إعدادات عامة ======
 const LOCALE_SEGMENT = "ar"
+type Locale = "ar" | "en"
 
 // صفحات ثابتة (بدون /posts)
-const STATIC_PATHS = ["", "menu", "branches", "about", "contact","posts"]
+const STATIC_PATHS = ["", "menu", "menu/category", "branches", "about", "contact", "posts"]
 const STATIC_CHANGEFREQ = "daily"
 const STATIC_PRIORITY = "0.8"
 
@@ -42,6 +44,46 @@ const toIsoSafe = (d: unknown): string => {
   } catch {
     return new Date().toISOString()
   }
+}
+
+const resolveLocale = (lng: string): Locale => (String(lng).toLowerCase().startsWith("en") ? "en" : "ar")
+
+function slugifyAr(input: string): string {
+  if (!input) return ""
+
+  let s = input.trim().toLowerCase()
+
+  // remove arabic diacritics
+  s = s.replace(/[\u064B-\u0652\u0670]/g, "")
+
+  // normalize letters
+  s = s
+    .replace(/أ|إ|آ/g, "ا")
+    .replace(/ى/g, "ي")
+    .replace(/ؤ/g, "و")
+    .replace(/ئ/g, "ي")
+    .replace(/ة/g, "ة")
+
+  // keep arabic + numbers + spaces + dash
+  s = s.replace(/[^\u0600-\u06FF0-9\s-]/g, " ")
+
+  // spaces -> dashes
+  s = s.replace(/[\s_-]+/g, "-").replace(/-+/g, "-")
+
+  // trim dashes
+  s = s.replace(/^-+|-+$/g, "")
+
+  return s
+}
+
+const getCategorySlug = (c: any, locale: Locale) => {
+  const explicit = String(c?.slug ?? "").trim()
+  if (explicit) return explicit
+
+  const name =
+    typeof c?.name === "string" ? c.name : c?.name?.[locale] ?? c?.name?.ar ?? c?.name?.en ?? ""
+
+  return slugifyAr(String(name))
 }
 
 export const dynamic = "force-dynamic"
@@ -138,9 +180,27 @@ ${staticUrlsXml}
       }
     }) ?? []
 
+  // ====== روابط فئات المنيو ======
+  const menu = await getMenuByRestaurantId(restaurant._id.toString())
+  const categories = menu?.categories ?? []
+  const categoryEntries = categories
+    .map((cat: any) => {
+      const slug = getCategorySlug(cat, resolveLocale(LOCALE_SEGMENT))
+      if (!slug) return null
+      const catUrl = `${baseUrl}/menu/${slug}`
+      const lastmod = toIsoSafe(cat?.updatedAt ?? cat?.createdAt ?? restaurantLastmod)
+      return {
+        loc: catUrl,
+        lastmod,
+        changefreq: PAGES_CHANGEFREQ,
+        priority: PAGES_PRIORITY,
+      }
+    })
+    .filter(Boolean) as { loc: string; lastmod: string; changefreq: string; priority: string }[]
+
   // Combine and dedupe by loc
   const mergedByLoc = new Map<string, { loc: string; lastmod: string; changefreq: string; priority: string }>()
-  for (const entry of [...staticEntries, ...postEntries, ...pageEntries]) {
+  for (const entry of [...staticEntries, ...postEntries, ...pageEntries, ...categoryEntries]) {
     const normalizedLoc = escapeXml(entry.loc)
     if (!mergedByLoc.has(normalizedLoc)) {
       mergedByLoc.set(normalizedLoc, { ...entry, loc: normalizedLoc })

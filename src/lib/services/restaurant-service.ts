@@ -103,6 +103,27 @@ export async function getRestaurantByHost(host: string): Promise<RestaurantType 
   }
 }
 
+export async function getRestaurantByAlias(host: string): Promise<RestaurantType | null> {
+  const normalizedHost = normalizeHost(host)
+  if (!normalizedHost) return null
+
+  try {
+    await dbConnect()
+    const restaurant = await Restaurant.findOne({
+      domainAliases: {
+        $elemMatch: {
+          host: normalizedHost,
+          ...ALIAS_ACTIVE_CONDITION,
+        },
+      },
+    })
+    return restaurant ? convertToPlainObject(restaurant) : null
+  } catch (error) {
+    console.error(`Error fetching restaurant by alias ${host}:`, error)
+    throw new Error("Failed to fetch restaurant")
+  }
+}
+
 export async function createRestaurant(
   data: Omit<RestaurantType, "_id" | "createdAt" | "updatedAt">,
 ): Promise<RestaurantType> {

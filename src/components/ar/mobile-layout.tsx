@@ -10,7 +10,7 @@ interface MobileLayoutProps {
 export function MobileLayout({ restaurant, children }: MobileLayoutProps) {
   return (
     <div className="mobile-container flex min-h-screen flex-col">
-      <div>{children}</div>
+      <div className="flex-1 pb-28 pt-2">{children}</div>
       <BottomNavigation />
     </div>
   )

@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { MainNav } from "@/components/ar/header/main-nav"
+import { MobileLayout } from "@/components/ar/mobile-layout"
+import { MenuPage } from "@/components/ar/menu/menu-page"
 
 import BlockRenderer from "@/components/cms/BlockRenderer"
 import { resolveRestaurantFromHeaders } from "@/lib/domain/restaurant-context"
@@ -13,6 +15,7 @@ import type { AnyBlock } from "@/types/blocks"
 import type { IPage } from "@/types/page"
 import type { IRestaurant } from "@/types/restaurant"
 import { renderSection } from "@/lib/builder"
+
 export const dynamic = "force-dynamic"
 
 type PageParams = {
@@ -52,6 +55,32 @@ const toAbsoluteUrl = (url: string | undefined | null, host: string, protocol: "
   if (url.startsWith("//")) return `${protocol}:${url}`
   const prefix = url.startsWith("/") ? "" : "/"
   return `${protocol}://${host}${prefix}${url}`
+}
+
+const buildMenuFallbackMetadata = (restaurant: IRestaurant, hostHeader: string, locale: Locale): Metadata => {
+  const protocol = resolveProtocol(hostHeader)
+  const host = resolveRestaurantHost(restaurant, hostHeader, getRootDomain())
+  const restaurantName =
+    typeof restaurant.name === "object"
+      ? restaurant.name?.[locale] ?? restaurant.name?.ar ?? restaurant.name?.en
+      : restaurant.name ?? "المطعم"
+
+  const description =
+    typeof restaurant.description === "object"
+      ? restaurant.description?.[locale] ?? restaurant.description?.ar ?? restaurant.description?.en
+      : restaurant.description ?? "استعرض قائمة الطعام الخاصة بنا."
+
+  return {
+    title: `قائمة الطعام - ${restaurantName}`,
+    description,
+    alternates: { canonical: `${protocol}://${host}/${locale}/menu` },
+    openGraph: {
+      title: `قائمة الطعام - ${restaurantName}`,
+      description,
+      url: `${protocol}://${host}/${locale}/menu`,
+      type: "website",
+    },
+  }
 }
 
 type LoadedContext = {
@@ -110,6 +139,10 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
   const { restaurant, hostHeader, page, locale, slugPath } = await loadPageContext(resolvedParams)
 
   if (!restaurant || !page || (!page.isPublished && !page.template)) {
+    if (restaurant && slugPath === "menu") {
+      return buildMenuFallbackMetadata(restaurant, hostHeader, locale)
+    }
+
     return {
       title: "Page not found",
       description: "The requested page could not be located.",
@@ -173,12 +206,26 @@ export default async function ContentPage({
   params: Promise<PageParams>
   searchParams?: Promise<Record<string, string | string[]>>
 }) {
-
-    let typedRestaurant: IRestaurant | null = null
-const resolvedParams = await params
+  const resolvedParams = await params
   const resolvedSearchParams = searchParams ? await searchParams : undefined
   const { restaurant, hostHeader, page, locale, branches, menuItems, menu } = await loadPageContext(resolvedParams)
-  if (!restaurant || !page || (!page.isPublished && !page.template)) {
+  if (!restaurant) return notFound()
+
+  const typedRestaurant = restaurant as IRestaurant | null
+
+  if (!page || (!page.isPublished && !page.template)) {
+    if (resolvedParams && normalizeSlug(resolvedParams.slug) === "menu") {
+      if (!menu) return notFound()
+      return (
+        <>
+          <MainNav />
+          <MobileLayout restaurant={typedRestaurant as IRestaurant}>
+            <MenuPage menuData={menu} />
+          </MobileLayout>
+        </>
+      )
+    }
+
     return notFound()
   }
 
@@ -191,26 +238,34 @@ const resolvedParams = await params
 
   if (builderSections?.length) {
     const orderedSections = sortSections(builderSections)
-    return (
-      <> <MainNav /> 
+  return (
+  <>
+    <MainNav />
+
+    <MobileLayout restaurant={restaurant as any}>
       <main dir={direction} className="min-h-screen bg-background text-foreground">
-       
         {structuredData && (
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          />
         )}
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-10 sm:px-6 lg:px-8">
+
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-10   sm:px-6 lg:px-8">
           {orderedSections.map((section) =>
             renderSection(section, {
               theme: builderTheme,
               dataSources: { branches, menuItems, menu },
               locale,
               searchParams: resolvedSearchParams,
-            })
+            }),
           )}
         </div>
       </main>
-      </>
-    )
+    </MobileLayout>
+  </>
+)
+
   }
 
   const orderedComponents = [...(page.components ?? [])].sort((a, b) => (a.position ?? 0) - (b.position ?? 0))
