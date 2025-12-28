@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 import { MainNav } from "@/components/ar/header/main-nav"
 import { MobileLayout } from "@/components/ar/mobile-layout"
+import {RestaurantHome} from "@/components/ar/RestaurantHome" // غيّر المسار حسب مشروعك
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -195,8 +196,13 @@ let typedRestaurant: IRestaurant | null = null
       {cmsBlocks.length > 0 ? (
         <BlockRenderer blocks={cmsBlocks} />
       ) : (
-        <div className="p-10 text-center text-sm text-muted-foreground">لا يوجد محتوى منشور لهذه الصفحة.</div>
-      )}
+        <> <MainNav /> 
+        <MobileLayout restaurant={restaurant}>
+ <RestaurantHome
+            restaurant={restaurant}
+          />
+          </MobileLayout></>
+                )}
     </main>
   );
 }

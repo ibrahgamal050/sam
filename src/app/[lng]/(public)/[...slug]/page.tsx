@@ -15,7 +15,8 @@ import type { AnyBlock } from "@/types/blocks"
 import type { IPage } from "@/types/page"
 import type { IRestaurant } from "@/types/restaurant"
 import { renderSection } from "@/lib/builder"
-
+import {BranchesPage} from "@/components/ar/branches-page"
+import {RestaurantHome} from "@/components/ar/RestaurantHome"
 export const dynamic = "force-dynamic"
 
 type PageParams = {
@@ -175,7 +176,8 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
     seo.canonical_url ||
     `${protocol}://${host}/${locale}/${slugPath}`.replace(/\/{2,}/g, "/").replace(":/", "://")
 
-  const ogImage = toAbsoluteUrl(seo.og_image, host, protocol) ?? toAbsoluteUrl(page.headerImage, host, protocol) ?? FALLBACK_IMAGE
+  const ogImage =
+    toAbsoluteUrl(seo.og_image, host, protocol) ?? toAbsoluteUrl(page.headerImage, host, protocol) ?? FALLBACK_IMAGE
 
   return {
     title,
@@ -213,20 +215,68 @@ export default async function ContentPage({
 
   const typedRestaurant = restaurant as IRestaurant | null
 
-  if (!page || (!page.isPublished && !page.template)) {
-    if (resolvedParams && normalizeSlug(resolvedParams.slug) === "menu") {
-      if (!menu) return notFound()
-      return (
-        <>
-          <MainNav />
-          <MobileLayout restaurant={typedRestaurant as IRestaurant}>
-            <MenuPage menuData={menu} />
-          </MobileLayout>
-        </>
-      )
-    }
+   // ✅ home لو slug مش موجود أو فاضي
+  const slugPath =
+    resolvedParams.slug && normalizeSlug(resolvedParams.slug).length > 0
+      ? normalizeSlug(resolvedParams.slug)
+      : "home"
 
-    return notFound()
+  type RouteCtx = {
+    restaurant: IRestaurant
+    menu: typeof menu | null
+    branches: typeof branches | null
+  }
+
+  type RouteEntry = {
+    requireMenu?: boolean
+    requireBranches?: boolean
+    render: (ctx: RouteCtx) => React.ReactNode
+  }
+
+  const routes: Record<string, RouteEntry> = {
+    home: {
+      // لو عندك home page خاصة اعرضها هنا بدل المثال
+      render: ({ restaurant, menu, branches }) => (
+        <MobileLayout restaurant={restaurant}>
+          {/* مثال: HomePage تجمع أقسام */}
+          <RestaurantHome restaurant={restaurant} menu={menu} branches={branches} />
+        </MobileLayout>
+      ),
+    },
+
+    menu: {
+      requireMenu: true,
+      render: ({ restaurant, menu }) => (
+        <MobileLayout restaurant={restaurant}>
+          <MenuPage menuData={menu} />
+        </MobileLayout>
+      ),
+    },
+
+    branches: {
+      requireBranches: true,
+      render: ({ restaurant }) => (
+        <MobileLayout restaurant={restaurant}>
+          <BranchesPage restaurant={restaurant} />
+        </MobileLayout>
+      ),
+    },
+  }
+
+  // ✅ fallback لو مفيش page منشور من الـ builder
+  if (!page || (!page.isPublished && !page.template)) {
+    const entry = routes[slugPath]
+    if (!entry) return notFound()
+
+    if (entry.requireMenu && !menu) return notFound()
+    if (entry.requireBranches && (!branches || branches.length === 0)) return notFound()
+
+    return (
+      <>
+        <MainNav />
+        {entry.render({ restaurant: typedRestaurant, menu: menu ?? null, branches: branches ?? null })}
+      </>
+    )
   }
 
   const direction = resolveDirection(locale)
@@ -238,80 +288,87 @@ export default async function ContentPage({
 
   if (builderSections?.length) {
     const orderedSections = sortSections(builderSections)
-  return (
-  <>
-    <MainNav />
+    return (
+      <>
+        <MainNav />
 
-    <MobileLayout restaurant={restaurant as any}>
-      <main dir={direction} className="min-h-screen bg-background text-foreground">
-        {structuredData && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-          />
-        )}
+        <MobileLayout restaurant={restaurant as any}>
+          <main dir={direction} className="min-h-screen bg-background text-foreground">
+            {structuredData && (
+              <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+              />
+            )}
 
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-10   sm:px-6 lg:px-8">
-          {orderedSections.map((section) =>
-            renderSection(section, {
-              theme: builderTheme,
-              dataSources: { branches, menuItems, menu },
-              locale,
-              searchParams: resolvedSearchParams,
-            }),
-          )}
-        </div>
-      </main>
-    </MobileLayout>
-  </>
-)
-
+            <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 sm:px-6 lg:px-8">
+              {orderedSections.map((section) =>
+                renderSection(section, {
+                  theme: builderTheme,
+                  dataSources: { branches, menuItems, menu },
+                  locale,
+                  searchParams: resolvedSearchParams,
+                }),
+              )}
+            </div>
+          </main>
+        </MobileLayout>
+      </>
+    )
   }
 
   const orderedComponents = [...(page.components ?? [])].sort((a, b) => (a.position ?? 0) - (b.position ?? 0))
 
   return (
     <>
-    
-    <main dir={direction} className="min-h-screen bg-background text-foreground">
-      {structuredData && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-      )}
+      <main dir={direction} className="min-h-screen bg-background text-foreground">
+        {structuredData && (
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+        )}
 
-      <article className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8 space-y-12">
-        <header className="space-y-4 text-center">
-          <div className="relative mx-auto h-56 w-full max-w-4xl overflow-hidden rounded-3xl md:h-72">
-            <img
-              src={toAbsoluteUrl(page.headerImage, host, protocol) ?? FALLBACK_IMAGE}
-              alt={typeof page.name === "string" ? page.name : page.name?.[locale] ?? page.name?.ar ?? page.name?.en ?? ""}
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="space-y-2">
-            <h1 className="text-3xl font-semibold md:text-4xl">
-              {typeof page.name === "string" ? page.name : page.name?.[locale] ?? page.name?.ar ?? page.name?.en ?? ""}
-            </h1>
-            {page.seo?.description && (
-              <p className="mx-auto max-w-2xl text-sm text-muted-foreground md:text-base">
-                {typeof page.seo.description === "string"
-                  ? page.seo.description
-                  : page.seo.description?.[locale] ?? page.seo.description?.ar ?? page.seo.description?.en ?? ""}
-              </p>
-            )}
-          </div>
-        </header>
-
-        <section className="space-y-10">
-          {orderedComponents.length > 0 ? (
-            <BlocksFromComponents components={orderedComponents} />
-          ) : (
-            <div className="rounded-2xl border border-dashed border-muted-foreground/40 p-10 text-center text-sm text-muted-foreground">
-              No content has been published for this page yet.
+        <article className="mx-auto w-full max-w-6xl space-y-12 px-4 py-10 sm:px-6 lg:px-8">
+          <header className="space-y-4 text-center">
+            <div className="relative mx-auto h-56 w-full max-w-4xl overflow-hidden rounded-3xl md:h-72">
+              <img
+                src={toAbsoluteUrl(page.headerImage, host, protocol) ?? FALLBACK_IMAGE}
+                alt={
+                  typeof page.name === "string"
+                    ? page.name
+                    : page.name?.[locale] ?? page.name?.ar ?? page.name?.en ?? ""
+                }
+                className="h-full w-full object-cover"
+              />
             </div>
-          )}
-        </section>
-      </article>
-    </main>
+            <div className="space-y-2">
+              <h1 className="text-3xl font-semibold md:text-4xl">
+                {typeof page.name === "string"
+                  ? page.name
+                  : page.name?.[locale] ?? page.name?.ar ?? page.name?.en ?? ""}
+              </h1>
+              {page.seo?.description && (
+                <p className="mx-auto max-w-2xl text-sm text-muted-foreground md:text-base">
+                  {typeof page.seo.description === "string"
+                    ? page.seo.description
+                    : page.seo.description?.[locale] ??
+                      page.seo.description?.ar ??
+                      page.seo.description?.en ??
+                      ""}
+                </p>
+              )}
+            </div>
+          </header>
+
+          <section className="space-y-10">
+            {orderedComponents.length > 0 ? (
+              <BlocksFromComponents components={orderedComponents} />
+            ) : (
+              <div className="rounded-2xl border border-dashed border-muted-foreground/40 p-10 text-center text-sm text-muted-foreground">
+                No content has been published for this page yet.
+              </div>
+            )}
+          </section>
+        </article>
+      </main>
     </>
   )
 }
