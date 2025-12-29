@@ -24,7 +24,13 @@ export async function GET(_: Request, { params }: Params) {
         { canonicalHost: normalized },
         { _id: normalized },
       ],
-    }).lean()
+    })
+      .lean()
+      .catch(async () =>
+        Restaurant.findOne({
+          $or: [{ subdomain: normalized }, { slug: normalized }, { canonicalHost: normalized }],
+        }).lean(),
+      )
 
     if (!restaurant?._id) {
       return NextResponse.json({ error: "Restaurant not found" }, { status: 404 })

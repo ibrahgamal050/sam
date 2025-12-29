@@ -23,7 +23,14 @@ export async function GET(_: Request, { params }: Params) {
         { canonicalHost: normalized },
         { _id: normalized },
       ],
-    }).lean()
+    })
+      .lean()
+      .catch(async () => {
+        // إذا فشل الـ ObjectId cast، جرّب بدون _id
+        return Restaurant.findOne({
+          $or: [{ subdomain: normalized }, { slug: normalized }, { canonicalHost: normalized }],
+        }).lean()
+      })
 
     if (!restaurant) {
       return NextResponse.json({ error: "Restaurant not found" }, { status: 404 })

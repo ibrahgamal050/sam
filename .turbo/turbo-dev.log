@@ -212,3 +212,5 @@ Failed to load menu CastError: Cast to ObjectId failed for value "karamelsham" (
  POST /api/zones/check-delivery [32m200[39m in 118ms
  GET /favicon.ico [31m500[39m in 882ms
  POST /api/zones/check-delivery [32m200[39m in 89ms
+ [32m[1m✓[22m[39m Compiled in 757ms (834 modules)
+ [32m[1m✓[22m[39m Compiled in 1137ms (1972 modules)
