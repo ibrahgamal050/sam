@@ -16,6 +16,7 @@ import OrdersClient from "./OrdersClient"
 
 export type OrdersUIItem = {
   id: string
+  branchId?: string
   status: OrderStatus
   totalPrice: number
   createdAtISO: string | null
@@ -57,6 +58,7 @@ export default async function OrdersPage({ params }: { params: Promise<{ lng?: s
   const safeOrders = Array.isArray((rawOrdersRes as any)?.data) ? ((rawOrdersRes as any).data as any[]) : []
   const orders: OrdersUIItem[] = safeOrders.map((order) => ({
     id: order._id?.toString() ?? order.id ?? "",
+    branchId: order.branchId ? order.branchId.toString() : undefined,
     status: order.status,
     totalPrice: Number(order.totalPrice ?? 0),
     createdAtISO: order.createdAt ? new Date(order.createdAt).toISOString() : null,

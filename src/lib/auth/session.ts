@@ -3,7 +3,7 @@ import { jwtVerify } from "jose"
 
 const ACCESS_COOKIE = "mz.access"
 const SECRET = new TextEncoder().encode(process.env.JWT_SECRET!)
-const ISSUER = process.env.NEXT_PUBLIC_ISSUER_URL!   // مثلا: http://id.meelza.local:3004
+const ISSUER = process.env.NEXT_PUBLIC_ISSUER_URL || "meelza-sites"
 const AUDIENCE = "meelza-clients"
 
 type SessionUser = {

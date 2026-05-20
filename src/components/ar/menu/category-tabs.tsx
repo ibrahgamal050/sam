@@ -46,7 +46,7 @@ export function CategoryTabs({ categories, activeCategory, scrollToCategory, cla
   return (
     <nav
       className={cn(
-        "sticky top-0 z-30 bg-white/95 pb-2 pt-3 shadow-[0_12px_30px_-20px_rgba(15,23,42,0.25)] backdrop-blur",
+        "bg-white/95 pb-2 pt-3 shadow-[0_12px_30px_-20px_rgba(15,23,42,0.25)] backdrop-blur",
         className,
       )}
       aria-label="التنقل بين الأقسام"

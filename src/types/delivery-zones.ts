@@ -3,6 +3,7 @@ import type { GeoJSON } from "geojson"
 export interface DeliveryZone {
   id: string
   restaurantId: string
+  branchId?: string
   name: string
   description?: string
   delivery_fee: number
@@ -17,6 +18,7 @@ export interface DeliveryZone {
 
 export interface CreateDeliveryZoneRequest {
   restaurantId: string
+  branchId?: string
   name: string
   description?: string
   delivery_fee: number

@@ -13,14 +13,7 @@ import { useState } from "react"
 import { useRestaurant } from "@/contexts/restaurant-context"
 import { useParams } from "next/navigation"
 import { Skeleton } from "@/components/ui/skeleton"
-
-const resolveImageSrc = (path?: string | null, fallback = "/placeholder.jpg") => {
-  if (!path) return fallback
-  if (path.startsWith("http")) return path
-  if (path.startsWith("/images/")) return path
-  const normalized = path.startsWith("/") ? path : `/${path}`
-  return `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/${normalized}`
-}
+import { resolveImageSrc } from "@/lib/resolve-image-src"
 
 export function ContactPage() {
   const { restaurant, isLoading } = useRestaurant()

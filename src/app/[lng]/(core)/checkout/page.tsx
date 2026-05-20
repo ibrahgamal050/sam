@@ -23,7 +23,7 @@ import { useRestaurant } from '@/contexts/restaurant-context'
 import { useDeliveryAddress } from '@/contexts/delivery-address-context'
 import { useSession } from '@/lib/nextauth-shim'
 import { useOrderSettings } from '@/hooks/useOrderSettings'
-import CustomerDeliverySelector from '@/components/ar/address/customer-delivery-selector'
+import CustomerDeliverySelector from '@/components/ar/address/AddressSheet'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { FulfillmentSelector } from './components/FulfillmentSelector'
 import { CheckoutAddressCard } from './components/CheckoutAddressCard'
@@ -126,6 +126,13 @@ const STRINGS = {
   },
 }
 
+const isLikelyCoordinates = (value?: string | null) => {
+  if (!value) return false
+  const parts = value.split(",").map((p) => Number(p.trim()))
+  if (parts.length !== 2) return false
+  return parts.every((n) => Number.isFinite(n))
+}
+
 const PAYMENT_ICONS: Record<PaymentMethod, React.ComponentType<{ className?: string }>> = {
   CASH: Wallet,
   CARD: CreditCard,
@@ -207,7 +214,7 @@ export default function CheckoutPage() {
 
   const router = useRouter()
   const pathname = usePathname()
-  const { items, clear: clearCart } = useCart()
+  const { items, clearCart } = useCart()
   const { restaurant } = useRestaurant()
   const {
     selectedAddress,
@@ -333,7 +340,9 @@ export default function CheckoutPage() {
 
   const addressLine = useMemo(() => {
     if (!selectedAddress) return ''
-    return [selectedAddress.name, selectedAddress.address, selectedAddress.city].filter(Boolean).join(', ')
+    const addr = selectedAddress.address
+    const safeAddress = isLikelyCoordinates(addr) ? selectedAddress.city || selectedAddress.name : addr
+    return [selectedAddress.name, safeAddress, selectedAddress.city].filter(Boolean).join(', ')
   }, [selectedAddress])
 
   const localeSeparator = currentLocale === 'ar' ? '، ' : ', '
@@ -624,12 +633,27 @@ export default function CheckoutPage() {
 
       const body = await safeJson(res)
       if (!res.ok) {
-        const msg = (body as any)?.message || (body as any)?.error || t.errorSubmitting
+        const apiError = (body as any)?.error
+        const code = typeof apiError?.code === 'string' ? apiError.code : (body as any)?.code
+        if (code === 'ITEM_NOT_FOUND' || code === 'INVALID_ITEM_ID') {
+          clearCart?.()
+          throw new Error(
+            currentLocale === 'ar'
+              ? 'تم تحديث المنيو وبعض الأصناف في السلة لم تعد متاحة. تم تفريغ السلة، يرجى إضافة الأصناف مرة أخرى.'
+              : 'The menu was updated and some cart items are no longer available. Your cart was cleared; please add the items again.',
+          )
+        }
+
+        const msg =
+          (typeof apiError?.message === 'string' && apiError.message) ||
+          (typeof (body as any)?.message === 'string' && (body as any).message) ||
+          (typeof (body as any)?.error === 'string' && (body as any).error) ||
+          t.errorSubmitting
         throw new Error(String(msg))
       }
 
     const created: any = body
-const createdId = created?.orderId || created?.data?._id || created?._id || created?.id
+const createdId = created?.orderId || created?.data?.id || created?.data?._id || created?._id || created?.id
 
 
       if (paymentMethod === 'CASH' || paymentMethod === 'CARD') {

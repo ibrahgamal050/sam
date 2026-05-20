@@ -1,6 +1,7 @@
 import Restaurant from "@/models/restaurant"
 import Order from "@/models/order"
 
+import mongoose from "mongoose"
 import { loadOrderSettings, assertOrderTypeAllowed, assertPaymentAllowed } from "./settings.service"
 import { normalizeOrderItems } from "./items.service"
 import { assertMinOrder, calculateTotals, assertDeliveryAddress } from "./pricing.service"
@@ -11,10 +12,11 @@ export async function createPublicOrderService(params: {
   type: "DELIVERY" | "PICKUP"
   pm: "CASH" | "CARD" | "ONLINE"
   addrLine?: string
+  deliveryZoneId?: string
   items: Array<{ productId: string; name: string; qty?: number; quantity?: number }>
   customer?: { name?: string; phone?: string; address?: string }
 }) {
-  const { restaurantId, type, pm, addrLine, items, customer } = params
+  const { restaurantId, type, pm, addrLine, items, customer, deliveryZoneId } = params
 
   const restaurant = await Restaurant.findById(restaurantId).lean()
   if (!restaurant) {
@@ -49,6 +51,18 @@ export async function createPublicOrderService(params: {
 
   const totals = calculateTotals({ subtotal, type, restaurant, settings })
 
+  let resolvedBranchId: string | undefined
+  let resolvedDeliveryFee: number | undefined
+
+  if (type === "DELIVERY" && deliveryZoneId && mongoose.isValidObjectId(deliveryZoneId)) {
+    const DeliveryZoneLegacy = (await import("@/models/delivery-zone-legacy")).default
+    const zone = await DeliveryZoneLegacy.findById(deliveryZoneId).lean()
+    if (zone) {
+      resolvedBranchId = zone.branchId ? zone.branchId.toString() : undefined
+      resolvedDeliveryFee = typeof zone.delivery_fee === "number" ? zone.delivery_fee : undefined
+    }
+  }
+
   const orderNumber = await generateOrderNumberRandom(restaurantId)
   console.log("orderNumber"+ orderNumber )
 
@@ -57,9 +71,14 @@ export async function createPublicOrderService(params: {
 console.log("[Order model file]", Order?.modelName)
 console.log("[Schema has orderNumber?]", Boolean((Order as any).schema?.path("orderNumber")))
 
+  const deliveryFeeFinal = typeDb === "delivery" ? (resolvedDeliveryFee ?? totals.deliveryFee ?? 0) : 0
+  const totalPriceFinal = totals.total - (totals.deliveryFee ?? 0) + deliveryFeeFinal
+
   const created = await Order.create({
     orderNumber,
     restaurantId: (restaurant as any)._id,
+    branchId: resolvedBranchId,
+    deliveryZoneId: deliveryZoneId && mongoose.isValidObjectId(deliveryZoneId) ? deliveryZoneId : undefined,
     type: typeDb,
     customer: {
       name: customer?.name,
@@ -68,8 +87,8 @@ console.log("[Schema has orderNumber?]", Boolean((Order as any).schema?.path("or
     },
     items: normalizedItems,
     subtotal,
-    deliveryFee: totals.deliveryFee,
-    totalPrice: totals.total,
+    deliveryFee: deliveryFeeFinal,
+    totalPrice: totalPriceFinal,
     payment: { method: pmDb, status: "unpaid" },
     status: "pending",
   })

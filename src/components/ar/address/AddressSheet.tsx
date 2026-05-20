@@ -1,8 +1,7 @@
 "use client"
 
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
@@ -16,7 +15,7 @@ import { useRestaurant } from "@/contexts/restaurant-context"
 import { ZonesAPI } from "@/lib/api/zones"
 import type { DeliveryZone } from "@/types/delivery-zones"
 
-import { rankBranchesForClientPoint, normalizeBranchId, toBranchSummary } from "@/lib/branch-utils"
+import { rankBranchesForClientPoint, toBranchSummary } from "@/lib/branch-utils"
 import DeliveryTab from "./DeliveryTab"
 import PickupTab from "./PickupTab"
 import { DeliveryAddressButton } from "./addAddress"
@@ -26,17 +25,15 @@ type Props = { className?: string }
 
 export default function AddressSheet({ className }: Props) {
   const maybeContext = useDeliveryAddressOptional()
-  if (!maybeContext) {
-    return null
-  }
+  if (!maybeContext) return null
 
   const { toast } = useToast()
   const { restaurant } = useRestaurant()
+
   const {
     addresses,
     selectedAddress,
     selectAddress,
-    addAddress,
     isLoading: addressesLoading,
     fulfillmentType,
     setFulfillmentType,
@@ -53,21 +50,29 @@ export default function AddressSheet({ className }: Props) {
   const [deliveryInfo, setDeliveryInfo] = useState<DeliveryState>(null)
 
   const restaurantId = restaurant?._id ?? ""
-    useEffect(() => {
-    if (restaurant) {
-      console.log("✅ بيانات المطعم:", restaurant)
-    } else {
-      console.log("❌ لا يوجد مطعم حالياً")
-    }
-  }, [restaurant])
   const branches = useMemo(() => restaurant?.branches ?? [], [restaurant])
+
+  // ✅ prevent setState after unmount
+  const isMountedRef = useRef(true)
+  useEffect(() => {
+    isMountedRef.current = true
+    return () => {
+      isMountedRef.current = false
+    }
+  }, [])
+
+  // ✅ cache results by "restaurantId|addressId"
+  const deliveryCacheRef = useRef(new Map<string, DeliveryState>())
 
   useEffect(() => setTab(fulfillmentType), [fulfillmentType])
 
-  const syncFulfillmentType = useCallback((value: "delivery" | "pickup") => {
-    setTab(value)
-    setFulfillmentType(value)
-  }, [setFulfillmentType])
+  const syncFulfillmentType = useCallback(
+    (value: "delivery" | "pickup") => {
+      setTab(value)
+      setFulfillmentType(value)
+    },
+    [setFulfillmentType]
+  )
 
   const title = useMemo(() => {
     if (tab === "pickup") return pickupBranch?.name || "حدد فرع الاستلام"
@@ -87,51 +92,84 @@ export default function AddressSheet({ className }: Props) {
     return `${selectedAddress.address}${selectedAddress.city ? `، ${selectedAddress.city}` : ""}`
   }, [pickupBranch, selectedAddress, tab])
 
-  // تحديد فرع التوصيل المناسب (الزون أولاً ثم الأقرب)
-  const determineDeliveryBranch = useCallback((lat: number, lng: number, zones: DeliveryZone[] = []) => {
-    if (!branches.length || !Number.isFinite(lat) || !Number.isFinite(lng)) return null
-    const clientPoint = { type: "Point" as const, coordinates: [lng, lat] as [number, number] }
-    const ranked = rankBranchesForClientPoint(clientPoint, zones as any, branches as any, { includeDistance: true })
-    return ranked[0]?.branch ?? null
-  }, [branches])
+  const determineDeliveryBranch = useCallback(
+    (lat: number, lng: number, zones: DeliveryZone[] = []) => {
+      if (!branches.length || !Number.isFinite(lat) || !Number.isFinite(lng)) return null
+      const clientPoint = { type: "Point" as const, coordinates: [lng, lat] as [number, number] }
+      const ranked = rankBranchesForClientPoint(clientPoint, zones as any, branches as any, { includeDistance: true })
+      return ranked[0]?.branch ?? null
+    },
+    [branches]
+  )
 
-  // فحص التوصيل لعنوان معيّن
-  const checkDeliveryAvailability = useCallback(async (lat: number, lng: number) => {
-    if (!restaurantId) {
-      setDeliveryInfo(null)
-      setDeliveryBranch(null)
-      return null
-    }
-    try {
-      setIsCheckingDelivery(true)
-      const result = await ZonesAPI.checkDelivery(restaurantId, lat, lng)
-      setDeliveryInfo({
-        isAvailable: result.isDeliveryAvailable,
-        fee: result.lowestDeliveryFee,
-        zones: result.zones,
-      })
-      if (result.isDeliveryAvailable) {
-        const assigned = determineDeliveryBranch(lat, lng, result.zones ?? [])
-        setDeliveryBranch(assigned ? toBranchSummary(assigned) : null)
-      } else {
+  const checkDeliveryAvailability = useCallback(
+    async (lat: number, lng: number, cacheKey?: string) => {
+      if (!restaurantId) {
+        setDeliveryInfo(null)
         setDeliveryBranch(null)
+        return null
       }
-      return result
-    } catch {
-      setDeliveryInfo({ isAvailable: false, fee: null, zones: [] })
-      setDeliveryBranch(null)
-      toast({ variant: "destructive", title: "تعذر تحديد نطاق التوصيل", description: "حدث خطأ أثناء التحقق من توفر التوصيل لهذا العنوان." })
-      return null
-    } finally {
-      setIsCheckingDelivery(false)
-    }
-  }, [determineDeliveryBranch, restaurantId, setDeliveryBranch, toast])
 
+      const key = cacheKey ? `${restaurantId}|${cacheKey}` : `${restaurantId}|${lat},${lng}`
+      const cached = deliveryCacheRef.current.get(key)
+      if (cached) {
+        setDeliveryInfo(cached)
+        if (cached.isAvailable) {
+          const assigned = determineDeliveryBranch(lat, lng, cached.zones ?? [])
+          setDeliveryBranch(assigned ? toBranchSummary(assigned) : null)
+        } else {
+          setDeliveryBranch(null)
+        }
+        return cached
+      }
+
+      try {
+        setIsCheckingDelivery(true)
+        const result = await ZonesAPI.checkDelivery(restaurantId, lat, lng)
+
+        const state: DeliveryState = {
+          isAvailable: result.isDeliveryAvailable,
+          fee: result.lowestDeliveryFee,
+          zones: result.zones ?? [],
+        }
+
+        if (!isMountedRef.current) return null
+
+        deliveryCacheRef.current.set(key, state)
+        setDeliveryInfo(state)
+
+        if (state.isAvailable) {
+          const assigned = determineDeliveryBranch(lat, lng, state.zones)
+          setDeliveryBranch(assigned ? toBranchSummary(assigned) : null)
+        } else {
+          setDeliveryBranch(null)
+        }
+
+        return state
+      } catch {
+        if (!isMountedRef.current) return null
+        const fail: DeliveryState = { isAvailable: false, fee: null, zones: [] }
+        setDeliveryInfo(fail)
+        setDeliveryBranch(null)
+        toast({
+          variant: "destructive",
+          title: "تعذر تحديد نطاق التوصيل",
+          description: "حدث خطأ أثناء التحقق من توفر التوصيل لهذا العنوان.",
+        })
+        return null
+      } finally {
+        if (isMountedRef.current) setIsCheckingDelivery(false)
+      }
+    },
+    [determineDeliveryBranch, restaurantId, setDeliveryBranch, toast]
+  )
+
+  // ✅ auto-check when selectedAddress changes (delivery mode)
   useEffect(() => {
     if (fulfillmentType === "delivery" && selectedAddress) {
-      void checkDeliveryAvailability(selectedAddress.lat, selectedAddress.lng)
+      void checkDeliveryAvailability(selectedAddress.lat, selectedAddress.lng, selectedAddress.id)
     }
-  }, [checkDeliveryAvailability, fulfillmentType, selectedAddress?.id])
+  }, [checkDeliveryAvailability, fulfillmentType, selectedAddress?.id ?? null])
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -140,7 +178,9 @@ export default function AddressSheet({ className }: Props) {
           type="button"
           className={cn(
             "flex items-center gap-3 rounded-2xl border border-gray-200 bg-white px-4 py-2 text-right shadow-sm transition",
-            "hover:border-[#6c5ce7]/40 hover:text-[#6c5ce7]", "w-full md:w-auto", className,
+            "hover:border-[#6c5ce7]/40 hover:text-[#6c5ce7]",
+            "w-full md:w-auto",
+            className
           )}
         >
           <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#6c5ce7]/15 text-[#6c5ce7]">
@@ -167,17 +207,21 @@ export default function AddressSheet({ className }: Props) {
         <SheetHeader className="pb-3">
           <div className="flex items-center justify-between">
             <SheetTitle className="text-lg font-semibold text-gray-900">العناوين</SheetTitle>
-            <Button variant="ghost" size="sm" onClick={() => setOpen(false)}><X className="h-4 w-4" /></Button>
+            <Button variant="ghost" size="sm" onClick={() => setOpen(false)}>
+              <X className="h-4 w-4" />
+            </Button>
           </div>
 
           <Tabs value={tab} onValueChange={(v) => syncFulfillmentType(v as "delivery" | "pickup")} className="w-full">
             <TabsList className="grid w-full grid-cols-2 rounded-full bg-gray-100 p-1">
-              <TabsTrigger value="delivery" className="rounded-full data-[state=active]:bg-white">التوصيل</TabsTrigger>
-              <TabsTrigger value="pickup" className="rounded-full data-[state=active]:bg-white">الاستلام الذاتي</TabsTrigger>
+              <TabsTrigger value="delivery" className="rounded-full data-[state=active]:bg-white">
+                التوصيل
+              </TabsTrigger>
+              <TabsTrigger value="pickup" className="rounded-full data-[state=active]:bg-white">
+                الاستلام الذاتي
+              </TabsTrigger>
             </TabsList>
           </Tabs>
-
-          
         </SheetHeader>
 
         <ScrollArea className="max-h-[48vh]">
@@ -188,9 +232,8 @@ export default function AddressSheet({ className }: Props) {
               selectedAddress={selectedAddress}
               searchQuery={searchQuery}
               onSelectAddress={async (a) => {
-                // تحقق التوصيل أولًا
-                const result = await checkDeliveryAvailability(a.lat, a.lng)
-                if (!result || !result.isDeliveryAvailable) {
+                const state = await checkDeliveryAvailability(a.lat, a.lng, a.id)
+                if (!state?.isAvailable) {
                   toast({ variant: "destructive", title: "خارج نطاق التوصيل", description: "اختر عنوانًا داخل نطاق التوصيل." })
                   return
                 }
@@ -201,8 +244,7 @@ export default function AddressSheet({ className }: Props) {
               isCheckingDelivery={isCheckingDelivery}
               deliveryInfo={deliveryInfo}
               deliveryBranch={deliveryBranch}
-              onEditAddress={(id) => {
-                // افتح شاشة تعديلك
+              onEditAddress={() => {
                 toast({ title: "تعديل العنوان", description: "افتح شاشة التعديل الخاصة بك." })
               }}
             />
@@ -212,8 +254,7 @@ export default function AddressSheet({ className }: Props) {
               searchQuery={searchQuery}
               pickupBranch={pickupBranch}
               onSelectBranch={(branch) => {
-                const summary = toBranchSummary(branch)
-                setPickupBranch(summary)
+                setPickupBranch(toBranchSummary(branch))
                 syncFulfillmentType("pickup")
                 setOpen(false)
               }}

@@ -99,7 +99,13 @@ function AddressDetails({
   phoneLabel?: string
   localeSeparator: string
 }) {
-  const enrichedLines = lines.filter(Boolean).join(localeSeparator)
+  const isCoord = (value?: string | null) => !!value && /^\s*\d+(\.\d+)?\s*,\s*\d+(\.\d+)?\s*$/.test(value)
+  const cleaned = lines.filter(Boolean).filter((line, idx, arr) => {
+    // drop duplicate coord strings
+    if (isCoord(line) && arr.some((l, i) => i < idx && l === line)) return false
+    return true
+  })
+  const enrichedLines = cleaned.join(localeSeparator)
   return (
     <div className="rounded-xl border border-gray-100 bg-white p-3 text-xs text-gray-600">
       <div className="flex items-start gap-2">

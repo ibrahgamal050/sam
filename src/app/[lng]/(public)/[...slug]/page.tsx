@@ -2,8 +2,10 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { MainNav } from "@/components/ar/header/main-nav"
 import { MobileLayout } from "@/components/ar/mobile-layout"
-import { MenuPage } from "@/components/ar/menu/menu-page"
-
+import { MenuPage as ArMenuPage } from "@/components/ar/menu/menu-page"
+import { MenuPage as EnMenuPage } from "@/components/en/menu/menu-page"
+import ArAboutPage from "@/components/ar/about-page"
+import  EnAboutPage from "@/components/en/about-page"
 import BlockRenderer from "@/components/cms/BlockRenderer"
 import { resolveRestaurantFromHeaders } from "@/lib/domain/restaurant-context"
 import { getRootDomain, resolveRestaurantHost } from "@/lib/host-utils"
@@ -15,7 +17,8 @@ import type { AnyBlock } from "@/types/blocks"
 import type { IPage } from "@/types/page"
 import type { IRestaurant } from "@/types/restaurant"
 import { renderSection } from "@/lib/builder"
-import {BranchesPage} from "@/components/ar/branches-page"
+import {BranchesPage as ArBranchesPage} from "@/components/ar/branches-page"
+import {BranchesPage as EnBranchesPage} from "@/components/en/branches-page"
 import {RestaurantHome} from "@/components/ar/RestaurantHome"
 export const dynamic = "force-dynamic"
 
@@ -23,7 +26,208 @@ type PageParams = {
   lng?: string
   slug?: string[] | string
 }
-
+const aboutData = {
+  "logo": "images/seafood-logo.png",
+  "data": {
+    "components": [
+      {
+        "component_id": "header_1",
+        "type": "header",
+        "props": {
+          "title": "The Catch Seafood Restaurant",
+          "subtitle": "Fresh from the sea to your table since 2010",
+          "backgroundImage": "images/seafood-hero.jpg"
+        }
+      },
+      {
+        "component_id": "story_1",
+        "type": "story",
+        "props": {
+          "title": "Our Story",
+          "contentParagraphs": [
+            "The Catch Seafood Restaurant was founded in 2010 by Captain Ahmed and his family, who have been fishermen for three generations. What started as a small fish market has grown into a beloved dining destination along the coast.",
+            "Our passion for the ocean and its bounty drives us to serve only the freshest, sustainably sourced seafood. Every morning, our team hand-selects the day's catch from local fishermen who share our commitment to quality.",
+            "Today, we are proud to welcome guests from around the world who come to experience authentic coastal flavors, warm hospitality, and a true taste of the sea."
+          ]
+        }
+      },
+      {
+        "component_id": "mission_1",
+        "type": "mission",
+        "props": {
+          "title": "Our Vision",
+          "content": "To become the most trusted seafood destination by delivering exceptional quality, celebrating ocean sustainability, and creating unforgettable dining experiences that bring people together."
+        }
+      },
+      {
+        "component_id": "values_1",
+        "type": "values",
+        "props": {
+          "title": "Our Values",
+          "items": [
+            {
+              "id": "val_1",
+              "number": 1,
+              "title": "Freshness First",
+              "description": "We never compromise on quality. Every ingredient is sourced daily from trusted local partners."
+            },
+            {
+              "id": "val_2",
+              "number": 2,
+              "title": "Sustainable Fishing",
+              "description": "We support responsible fishing practices to protect our oceans for future generations."
+            },
+            {
+              "id": "val_3",
+              "number": 3,
+              "title": "Warm Hospitality",
+              "description": "Every guest is treated like family. We take pride in making you feel at home."
+            },
+            {
+              "id": "val_4",
+              "number": 4,
+              "title": "Continuous Innovation",
+              "description": "We constantly refine our recipes and techniques to surprise and delight you."
+            }
+          ]
+        }
+      },
+      {
+        "component_id": "team_1",
+        "type": "team",
+        "props": {
+          "members": [
+            {
+              "id": "member_1",
+              "name": "Captain Ahmed",
+              "role": "Founder & Head Chef",
+              "image": "/images/chef-ahmed.jpg"
+            },
+            {
+              "id": "member_2",
+              "name": "Chef Layla",
+              "role": "Sous Chef",
+              "image": "/images/chef-layla.jpg"
+            },
+            {
+              "id": "member_3",
+              "name": "Omar Hassan",
+              "role": "Restaurant Manager",
+              "image": "/images/omar.jpg"
+            },
+            {
+              "id": "member_4",
+              "name": "Nadia Mahmoud",
+              "role": "Customer Experience Lead",
+              "image": "images/nadia.jpg"
+            }
+          ]
+        }
+      }
+    ]
+  }
+} 
+const araboutData = {
+  "logo": "images/seafood-logo.png",
+  "data": {
+    "components": [
+      {
+        "component_id": "header_1",
+        "type": "header",
+        "props": {
+          "title": "مطعم ذا كاتش للمأكولات البحرية",
+          "subtitle": "طازج من البحر إلى مائدتك منذ 2010",
+          "backgroundImage": "images/seafood-hero.jpg"
+        }
+      },
+      {
+        "component_id": "story_1",
+        "type": "story",
+        "props": {
+          "title": "قصتنا",
+          "contentParagraphs": [
+            "تأسس مطعم ذا كاتش للمأكولات البحرية في عام 2010 على يد الكابتن أحمد وعائلته، الذين عملوا في الصيد لثلاثة أجيال. ما بدأ كسوق سمك صغير تحول إلى وجهة غذائية محبوبة على طول الساحل.",
+            "شغفنا بالمحيط وخيراته يدفعنا لتقديم أجود المأكولات البحرية الطازجة والمستدامة. كل صباح، يختار فريقنا بعناية صيد اليوم من الصيادين المحليين الذين يشاركوننا الالتزام بالجودة.",
+            "اليوم، نحن فخورون بالترحيب بضيوف من جميع أنحاء العالم يأتون لتجربة النكهات الساحلية الأصيلة، والضيافة الدافئة، والطعم الحقيقي للبحر."
+          ]
+        }
+      },
+      {
+        "component_id": "mission_1",
+        "type": "mission",
+        "props": {
+          "title": "رؤيتنا",
+          "content": "أن نصبح الوجهة البحرية الأكثر ثقة من خلال تقديم جودة استثنائية، والاحتفال باستدامة المحيط، وخلق تجارب طعام لا تُنسى تجمع الناس معًا."
+        }
+      },
+      {
+        "component_id": "values_1",
+        "type": "values",
+        "props": {
+          "title": "قيمنا",
+          "items": [
+            {
+              "id": "val_1",
+              "number": 1,
+              "title": "النضارة أولاً",
+              "description": "لا نتنازل أبدًا عن الجودة. يتم الحصول على كل مكون يوميًا من شركاء محليين موثوقين."
+            },
+            {
+              "id": "val_2",
+              "number": 2,
+              "title": "الصيد المستدام",
+              "description": "ندعم ممارسات الصيد المسؤولة لحماية محيطاتنا للأجيال القادمة."
+            },
+            {
+              "id": "val_3",
+              "number": 3,
+              "title": "الضيافة الدافئة",
+              "description": "كل ضيف يعامل كأفراد العائلة. نحن نفخر بجعلك تشعر وكأنك في منزلك."
+            },
+            {
+              "id": "val_4",
+              "number": 4,
+              "title": "الابتكار المستمر",
+              "description": "نحن نطور باستمرار وصفاتنا وتقنياتنا لإبهارك وإسعادك."
+            }
+          ]
+        }
+      },
+      {
+        "component_id": "team_1",
+        "type": "team",
+        "props": {
+          "members": [
+            {
+              "id": "member_1",
+              "name": "الكابتن أحمد",
+              "role": "المؤسس والطاهي الرئيسي",
+              "image": "/images/chef-ahmed.jpg"
+            },
+            {
+              "id": "member_2",
+              "name": "الشيف ليلى",
+              "role": "طاهية مساعدة",
+              "image": "/images/chef-layla.jpg"
+            },
+            {
+              "id": "member_3",
+              "name": "عمر حسن",
+              "role": "مدير المطعم",
+              "image": "/images/omar.jpg"
+            },
+            {
+              "id": "member_4",
+              "name": "نادية محمود",
+              "role": "مسؤولة تجربة العملاء",
+              "image": "images/nadia.jpg"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
 type Locale = "ar" | "en"
 
 const SUPPORTED_LOCALES: Locale[] = ["ar", "en"]
@@ -228,7 +432,6 @@ export default async function ContentPage({
   }
 
   type RouteEntry = {
-    requireMenu?: boolean
     requireBranches?: boolean
     render: (ctx: RouteCtx) => React.ReactNode
   }
@@ -245,10 +448,9 @@ export default async function ContentPage({
     },
 
     menu: {
-      requireMenu: true,
       render: ({ restaurant, menu }) => (
         <MobileLayout restaurant={restaurant}>
-          <MenuPage menuData={menu} />
+          {locale === "en" ? <EnMenuPage menuData={menu} /> : <ArMenuPage menuData={menu} />}
         </MobileLayout>
       ),
     },
@@ -257,7 +459,15 @@ export default async function ContentPage({
       requireBranches: true,
       render: ({ restaurant }) => (
         <MobileLayout restaurant={restaurant}>
-          <BranchesPage restaurant={restaurant} />
+          {locale === "en" ?  <EnBranchesPage restaurant={restaurant} />: <ArBranchesPage restaurant={restaurant} />}
+        </MobileLayout>
+      ),
+    },
+    about: {
+      requireBranches: true,
+      render: ({ restaurant }) => (
+        <MobileLayout restaurant={restaurant}>
+          {locale === "en" ?  <EnAboutPage data={aboutData.data} logo={aboutData.logo}   />: <ArAboutPage  data={araboutData.data} logo={aboutData.logo}   />}
         </MobileLayout>
       ),
     },
@@ -268,7 +478,6 @@ export default async function ContentPage({
     const entry = routes[slugPath]
     if (!entry) return notFound()
 
-    if (entry.requireMenu && !menu) return notFound()
     if (entry.requireBranches && (!branches || branches.length === 0)) return notFound()
 
     return (

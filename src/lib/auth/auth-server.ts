@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server"
 
 const ACCESS_COOKIE = "mz.access"
 const SECRET = new TextEncoder().encode(process.env.JWT_SECRET!)
-const ISSUER = process.env.NEXT_PUBLIC_ISSUER_URL!
+const ISSUER = process.env.NEXT_PUBLIC_ISSUER_URL || "meelza-sites"
 const AUDIENCE = "meelza-clients"
 
 // استخراج التوكن من الكوكي أو الـ Authorization header

@@ -24,15 +24,7 @@ const RestaurantContext = createContext<RestaurantContextType>({
 export const useRestaurant = () => useContext(RestaurantContext)
 
 function extractSubdomainFromHost(hostname: string) {
-  // localhost والديف: حط قيمة افتراضية أو اسحب من localStorage
-  if (hostname === "localhost" || hostname.endsWith(".localhost")) {
-    return localStorage.getItem("devSubdomain") || "pizzamaster"
-  }
 
-  // vercel preview: myapp-xyz.vercel.app -> myapp-xyz
-  if (hostname.endsWith(".vercel.app")) {
-    return hostname.replace(".vercel.app", "").split(".")[0] || ""
-  }
 
   // دومين متعدد المستأجرين: sub.domain.tld -> sub
   const parts = hostname.split(".")

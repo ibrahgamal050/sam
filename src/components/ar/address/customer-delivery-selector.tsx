@@ -23,6 +23,19 @@ type DeliveryState = {
   zones: DeliveryZone[]
 } | null
 
+const isLikelyCoords = (value?: string | null) => {
+  if (!value) return false
+  return /^\s*\d+(\.\d+)?\s*,\s*\d+(\.\d+)?\s*$/.test(value)
+}
+
+const formatAddressLine = (address?: string | null, city?: string | null, name?: string | null) => {
+  if (!address) return city ?? name ?? ""
+  if (isLikelyCoords(address)) {
+    return city || name || address
+  }
+  return address
+}
+
 interface CustomerDeliverySelectorProps {
   showIntro?: boolean
   onClose?: () => void
@@ -189,9 +202,14 @@ export default function CustomerDeliverySelector({ showIntro = true, onClose }: 
     }
 
    try {
+  const label = (addressLabel ?? "").trim()
+  const displayName = label && label.length < 60 ? label : "موقع مخصص"
+  const displayAddress =
+    label && label.length >= 3 && !/^\d+(\.\d+)?\s*,\s*\d+(\.\d+)?$/.test(label) ? label : fallbackCity
+
   const created = await addAddress({
-    name: addressLabel && addressLabel.length < 60 ? addressLabel : "موقع مخصص",
-    address: addressLabel || `${lat.toFixed(4)}, ${lng.toFixed(4)}`,
+    name: displayName,
+    address: displayAddress,
     city: fallbackCity,
     lat,
     lng,
@@ -412,8 +430,8 @@ export default function CustomerDeliverySelector({ showIntro = true, onClose }: 
                 )
               ) : currentAddress ? (
                 <p className="text-xs text-gray-500">
-                  {currentAddress.address}
-                  {currentAddress.city ? `، ${currentAddress.city}` : ""}
+                  {formatAddressLine(currentAddress.address, currentAddress.city, currentAddress.name)}
+                  {currentAddress.city && !isLikelyCoords(currentAddress.address) ? `، ${currentAddress.city}` : ""}
                 </p>
               ) : (
                 <p className="text-xs text-gray-500">حدد موقعك على الخريطة أولاً.</p>

@@ -62,11 +62,11 @@ export function ProfileEntry() {
         <p className="text-xs text-gray-500">
           {redirecting
             ? locale === "ar"
-              ? "جار تسجيل الدخول عبر Meelza ID..."
-              : "Logging in via Meelza ID..."
+              ? "جار فتح صفحة تسجيل الدخول..."
+              : "Opening sign in..."
             : locale === "ar"
-              ? "أنت غير مسجل الدخول الآن. سجّل الدخول عبر Meelza ID."
-              : "You’re not signed in. Sign in with Meelza ID."}
+              ? "أنت غير مسجل الدخول الآن. سجّل الدخول بالبريد الإلكتروني."
+              : "You’re not signed in. Sign in with email."}
         </p>
       </div>
     )

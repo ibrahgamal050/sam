@@ -2,7 +2,7 @@ import { jwtVerify, type JWTPayload } from "jose"
 
 /** إعدادات أساسية */
 const SECRET = new TextEncoder().encode(process.env.JWT_SECRET!)
-const ISS = process.env.NEXT_PUBLIC_ISSUER_URL!      // مثال: http://id.meelza.local:3004
+const ISS = process.env.NEXT_PUBLIC_ISSUER_URL || "meelza-sites"
 const AUD = "meelza-clients"                         // نفس القيمة اللي أنت موقّع بيها
 
 export type AccessPayload = JWTPayload & {

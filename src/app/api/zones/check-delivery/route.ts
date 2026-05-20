@@ -12,6 +12,7 @@ const CACHE_TTL_MS = 30_000
 const toZoneResponse = (zone: any) => ({
   id: zone._id?.toString() ?? "",
   restaurantId: zone.restaurantId?.toString() ?? "",
+  branchId: zone.branchId?.toString?.() ?? undefined,
   name: zone.name,
   description: zone.description ?? undefined,
   delivery_fee: zone.delivery_fee,

@@ -6,15 +6,23 @@ import { useMenuScroll } from "@/hooks/use-menu-scroll"
 import type { IMenu } from "@/types/menu"
 
 interface MenuPageProps {
-  menuData: IMenu
+  menuData: IMenu | null
 }
 
 export function MenuPage({ menuData }: MenuPageProps) {
+  const normalizedMenuData = {
+    name: "قائمة الطعام",
+    currency: { ar: "ج.م" },
+    categories: [],
+    menuImages: [],
+    ...menuData,
+  } as IMenu
+
   // Extract categories from menuData
-  const categories = menuData?.categories || []
+  const categories = normalizedMenuData.categories || []
 
   // Get currency from menuData
-  const currency = menuData?.currency?.ar || "ج.م"
+  const currency = normalizedMenuData.currency?.ar || "ج.م"
 
   // Refs for layout elements
   const headerRef = useRef<HTMLDivElement>(null)
@@ -37,7 +45,7 @@ export function MenuPage({ menuData }: MenuPageProps) {
       dir="rtl"
     >
       <MenuLayout
-        menuData={menuData}
+        menuData={normalizedMenuData}
         categories={categories}
         activeCategory={activeCategory}
         categoryRefs={categoryRefs}

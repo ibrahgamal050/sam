@@ -62,7 +62,16 @@ export async function normalizeOrderItems(params: {
   const { restaurantId, items } = params
 
   const uniqueProductIds = Array.from(new Set(items.map((i) => String(i.productId))))
-  const productObjectIds = uniqueProductIds.map((id) => new Types.ObjectId(id))
+  const productObjectIds = uniqueProductIds.map((id) => {
+    if (!Types.ObjectId.isValid(id)) {
+      const err: any = new Error(`Invalid item id: ${id}`)
+      err.status = 400
+      err.code = "INVALID_ITEM_ID"
+      err.details = { productId: id }
+      throw err
+    }
+    return new Types.ObjectId(id)
+  })
 
   const menuItems = await fetchMenuItemsByIds(restaurantId, productObjectIds)
   const itemMap = new Map<string, FlatItem>()
@@ -73,9 +82,10 @@ export async function normalizeOrderItems(params: {
   const normalizedItems: NormalizedItem[] = items.map((i) => {
     const db = itemMap.get(String(i.productId))
     if (!db) {
-      const err: any = new Error(`Item not found: ${i.productId}`)
-      err.status = 404
+      const err: any = new Error("One or more cart items are no longer available. Please re-add your items.")
+      err.status = 409
       err.code = "ITEM_NOT_FOUND"
+      err.details = { productId: i.productId, name: i.name }
       throw err
     }
 

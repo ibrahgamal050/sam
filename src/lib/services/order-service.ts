@@ -117,6 +117,8 @@ export async function getOrdersByRestaurantId(params: {
           status: 1,
           createdAt: 1,
           guest: 1,
+          branchId: 1,
+          deliveryZoneId: 1,
         }
 
   const [total, orders] = await Promise.all([
@@ -220,6 +222,8 @@ export async function getOrdersForCustomer(params: {
           createdAt: 1,
           guest: 1,
           restaurantId: 1,
+          branchId: 1,
+          deliveryZoneId: 1,
         }
 
   const [total, orders] = await Promise.all([

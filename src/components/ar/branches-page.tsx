@@ -2,17 +2,10 @@ import Image from "next/image"
 import Link from "next/link"
 import { Clock, MapPin, Navigation, Phone, Building2 } from "lucide-react"
 import type { IRestaurant } from "@/types"
+import { resolveImageSrc } from "@/lib/resolve-image-src"
 
 interface BranchesPageProps {
   restaurant: IRestaurant
-}
-
-const resolveImageSrc = (path?: string | null, fallback = "/placeholder.jpg") => {
-  if (!path) return fallback
-  if (path.startsWith("http")) return path
-  if (path.startsWith("/images/")) return path
-  const normalized = path.startsWith("/") ? path : `/${path}`
-  return `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/${normalized}`
 }
 
 export function BranchesPage({ restaurant }: BranchesPageProps) {

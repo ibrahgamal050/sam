@@ -48,7 +48,7 @@ export function BottomNavigation() {
   }
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 block md:hidden" aria-label={locale === "ar" ? "التنقل السفلي" : "Bottom navigation"}>
+    <nav className="fixed inset-x-0 bottom-0 z-50 block md:hidden" aria-label={locale === "ar" ? "التنقل السفلي" : "Bottom navigation"}>
       <div className="mx-auto flex w-screen flex-col">
         <div className="relative overflow-hidden border border-gray-200 bg-white shadow-[0_25px_45px_-30px_rgba(15,23,42,0.4)]">
           <div className="grid pb-2 mt-2 grid-cols-4">

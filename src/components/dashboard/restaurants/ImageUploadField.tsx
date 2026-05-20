@@ -22,7 +22,7 @@ export function ImageUploadField<TFieldValues extends FieldValues>({
   control,
   name,
   label = "Image",
-  uploadEndpoint = "http://localhost:3001/api/upload",   // ← نسبي أفضل
+  uploadEndpoint = `${process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3011"}/api/upload`,
   accept = ["image/jpeg", "image/png", "image/webp", "image/avif"],
   maxSizeMB = 5,
   ttlSec = 600,

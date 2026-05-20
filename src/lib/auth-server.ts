@@ -16,7 +16,7 @@ export type Session =
   | { status: "unauthenticated" }
   | { status: "authenticated"; user: SessionUser }
 
-const ISSUER = process.env.NEXT_PUBLIC_ISSUER_URL // عادي تكون public
+const ISSUER = process.env.NEXT_PUBLIC_ISSUER_URL || "meelza-sites"
 const AUDIENCE = process.env.JWT_AUDIENCE ?? "meelza-clients"
 const COOKIE_NAME = process.env.JWT_COOKIE_NAME ?? "mz.access"
 

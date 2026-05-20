@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Search } from "lucide-react"
 
 import { dbConnect } from "@/lib/db"
+import { resolveImageSrc } from "@/lib/resolve-image-src"
 import Restaurant from "@/models/restaurant"
 import type { IRestaurant } from "@/types/restaurant"
 
@@ -11,18 +12,6 @@ type RestaurantCardData = Pick<
   IRestaurant,
   "name" | "subdomain" | "logo" | "coverImage" | "description" | "phones"
 > & { _id: string }
-
-const resolveImageSrc = (path: string | undefined | null, fallback = "/placeholder.svg") => {
-  if (!path) return fallback
-  if (path.startsWith("http")) return path
-
-  if (path.startsWith("/images/")) {
-    return path
-  }
-
-  const normalized = path.startsWith("/") ? path : `/${path}`
-  return `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/${normalized}`
-}
 
 const buildRestaurantUrl = (subdomain: string) => {
   const rootDomain = process.env.NEXT_PUBLIC_ROOT_DOMAIN

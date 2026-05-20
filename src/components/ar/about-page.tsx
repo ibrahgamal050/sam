@@ -3,19 +3,12 @@ import { Award, Heart, Star, Users, Utensils } from "lucide-react"
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { resolveImageSrc } from "@/lib/resolve-image-src"
 import type { IPage } from "@/types/page"
 
 interface AboutPageProps {
   data: IPage
   logo: string
-}
-
-const resolveImageSrc = (path?: string | null, fallback = "/placeholder.jpg") => {
-  if (!path) return fallback
-  if (path.startsWith("http")) return path
-  if (path.startsWith("/images/")) return path
-  const normalized = path.startsWith("/") ? path : `/${path}`
-  return `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/${normalized}`
 }
 
 export default function AboutPage({ data, logo }: AboutPageProps) {

@@ -3,6 +3,7 @@ import { Schema, model, models, Types } from "mongoose"
 const DeliveryZoneSchema = new Schema(
   {
     restaurantId: { type: Types.ObjectId, ref: "Restaurant", required: true, index: true },
+    branchId: { type: Types.ObjectId, ref: "Branch", required: false, index: true },
     name: { type: String, required: true, trim: true },
     geometry: {
       type: {

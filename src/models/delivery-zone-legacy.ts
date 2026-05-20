@@ -5,6 +5,7 @@ export type ZoneType = "circle" | "polygon"
 
 export interface DeliveryZoneLegacyDocument extends Document {
   restaurantId: Types.ObjectId
+  branchId?: Types.ObjectId
   name: string
   description?: string | null
   delivery_fee: number
@@ -28,6 +29,12 @@ const DeliveryZoneLegacySchema = new Schema<DeliveryZoneLegacyDocument>(
       type: Schema.Types.ObjectId,
       ref: "Restaurant",
       required: true,
+      index: true,
+    },
+    branchId: {
+      type: Schema.Types.ObjectId,
+      ref: "Branch",
+      required: false,
       index: true,
     },
     name: { type: String, required: true, trim: true },

@@ -16,7 +16,7 @@ import { useOrderSettings } from '@/hooks/useOrderSettings'
 import { ContactCard, DeliveryCard, PaymentCard, SummaryCard } from '@/components/checkout'
 
 export default function CheckoutPage() {
-  const { items, clear: clearCart } = useCart()
+  const { items, clearCart } = useCart()
   const { restaurant } = useRestaurant()
   const { selectedAddress } = useDeliveryAddress()
   const router = useRouter()
@@ -280,7 +280,18 @@ console.log('[orders] outgoing payload', payload, JSON.stringify(payload).length
 
       const body = await safeJson(res)
       if (!res.ok) {
-        const msg = (body as any)?.message || (body as any)?.error || 'حدث خطأ أثناء إنشاء الطلب.'
+        const apiError = (body as any)?.error
+        const code = typeof apiError?.code === 'string' ? apiError.code : (body as any)?.code
+        if (code === 'ITEM_NOT_FOUND' || code === 'INVALID_ITEM_ID') {
+          clearCart?.()
+          throw new Error('تم تحديث المنيو وبعض الأصناف في السلة لم تعد متاحة. تم تفريغ السلة، يرجى إضافة الأصناف مرة أخرى.')
+        }
+
+        const msg =
+          (typeof apiError?.message === 'string' && apiError.message) ||
+          (typeof (body as any)?.message === 'string' && (body as any).message) ||
+          (typeof (body as any)?.error === 'string' && (body as any).error) ||
+          'حدث خطأ أثناء إنشاء الطلب.'
         throw new Error(String(msg))
       }
 

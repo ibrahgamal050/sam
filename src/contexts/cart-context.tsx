@@ -70,7 +70,7 @@ interface CartContextType {
   clearCart: () => void
 }
 
-const CartContext = createContext<CartContextType | undefined>(undefined)
+export const CartContext = createContext<CartContextType | undefined>(undefined)
 
 const sanitizeNote = (note?: string) => {
   if (typeof note !== "string") return undefined
@@ -376,4 +376,8 @@ export function useCart() {
   const ctx = useContext(CartContext)
   if (!ctx) throw new Error("useCart must be used within CartProvider")
   return ctx
+}
+
+export function useCartOptional(): CartContextType | undefined {
+  return useContext(CartContext)
 }

@@ -9,7 +9,7 @@ export default async function AccountPage() {
 
   const secret = new TextEncoder().encode(process.env.JWT_SECRET) // نفس السر
   const { payload } = await jwtVerify(token, secret, {
-    issuer: process.env.NEXT_PUBLIC_ISSUER_URL, // لازم يساوي ISSUER في الـ ID
+    issuer: process.env.NEXT_PUBLIC_ISSUER_URL || "meelza-sites",
     audience: 'meelza-clients',
   })
 

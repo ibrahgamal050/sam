@@ -96,7 +96,7 @@ export default function MobileProfileMenu() {
 
   const avatarFallback = resolvedName?.trim()?.[0] ?? (locale === "ar" ? "م" : "G")
   const displayName = resolvedName ?? (locale === "ar" ? "غير مسجل الدخول" : "Not signed in")
-  const displaySubtitle = resolvedEmail ?? (locale === "ar" ? "سجّل الدخول عبر Meelza ID" : "Sign in with Meelza ID")
+  const displaySubtitle = resolvedEmail ?? (locale === "ar" ? "سجّل الدخول بالبريد الإلكتروني" : "Sign in with email")
 
   const handleSignOut = async () => {
     if (signingOut) return
@@ -222,8 +222,8 @@ export default function MobileProfileMenu() {
             <div className="mt-6 space-y-3">
               <p className={cn("text-sm text-gray-600", textAlign)}>
                 {locale === "ar"
-                  ? "أنت غير مسجل الدخول. استخدم Meelza ID لتسجيل الدخول ومتابعة طلباتك."
-                  : "You’re not signed in. Use Meelza ID to sign in and manage your orders."}
+                  ? "أنت غير مسجل الدخول. استخدم بريدك الإلكتروني وكلمة السر لمتابعة طلباتك."
+                  : "You’re not signed in. Use your email and password to manage your orders."}
               </p>
               <Button
                 className="w-full justify-center gap-2 rounded-3xl bg-[#6c5ce7] py-3 text-sm font-semibold text-white hover:bg-[#5a4bd1]"

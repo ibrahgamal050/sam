@@ -2,7 +2,7 @@
 
 import { useMemo } from "react"
 import { cn } from "@/lib/utils"
-import { useCart } from "@/contexts/cart-context"
+import { useCart, useCartOptional } from "@/contexts/cart-context"
 
 type CardStyle = "soft" | "outlined" | "flat"
 
@@ -214,6 +214,19 @@ type MenuDynamicClientProps = {
   stickyTopClass?: string
 }
 
+const useCartSafe = () => {
+  const optional = useCartOptional()
+  if (optional) return optional
+  // No provider — fallback to noop cart
+  return {
+    items: [],
+    addItem: () => {},
+    increaseItem: () => {},
+    decreaseItem: () => {},
+    clearCart: () => {},
+  }
+}
+
 export function MenuDynamicClient({
   groups,
   variant,
@@ -225,7 +238,7 @@ export function MenuDynamicClient({
   stickyCategoryTitle = true,
   stickyTopClass = "top-[120px] md:top-[80px]",
 }: MenuDynamicClientProps) {
-  const { items: cartItems, addItem, increaseItem, decreaseItem } = useCart()
+  const { items: cartItems, addItem, increaseItem, decreaseItem } = useCartSafe()
 
   const { quantityByItemId, cartIdByItemId } = useMemo(() => {
     const quantities = new Map<string, number>()
