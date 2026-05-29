@@ -1,9 +1,7 @@
 import { Types } from "mongoose"
 
 export type DomainAlias = {
-  // example: "abdo.meelza.site" أو "abdo.com"
   host: string
-  // لو موجود: حوّل 301 إلى هذا الهوست
   redirectTo?: string
   active: boolean
   createdAt: Date
@@ -14,11 +12,13 @@ export interface IBranch {
   name: {
     ar: string
     en: string
+    ru: string // ✅ added
   }
   location: {
     address: {
       ar: string
       en: string
+      ru: string // ✅ added
     }
     latitude: number
     longitude: number
@@ -28,7 +28,6 @@ export interface IBranch {
   isMainBranch: boolean
 }
 
-// تعريف نوع البيانات الخاصة بساعات العمل
 export interface OpeningHours {
   open: string
   close: string
@@ -59,25 +58,34 @@ export interface IRestaurant {
   name: {
     ar: string
     en: string
+    ru: string // ✅ added
   }
+
   subdomain: string
-  // الهوست الأساسي: "abdo.com" أو "abdo.meelza.site"
   canonicalHost?: string | null
-  // الدومينات القديمة أو الثانوية
   domainAliases: DomainAlias[]
+
   logo: string
   coverImage: string
-  description: string
+
+  description: {
+    ar: string
+    en: string
+    ru: string // ✅ changed from string → multilingual
+  }
+
   social: {
     facebook?: string
     instagram?: string
     tiktok?: string
     twitter?: string
   }
+
   branches: IBranch[]
   hours?: RestaurantHours[]
   isPublished?: boolean
   phones: string[]
+
   createdAt?: Date
   updatedAt?: Date
 }

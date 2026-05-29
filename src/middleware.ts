@@ -42,9 +42,10 @@ type DomainCacheData = {
 
 let domainCache: DomainCacheData | null = null
 let lastFetchTime = 0
-const CACHE_DURATION = 5 * 60 * 1000 // 5 minutes
-const SUPPORTED_LOCALES = new Set(["ar", "en"])
-const DEFAULT_LOCALE = process.env.NEXT_PUBLIC_DEFAULT_LOCALE?.trim().toLowerCase() || "ar"
+const CACHE_DURATION = 5 * 60 * 1000
+
+// ✅ دعم اللغات بدل ar فقط
+const SUPPORTED_LOCALES = new Set(["ar", "en", "ru"])
 
 const splitHostAndPort = (hostHeader: string) => {
   const [hostPart, portPart] = hostHeader.split(":")
@@ -67,12 +68,13 @@ const resolveApiOrigin = (request: NextRequest): string => {
 
   const rootDomain = process.env.NEXT_PUBLIC_ROOT_DOMAIN
   const hostHeader = request.headers.get("host")
-  const protocol = request.nextUrl.protocol || (hostHeader?.includes("localhost") ? "http:" : "https:")
+  const protocol =
+    request.nextUrl.protocol ||
+    (hostHeader?.includes("localhost") ? "http:" : "https:")
+
   const requestHost = request.nextUrl.host || hostHeader || rootDomain
 
-  if (!requestHost) {
-    throw new Error("Unable to resolve host for domain lookup")
-  }
+  if (!requestHost) throw new Error("Unable to resolve host")
 
   const shouldUseRootDomain =
     !!rootDomain && requestHost.endsWith(rootDomain) && requestHost !== rootDomain
@@ -86,212 +88,220 @@ const fetchDomainData = async (request: NextRequest): Promise<DomainCacheData> =
   const origin = resolveApiOrigin(request)
   const url = new URL("/api/subdomains", origin).toString()
 
-  const response = await fetch(url, { headers: { "Cache-Control": "no-cache" } })
+  const response = await fetch(url, { cache: "no-store" })
   if (!response.ok) throw new Error("Failed to fetch domain data")
 
   const payload = (await response.json()) as ApiDomainEntry[]
+
   const rootDomain = normalizeHost(process.env.NEXT_PUBLIC_ROOT_DOMAIN)
   const subdomains = new Set<string>()
   const bySubdomain = new Map<string, DomainEntry>()
   const hostMap = new Map<string, HostMatch>()
+
   const isDevelopment = process.env.NODE_ENV !== "production"
 
   for (const record of payload) {
     if (!record?.subdomain) continue
 
-    const subdomain = record.subdomain.trim().toLowerCase()
+    const subdomain = record.subdomain.toLowerCase()
     subdomains.add(subdomain)
 
     const canonicalHostKey = normalizeHost(record.canonicalHost)
+
     const domainAliases: DomainAliasRecord[] = (record.domainAliases ?? [])
-      .filter((alias): alias is ApiDomainAlias => Boolean(alias?.host))
-      .map((alias) => {
-        const matchHost = normalizeHost(alias.host)
+      .filter((a) => a?.host)
+      .map((a) => {
+        const matchHost = normalizeHost(a.host)
         return {
-          host: alias.host.trim(),
+          host: a.host.trim(),
           matchHost: matchHost ?? "",
-          redirectTo: alias.redirectTo?.trim() ?? null,
-          active: alias.active !== false,
+          redirectTo: a.redirectTo?.trim() ?? null,
+          active: a.active !== false,
         }
       })
-      .filter((alias) => alias.matchHost.length > 0)
+      .filter((a) => a.matchHost)
 
-    const normalizedRecord: DomainEntry = {
+    const normalized: DomainEntry = {
       subdomain,
-      canonicalHost: record.canonicalHost?.trim().toLowerCase() ?? null,
+      canonicalHost: record.canonicalHost?.toLowerCase() ?? null,
       canonicalHostKey,
       domainAliases,
     }
 
-    bySubdomain.set(subdomain, normalizedRecord)
+    bySubdomain.set(subdomain, normalized)
 
     if (canonicalHostKey) {
-      hostMap.set(canonicalHostKey, { record: normalizedRecord, source: "canonical" })
+      hostMap.set(canonicalHostKey, {
+        record: normalized,
+        source: "canonical",
+      })
     }
 
     if (rootDomain) {
-      hostMap.set(`${subdomain}.${rootDomain}`, { record: normalizedRecord, source: "platform" })
+      hostMap.set(`${subdomain}.${rootDomain}`, {
+        record: normalized,
+        source: "platform",
+      })
     }
 
     if (isDevelopment) {
-      hostMap.set(`${subdomain}.localhost`, { record: normalizedRecord, source: "platform" })
+      hostMap.set(`${subdomain}.localhost`, {
+        record: normalized,
+        source: "platform",
+      })
     }
 
     for (const alias of domainAliases) {
       if (!alias.active) continue
-      hostMap.set(alias.matchHost, { record: normalizedRecord, alias, source: "alias" })
+      hostMap.set(alias.matchHost, {
+        record: normalized,
+        alias,
+        source: "alias",
+      })
     }
   }
 
   return { rootDomain, subdomains, bySubdomain, hostMap }
 }
 
-const getDomainData = async (request: NextRequest): Promise<DomainCacheData> => {
+const getDomainData = async (request: NextRequest) => {
   const now = Date.now()
+
   if (!domainCache || now - lastFetchTime > CACHE_DURATION) {
-    try {
-      domainCache = await fetchDomainData(request)
-      lastFetchTime = now
-    } catch (error) {
-      console.error("Error updating domain cache:", error)
-      if (!domainCache) {
-        throw error
-      }
-    }
+    domainCache = await fetchDomainData(request)
+    lastFetchTime = now
   }
 
   return domainCache
 }
 
-const buildPlatformHost = (subdomain: string, originalHost: string, rootDomain: string | null) => {
-  const { host, port } = splitHostAndPort(originalHost)
-  const isLocal = host === "localhost" || host === "127.0.0.1"
+// ❌ كان ثابت ar
+// const SITE_APP_PREFIX = "/sites/ar"
 
-  if (isLocal) {
-    const targetHost = `${subdomain}.localhost`
-    return port ? `${targetHost}:${port}` : targetHost
-  }
+// ✅ أصبح ديناميكي
+const SITE_APP_PREFIX = "/sites"
 
-  if (rootDomain) {
-    return `${subdomain}.${rootDomain}`
-  }
-
-  const targetHost = `${subdomain}.${host}`
-  return port ? `${targetHost}:${port}` : targetHost
-}
-
-const withProtocol = (target: string, fallbackProtocol: string) => {
-  if (/^https?:\/\//i.test(target)) {
-    return target
-  }
-  return `${fallbackProtocol}//${target}`
-}
-
-const normalizePath = (value: string): string => {
+const normalizePath = (value: string) => {
   if (!value || value === "/") return "/"
   return value.startsWith("/") ? value : `/${value}`
 }
 
-const ensureLocalePath = (value: string): string => {
+const ensureSitePath = (value: string): string => {
   const normalized = normalizePath(value)
-  if (normalized === "/") {
-    return `/${DEFAULT_LOCALE}`
-  }
-
   const segments = normalized.split("/").filter(Boolean)
-  const firstSegment = segments[0]?.toLowerCase()
-  if (firstSegment && SUPPORTED_LOCALES.has(firstSegment)) {
-    return normalized
+
+  if (segments.length === 0) return "/sites/ar"
+
+  const first = segments[0]?.toLowerCase()
+  const locale = SUPPORTED_LOCALES.has(first) ? first : "ar"
+
+  const rest = SUPPORTED_LOCALES.has(first) ? segments.slice(1) : segments
+  const restPath = rest.join("/")
+
+  return restPath
+    ? `/sites/${locale}/${restPath}`
+    : `/sites/${locale}`
+}
+
+const buildPlatformHost = (
+  subdomain: string,
+  originalHost: string,
+  rootDomain: string | null
+) => {
+  const { host, port } = splitHostAndPort(originalHost)
+  const isLocal = host === "localhost" || host === "127.0.0.1"
+
+  if (isLocal) {
+    const target = `${subdomain}.localhost`
+    return port ? `${target}:${port}` : target
   }
 
-  return `/${DEFAULT_LOCALE}${normalized}`
+  if (rootDomain) return `${subdomain}.${rootDomain}`
+
+  const target = `${subdomain}.${host}`
+  return port ? `${target}:${port}` : target
 }
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl
   const { pathname, search } = url
-  const hostnameHeader = request.headers.get("host") || "localhost:3000"
-  const hostWithoutPort = stripPort(hostnameHeader)
-  const protocol = url.protocol || (hostnameHeader.includes("localhost") ? "http:" : "https:")
 
-  // Redirect www to non-www
-  if (hostnameHeader.startsWith("www.")) {
-    const targetHost = hostnameHeader.replace(/^www\./, "")
-    const redirectUrl = `${protocol}//${targetHost}${pathname}${search}`
-    return NextResponse.redirect(redirectUrl, 301)
+  const hostHeader = request.headers.get("host") || "localhost:3000"
+  const host = stripPort(hostHeader)
+  const protocol = url.protocol || "https:"
+
+  // redirect www
+  if (hostHeader.startsWith("www.")) {
+    const target = hostHeader.replace("www.", "")
+    return NextResponse.redirect(
+      `${protocol}//${target}${pathname}${search}`,
+      301
+    )
   }
 
-  // Allow access to API routes, robots.txt, and sitemap for all domains
-  if (pathname.startsWith("/api") || pathname.startsWith("/_next") || pathname.includes(".txt")) {
+  if (
+    pathname.startsWith("/api") ||
+    pathname.startsWith("/_next") ||
+    pathname.includes(".txt") ||
+    pathname.endsWith(".xml")
+  ) {
     return NextResponse.next()
   }
 
-  const isXmlRequest = pathname.endsWith(".xml")
-  const rootDomainEnv = normalizeHost(process.env.NEXT_PUBLIC_ROOT_DOMAIN)
-  const isRootHost =
-    hostWithoutPort === "localhost" ||
-    hostWithoutPort === "127.0.0.1" ||
-    (rootDomainEnv ? hostWithoutPort === rootDomainEnv : false)
-
-  // Allow XML (sitemap/robots) to bypass locale rewrites on any host
-  if (isXmlRequest) {
-    return NextResponse.next()
-  }
-
-  // Special handling for admin/auth routes - always allow
   if (pathname.startsWith("/dashboard") || pathname.startsWith("/auth")) {
     return NextResponse.next()
   }
 
-  let domainData: DomainCacheData
-  try {
-    domainData = await getDomainData(request)
-  } catch (error) {
-    console.error("❌ Failed to resolve domain data:", error)
-    return NextResponse.rewrite(new URL("/404", request.url))
-  }
+  const domainData = await getDomainData(request)
 
-  if (isRootHost) {
-    const pathSegments = pathname.split("/").filter(Boolean)
+  const isRoot =
+    host === "localhost" ||
+    host === "127.0.0.1" ||
+    host === domainData.rootDomain
 
-    if (pathSegments.length > 0) {
-      const potentialSubdomain = pathSegments[0].toLowerCase()
-      const record = domainData.bySubdomain.get(potentialSubdomain)
+  // root handling
+  if (isRoot) {
+    const segments = pathname.split("/").filter(Boolean)
+
+    if (segments.length > 0) {
+      const maybeSub = segments[0].toLowerCase()
+      const record = domainData.bySubdomain.get(maybeSub)
 
       if (record) {
-        const restOfPath = pathSegments.slice(1).join("/")
-        const redirectHost = record.canonicalHost || buildPlatformHost(potentialSubdomain, hostnameHeader, domainData.rootDomain)
-        const redirectPath = restOfPath ? `/${restOfPath}` : "/"
-        const redirectUrl = `${protocol}//${redirectHost}${redirectPath}${search}`
-        return NextResponse.redirect(redirectUrl, 302)
-      }
-    }
+        const rest = segments.slice(1).join("/")
+        const redirectHost =
+          record.canonicalHost ||
+          buildPlatformHost(maybeSub, hostHeader, domainData.rootDomain)
 
-    if (pathname === "/") {
-      return NextResponse.next()
+        return NextResponse.redirect(
+          `${protocol}//${redirectHost}/${rest}${search}`,
+          302
+        )
+      }
     }
 
     const slug = pathname.split("/")[1]
     return NextResponse.rewrite(new URL(`/${slug}`, request.url))
   }
 
-  const hostMatch = domainData.hostMap.get(hostWithoutPort)
+  const match = domainData.hostMap.get(host)
 
-  if (hostMatch) {
-    if (hostMatch.alias?.redirectTo) {
-      const redirectUrl = withProtocol(hostMatch.alias.redirectTo, protocol) + `${pathname}${search}`
-      return NextResponse.redirect(redirectUrl, 301)
+  if (match) {
+    if (match.alias?.redirectTo) {
+      return NextResponse.redirect(
+        `${protocol}//${match.alias.redirectTo}${pathname}${search}`,
+        301
+      )
     }
 
-    const rewriteUrl = request.nextUrl.clone()
-    rewriteUrl.pathname = ensureLocalePath(pathname)
-    return NextResponse.rewrite(rewriteUrl)
+    const rewrite = request.nextUrl.clone()
+    rewrite.pathname = ensureSitePath(pathname)
+    return NextResponse.rewrite(rewrite)
   }
 
-  console.warn("❌ Domain not recognized:", hostWithoutPort)
   return NextResponse.rewrite(new URL("/404", request.url))
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|public/|images).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|public|images).*)"],
 }

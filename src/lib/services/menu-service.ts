@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import  {  ICategory,  IMenuItem  } from "@/types/menu"
+import { ICategory, IMenuItem } from "@/types/menu"
 import Menu from "@/models/menu"
 
 import connectToDatabase from "@/lib/db"
@@ -8,6 +8,15 @@ import type { Menu as MenuType, MenuCategory as MenuCategoryType, MenuItem as Me
 // Helper function to convert Mongoose document to plain object
 function convertToPlainObject<T>(doc: T): any {
   return JSON.parse(JSON.stringify(doc))
+}
+
+// Helper function to get localized text with priority: ru -> ar -> en -> fallback
+function getLocalizedText(textObj: any, fallback: string = ""): string {
+  if (!textObj) return fallback
+  if (typeof textObj === "string") return textObj
+  
+  // Priority: Russian -> Arabic -> English -> any other key -> fallback
+  return textObj.ru || textObj.ar || textObj.en || Object.values(textObj)[0] || fallback
 }
 
 export interface MenuItemSummary {
@@ -36,11 +45,10 @@ export const flattenMenuItems = (menu: MenuType | null): MenuItemSummary[] => {
         id: item.id,
         categoryId: catId,
         categoryKey: catKey,
-        name: (item.name as any)?.ar ?? (item.name as any)?.en ?? item.name,
-        description:
-          (item.description as any)?.ar ??
-          (item.description as any)?.en ??
-          item.description,
+        // Get name with Russian priority
+        name: getLocalizedText(item.name, "Без названия"),
+        // Get description with Russian priority
+        description: getLocalizedText(item.description, ""),
         price: item.price,
         image: item.image,
         tags: item.tags ?? [],
@@ -67,11 +75,10 @@ export const flattenMenuPayload = (menuPayload: any): MenuItemSummary[] => {
         id: item.id,
         categoryId: catId,
         categoryKey: catKey,
-        name: (item.name as any)?.ar ?? (item.name as any)?.en ?? item.name,
-        description:
-          (item.description as any)?.ar ??
-          (item.description as any)?.en ??
-          item.description,
+        // Get name with Russian priority
+        name: getLocalizedText(item.name, "Без названия"),
+        // Get description with Russian priority
+        description: getLocalizedText(item.description, ""),
         price: item.price,
         image: item.image,
         tags: item.tags ?? [],
@@ -84,6 +91,60 @@ export const flattenMenuPayload = (menuPayload: any): MenuItemSummary[] => {
   return items
 }
 
+// New function to get menu with Russian localization
+export async function getMenuByRestaurantIdWithRussian(restaurantId: string): Promise<MenuType | null> {
+  try {
+    await connectToDatabase()
+
+    if (!mongoose.Types.ObjectId.isValid(restaurantId)) {
+      return null
+    }
+
+    const menu = await Menu.findOne({ restaurantId: new mongoose.Types.ObjectId(restaurantId) })
+    if (!menu) return null
+
+    const plainMenu = convertToPlainObject(menu)
+    
+    // Transform categories to use Russian names and descriptions
+    if (plainMenu.categories) {
+      plainMenu.categories = plainMenu.categories.map((category: any) => ({
+        ...category,
+        // Transform category name
+        name: typeof category.name === "object" 
+          ? getLocalizedText(category.name, "Без категории")
+          : category.name,
+        // Transform category description
+        description: typeof category.description === "object"
+          ? getLocalizedText(category.description, "")
+          : category.description,
+        // Transform menu items
+        menuItems: category.menuItems?.map((item: any) => ({
+          ...item,
+          name: typeof item.name === "object"
+            ? getLocalizedText(item.name, "Без названия")
+            : item.name,
+          description: typeof item.description === "object"
+            ? getLocalizedText(item.description, "")
+            : item.description,
+          // Transform size names if they exist
+          sizes: item.sizes?.map((size: any) => ({
+            ...size,
+            name: typeof size.name === "object"
+              ? getLocalizedText(size.name, "Порция")
+              : size.name
+          })) || []
+        }))
+      }))
+    }
+
+    return plainMenu
+  } catch (error) {
+    console.error(`Error fetching menu for restaurant ${restaurantId}:`, error)
+    throw new Error("Failed to fetch menu")
+  }
+}
+
+// Original function without transformation (kept for backward compatibility)
 export async function getMenuByRestaurantId(restaurantId: string): Promise<MenuType | null> {
   try {
     await connectToDatabase()
@@ -166,7 +227,7 @@ export async function addCategory(
       ...categoryData,
       menuItems: [],
       order: menu.categories.length, // Set order to the end of the list
-    } as IMenuCategory
+    } as any
 
     // Add category to menu
     menu.categories.push(newCategory)
@@ -257,7 +318,6 @@ export async function addMenuItem(
       throw new Error("Menu not found")
     }
 
-    // Fix the TypeScript error by adding a null check or using optional chaining
     const category = menu.categories.find((cat: ICategory) => cat._id && cat._id.toString() === categoryId)
 
     if (!category) {
@@ -269,12 +329,12 @@ export async function addMenuItem(
       name: {
         en: itemData.name?.en || "",
         ar: itemData.name?.ar || "",
+        ru: itemData.name?.ru || "", // Add Russian support
       },
-      description: itemData.description || { en: "", ar: "" },
+      description: itemData.description || { en: "", ar: "", ru: "" },
       price: itemData.price || 0,
       sizes: itemData.sizes || [],
       image: itemData.image || "",
-      // Add any other properties from itemData that are valid for IMenuItem
       ...(itemData.visible !== undefined ? { visible: itemData.visible } : {}),
     }
 
@@ -377,13 +437,10 @@ export async function getPopularMenuItems(restaurantId: string, limit = 10): Pro
       category.menuItems.forEach((item) => {
         allItems.push({
           _id: item._id,
-          name: item.name,
+          name: getLocalizedText(item.name), // Use Russian name
           price: item.price,
           image: item.image,
-          category: category.name,
-          // In a real app, you would have a separate collection for orders
-          // and would aggregate based on order data
-          // This is just a placeholder for demonstration
+          category: getLocalizedText(category.name), // Use Russian category name
           orderCount: Math.floor(Math.random() * 100), // Simulated order count
         })
       })
@@ -425,10 +482,10 @@ export async function getMenuItemsByPriceRange(
       {
         $project: {
           _id: "$categories.menuItems._id",
-          name: "$categories.menuItems.name",
+          name: "$categories.menuItems.name.ru", // Get Russian name
           price: "$categories.menuItems.price",
           image: "$categories.menuItems.image",
-          category: "$categories.name",
+          category: "$categories.name.ru", // Get Russian category name
         },
       },
       { $sort: { price: 1 } },

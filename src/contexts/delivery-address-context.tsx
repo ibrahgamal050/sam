@@ -35,36 +35,37 @@ interface DeliveryAddressContextValue {
   setDeliveryBranch: (branch: BranchSummary | null) => void
 }
 
-const DEFAULT_ADDRESSES: DeliveryAddress[] = [
-  {
-    id: "1",
-    name: "المنزل",
-    address: "١٢ شارع التحرير، الدقي",
-    city: "الجيزة",
-    lat: 30.0376,
-    lng: 31.2118,
-    isDefault: true,
-    tenantKey: null,
-  },
-  {
-    id: "2",
-    name: "العمل",
-    address: "١٠ شارع الثورة، مصر الجديدة",
-    city: "القاهرة",
-    lat: 30.0902,
-    lng: 31.3234,
-    tenantKey: null,
-  },
-  {
-    id: "3",
-    name: "الأسرة",
-    address: "شارع ٩، المعادي",
-    city: "القاهرة",
-    lat: 29.9604,
-    lng: 31.2599,
-    tenantKey: null,
-  },
-]
+type DefaultsLocale = "ar" | "en" | "ru"
+
+const DEFAULT_ADDRESSES_BY_LOCALE: Record<DefaultsLocale, DeliveryAddress[]> = {
+  ar: [
+    { id: "1", name: "المنزل", address: "شارع بولشايا سادوفايا 25", city: "روستوف-نا-دونو", lat: 47.2357, lng: 39.7015, isDefault: true, tenantKey: null },
+    { id: "2", name: "العمل", address: "شارع بوشكين 10", city: "روستوف-نا-دونو", lat: 47.2221, lng: 39.7187, tenantKey: null },
+    { id: "3", name: "الأسرة", address: "شارع فوروبيوف 8", city: "روستوف-نا-دونو", lat: 47.2304, lng: 39.7205, tenantKey: null },
+  ],
+
+  en: [
+    { id: "1", name: "Home", address: "25 Bolshaya Sadovaya St", city: "Rostov-on-Don", lat: 47.2357, lng: 39.7015, isDefault: true, tenantKey: null },
+    { id: "2", name: "Work", address: "10 Pushkin St", city: "Rostov-on-Don", lat: 47.2221, lng: 39.7187, tenantKey: null },
+    { id: "3", name: "Family", address: "8 Vorobyov St", city: "Rostov-on-Don", lat: 47.2304, lng: 39.7205, tenantKey: null },
+  ],
+
+  ru: [
+    { id: "1", name: "Дом", address: "ул. Большая Садовая, 25", city: "Ростов-на-Дону", lat: 47.2357, lng: 39.7015, isDefault: true, tenantKey: null },
+    { id: "2", name: "Работа", address: "ул. Пушкина, 10", city: "Ростов-на-Дону", lat: 47.2221, lng: 39.7187, tenantKey: null },
+    { id: "3", name: "Семья", address: "ул. Воробьёва, 8", city: "Ростов-на-Дону", lat: 47.2304, lng: 39.7205, tenantKey: null },
+  ],
+};
+
+const detectDefaultsLocale = (): DefaultsLocale => {
+  if (typeof window === "undefined") return "ar"
+  const path = window.location.pathname
+  if (path.startsWith("/ru")) return "ru"
+  if (path.startsWith("/en")) return "en"
+  return "ar"
+}
+
+const getDefaultAddresses = (): DeliveryAddress[] => DEFAULT_ADDRESSES_BY_LOCALE[detectDefaultsLocale()]
 
 export type FulfillmentType = "delivery" | "pickup"
 
@@ -168,7 +169,7 @@ export function DeliveryAddressProvider({ children }: { children: ReactNode }) {
 
     if (status === "unauthenticated") {
       hasFetchedRef.current = false
-      applyAddresses(DEFAULT_ADDRESSES)
+      applyAddresses(getDefaultAddresses())
     }
   }, [status, loadAddressesFromServer, applyAddresses])
 
